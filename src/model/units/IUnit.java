@@ -87,4 +87,8 @@ public interface IUnit {
   void receiveWeaknessAttack(IEquipableItem item);
 
   void receiveResistantAttack(IEquipableItem item);
+
+  boolean addItem(IEquipableItem item);
+
+  void exchange(IUnit unit, IEquipableItem item);
 }

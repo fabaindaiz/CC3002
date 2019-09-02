@@ -24,6 +24,7 @@ public abstract class AbstractUnit implements IUnit {
   private final int maxHitPoints;
   private int currentHitPoints;
   private final int movement;
+  private final int maxItems;
   protected IEquipableItem equippedItem;
   private Location location;
 
@@ -44,6 +45,7 @@ public abstract class AbstractUnit implements IUnit {
     this.maxHitPoints = hitPoints;
     this.currentHitPoints = hitPoints;
     this.movement = movement;
+    this.maxItems = maxItems;
     this.location = location;
     this.items.addAll(Arrays.asList(items).subList(0, min(maxItems, items.length)));
   }
@@ -138,4 +140,21 @@ public abstract class AbstractUnit implements IUnit {
   public void receiveResistantAttack(IEquipableItem item) { this.currentHitPoints -= item.getPower() - 20;
   }
 
+  @Override
+  public boolean addItem(IEquipableItem item){
+    if( items.size() == maxItems ){
+      return false;
+    }
+    items.add(item);
+    return true;
+  }
+
+  @Override
+  public void exchange(IUnit unit, IEquipableItem item){
+    if(items.contains(item) && (int) getLocation().distanceTo(unit.getLocation()) == 1){
+      if (unit.addItem(item)){
+        items.remove(item);
+      }
+    }
+  }
 }
