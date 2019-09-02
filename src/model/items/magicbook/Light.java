@@ -25,7 +25,11 @@ public class Light extends MagicBook {
      *     Unit that receives the attack.
      */
     @Override
-    public void attack(IUnit other) { other.getEquippedItem().receiveLightAttack(this); }
+    public void attack(IUnit other) {
+        if(other.getEquippedItem() != null)
+            other.getEquippedItem().receiveLightAttack(this);
+        else other.receiveAttack(this);
+    }
 
     @Override
     public void receiveAnimaAttack(IEquipableItem item) { owner.receiveAttack(item); }

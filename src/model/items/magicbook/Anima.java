@@ -25,7 +25,11 @@ public class Anima extends MagicBook {
      *     Unit that receives the attack.
      */
     @Override
-    public void attack(IUnit other) { other.getEquippedItem().receiveAnimaAttack(this); }
+    public void attack(IUnit other) {
+        if(other.getEquippedItem() != null)
+            other.getEquippedItem().receiveAnimaAttack(this);
+        else other.receiveAttack(this);
+    }
 
     @Override
     public void receiveAnimaAttack(IEquipableItem item) { owner.receiveAttack(item); }

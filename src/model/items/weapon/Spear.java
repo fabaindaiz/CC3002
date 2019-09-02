@@ -38,7 +38,11 @@ public class Spear extends Weapon {
    *     Unit that receives the attack.
    */
   @Override
-  public void attack(IUnit other) { other.getEquippedItem().receiveSpearAttack(this); }
+  public void attack(IUnit other) {
+    if(other.getEquippedItem() != null)
+      other.getEquippedItem().receiveSpearAttack(this);
+    else other.receiveAttack(this);
+  }
 
   @Override
   public void receiveAnimaAttack(IEquipableItem item) { owner.receiveWeaknessAttack(item); }

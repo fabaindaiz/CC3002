@@ -38,7 +38,11 @@ public class Sword extends Weapon {
    *     Unit that receives the attack.
    */
   @Override
-  public void attack(IUnit other) { other.getEquippedItem().receiveSwordAttack(this); }
+  public void attack(IUnit other) {
+    if(other.getEquippedItem() != null)
+    other.getEquippedItem().receiveSwordAttack(this);
+    else other.receiveAttack(this);
+  }
 
   @Override
   public void receiveAnimaAttack(IEquipableItem item) { owner.receiveWeaknessAttack(item); }

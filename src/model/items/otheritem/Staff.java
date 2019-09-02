@@ -39,7 +39,9 @@ public class Staff extends OtherItem {
    */
   @Override
   public void attack(IUnit other) {
-    other.receiveStaffHeal(this);
+    if(other.getEquippedItem() != null)
+      other.getEquippedItem().receiveStaffHeal(this);
+    else other.receiveHeal(this);
   }
 
   @Override

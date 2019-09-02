@@ -40,7 +40,9 @@ public class Bow extends Weapon {
    */
   @Override
   public void attack(IUnit other) {
-    other.getEquippedItem().receiveBowAttack(this);
+    if(other.getEquippedItem() != null)
+      other.getEquippedItem().receiveBowAttack(this);
+    else other.receiveAttack(this);
   }
 
   @Override

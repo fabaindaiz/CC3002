@@ -39,7 +39,9 @@ public class Axe extends Weapon {
    */
   @Override
   public void attack(IUnit other) {
-    other.getEquippedItem().receiveAxeAttack(this);
+    if(other.getEquippedItem() != null)
+      other.getEquippedItem().receiveAxeAttack(this);
+    else other.receiveAttack(this);
   }
 
   @Override

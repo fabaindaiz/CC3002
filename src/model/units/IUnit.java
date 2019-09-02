@@ -80,7 +80,7 @@ public interface IUnit {
    */
   void attack(IUnit other);
 
-  void receiveStaffHeal(Staff staff);
+  void receiveHeal(IEquipableItem item);
 
   void receiveAttack(IEquipableItem item);
 
