@@ -13,7 +13,7 @@ import model.units.AbstractUnit;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class Archer extends AbstractUnit {
+public class Archer extends Warrior {
 
   /**
    * Creates a new archer

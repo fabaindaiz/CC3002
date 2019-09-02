@@ -12,9 +12,9 @@ public abstract class AbstractItem implements IEquipableItem {
 
   private final String name;
   private final int power;
-  protected int maxRange;
   protected int minRange;
-  private IUnit owner;
+  protected int maxRange;
+  protected IUnit owner;
 
   /**
    * Constructor for a default item without any special behaviour.

@@ -12,7 +12,7 @@ import model.units.AbstractUnit;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class Cleric extends AbstractUnit {
+public class Cleric extends OtherUnit {
 
   /**
    * Creates a new Unit.

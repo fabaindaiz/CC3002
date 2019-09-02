@@ -2,6 +2,7 @@ package model.units;
 
 import java.util.List;
 import model.items.IEquipableItem;
+import model.items.otheritem.Staff;
 import model.map.Location;
 
 /**
@@ -22,6 +23,11 @@ public interface IUnit {
    *     the item to equip
    */
   void equipItem(IEquipableItem item);
+
+  /**
+   * @return max hit points of the unit
+   */
+  int getMaxHitPoints();
 
   /**
    * @return hit points of the unit
@@ -65,4 +71,20 @@ public interface IUnit {
    * If the other location is out of this unit's movement range, the unit doesn't move.
    */
   void moveTo(Location targetLocation);
+
+  /**
+   * Attacks another Unit.
+   *
+   * @param other
+   *     Target of the attack.
+   */
+  void attack(IUnit other);
+
+  void receiveStaffHeal(Staff staff);
+
+  void receiveAttack(IEquipableItem item);
+
+  void receiveWeaknessAttack(IEquipableItem item);
+
+  void receiveResistantAttack(IEquipableItem item);
 }

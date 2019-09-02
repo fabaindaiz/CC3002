@@ -13,7 +13,7 @@ import model.units.AbstractUnit;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class Hero extends AbstractUnit {
+public class Hero extends Warrior {
 
   /**
    * Creates a new Unit.

@@ -12,7 +12,7 @@ import model.units.AbstractUnit;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class SwordMaster extends AbstractUnit {
+public class SwordMaster extends Warrior {
 
   public SwordMaster(final int hitPoints, final int movement, final Location location,
       IEquipableItem... items) {

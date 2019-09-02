@@ -1,6 +1,8 @@
 package model.items.otheritem;
 
+import model.items.IEquipableItem;
 import model.items.otheritem.OtherItem;
+import model.units.IUnit;
 
 /**
  * This class represents a <i>Staff</i> type item.
@@ -26,5 +28,53 @@ public class Staff extends OtherItem {
    */
   public Staff(final String name, final int power, final int minRange, final int maxRange) {
     super(name, power, minRange, maxRange);
+  }
+
+  /**
+   * Performs a staff type attack.
+   * {@inheritDoc}
+   *
+   * @param other
+   *     Unit that receives the attack.
+   */
+  @Override
+  public void attack(IUnit other) {
+    other.receiveStaffHeal(this);
+  }
+
+  @Override
+  public void receiveAnimaAttack(IEquipableItem item) { owner.receiveAttack(item); }
+
+  @Override
+  public void receiveDarkAttack(IEquipableItem item) {
+    owner.receiveAttack(item);
+  }
+
+  @Override
+  public void receiveLightAttack(IEquipableItem item) {
+    owner.receiveAttack(item);
+  }
+
+  @Override
+  public void receiveStaffHeal(IEquipableItem item) {
+    owner.receiveHeal(item);
+  }
+
+  @Override
+  public void receiveAxeAttack(IEquipableItem item) {
+    owner.receiveAttack(item);
+  }
+
+  @Override
+  public void receiveSpearAttack(IEquipableItem item) {
+    owner.receiveAttack(item);
+  }
+
+  @Override
+  public void receiveSwordAttack(IEquipableItem item) {  owner.receiveAttack(item); }
+
+  @Override
+  public void receiveBowAttack(IEquipableItem item) {
+    owner.receiveAttack(item);
   }
 }

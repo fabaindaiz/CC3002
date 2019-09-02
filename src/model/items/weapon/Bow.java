@@ -1,6 +1,8 @@
 package model.items.weapon;
 
+import model.items.IEquipableItem;
 import model.items.weapon.Weapon;
+import model.units.IUnit;
 
 /**
  * @author Ignacio Slater Muñoz
@@ -27,5 +29,53 @@ public class Bow extends Weapon {
     super(name, power, minRange, maxRange);
     this.minRange = Math.max(minRange, 2);
     this.maxRange = Math.max(maxRange, this.minRange);
+  }
+
+  /**
+   * Performs a bow type attack.
+   * {@inheritDoc}
+   *
+   * @param other
+   *     Unit that receives the attack.
+   */
+  @Override
+  public void attack(IUnit other) {
+    other.getEquippedItem().receiveBowAttack(this);
+  }
+
+  @Override
+  public void receiveAnimaAttack(IEquipableItem item) { owner.receiveWeaknessAttack(item); }
+
+  @Override
+  public void receiveDarkAttack(IEquipableItem item) {
+    owner.receiveWeaknessAttack(item);
+  }
+
+  @Override
+  public void receiveLightAttack(IEquipableItem item) {
+    owner.receiveWeaknessAttack(item);
+  }
+
+  @Override
+  public void receiveStaffHeal(IEquipableItem item) {
+    owner.receiveHeal(item);
+  }
+
+  @Override
+  public void receiveAxeAttack(IEquipableItem item) {
+    owner.receiveAttack(item);
+  }
+
+  @Override
+  public void receiveSpearAttack(IEquipableItem item) {
+    owner.receiveAttack(item);
+  }
+
+  @Override
+  public void receiveSwordAttack(IEquipableItem item) {  owner.receiveAttack(item); }
+
+  @Override
+  public void receiveBowAttack(IEquipableItem item) {
+    owner.receiveAttack(item);
   }
 }

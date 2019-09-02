@@ -12,7 +12,7 @@ import model.units.AbstractUnit;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class Fighter extends AbstractUnit {
+public class Fighter extends Warrior {
 
   public Fighter(final int hitPoints, final int movement, final Location location,
       IEquipableItem... items) {

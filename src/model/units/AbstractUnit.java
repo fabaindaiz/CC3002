@@ -21,7 +21,8 @@ import model.map.Location;
 public abstract class AbstractUnit implements IUnit {
 
   protected final List<IEquipableItem> items = new ArrayList<>();
-  private final int currentHitPoints;
+  private final int maxHitPoints;
+  private int currentHitPoints;
   private final int movement;
   protected IEquipableItem equippedItem;
   private Location location;
@@ -40,10 +41,16 @@ public abstract class AbstractUnit implements IUnit {
    */
   protected AbstractUnit(final int hitPoints, final int movement,
       final Location location, final int maxItems, final IEquipableItem... items) {
+    this.maxHitPoints = hitPoints;
     this.currentHitPoints = hitPoints;
     this.movement = movement;
     this.location = location;
     this.items.addAll(Arrays.asList(items).subList(0, min(maxItems, items.length)));
+  }
+
+  @Override
+  public int getMaxHitPoints() {
+    return maxHitPoints;
   }
 
   @Override
@@ -88,4 +95,47 @@ public abstract class AbstractUnit implements IUnit {
       setLocation(targetLocation);
     }
   }
+
+  @Override
+  public void attack(IUnit other) { equippedItem.attack(other);
+  }
+
+  /**
+   * Receives an heal.
+   *
+   * @param item
+   *     Received attack.
+   */
+  public void receiveHeal(IEquipableItem item) {
+    this.currentHitPoints += item.getPower();
+  }
+
+  /**
+   * Receives an attack.
+   *
+   * @param item
+   *     Received attack.
+   */
+  public void receiveAttack(IEquipableItem item) {
+    this.currentHitPoints -= item.getPower();
+  }
+
+  /**
+   * Receives an attack to which this Weapon is weak.
+   *
+   * @param item
+   *     Received attack.
+   */
+  public void receiveWeaknessAttack(IEquipableItem item) { this.currentHitPoints -= item.getPower() * 1.5;
+  }
+
+  /**
+   * Receives an attack to which this Weapon is resistant.
+   *
+   * @param item
+   *     Received attack.
+   */
+  public void receiveResistantAttack(IEquipableItem item) { this.currentHitPoints -= item.getPower() - 20;
+  }
+
 }

@@ -1,6 +1,8 @@
 package model.items.magicbook;
 
+import model.items.IEquipableItem;
 import model.items.magicbook.MagicBook;
+import model.units.IUnit;
 
 public class Anima extends MagicBook {
     /**
@@ -13,5 +15,51 @@ public class Anima extends MagicBook {
      */
     public Anima(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
+    }
+
+    /**
+     * Performs a anima type attack.
+     * {@inheritDoc}
+     *
+     * @param other
+     *     Unit that receives the attack.
+     */
+    @Override
+    public void attack(IUnit other) { other.getEquippedItem().receiveAnimaAttack(this); }
+
+    @Override
+    public void receiveAnimaAttack(IEquipableItem item) { owner.receiveAttack(item); }
+
+    @Override
+    public void receiveDarkAttack(IEquipableItem item) {
+        owner.receiveWeaknessAttack(item);
+    }
+
+    @Override
+    public void receiveLightAttack(IEquipableItem item) {
+        owner.receiveResistantAttack(item);
+    }
+
+    @Override
+    public void receiveStaffHeal(IEquipableItem item) {
+        owner.receiveHeal(item);
+    }
+
+    @Override
+    public void receiveAxeAttack(IEquipableItem item) {
+        owner.receiveWeaknessAttack(item);
+    }
+
+    @Override
+    public void receiveSpearAttack(IEquipableItem item) {
+        owner.receiveWeaknessAttack(item);
+    }
+
+    @Override
+    public void receiveSwordAttack(IEquipableItem item) {  owner.receiveWeaknessAttack(item); }
+
+    @Override
+    public void receiveBowAttack(IEquipableItem item) {
+        owner.receiveWeaknessAttack(item);
     }
 }

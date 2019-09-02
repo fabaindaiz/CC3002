@@ -13,7 +13,7 @@ import model.units.AbstractUnit;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class Alpaca extends AbstractUnit {
+public class Alpaca extends OtherUnit {
 
   /**
    * Creates a new Alpaca.
