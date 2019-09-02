@@ -1,14 +1,16 @@
-package model.items;
+package model.items.weapon;
+
+import model.items.weapon.Weapon;
 
 /**
- * This class represents an Axe.
+ * This class represents a <i>spear</i>.
  * <p>
- * Axes are strong against spears but weak agains swords.
+ * Spears are strong against swords and weak against axes
  *
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class Axe extends AbstractItem {
+public class Spear extends Weapon {
 
   /**
    * Creates a new Axe item
@@ -22,7 +24,7 @@ public class Axe extends AbstractItem {
    * @param maxRange
    *     the maximum range of the axe
    */
-  public Axe(final String name, final int power, final int minRange, final int maxRange) {
+  public Spear(final String name, final int power, final int minRange, final int maxRange) {
     super(name, power, minRange, maxRange);
   }
 }

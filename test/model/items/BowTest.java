@@ -2,8 +2,9 @@ package model.items;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import model.items.weapon.Bow;
 import model.map.Location;
-import model.units.Archer;
+import model.units.warrior.Archer;
 import model.units.IUnit;
 import org.junit.jupiter.api.Test;
 

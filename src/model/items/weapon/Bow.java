@@ -1,10 +1,12 @@
-package model.items;
+package model.items.weapon;
+
+import model.items.weapon.Weapon;
 
 /**
  * @author Ignacio Slater Muñoz
  * @since
  */
-public class Bow extends AbstractItem {
+public class Bow extends Weapon {
 
   /**
    * Creates a new bow.

@@ -1,19 +1,20 @@
-package model.units;
+package model.units.warrior;
 
+import model.items.weapon.Axe;
 import model.items.IEquipableItem;
 import model.map.Location;
+import model.units.AbstractUnit;
 
 /**
- * This class represents a <i>SwordMaster</i> type unit.
- * <p>
- * A <i>SwordMaster</i> is a unit that <b>can only use sword type weapons</b>.
+ * This class represents a fighter type unit.
+ * A fighter is a unit that can only use axe type weapons.
  *
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class SwordMaster extends AbstractUnit {
+public class Fighter extends AbstractUnit {
 
-  public SwordMaster(final int hitPoints, final int movement, final Location location,
+  public Fighter(final int hitPoints, final int movement, final Location location,
       IEquipableItem... items) {
     super(hitPoints, movement, location, 3, items);
   }
@@ -26,7 +27,7 @@ public class SwordMaster extends AbstractUnit {
    */
   @Override
   public void equipItem(final IEquipableItem item) {
-    if (item instanceof SwordMaster) {
+    if (item instanceof Axe) {
       equippedItem = item;
     }
   }

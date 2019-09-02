@@ -1,4 +1,6 @@
-package model.items;
+package model.items.weapon;
+
+import model.items.weapon.Weapon;
 
 /**
  * This class represents a sword type item.
@@ -8,7 +10,7 @@ package model.items;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class Sword extends AbstractItem {
+public class Sword extends Weapon {
 
   /**
    * Creates a new Sword.

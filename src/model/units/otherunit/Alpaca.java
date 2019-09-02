@@ -1,7 +1,8 @@
-package model.units;
+package model.units.otherunit;
 
 import model.items.IEquipableItem;
 import model.map.Location;
+import model.units.AbstractUnit;
 
 /**
  * This class represents an <i>Alpaca</i> type unit.

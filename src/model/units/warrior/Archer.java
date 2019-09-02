@@ -1,8 +1,9 @@
-package model.units;
+package model.units.warrior;
 
-import model.items.Bow;
+import model.items.weapon.Bow;
 import model.items.IEquipableItem;
 import model.map.Location;
+import model.units.AbstractUnit;
 
 /**
  * This class represents an <i>Archer</i> type unit.

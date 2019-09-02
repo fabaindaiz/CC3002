@@ -1,18 +1,18 @@
-package model.units;
+package model.units.otherunit;
 
 import model.items.IEquipableItem;
-import model.items.Spear;
+import model.items.otheritem.Staff;
 import model.map.Location;
+import model.units.AbstractUnit;
 
 /**
- * A <i>Hero</i> is a special kind of unit, the player that defeats this unit wins the game.
- * <p>
- * This unit <b>can only use spear weapons</b>.
+ * This class represents a cleric type unit. A cleric can only use staff type weapons, which means
+ * that it can receive attacks but can't counter attack any of those.
  *
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class Hero extends AbstractUnit {
+public class Cleric extends AbstractUnit {
 
   /**
    * Creates a new Unit.
@@ -22,7 +22,7 @@ public class Hero extends AbstractUnit {
    * @param movement
    *     the number of panels a unit can move
    */
-  public Hero(final int hitPoints, final int movement, final Location location,
+  public Cleric(final int hitPoints, final int movement, final Location location,
       IEquipableItem... items) {
     super(hitPoints, movement, location, 3, items);
   }
@@ -35,7 +35,7 @@ public class Hero extends AbstractUnit {
    */
   @Override
   public void equipItem(final IEquipableItem item) {
-    if (item instanceof Spear) {
+    if (item instanceof Staff) {
       equippedItem = item;
     }
   }

@@ -1,7 +1,8 @@
 package model.items;
 
+import model.items.otheritem.Staff;
 import model.map.Location;
-import model.units.Cleric;
+import model.units.otherunit.Cleric;
 import model.units.IUnit;
 
 /**

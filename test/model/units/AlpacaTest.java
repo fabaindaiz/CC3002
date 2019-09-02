@@ -1,5 +1,7 @@
 package model.units;
 
+import model.units.otherunit.Alpaca;
+
 /**
  * Test set for the alpaca unit
  *
