@@ -16,8 +16,11 @@ import model.items.weapon.Bow;
 import model.map.Field;
 import model.map.Location;
 import model.units.otherunit.Alpaca;
+import model.units.warrior.Archer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 /**
  * @author Ignacio Slater Muñoz
@@ -26,6 +29,7 @@ import org.junit.jupiter.api.Test;
 public abstract class AbstractTestUnit implements ITestUnit {
 
   protected Alpaca targetAlpaca;
+  protected Archer targetIntercambio;
   protected Field field;
   protected Anima anima;
   protected Dark dark;
@@ -41,6 +45,11 @@ public abstract class AbstractTestUnit implements ITestUnit {
     targetAlpaca = new Alpaca(50, 2, field.getCell(1, 0));
   }
 
+  @Override
+  public void setTargetIntercambio() {
+    targetIntercambio = new Archer(50, 2, field.getCell(1, 0));
+  }
+
   /**
    * Sets up the units and weapons to be tested
    */
@@ -49,6 +58,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     setField();
     setTestUnit();
     setTargetAlpaca();
+    setTargetIntercambio();
     setWeapons();
   }
 
@@ -94,6 +104,63 @@ public abstract class AbstractTestUnit implements ITestUnit {
     assertEquals(2, getTestUnit().getMovement());
     assertEquals(new Location(0, 0), getTestUnit().getLocation());
     assertTrue(getTestUnit().getItems().isEmpty());
+  }
+
+  @Override
+  @Test
+  public void intercambioTest() {
+    assertEquals(targetAlpaca.getItems(), List.of());
+    getTestUnit().addItem(staff);
+    getTestUnit().exchange(targetAlpaca,staff);
+    assertEquals(targetAlpaca.getItems(), List.of(staff));
+  }
+
+  @Override
+  @Test
+  public void llenarInventarioTest() {
+    assertEquals(targetIntercambio.getItems(), List.of());
+    getTestUnit().addItem(anima);
+    assertEquals(getTestUnit().getItems(), List.of(anima));
+    getTestUnit().addItem(dark);
+    assertEquals(getTestUnit().getItems(), List.of(anima,dark));
+    getTestUnit().addItem(light);
+    assertEquals(getTestUnit().getItems(), List.of(anima,dark,light));
+    getTestUnit().addItem(staff);
+    if(getTestUnit().getMaxItems() == 3)
+      assertEquals(getTestUnit().getItems(), List.of(anima,dark,light));
+    else assertEquals(getTestUnit().getItems(), List.of(anima,dark,light,staff));
+    getTestUnit().exchange(targetIntercambio,anima);
+    if(getTestUnit().getMaxItems() == 3)
+      assertEquals(getTestUnit().getItems(), List.of(dark,light));
+    else assertEquals(getTestUnit().getItems(), List.of(dark,light,staff));
+    getTestUnit().exchange(targetIntercambio,dark);
+    if(getTestUnit().getMaxItems() == 3)
+      assertEquals(getTestUnit().getItems(), List.of(light));
+    else assertEquals(getTestUnit().getItems(), List.of(light,staff));
+    getTestUnit().exchange(targetIntercambio,light);
+    if(getTestUnit().getMaxItems() == 3)
+      assertEquals(getTestUnit().getItems(), List.of());
+    else assertEquals(getTestUnit().getItems(), List.of(staff));
+    getTestUnit().exchange(targetIntercambio,staff);
+    assertEquals(targetIntercambio.getItems(), List.of(anima,dark,light));
+    getTestUnit().addItem(staff);
+    getTestUnit().exchange(targetIntercambio,staff);
+    assertEquals(targetIntercambio.getItems(), List.of(anima,dark,light));
+    if(getTestUnit().getMaxItems() == 3)
+      assertEquals(getTestUnit().getItems(), List.of(staff));
+    else assertEquals(getTestUnit().getItems(), List.of(staff,staff));
+    targetIntercambio.exchange(getTestUnit(),staff);
+    if(getTestUnit().getMaxItems() == 3)
+      assertEquals(getTestUnit().getItems(), List.of(staff));
+    else assertEquals(getTestUnit().getItems(), List.of(staff,staff));
+    targetIntercambio.exchange(getTestUnit(),anima);
+    if(getTestUnit().getMaxItems() == 3)
+      assertEquals(getTestUnit().getItems(), List.of(staff,anima));
+    else assertEquals(getTestUnit().getItems(), List.of(staff,staff,anima));
+    getTestUnit().exchange(targetIntercambio,staff);
+    if(getTestUnit().getMaxItems() == 3)
+      assertEquals(getTestUnit().getItems(), List.of(anima));
+    else assertEquals(getTestUnit().getItems(), List.of(staff,anima));
   }
 
   /**
