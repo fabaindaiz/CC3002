@@ -2,6 +2,9 @@ package model.units;
 
 
 import model.items.*;
+import model.items.magicbook.Anima;
+import model.items.magicbook.Dark;
+import model.items.magicbook.Light;
 import model.items.otheritem.Staff;
 import model.items.weapon.Axe;
 import model.items.weapon.Bow;
@@ -46,6 +49,21 @@ public interface ITestUnit {
    * @return the current unit being tested
    */
   IUnit getTestUnit();
+
+  @Test
+  void equipAnimaTest();
+
+  Anima getAnima();
+
+  @Test
+  void equipDarkTest();
+
+  Dark getDark();
+
+  @Test
+  void equipLightTest();
+
+  Light getLight();
 
   /**
    * Checks if the axe is equipped correctly to the unit

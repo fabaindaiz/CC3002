@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import model.items.*;
-import model.items.otheritem.Staff;
+import model.items.magicbook.Anima;
+import model.items.magicbook.Dark;
+import model.items.magicbook.Light;
 import model.items.weapon.Axe;
-import model.items.weapon.Bow;
 import model.items.weapon.Spear;
 import model.items.weapon.Sword;
+import model.items.otheritem.Staff;
+import model.items.weapon.Bow;
 import model.map.Field;
 import model.map.Location;
 import model.units.otherunit.Alpaca;
@@ -23,12 +26,15 @@ import org.junit.jupiter.api.Test;
 public abstract class AbstractTestUnit implements ITestUnit {
 
   protected Alpaca targetAlpaca;
-  protected Bow bow;
   protected Field field;
+  protected Anima anima;
+  protected Dark dark;
+  protected Light light;
   protected Axe axe;
   protected Sword sword;
-  protected Staff staff;
   protected Spear spear;
+  protected Staff staff;
+  protected Bow bow;
 
   @Override
   public void setTargetAlpaca() {
@@ -68,6 +74,9 @@ public abstract class AbstractTestUnit implements ITestUnit {
    */
   @Override
   public void setWeapons() {
+    this.anima = new Anima("Anima", 10, 2, 3);
+    this.dark = new Dark("Dark", 10, 2, 3);
+    this.light = new Light("Light", 10, 2, 3);
     this.axe = new Axe("Axe", 10, 1, 2);
     this.sword = new Sword("Sword", 10, 1, 2);
     this.spear = new Spear("Spear", 10, 1, 2);
@@ -94,16 +103,6 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public abstract IUnit getTestUnit();
 
   /**
-   * Checks if the axe is equipped correctly to the unit
-   */
-  @Override
-  @Test
-  public void equipAxeTest() {
-    assertNull(getTestUnit().getEquippedItem());
-    checkEquippedItem(getAxe());
-  }
-
-  /**
    * Tries to equip a weapon to the alpaca and verifies that it was not equipped
    *
    * @param item
@@ -114,6 +113,58 @@ public abstract class AbstractTestUnit implements ITestUnit {
     assertNull(getTestUnit().getEquippedItem());
     getTestUnit().equipItem(item);
     assertNull(getTestUnit().getEquippedItem());
+  }
+
+  @Override
+  @Test
+  public void equipAnimaTest() {
+    assertNull(getTestUnit().getEquippedItem());
+    checkEquippedItem(getAnima());
+  }
+
+  /**
+   * @return the test anima
+   */
+  @Override
+  public Anima getAnima() {
+    return anima;
+  }
+
+  @Override
+  @Test
+  public void equipDarkTest() {
+    assertNull(getTestUnit().getEquippedItem());
+    checkEquippedItem(getDark());
+  }
+
+  /**
+   * @return the test axe
+   */
+  @Override
+  public Dark getDark() {
+    return dark;
+  }
+
+  @Override
+  @Test
+  public void equipLightTest() {
+    assertNull(getTestUnit().getEquippedItem());
+    checkEquippedItem(getLight());
+  }
+
+  /**
+   * @return the test axe
+   */
+  @Override
+  public Light getLight() {
+    return light;
+  }
+
+  @Override
+  @Test
+  public void equipAxeTest() {
+    assertNull(getTestUnit().getEquippedItem());
+    checkEquippedItem(getAxe());
   }
 
   /**
@@ -127,6 +178,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Override
   @Test
   public void equipSwordTest() {
+    assertNull(getTestUnit().getEquippedItem());
     checkEquippedItem(getSword());
   }
 
@@ -141,6 +193,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Override
   @Test
   public void equipSpearTest() {
+    assertNull(getTestUnit().getEquippedItem());
     checkEquippedItem(getSpear());
   }
 
@@ -155,6 +208,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Override
   @Test
   public void equipStaffTest() {
+    assertNull(getTestUnit().getEquippedItem());
     checkEquippedItem(getStaff());
   }
 
@@ -169,6 +223,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Override
   @Test
   public void equipBowTest() {
+    assertNull(getTestUnit().getEquippedItem());
     checkEquippedItem(getBow());
   }
 
