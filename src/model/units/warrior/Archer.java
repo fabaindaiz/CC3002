@@ -44,6 +44,7 @@ public class Archer extends Warrior {
   public void equipItem(final IEquipableItem item) {
     if (item instanceof Bow) {
       equippedItem = item;
+      item.setOwner(this);
     }
   }
 }

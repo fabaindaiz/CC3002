@@ -3,6 +3,8 @@ package model.units;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import model.items.IEquipableItem;
+import model.items.magicbook.MagicBook;
 import model.units.sorcerer.Sorcerer;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +22,9 @@ public class SorcererTest extends AbstractTestUnit {
     public void setTestUnit() {
         sorcerer = new Sorcerer(50, 2, field.getCell(0, 0));
     }
+
+    @Override
+    public IEquipableItem getWeapon() {return dark;}
 
     /**
      * @return the current unit being tested
@@ -52,4 +57,28 @@ public class SorcererTest extends AbstractTestUnit {
         sorcerer.equipItem(light);
         assertEquals(light, sorcerer.getEquippedItem());
     }
+
+    @Override
+    public int getHPanima() {return 35;}
+
+    @Override
+    public int getHPdark() {return 40;}
+
+    @Override
+    public int getHPlight() {return 50;}
+
+    @Override
+    public int getHPaxe() {return 35;}
+
+    @Override
+    public int getHPspear() {return 35;}
+
+    @Override
+    public int getHPsword() {return 35;}
+
+    @Override
+    public int getHPstaff() {return 40;}
+
+    @Override
+    public int getHPbow() {return 35;}
 }

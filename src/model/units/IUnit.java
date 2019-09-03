@@ -88,7 +88,7 @@ public interface IUnit {
    * @param other
    *     Target of the attack.
    */
-  void attack(IUnit other);
+  void attack(IUnit other, boolean counterattack);
 
   /**
    * Verifica si el ataque esta fuera de rango

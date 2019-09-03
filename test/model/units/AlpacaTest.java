@@ -1,5 +1,6 @@
 package model.units;
 
+import model.items.IEquipableItem;
 import model.units.otherunit.Alpaca;
 
 /**
@@ -18,7 +19,34 @@ public class AlpacaTest extends AbstractTestUnit {
   }
 
   @Override
+  public IEquipableItem getWeapon() {return null;}
+
+  @Override
   public Alpaca getTestUnit() {
     return alpaca;
   }
+
+  @Override
+  public int getHPanima() {return 50;}
+
+  @Override
+  public int getHPdark() {return 50;}
+
+  @Override
+  public int getHPlight() {return 50;}
+
+  @Override
+  public int getHPaxe() {return 50;}
+
+  @Override
+  public int getHPspear() {return 50;}
+
+  @Override
+  public int getHPsword() {return 50;}
+
+  @Override
+  public int getHPstaff() {return 50;}
+
+  @Override
+  public int getHPbow() {return 50;}
 }

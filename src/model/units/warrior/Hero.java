@@ -38,6 +38,7 @@ public class Hero extends Warrior {
   public void equipItem(final IEquipableItem item) {
     if (item instanceof Spear) {
       equippedItem = item;
+      item.setOwner(this);
     }
   }
 }

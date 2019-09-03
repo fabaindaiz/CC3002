@@ -5,18 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import model.items.*;
-import model.items.magicbook.Anima;
-import model.items.magicbook.Dark;
-import model.items.magicbook.Light;
-import model.items.weapon.Axe;
-import model.items.weapon.Spear;
-import model.items.weapon.Sword;
-import model.items.otheritem.Staff;
-import model.items.weapon.Bow;
+import model.items.magicbook.*;
+import model.items.weapon.*;
+import model.items.otheritem.*;
 import model.map.Field;
 import model.map.Location;
-import model.units.otherunit.Alpaca;
-import model.units.warrior.Archer;
+import model.units.otherunit.*;
+import model.units.sorcerer.*;
+import model.units.warrior.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +27,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   protected Alpaca targetAlpaca;
   protected Archer targetIntercambio;
   protected Field field;
+
   protected Anima anima;
   protected Dark dark;
   protected Light light;
@@ -39,6 +36,13 @@ public abstract class AbstractTestUnit implements ITestUnit {
   protected Spear spear;
   protected Staff staff;
   protected Bow bow;
+
+  protected Sorcerer sorcerer;
+  protected Fighter fighter;
+  protected Hero hero;
+  protected SwordMaster swordMaster;
+  protected Archer archer;
+  protected Cleric cleric;
 
   @Override
   public void setTargetAlpaca() {
@@ -60,6 +64,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     setTargetAlpaca();
     setTargetIntercambio();
     setWeapons();
+    setWarriors();
   }
 
   /**
@@ -88,10 +93,20 @@ public abstract class AbstractTestUnit implements ITestUnit {
     this.dark = new Dark("Dark", 10, 2, 3);
     this.light = new Light("Light", 10, 2, 3);
     this.axe = new Axe("Axe", 10, 1, 2);
-    this.sword = new Sword("Sword", 10, 1, 2);
     this.spear = new Spear("Spear", 10, 1, 2);
+    this.sword = new Sword("Sword", 10, 1, 2);
     this.staff = new Staff("Staff", 10, 1, 2);
     this.bow = new Bow("Bow", 10, 2, 3);
+  }
+
+  @Override
+  public void setWarriors() {
+    this.sorcerer = new Sorcerer(50, 2, field.getCell(1, 1));
+    this.fighter = new Fighter(50, 2, field.getCell(1, 1));
+    this.hero = new Hero(50, 2, field.getCell(1, 1));
+    this.swordMaster = new SwordMaster(50, 2, field.getCell(1, 1));
+    this.archer = new Archer(50, 2, field.getCell(1, 1));
+    this.cleric = new Cleric(50, 2, field.getCell(1, 1));
   }
 
   /**
@@ -163,6 +178,8 @@ public abstract class AbstractTestUnit implements ITestUnit {
     else assertEquals(getTestUnit().getItems(), List.of(staff,anima));
   }
 
+  public abstract IEquipableItem getWeapon();
+
   /**
    * @return the current unit being tested
    */
@@ -189,6 +206,21 @@ public abstract class AbstractTestUnit implements ITestUnit {
     checkEquippedItem(getAnima());
   }
 
+  @Override
+  @Test
+  public void attackToAnima() {
+    IUnit unit = getTestUnit();
+    IEquipableItem item = getWeapon();
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      sorcerer.addItem(anima);
+      sorcerer.equipItem(anima);
+      unit.attack(sorcerer, false);
+      assertEquals(sorcerer.getCurrentHitPoints(), getHPanima());
+    }
+  }
+
   /**
    * @return the test anima
    */
@@ -202,6 +234,21 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public void equipDarkTest() {
     assertNull(getTestUnit().getEquippedItem());
     checkEquippedItem(getDark());
+  }
+
+  @Override
+  @Test
+  public void attackToDark() {
+    IUnit unit = getTestUnit();
+    IEquipableItem item = getWeapon();
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      sorcerer.addItem(dark);
+      sorcerer.equipItem(dark);
+      unit.attack(sorcerer, false);
+      assertEquals(sorcerer.getCurrentHitPoints(), getHPdark());
+    }
   }
 
   /**
@@ -219,6 +266,21 @@ public abstract class AbstractTestUnit implements ITestUnit {
     checkEquippedItem(getLight());
   }
 
+  @Override
+  @Test
+  public void attackToLight() {
+    IUnit unit = getTestUnit();
+    IEquipableItem item = getWeapon();
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      sorcerer.addItem(light);
+      sorcerer.equipItem(light);
+      unit.attack(sorcerer, false);
+      assertEquals(sorcerer.getCurrentHitPoints(), getHPlight());
+    }
+  }
+
   /**
    * @return the test axe
    */
@@ -232,6 +294,21 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public void equipAxeTest() {
     assertNull(getTestUnit().getEquippedItem());
     checkEquippedItem(getAxe());
+  }
+
+  @Override
+  @Test
+  public void attackToAxe() {
+    IUnit unit = getTestUnit();
+    IEquipableItem item = getWeapon();
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      fighter.addItem(axe);
+      fighter.equipItem(axe);
+      unit.attack(fighter, false);
+      assertEquals(fighter.getCurrentHitPoints(), getHPaxe());
+    }
   }
 
   /**
@@ -249,6 +326,21 @@ public abstract class AbstractTestUnit implements ITestUnit {
     checkEquippedItem(getSword());
   }
 
+  @Override
+  @Test
+  public void attackToSword() {
+    IUnit unit = getTestUnit();
+    IEquipableItem item = getWeapon();
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      swordMaster.addItem(sword);
+      swordMaster.equipItem(sword);
+      unit.attack(swordMaster, false);
+      assertEquals(swordMaster.getCurrentHitPoints(), getHPsword());
+    }
+  }
+
   /**
    * @return the test sword
    */
@@ -262,6 +354,21 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public void equipSpearTest() {
     assertNull(getTestUnit().getEquippedItem());
     checkEquippedItem(getSpear());
+  }
+
+  @Override
+  @Test
+  public void attackToSpear() {
+    IUnit unit = getTestUnit();
+    IEquipableItem item = getWeapon();
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      hero.addItem(spear);
+      hero.equipItem(spear);
+      unit.attack(hero, false);
+      assertEquals(hero.getCurrentHitPoints(), getHPspear());
+    }
   }
 
   /**
@@ -279,6 +386,21 @@ public abstract class AbstractTestUnit implements ITestUnit {
     checkEquippedItem(getStaff());
   }
 
+  @Override
+  @Test
+  public void attackToStaff() {
+    IUnit unit = getTestUnit();
+    IEquipableItem item = getWeapon();
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      cleric.addItem(staff);
+      cleric.equipItem(staff);
+      unit.attack(cleric, false);
+      assertEquals(cleric.getCurrentHitPoints(), getHPstaff());
+    }
+  }
+
   /**
    * @return the test staff
    */
@@ -292,6 +414,21 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public void equipBowTest() {
     assertNull(getTestUnit().getEquippedItem());
     checkEquippedItem(getBow());
+  }
+
+  @Override
+  @Test
+  public void attackToBow() {
+    IUnit unit = getTestUnit();
+    IEquipableItem item = getWeapon();
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      archer.addItem(bow);
+      archer.equipItem(bow);
+      unit.attack(archer, false);
+      assertEquals(archer.getCurrentHitPoints(), getHPbow());
+    }
   }
 
   /**
@@ -334,4 +471,20 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public Alpaca getTargetAlpaca() {
     return targetAlpaca;
   }
+
+  public abstract int getHPanima();
+
+  public abstract int getHPdark();
+
+  public abstract int getHPlight();
+
+  public abstract int getHPaxe();
+
+  public abstract int getHPspear();
+
+  public abstract int getHPsword();
+
+  public abstract int getHPstaff();
+
+  public abstract int getHPbow();
 }

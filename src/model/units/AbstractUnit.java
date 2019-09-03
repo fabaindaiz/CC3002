@@ -103,18 +103,17 @@ public abstract class AbstractUnit implements IUnit {
 
   @Override
   public void muerte(){
-    
   }
 
   @Override
-  public void attack(IUnit other) { equippedItem.attack(other, true);
+  public void attack(IUnit other, boolean counterattack) { equippedItem.attack(other, counterattack);
   }
 
   @Override
   public boolean outOfRange(IUnit unit){
     IEquipableItem item = unit.getEquippedItem();
     int distancia = (int) getLocation().distanceTo( unit.getLocation() );
-    if( distancia < item.getMinRange() || distancia > item.getMinRange() )
+    if( distancia < item.getMinRange() || distancia > item.getMaxRange() )
       return true;
     else
       return false;
@@ -140,7 +139,7 @@ public abstract class AbstractUnit implements IUnit {
     if(damage < currentHitPoints) {
       this.currentHitPoints -= damage;
       if (counterAttack && equippedItem.counterattack())
-        attack(item.getOwner());
+        attack(item.getOwner(), false);
     }
     else
       muerte();
@@ -154,7 +153,7 @@ public abstract class AbstractUnit implements IUnit {
     if(damage < currentHitPoints) {
       this.currentHitPoints -= damage;
       if (counterAttack && equippedItem.counterattack())
-        attack(item.getOwner());
+        attack(item.getOwner(), false);
     }
     else
       muerte();
@@ -168,7 +167,7 @@ public abstract class AbstractUnit implements IUnit {
     if(damage < currentHitPoints) {
       this.currentHitPoints -= damage;
       if (counterAttack && equippedItem.counterattack())
-        attack(item.getOwner());
+        attack(item.getOwner(), false);
     }
     else
       muerte();

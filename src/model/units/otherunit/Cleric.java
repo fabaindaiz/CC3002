@@ -37,6 +37,7 @@ public class Cleric extends OtherUnit {
   public void equipItem(final IEquipableItem item) {
     if (item instanceof Staff) {
       equippedItem = item;
+      item.setOwner(this);
     }
   }
 }

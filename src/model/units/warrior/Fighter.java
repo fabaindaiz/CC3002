@@ -29,6 +29,7 @@ public class Fighter extends Warrior {
   public void equipItem(final IEquipableItem item) {
     if (item instanceof Axe) {
       equippedItem = item;
+      item.setOwner(this);
     }
   }
 }

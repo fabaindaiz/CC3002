@@ -42,6 +42,9 @@ public abstract class AbstractItem implements IEquipableItem {
   }
 
   @Override
+  public void setOwner(IUnit unit) { owner = unit;}
+
+  @Override
   public IUnit getOwner() {
     return owner;
   }

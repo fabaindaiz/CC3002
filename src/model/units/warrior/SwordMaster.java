@@ -29,6 +29,7 @@ public class SwordMaster extends Warrior {
   public void equipItem(final IEquipableItem item) {
     if (item instanceof SwordMaster) {
       equippedItem = item;
+      item.setOwner(this);
     }
   }
 }

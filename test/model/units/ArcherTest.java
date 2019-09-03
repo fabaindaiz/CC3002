@@ -3,6 +3,7 @@ package model.units;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import model.items.IEquipableItem;
 import model.units.warrior.Archer;
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +25,9 @@ public class ArcherTest extends AbstractTestUnit {
     archer = new Archer(50, 2, field.getCell(0, 0));
   }
 
+  @Override
+  public IEquipableItem getWeapon() {return bow;}
+
   /**
    * @return the current unit being tested
    */
@@ -42,4 +46,28 @@ public class ArcherTest extends AbstractTestUnit {
     archer.equipItem(bow);
     assertEquals(bow, archer.getEquippedItem());
   }
+
+  @Override
+  public int getHPanima() {return 35;}
+
+  @Override
+  public int getHPdark() {return 35;}
+
+  @Override
+  public int getHPlight() {return 35;}
+
+  @Override
+  public int getHPaxe() {return 40;}
+
+  @Override
+  public int getHPspear() {return 40;}
+
+  @Override
+  public int getHPsword() {return 40;}
+
+  @Override
+  public int getHPstaff() {return 40;}
+
+  @Override
+  public int getHPbow() {return 40;}
 }

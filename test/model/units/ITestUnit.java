@@ -47,6 +47,8 @@ public interface ITestUnit {
    */
   void setWeapons();
 
+  void setWarriors();
+
   /**
    * Checks that the constructor works properly.
    */
@@ -81,6 +83,9 @@ public interface ITestUnit {
   @Test
   void equipAnimaTest();
 
+  @Test
+  void attackToAnima();
+
   /**
    * @return the test anima
    */
@@ -92,7 +97,10 @@ public interface ITestUnit {
   @Test
   void equipDarkTest();
 
-  /**
+    @Test
+    void attackToDark();
+
+    /**
    * @return the test dark
    */
   Dark getDark();
@@ -102,6 +110,9 @@ public interface ITestUnit {
    */
   @Test
   void equipLightTest();
+
+  @Test
+  void attackToLight();
 
   /**
    * @return the test light
@@ -122,6 +133,9 @@ public interface ITestUnit {
   @Test
   void equipAxeTest();
 
+  @Test
+  void attackToAxe();
+
   /**
    * @return the test axe
    */
@@ -132,6 +146,9 @@ public interface ITestUnit {
    */
   @Test
   void equipSwordTest();
+
+  @Test
+  void attackToSword();
 
   /**
    * @return the test sword
@@ -144,6 +161,9 @@ public interface ITestUnit {
   @Test
   void equipSpearTest();
 
+  @Test
+  void attackToSpear();
+
   /**
    * @return the test spear
    */
@@ -155,6 +175,9 @@ public interface ITestUnit {
   @Test
   void equipStaffTest();
 
+  @Test
+  void attackToStaff();
+
   /**
    * @return the test staff
    */
@@ -165,6 +188,9 @@ public interface ITestUnit {
    */
   @Test
   void equipBowTest();
+
+  @Test
+  void attackToBow();
 
   /**
    * @return the test bow

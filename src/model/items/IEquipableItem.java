@@ -21,6 +21,8 @@ public interface IEquipableItem {
    */
   void equipTo(IUnit unit);
 
+  void setOwner(IUnit unit);
+
   /**
    * @return the unit that has currently equipped this item
    */
