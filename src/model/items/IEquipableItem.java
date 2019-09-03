@@ -46,6 +46,8 @@ public interface IEquipableItem {
    */
   int getMaxRange();
 
+  boolean counterattack();
+
   /**
    * An attack damages a Unit based on the attack's base damage, it's type and the type of the
    * Item that receives the attack.
@@ -53,7 +55,7 @@ public interface IEquipableItem {
    * @param other
    *     Unit that receives the attack.
    */
-  void attack(IUnit other);
+  void attack(IUnit other, boolean counterAttack);
 
   /**
    * Receives damage from a Anima attack.
@@ -61,7 +63,7 @@ public interface IEquipableItem {
    * @param item
    *     Received attack.
    */
-  void receiveAnimaAttack(IEquipableItem item);
+  void receiveAnimaAttack(IEquipableItem item, boolean counterAttack);
 
   /**
    * Receives damage from a Dark attack.
@@ -69,7 +71,7 @@ public interface IEquipableItem {
    * @param item
    *     Received attack.
    */
-  void receiveDarkAttack(IEquipableItem item);
+  void receiveDarkAttack(IEquipableItem item, boolean counterAttack);
 
   /**
    * Receives damage from a Light attack.
@@ -77,7 +79,7 @@ public interface IEquipableItem {
    * @param item
    *     Received attack.
    */
-  void receiveLightAttack(IEquipableItem item);
+  void receiveLightAttack(IEquipableItem item, boolean counterAttack);
 
   /**
    * Receives heal from a Staff attack.
@@ -93,7 +95,7 @@ public interface IEquipableItem {
    * @param item
    *     Received attack.
    */
-  void receiveAxeAttack(IEquipableItem item);
+  void receiveAxeAttack(IEquipableItem item, boolean counterAttack);
 
   /**
    * Receives damage from a Spear attack.
@@ -101,7 +103,7 @@ public interface IEquipableItem {
    * @param item
    *     Received attack.
    */
-  void receiveSpearAttack(IEquipableItem item);
+  void receiveSpearAttack(IEquipableItem item, boolean counterAttack);
 
   /**
    * Receives damage from a Sword attack.
@@ -109,7 +111,7 @@ public interface IEquipableItem {
    * @param item
    *     Received attack.
    */
-  void receiveSwordAttack(IEquipableItem item);
+  void receiveSwordAttack(IEquipableItem item, boolean counterAttack);
 
   /**
    * Receives damage from a Bow attack.
@@ -117,5 +119,5 @@ public interface IEquipableItem {
    * @param item
    *     Received attack.
    */
-  void receiveBowAttack(IEquipableItem item);
+  void receiveBowAttack(IEquipableItem item, boolean counterAttack);
 }

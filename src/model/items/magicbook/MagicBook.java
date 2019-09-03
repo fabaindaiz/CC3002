@@ -14,4 +14,9 @@ public abstract class MagicBook extends AbstractItem {
     public MagicBook(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
     }
+
+    @Override
+    public boolean counterattack(){
+        return true;
+    }
 }

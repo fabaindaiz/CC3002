@@ -14,4 +14,9 @@ public abstract class OtherItem extends AbstractItem {
     public OtherItem(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
     }
+
+    @Override
+    public boolean counterattack(){
+        return false;
+    }
 }

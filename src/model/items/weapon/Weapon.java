@@ -14,4 +14,9 @@ public abstract class Weapon extends AbstractItem {
     public Weapon(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
     }
+
+    @Override
+    public boolean counterattack(){
+        return true;
+    }
 }

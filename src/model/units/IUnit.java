@@ -34,6 +34,8 @@ public interface IUnit {
    */
   int getCurrentHitPoints();
 
+  int getMaxItems();
+
   /**
    * @return the items carried by this unit
    */
@@ -72,6 +74,8 @@ public interface IUnit {
    */
   void moveTo(Location targetLocation);
 
+  void muerte();
+
   /**
    * Attacks another Unit.
    *
@@ -80,13 +84,37 @@ public interface IUnit {
    */
   void attack(IUnit other);
 
+  /**
+   * Receives an heal.
+   *
+   * @param item
+   *     Received heal.
+   */
   void receiveHeal(IEquipableItem item);
 
-  void receiveAttack(IEquipableItem item);
+  /**
+   * Receives an attack.
+   *
+   * @param item
+   *     Received attack.
+   */
+  void receiveAttack(IEquipableItem item, boolean counterAttack);
 
-  void receiveWeaknessAttack(IEquipableItem item);
+  /**
+   * Receives an attack to which this Weapon is weak.
+   *
+   * @param item
+   *     Received attack.
+   */
+  void receiveWeaknessAttack(IEquipableItem item, boolean counterAttack);
 
-  void receiveResistantAttack(IEquipableItem item);
+  /**
+   * Receives an attack to which this Weapon is resistant.
+   *
+   * @param item
+   *     Received attack.
+   */
+  void receiveResistantAttack(IEquipableItem item, boolean counterAttack);
 
   boolean addItem(IEquipableItem item);
 

@@ -25,24 +25,20 @@ public class Light extends MagicBook {
      *     Unit that receives the attack.
      */
     @Override
-    public void attack(IUnit other) {
+    public void attack(IUnit other, boolean counterAttack) {
         if(other.getEquippedItem() != null)
-            other.getEquippedItem().receiveLightAttack(this);
-        else other.receiveAttack(this);
+            other.getEquippedItem().receiveLightAttack(this, counterAttack);
+        else other.receiveAttack(this, false);
     }
 
     @Override
-    public void receiveAnimaAttack(IEquipableItem item) { owner.receiveAttack(item); }
+    public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) { owner.receiveAttack(item, counterAttack); }
 
     @Override
-    public void receiveDarkAttack(IEquipableItem item) {
-        owner.receiveWeaknessAttack(item);
-    }
+    public void receiveDarkAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
 
     @Override
-    public void receiveLightAttack(IEquipableItem item) {
-        owner.receiveResistantAttack(item);
-    }
+    public void receiveLightAttack(IEquipableItem item, boolean counterAttack) { owner.receiveResistantAttack(item, counterAttack); }
 
     @Override
     public void receiveStaffHeal(IEquipableItem item) {
@@ -50,20 +46,14 @@ public class Light extends MagicBook {
     }
 
     @Override
-    public void receiveAxeAttack(IEquipableItem item) {
-        owner.receiveWeaknessAttack(item);
-    }
+    public void receiveAxeAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
 
     @Override
-    public void receiveSpearAttack(IEquipableItem item) {
-        owner.receiveWeaknessAttack(item);
-    }
+    public void receiveSpearAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
 
     @Override
-    public void receiveSwordAttack(IEquipableItem item) {  owner.receiveWeaknessAttack(item); }
+    public void receiveSwordAttack(IEquipableItem item, boolean counterAttack) {  owner.receiveWeaknessAttack(item, counterAttack); }
 
     @Override
-    public void receiveBowAttack(IEquipableItem item) {
-        owner.receiveWeaknessAttack(item);
-    }
+    public void receiveBowAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
 }

@@ -61,6 +61,9 @@ public abstract class AbstractUnit implements IUnit {
   }
 
   @Override
+  public int getMaxItems() { return maxItems; }
+
+  @Override
   public List<IEquipableItem> getItems() {
     return List.copyOf(items);
   }
@@ -99,45 +102,73 @@ public abstract class AbstractUnit implements IUnit {
   }
 
   @Override
-  public void attack(IUnit other) { equippedItem.attack(other);
+  public void muerte(){}
+
+  @Override
+  public void attack(IUnit other) { equippedItem.attack(other, true);
   }
 
-  /**
-   * Receives an heal.
-   *
-   * @param item
-   *     Received attack.
-   */
+  public boolean outOfRange(IUnit unit){
+    IEquipableItem item = unit.getEquippedItem();
+    int distancia = (int) getLocation().distanceTo( unit.getLocation() );
+    if( distancia < item.getMinRange() || distancia > item.getMinRange() )
+      return true;
+    else
+      return false;
+  }
+
+  @Override
   public void receiveHeal(IEquipableItem item) {
-    this.currentHitPoints += item.getPower();
+    if( outOfRange( item.getOwner() ) ) return;
+
+    int healed = item.getPower();
+
+    if((maxHitPoints - currentHitPoints) < healed)
+      currentHitPoints = maxHitPoints;
+    else
+      this.currentHitPoints += healed;
   }
 
-  /**
-   * Receives an attack.
-   *
-   * @param item
-   *     Received attack.
-   */
-  public void receiveAttack(IEquipableItem item) {
-    this.currentHitPoints -= item.getPower();
+  @Override
+  public void receiveAttack(IEquipableItem item, boolean counterAttack) {
+    if( outOfRange( item.getOwner() ) ) return;
+    int damage = item.getPower();
+
+    if(damage < currentHitPoints) {
+      this.currentHitPoints -= damage;
+      if (counterAttack && equippedItem.counterattack())
+        attack(item.getOwner());
+    }
+    else
+      muerte();
   }
 
-  /**
-   * Receives an attack to which this Weapon is weak.
-   *
-   * @param item
-   *     Received attack.
-   */
-  public void receiveWeaknessAttack(IEquipableItem item) { this.currentHitPoints -= item.getPower() * 1.5;
-  }
+  @Override
+  public void receiveWeaknessAttack(IEquipableItem item, boolean counterAttack) {
+    if( outOfRange( item.getOwner() ) ) return;
+    int damage = (int) (item.getPower() * 1.5);
 
-  /**
-   * Receives an attack to which this Weapon is resistant.
-   *
-   * @param item
-   *     Received attack.
-   */
-  public void receiveResistantAttack(IEquipableItem item) { this.currentHitPoints -= item.getPower() - 20;
+    if(damage < currentHitPoints) {
+      this.currentHitPoints -= damage;
+      if (counterAttack && equippedItem.counterattack())
+        attack(item.getOwner());
+    }
+    else
+      muerte();
+  }
+  
+  @Override
+  public void receiveResistantAttack(IEquipableItem item, boolean counterAttack) {
+    if( outOfRange( item.getOwner() ) ) return;
+    int damage = item.getPower() - 20;
+
+    if(damage < currentHitPoints) {
+      this.currentHitPoints -= damage;
+      if (counterAttack && equippedItem.counterattack())
+        attack(item.getOwner());
+    }
+    else
+      muerte();
   }
 
   @Override
