@@ -55,7 +55,10 @@ public interface ITestUnit {
   @Test
   void constructorTest();
 
-  /**
+    @Test
+    void counterattackTest();
+
+    /**
    * Prueba el funcionamiento basico del intercambio
    */
   @Test

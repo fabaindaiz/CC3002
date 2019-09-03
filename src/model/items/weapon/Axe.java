@@ -69,10 +69,10 @@ public class Axe extends Weapon {
   }
 
   @Override
-  public void receiveSpearAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
+  public void receiveSpearAttack(IEquipableItem item, boolean counterAttack) { owner.receiveResistantAttack(item, counterAttack); }
 
   @Override
-  public void receiveSwordAttack(IEquipableItem item, boolean counterAttack) {  owner.receiveResistantAttack(item, counterAttack); }
+  public void receiveSwordAttack(IEquipableItem item, boolean counterAttack) {  owner.receiveWeaknessAttack(item, counterAttack); }
 
   @Override
   public void receiveBowAttack(IEquipableItem item, boolean counterAttack) {

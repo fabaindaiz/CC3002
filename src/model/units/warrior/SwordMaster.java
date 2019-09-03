@@ -1,6 +1,7 @@
 package model.units.warrior;
 
 import model.items.IEquipableItem;
+import model.items.weapon.Sword;
 import model.map.Location;
 import model.units.AbstractUnit;
 
@@ -27,7 +28,7 @@ public class SwordMaster extends Warrior {
    */
   @Override
   public void equipItem(final IEquipableItem item) {
-    if (item instanceof SwordMaster) {
+    if (item instanceof Sword) {
       equippedItem = item;
       item.setOwner(this);
     }

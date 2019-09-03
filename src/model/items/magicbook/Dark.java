@@ -37,13 +37,13 @@ public class Dark extends MagicBook {
     }
 
     @Override
-    public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) { owner.receiveAttack(item, counterAttack); }
+    public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) { owner.receiveResistantAttack(item, counterAttack); }
 
     @Override
-    public void receiveDarkAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
+    public void receiveDarkAttack(IEquipableItem item, boolean counterAttack) { owner.receiveAttack(item, counterAttack); }
 
     @Override
-    public void receiveLightAttack(IEquipableItem item, boolean counterAttack) { owner.receiveResistantAttack(item, counterAttack); }
+    public void receiveLightAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
 
     @Override
     public void receiveStaffHeal(IEquipableItem item) {

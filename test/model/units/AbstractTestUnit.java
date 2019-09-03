@@ -123,6 +123,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
 
   @Override
   @Test
+  public void counterattackTest() {}
+
+  @Override
+  @Test
   public void intercambioTest() {
     assertEquals(targetAlpaca.getItems(), List.of());
     getTestUnit().addItem(staff);
