@@ -34,6 +34,9 @@ public interface IUnit {
    */
   int getCurrentHitPoints();
 
+  /**
+   * @return max item slots of the unit
+   */
   int getMaxItems();
 
   /**
@@ -74,6 +77,9 @@ public interface IUnit {
    */
   void moveTo(Location targetLocation);
 
+  /**
+   * La unidad muere
+   */
   void muerte();
 
   /**
@@ -83,6 +89,15 @@ public interface IUnit {
    *     Target of the attack.
    */
   void attack(IUnit other);
+
+  /**
+   * Verifica si el ataque esta fuera de rango
+   *
+   * @return un valor booleano segun la condicion
+   * TRUE es fuera de rango
+   * FALSE es dentro de rango
+   */
+  boolean outOfRange(IUnit unit);
 
   /**
    * Receives an heal.
@@ -116,7 +131,24 @@ public interface IUnit {
    */
   void receiveResistantAttack(IEquipableItem item, boolean counterAttack);
 
+  /**
+   * Añade un item al inventario de la unidad
+   *
+   * @param item
+   *      Es el item que se quiere añadir
+   *
+   * @return si se pudo añadir el item
+   * TRUE si se logro
+   */
   boolean addItem(IEquipableItem item);
 
+  /**
+   * Entrega un item a otra unidad
+   *
+   * @param unit
+   *      Unidad con la que se queire intercambiar
+   * @param item
+   *      Item que se quiere entregar
+   */
   void exchange(IUnit unit, IEquipableItem item);
 }

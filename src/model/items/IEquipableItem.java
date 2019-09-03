@@ -46,6 +46,12 @@ public interface IEquipableItem {
    */
   int getMaxRange();
 
+  /**
+   * Verifica si este item contraataca
+   *
+   * @return un valor booleano dependiendo de la condicion
+   * TRUE si este item contraataca
+   */
   boolean counterattack();
 
   /**
@@ -62,6 +68,8 @@ public interface IEquipableItem {
    *
    * @param item
    *     Received attack.
+   * @param counterAttack
+   *     Avisa este ataque requiere un contraataque
    */
   void receiveAnimaAttack(IEquipableItem item, boolean counterAttack);
 
@@ -70,6 +78,8 @@ public interface IEquipableItem {
    *
    * @param item
    *     Received attack.
+   * @param counterAttack
+   *    Avisa este ataque requiere un contraataque
    */
   void receiveDarkAttack(IEquipableItem item, boolean counterAttack);
 
@@ -78,6 +88,8 @@ public interface IEquipableItem {
    *
    * @param item
    *     Received attack.
+   * @param counterAttack
+   *    Avisa este ataque requiere un contraataque
    */
   void receiveLightAttack(IEquipableItem item, boolean counterAttack);
 
@@ -94,6 +106,8 @@ public interface IEquipableItem {
    *
    * @param item
    *     Received attack.
+   * @param counterAttack
+   *    *    Avisa este ataque requiere un contraataque
    */
   void receiveAxeAttack(IEquipableItem item, boolean counterAttack);
 
@@ -102,6 +116,8 @@ public interface IEquipableItem {
    *
    * @param item
    *     Received attack.
+   * @param counterAttack
+   *    *    Avisa este ataque requiere un contraataque
    */
   void receiveSpearAttack(IEquipableItem item, boolean counterAttack);
 
@@ -110,6 +126,8 @@ public interface IEquipableItem {
    *
    * @param item
    *     Received attack.
+   * @param counterAttack
+   *    *    Avisa este ataque requiere un contraataque
    */
   void receiveSwordAttack(IEquipableItem item, boolean counterAttack);
 
@@ -118,6 +136,8 @@ public interface IEquipableItem {
    *
    * @param item
    *     Received attack.
+   * @param counterAttack
+   *    *    Avisa este ataque requiere un contraataque
    */
   void receiveBowAttack(IEquipableItem item, boolean counterAttack);
 }

@@ -108,6 +108,7 @@ public abstract class AbstractUnit implements IUnit {
   public void attack(IUnit other) { equippedItem.attack(other, true);
   }
 
+  @Override
   public boolean outOfRange(IUnit unit){
     IEquipableItem item = unit.getEquippedItem();
     int distancia = (int) getLocation().distanceTo( unit.getLocation() );
@@ -156,7 +157,7 @@ public abstract class AbstractUnit implements IUnit {
     else
       muerte();
   }
-  
+
   @Override
   public void receiveResistantAttack(IEquipableItem item, boolean counterAttack) {
     if( outOfRange( item.getOwner() ) ) return;
