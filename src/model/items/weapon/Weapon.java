@@ -19,9 +19,4 @@ public abstract class Weapon extends AbstractItem {
     public boolean counterattack(){
         return true;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof Weapon;
-    }
 }

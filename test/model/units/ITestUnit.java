@@ -66,18 +66,18 @@ public interface ITestUnit {
   Light getLight();
 
   /**
-   * Checks if the axe is equipped correctly to the unit
-   */
-  @Test
-  void equipAxeTest();
-
-  /**
    * Tries to equip a weapon to the alpaca and verifies that it was not equipped
    *
    * @param item
    *     to be equipped
    */
   void checkEquippedItem(IEquipableItem item);
+
+  /**
+   * Checks if the axe is equipped correctly to the unit
+   */
+  @Test
+  void equipAxeTest();
 
   /**
    * @return the test axe
