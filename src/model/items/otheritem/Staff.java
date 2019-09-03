@@ -45,6 +45,11 @@ public class Staff extends OtherItem {
   }
 
   @Override
+  public boolean equals(Object obj) {
+    return obj instanceof Staff;
+  }
+
+  @Override
   public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) { owner.receiveAttack(item, counterAttack); }
 
   @Override

@@ -46,6 +46,11 @@ public class Bow extends Weapon {
   }
 
   @Override
+  public boolean equals(Object obj) {
+    return obj instanceof Bow;
+  }
+
+  @Override
   public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
 
   @Override

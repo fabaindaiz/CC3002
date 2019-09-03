@@ -19,4 +19,9 @@ public abstract class OtherItem extends AbstractItem {
     public boolean counterattack(){
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof OtherItem;
+    }
 }

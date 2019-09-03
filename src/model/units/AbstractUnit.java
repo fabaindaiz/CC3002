@@ -102,7 +102,9 @@ public abstract class AbstractUnit implements IUnit {
   }
 
   @Override
-  public void muerte(){}
+  public void muerte(){
+    
+  }
 
   @Override
   public void attack(IUnit other) { equippedItem.attack(other, true);

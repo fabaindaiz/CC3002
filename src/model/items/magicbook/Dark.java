@@ -32,6 +32,11 @@ public class Dark extends MagicBook {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Dark;
+    }
+
+    @Override
     public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) { owner.receiveAttack(item, counterAttack); }
 
     @Override

@@ -19,4 +19,9 @@ public abstract class MagicBook extends AbstractItem {
     public boolean counterattack(){
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof MagicBook;
+    }
 }
