@@ -26,6 +26,13 @@ public abstract class AbstractTestUnit implements ITestUnit {
 
   protected Alpaca targetAlpaca;
   protected Archer targetIntercambio;
+  protected Archer targetCounterattack1;
+  protected Cleric targetCounterattack2;
+  protected Sorcerer targetCounterattack3;
+  protected Alpaca targetCounterattack4;
+  protected Bow item1;
+  protected Staff item2;
+  protected Light item3;
   protected Field field;
 
   protected Anima anima;
@@ -54,6 +61,18 @@ public abstract class AbstractTestUnit implements ITestUnit {
     targetIntercambio = new Archer(50, 2, field.getCell(1, 0));
   }
 
+  @Override
+  public void setTargetCounterattack() {
+    item1 = new Bow("Bow", 20, 2, 3);
+    item2 = new Staff("Staff", 50, 2, 3);
+    item3 = new Light("Light", 10, 2, 3);
+    targetCounterattack1 = new Archer(20, 2, field.getCell(1, 1));
+    targetCounterattack2 = new Cleric(50, 2, field.getCell(2, 0));
+    targetCounterattack3 = new Sorcerer(50, 2, field.getCell(0, 2));
+    targetCounterattack4 = new Alpaca(50, 2, field.getCell(2, 2));
+
+  }
+
   /**
    * Sets up the units and weapons to be tested
    */
@@ -63,6 +82,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     setTestUnit();
     setTargetAlpaca();
     setTargetIntercambio();
+    setTargetCounterattack();
     setWeapons();
     setWarriors();
   }
@@ -123,7 +143,38 @@ public abstract class AbstractTestUnit implements ITestUnit {
 
   @Override
   @Test
-  public void counterattackTest() {}
+  public void counterattackTest() {
+    IUnit unit = getTestUnit();
+    IEquipableItem item = getWeapon();
+    targetCounterattack1.addItem(item1);
+    targetCounterattack2.addItem(item2);
+    targetCounterattack3.addItem(item3);
+    targetCounterattack1.equipItem(item1);
+    targetCounterattack2.equipItem(item2);
+    targetCounterattack3.equipItem(item3);
+
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      unit.attack(targetCounterattack1, true);
+      assertEquals(unit.getCurrentHitPoints(), getHP1());
+      unit.attack(targetCounterattack1, true);
+      assertEquals(unit.getCurrentHitPoints(), getHP1());
+      unit.attack(targetCounterattack2, true);
+      assertEquals(unit.getCurrentHitPoints(), getHP1());
+      unit.attack(targetCounterattack3, true);
+      assertEquals(unit.getCurrentHitPoints(), getHP2());
+      unit.attack(targetCounterattack4, true);
+      assertEquals(unit.getCurrentHitPoints(), getHP2());
+      targetCounterattack2.attack(unit, true);
+      assertEquals(unit.getCurrentHitPoints(), 50);
+      if(item != staff)
+        assertEquals(targetCounterattack2.getCurrentHitPoints(), 40);
+      else
+        assertEquals(targetCounterattack2.getCurrentHitPoints(), 50);
+    }
+
+  }
 
   @Override
   @Test
@@ -223,6 +274,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
       unit.attack(sorcerer, false);
       assertEquals(sorcerer.getCurrentHitPoints(), getHPanima());
     }
+    else {
+      unit.attack(sorcerer, false);
+      assertEquals(sorcerer.getCurrentHitPoints(), 50);
+    }
   }
 
   /**
@@ -252,6 +307,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
       sorcerer.equipItem(dark);
       unit.attack(sorcerer, false);
       assertEquals(sorcerer.getCurrentHitPoints(), getHPdark());
+    }
+    else {
+      unit.attack(sorcerer, false);
+      assertEquals(sorcerer.getCurrentHitPoints(), 50);
     }
   }
 
@@ -283,6 +342,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
       unit.attack(sorcerer, false);
       assertEquals(sorcerer.getCurrentHitPoints(), getHPlight());
     }
+    else {
+      unit.attack(sorcerer, false);
+      assertEquals(sorcerer.getCurrentHitPoints(), 50);
+    }
   }
 
   /**
@@ -312,6 +375,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
       fighter.equipItem(axe);
       unit.attack(fighter, false);
       assertEquals(fighter.getCurrentHitPoints(), getHPaxe());
+    }
+    else {
+      unit.attack(fighter, false);
+      assertEquals(fighter.getCurrentHitPoints(), 50);
     }
   }
 
@@ -343,6 +410,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
       unit.attack(swordMaster, false);
       assertEquals(swordMaster.getCurrentHitPoints(), getHPsword());
     }
+    else {
+      unit.attack(swordMaster, false);
+      assertEquals(swordMaster.getCurrentHitPoints(), 50);
+    }
   }
 
   /**
@@ -372,6 +443,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
       hero.equipItem(spear);
       unit.attack(hero, false);
       assertEquals(hero.getCurrentHitPoints(), getHPspear());
+    }
+    else {
+      unit.attack(hero, false);
+      assertEquals(hero.getCurrentHitPoints(), 50);
     }
   }
 
@@ -403,6 +478,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
       unit.attack(cleric, false);
       assertEquals(cleric.getCurrentHitPoints(), getHPstaff());
     }
+    else {
+      unit.attack(cleric, false);
+      assertEquals(cleric.getCurrentHitPoints(), 50);
+    }
   }
 
   /**
@@ -432,6 +511,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
       archer.equipItem(bow);
       unit.attack(archer, false);
       assertEquals(archer.getCurrentHitPoints(), getHPbow());
+    }
+    else {
+      unit.attack(archer, false);
+      assertEquals(archer.getCurrentHitPoints(), 50);
     }
   }
 
@@ -476,19 +559,4 @@ public abstract class AbstractTestUnit implements ITestUnit {
     return targetAlpaca;
   }
 
-  public abstract int getHPanima();
-
-  public abstract int getHPdark();
-
-  public abstract int getHPlight();
-
-  public abstract int getHPaxe();
-
-  public abstract int getHPspear();
-
-  public abstract int getHPsword();
-
-  public abstract int getHPstaff();
-
-  public abstract int getHPbow();
 }

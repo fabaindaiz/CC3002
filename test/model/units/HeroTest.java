@@ -80,4 +80,10 @@ public class HeroTest extends AbstractTestUnit {
 
   @Override
   public int getHPbow() {return 40;}
+
+  @Override
+  public int getHP1() {return 30;} //Bow
+
+  @Override
+  public int getHP2() {return 15;} //Light
 }

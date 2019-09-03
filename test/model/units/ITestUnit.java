@@ -27,6 +27,8 @@ public interface ITestUnit {
    */
   void setTargetIntercambio();
 
+  void setTargetCounterattack();
+
   /**
    * Set up the game field
    */
@@ -215,4 +217,24 @@ public interface ITestUnit {
    * @return the target Alpaca
    */
   Alpaca getTargetAlpaca();
+
+  int getHPanima();
+
+  int getHPdark();
+
+  int getHPlight();
+
+  int getHPaxe();
+
+  int getHPspear();
+
+  int getHPsword();
+
+  int getHPstaff();
+
+  int getHPbow();
+
+  int getHP1();
+
+  int getHP2();
 }

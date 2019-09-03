@@ -80,4 +80,10 @@ public class ClericTest extends AbstractTestUnit {
 
   @Override
   public int getHPbow() {return 50;}
+
+  @Override
+  public int getHP1() {return 50;} //Bow
+
+  @Override
+  public int getHP2() {return 50;} //Light
 }

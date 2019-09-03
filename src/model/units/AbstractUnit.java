@@ -107,7 +107,9 @@ public abstract class AbstractUnit implements IUnit {
   }
 
   @Override
-  public void attack(IUnit other, boolean counterattack) { equippedItem.attack(other, counterattack);
+  public void attack(IUnit other, boolean counterattack) {
+    if (equippedItem != null)
+      equippedItem.attack(other, counterattack);
   }
 
   @Override

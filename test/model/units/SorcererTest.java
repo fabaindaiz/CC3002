@@ -97,4 +97,10 @@ public class SorcererTest extends AbstractTestUnit {
 
     @Override
     public int getHPbow() {return 35;}
+
+    @Override
+    public int getHP1() {return 20;} //Bow
+
+    @Override
+    public int getHP2() {return 5;} //Light
 }

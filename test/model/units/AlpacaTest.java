@@ -49,4 +49,10 @@ public class AlpacaTest extends AbstractTestUnit {
 
   @Override
   public int getHPbow() {return 50;}
+
+  @Override
+  public int getHP1() {return 30;} //Bow
+
+  @Override
+  public int getHP2() {return 20;} //Light
 }
