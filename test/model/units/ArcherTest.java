@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import model.items.IEquipableItem;
+import model.items.weapon.Bow;
 import model.units.warrior.Archer;
 import org.junit.jupiter.api.Test;
 
@@ -34,6 +35,21 @@ public class ArcherTest extends AbstractTestUnit {
   @Override
   public IUnit getTestUnit() {
     return archer;
+  }
+
+  @Override
+  @Test
+  public void attackToBow() {
+    IUnit unit = new Archer(50, 2, field.getCell(1, 1));
+    IEquipableItem item = new Bow("Example Bow", 10, 2, 3);
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      archer.addItem(bow);
+      archer.equipItem(bow);
+      unit.attack(archer, false);
+      assertEquals(archer.getCurrentHitPoints(), getHPbow());
+    }
   }
 
   /**

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import model.items.IEquipableItem;
+import model.items.otheritem.Staff;
 import model.units.otherunit.Cleric;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +32,21 @@ public class ClericTest extends AbstractTestUnit {
   @Override
   public IUnit getTestUnit() {
     return cleric;
+  }
+
+  @Override
+  @Test
+  public void attackToStaff() {
+    IUnit unit = new Cleric(50, 2, field.getCell(0, 0));
+    IEquipableItem item = new Staff("Staff", 10, 1, 2);
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      cleric.addItem(staff);
+      cleric.equipItem(staff);
+      unit.attack(cleric, false);
+      assertEquals(cleric.getCurrentHitPoints(), getHPstaff());
+    }
   }
 
   @Test

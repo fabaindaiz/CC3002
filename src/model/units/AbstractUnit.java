@@ -103,6 +103,7 @@ public abstract class AbstractUnit implements IUnit {
 
   @Override
   public void muerte(){
+    this.currentHitPoints = 0;
   }
 
   @Override
@@ -165,7 +166,8 @@ public abstract class AbstractUnit implements IUnit {
     int damage = item.getPower() - 20;
 
     if(damage < currentHitPoints) {
-      this.currentHitPoints -= damage;
+      if(damage > 0)
+        this.currentHitPoints -= damage;
       if (counterAttack && equippedItem.counterattack())
         attack(item.getOwner(), false);
     }

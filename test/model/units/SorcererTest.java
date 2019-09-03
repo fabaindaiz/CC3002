@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import model.items.IEquipableItem;
+import model.items.magicbook.Dark;
 import model.items.magicbook.MagicBook;
 import model.units.sorcerer.Sorcerer;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,21 @@ public class SorcererTest extends AbstractTestUnit {
     @Override
     public IUnit getTestUnit() {
         return sorcerer;
+    }
+
+    @Override
+    @Test
+    public void attackToDark() {
+        IUnit unit = new Sorcerer(50, 2, field.getCell(1, 1));
+        IEquipableItem item = new Dark("Example Dark", 10, 2, 3);
+        if(item != null) {
+            unit.addItem(item);
+            unit.equipItem(item);
+            sorcerer.addItem(dark);
+            sorcerer.equipItem(dark);
+            unit.attack(sorcerer, false);
+            assertEquals(sorcerer.getCurrentHitPoints(), getHPdark());
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import model.items.IEquipableItem;
+import model.items.weapon.Axe;
 import model.units.warrior.Fighter;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +32,21 @@ public class FighterTest extends AbstractTestUnit {
   @Override
   public IUnit getTestUnit() {
     return fighter;
+  }
+
+  @Override
+  @Test
+  public void attackToAxe() {
+    IUnit unit = new Fighter(50, 2, field.getCell(1, 1));
+    IEquipableItem item = new Axe("Axe", 10, 1, 2);
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      fighter.addItem(axe);
+      fighter.equipItem(axe);
+      unit.attack(fighter, false);
+      assertEquals(fighter.getCurrentHitPoints(), getHPaxe());
+    }
   }
 
   /**
@@ -63,7 +79,7 @@ public class FighterTest extends AbstractTestUnit {
   public int getHPsword() {return 50;}
 
   @Override
-  public int getHPstaff() {return 50;}
+  public int getHPstaff() {return 40;}
 
   @Override
   public int getHPbow() {return 40;}

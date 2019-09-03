@@ -1,7 +1,9 @@
 package model.units;
 
 import model.items.IEquipableItem;
+import model.items.weapon.Sword;
 import model.units.warrior.SwordMaster;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -30,6 +32,21 @@ public class SwordMasterTest extends AbstractTestUnit {
   @Override
   public IUnit getTestUnit() {
     return swordMaster;
+  }
+
+  @Override
+  @Test
+  public void attackToSword() {
+    IUnit unit = new SwordMaster(50, 2, field.getCell(1, 1));
+    IEquipableItem item = new Sword("Sword", 10, 1, 2);
+    if(item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+      swordMaster.addItem(sword);
+      swordMaster.equipItem(sword);
+      unit.attack(swordMaster, false);
+      assertEquals(swordMaster.getCurrentHitPoints(), getHPsword());
+    }
   }
 
   @Override
