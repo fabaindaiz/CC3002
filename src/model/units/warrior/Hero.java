@@ -3,7 +3,6 @@ package model.units.warrior;
 import model.items.IEquipableItem;
 import model.items.weapon.Spear;
 import model.map.Location;
-import model.units.AbstractUnit;
 
 /**
  * A <i>Hero</i> is a special kind of unit, the player that defeats this unit wins the game.

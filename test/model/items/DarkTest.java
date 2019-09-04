@@ -2,8 +2,8 @@ package model.items;
 
 import model.items.magicbook.Dark;
 import model.map.Location;
-import model.units.sorcerer.Sorcerer;
 import model.units.IUnit;
+import model.units.sorcerer.Sorcerer;
 
 /**
  * Test set for Axes

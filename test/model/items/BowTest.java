@@ -1,12 +1,12 @@
 package model.items;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import model.items.weapon.Bow;
 import model.map.Location;
-import model.units.warrior.Archer;
 import model.units.IUnit;
+import model.units.warrior.Archer;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test set for bows

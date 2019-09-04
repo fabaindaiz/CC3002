@@ -1,7 +1,6 @@
 package model.items.weapon;
 
 import model.items.IEquipableItem;
-import model.items.weapon.Weapon;
 import model.units.IUnit;
 
 /**

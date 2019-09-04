@@ -3,7 +3,6 @@ package model.units.otherunit;
 import model.items.IEquipableItem;
 import model.items.otheritem.Staff;
 import model.map.Location;
-import model.units.AbstractUnit;
 
 /**
  * This class represents a cleric type unit. A cleric can only use staff type weapons, which means

@@ -2,8 +2,8 @@ package model.items;
 
 import model.items.otheritem.Staff;
 import model.map.Location;
-import model.units.otherunit.Cleric;
 import model.units.IUnit;
+import model.units.otherunit.Cleric;
 
 /**
  * Test set for staffs

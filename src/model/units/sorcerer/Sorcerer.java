@@ -2,7 +2,6 @@ package model.units.sorcerer;
 
 import model.items.IEquipableItem;
 import model.items.magicbook.MagicBook;
-import model.items.otheritem.Staff;
 import model.map.Location;
 import model.units.AbstractUnit;
 

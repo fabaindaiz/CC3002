@@ -1,8 +1,9 @@
 package model.map;
 
+import model.units.IUnit;
+
 import java.util.HashSet;
 import java.util.Set;
-import model.units.IUnit;
 
 /**
  * This class represents a <i>location</i> in the game's map.

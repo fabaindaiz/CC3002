@@ -1,18 +1,17 @@
 package model.units;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import model.items.IEquipableItem;
 import model.items.magicbook.Dark;
-import model.items.magicbook.MagicBook;
 import model.units.sorcerer.Sorcerer;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * @author Ignacio Slater Muñoz
  */
-public class SorcererTest extends AbstractTestUnit {
+public class SorcererDarkTest extends AbstractTestUnit {
 
     private Sorcerer sorcerer;
 

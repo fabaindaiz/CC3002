@@ -1,7 +1,6 @@
 package model.items.magicbook;
 
 import model.items.IEquipableItem;
-import model.items.magicbook.MagicBook;
 import model.units.IUnit;
 
 public class Anima extends MagicBook {

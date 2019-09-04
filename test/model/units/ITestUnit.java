@@ -1,7 +1,7 @@
 package model.units;
 
 
-import model.items.*;
+import model.items.IEquipableItem;
 import model.items.magicbook.Anima;
 import model.items.magicbook.Dark;
 import model.items.magicbook.Light;
@@ -59,6 +59,9 @@ public interface ITestUnit {
 
     @Test
     void counterattackTest();
+
+    @Test
+    void healTest();
 
     /**
    * Prueba el funcionamiento basico del intercambio

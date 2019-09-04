@@ -1,12 +1,13 @@
 package model.units;
 
-import static java.lang.Math.min;
+import model.items.IEquipableItem;
+import model.map.Location;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import model.items.IEquipableItem;
-import model.map.Location;
+
+import static java.lang.Math.min;
 
 /**
  * This class represents an abstract unit.
@@ -51,14 +52,15 @@ public abstract class AbstractUnit implements IUnit {
   }
 
   @Override
-  public int getMaxHitPoints() {
-    return maxHitPoints;
-  }
+  public int getMaxHitPoints() { return maxHitPoints; }
 
   @Override
   public int getCurrentHitPoints() {
     return currentHitPoints;
   }
+
+  @Override
+  public void setCurrentHitPoints(int HP) { currentHitPoints = HP; }
 
   @Override
   public int getMaxItems() { return maxItems; }
@@ -104,6 +106,7 @@ public abstract class AbstractUnit implements IUnit {
   @Override
   public void muerte(){
     this.currentHitPoints = 0;
+
   }
 
   @Override

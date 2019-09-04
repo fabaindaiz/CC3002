@@ -1,9 +1,8 @@
 package model.units.warrior;
 
-import model.items.weapon.Axe;
 import model.items.IEquipableItem;
+import model.items.weapon.Axe;
 import model.map.Location;
-import model.units.AbstractUnit;
 
 /**
  * This class represents a fighter type unit.

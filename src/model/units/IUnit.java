@@ -1,9 +1,9 @@
 package model.units;
 
-import java.util.List;
 import model.items.IEquipableItem;
-import model.items.otheritem.Staff;
 import model.map.Location;
+
+import java.util.List;
 
 /**
  * This interface represents all units in the game.
@@ -34,7 +34,9 @@ public interface IUnit {
    */
   int getCurrentHitPoints();
 
-  /**
+    void setCurrentHitPoints(int HP);
+
+    /**
    * @return max item slots of the unit
    */
   int getMaxItems();

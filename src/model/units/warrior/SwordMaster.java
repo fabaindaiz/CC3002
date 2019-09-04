@@ -3,7 +3,6 @@ package model.units.warrior;
 import model.items.IEquipableItem;
 import model.items.weapon.Sword;
 import model.map.Location;
-import model.units.AbstractUnit;
 
 /**
  * This class represents a <i>SwordMaster</i> type unit.

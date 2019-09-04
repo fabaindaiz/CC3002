@@ -1,22 +1,29 @@
 package model.units;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import model.items.*;
-import model.items.magicbook.*;
-import model.items.weapon.*;
-import model.items.otheritem.*;
+import model.items.IEquipableItem;
+import model.items.magicbook.Anima;
+import model.items.magicbook.Dark;
+import model.items.magicbook.Light;
+import model.items.otheritem.Staff;
+import model.items.weapon.Axe;
+import model.items.weapon.Bow;
+import model.items.weapon.Spear;
+import model.items.weapon.Sword;
 import model.map.Field;
 import model.map.Location;
-import model.units.otherunit.*;
-import model.units.sorcerer.*;
-import model.units.warrior.*;
+import model.units.otherunit.Alpaca;
+import model.units.otherunit.Cleric;
+import model.units.sorcerer.Sorcerer;
+import model.units.warrior.Archer;
+import model.units.warrior.Fighter;
+import model.units.warrior.Hero;
+import model.units.warrior.SwordMaster;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Ignacio Slater Muñoz
@@ -33,6 +40,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   protected Bow item1;
   protected Staff item2;
   protected Light item3;
+  protected Staff item4;
   protected Field field;
 
   protected Anima anima;
@@ -66,6 +74,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     item1 = new Bow("Bow", 20, 2, 3);
     item2 = new Staff("Staff", 50, 2, 3);
     item3 = new Light("Light", 10, 2, 3);
+    item4 = new Staff("Staff", 0, 2, 3);
     targetCounterattack1 = new Archer(20, 2, field.getCell(1, 1));
     targetCounterattack2 = new Cleric(50, 2, field.getCell(2, 0));
     targetCounterattack3 = new Sorcerer(50, 2, field.getCell(0, 2));
@@ -152,7 +161,6 @@ public abstract class AbstractTestUnit implements ITestUnit {
     targetCounterattack1.equipItem(item1);
     targetCounterattack2.equipItem(item2);
     targetCounterattack3.equipItem(item3);
-
     if(item != null) {
       unit.addItem(item);
       unit.equipItem(item);
@@ -173,7 +181,24 @@ public abstract class AbstractTestUnit implements ITestUnit {
       else
         assertEquals(targetCounterattack2.getCurrentHitPoints(), 50);
     }
+  }
 
+  @Override
+  @Test
+  public void healTest() {
+    IUnit unit = getTestUnit();
+    targetCounterattack2.addItem(staff);
+    targetCounterattack2.addItem(item4);
+    unit.setCurrentHitPoints(20);
+    targetCounterattack2.equipItem(item4);
+    targetCounterattack2.attack(unit,false);
+    assertEquals(unit.getCurrentHitPoints(),20);
+    targetCounterattack2.equipItem(staff);
+    targetCounterattack2.attack(unit,false);
+    assertEquals(unit.getCurrentHitPoints(),30);
+    targetCounterattack2.attack(unit,true);
+    assertEquals(unit.getCurrentHitPoints(),40);
+    assertEquals(targetCounterattack2.getCurrentHitPoints(),50);
   }
 
   @Override

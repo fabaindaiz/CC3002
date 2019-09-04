@@ -2,8 +2,8 @@ package model.items;
 
 import model.items.weapon.Spear;
 import model.map.Location;
-import model.units.warrior.Hero;
 import model.units.IUnit;
+import model.units.warrior.Hero;
 
 /**
  * Test set for spears

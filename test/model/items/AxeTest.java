@@ -2,8 +2,8 @@ package model.items;
 
 import model.items.weapon.Axe;
 import model.map.Location;
-import model.units.warrior.Fighter;
 import model.units.IUnit;
+import model.units.warrior.Fighter;
 
 /**
  * Test set for Axes

@@ -4,8 +4,6 @@ import model.items.IEquipableItem;
 import model.map.Location;
 import model.units.AbstractUnit;
 
-import java.security.acl.Owner;
-
 public abstract class Warrior extends AbstractUnit {
     /**
      * Creates a new Unit.
