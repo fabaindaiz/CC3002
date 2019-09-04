@@ -1,1 +1,74 @@
+Tarea CC3002
 
+Empezando
+    Este proyecto tiene por finalidad cumplir con las tareas de CC3002 para este semestre
+    Actualmente está implementado únicamente lo pedido en el primer enunciado
+
+Requisitos
+    Para ejecutar el proyecto se necesita tener java 11 o superior instalado (JDK)
+    Actualmente lo único funcional del proyecto son las test y se deben correr en un IDE con JUnit 5
+
+Descripción del proyecto
+    Esta tarea fue hecha considerando lo visto en CC3002
+    Se implementaron 2 interfaces principales: IUnit y IEquipableItem
+    Cada interfaz posee una clase abstracta principal
+
+    Todas las armas y unidades similares están implementadas con clases abstractas asociadas a su clase abstracta principal
+    Estas clases abstractas son implementadas por una clase especifica por cada arma o unidad existente
+    Esto se hizo a fin de facilitar futuras implementaciones en el proyecto
+
+    Para ejecutar diferentes acciones dependiendo del caso como en los ataques o en los test, se usó Double Dispatch
+    Esto permite tener funciones en cada clase que generan un comportamiento distinto según sea requerido
+
+Decisiones relevantes
+    Se enumeraran a continuación todas las decisiones no mencionadas en la descripción que se tomaron al realizar el proyecto
+
+    Comentarios para la Tarea 1:
+    - Se crearon clases abstractas para agrupar armas similares para facilitar futuras implementaciones
+    - Para el contraataque, se optó por tener el método ataque con un parámetro boolean que indica si es necesario
+        Además, las armas poseen un método que indica si son armas que realizas contraataque o no.
+
+    - Los sistemas de daño modificado se implementaron como métodos en las distintas armas
+        Así además, según el arma que ataca se llama a un método de daño en la unidad distinto según el caso
+        Se implemento la curación, como una llamada que se realiza al recibirse un ataque con Staff
+
+    - Los ataques son recibidos y ejecutados por el arma equipada, desligando esto de las unidades
+        (En un inicio se pensó usar una clase ataque, pero se descartó para usar esta implementación)
+    - El aumento y disminución de valores y la verificaciones de armas son las únicas partes del combate
+        que se implementaron en la unidad, esto con fin de evitar problemas con unidades sin armas
+        (Una posible propuesta fue implementar una clase "nullWeapon", pero se descartó por esta idea)
+    - Toda unidad sin arma equipada recibe daño sin modificar, esto se ejecuta directamente en la unidad
+
+    - Una unidad muerta simplemente posee localización nula, así nadie puede interactuar con ella
+        Se verifica además que ninguna función pueda ejecutarse o falle por puntero nulo
+
+Testeo
+    Los test están implementados con JUnit 5
+
+    Cada arma se testea con los mismos test básicos que verifican su correcto funcionamiento
+    En esta parte no han habido muchos cambios desde el template además de añadir los test para las armas nuevas
+
+    Cada Unidad se testea con los mismos test completos que verifican su correcto funcionamiento
+    En esta parte se verifican todas las funcionalidades de las unidades con diferentes test
+    También se verifica el sistema de armas y fortalezas en diversas pruebas de ataque y contraataque
+
+    En el testeo, cada unidad con cada arma ataca a el resto de forma independiente, verificando así el funcionamiento completo
+    Además, en cada test especifico se han añadido casos de borde para verificar que ninguna método falle en estos
+
+Hecho con
+    Java 12
+    Intellij - IDE java
+    JUnit 5 - Framework para test
+
+Contribuciones
+    Esto es un trabajo personal, sin contribuciones externas
+
+Versionamiento
+    Se uso git para el versionamiento. Para ver las versiones disponibles, revisa los Tags de este repositorio
+
+Autores
+    Ignacio Slater Muñoz - Template inicial
+    Fabián Díaz González - Trabajo posterior
+
+Licencia
+    Este proyecto no posee licencia, puede usarse con cualquier fin
