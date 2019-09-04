@@ -34,7 +34,10 @@ public interface IUnit {
    */
   int getCurrentHitPoints();
 
-    void setCurrentHitPoints(int HP);
+  /**
+   * Configura la vida de la unidad a una especificada
+   */
+  void setCurrentHitPoints(int HP);
 
     /**
    * @return max item slots of the unit

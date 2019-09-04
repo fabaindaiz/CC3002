@@ -21,6 +21,12 @@ public interface IEquipableItem {
    */
   void equipTo(IUnit unit);
 
+  /**
+   * Configura el dueño de un objeto equipado
+   *
+   * @param unit
+   *      dueño del objeto
+   */
   void setOwner(IUnit unit);
 
   /**

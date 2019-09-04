@@ -221,23 +221,53 @@ public interface ITestUnit {
    */
   Alpaca getTargetAlpaca();
 
+  /**
+   * @return expected HP after anima attack
+   */
   int getHPanima();
 
+  /**
+   * @return expected HP after dark attack
+   */
   int getHPdark();
 
+  /**
+   * @return expected HP after light attack
+   */
   int getHPlight();
 
+  /**
+   * @return expected HP after axe attack
+   */
   int getHPaxe();
 
+  /**
+   * @return expected HP after spear attack
+   */
   int getHPspear();
 
+  /**
+   * @return expected HP after sword attack
+   */
   int getHPsword();
 
+  /**
+   * @return expected HP after staff attack
+   */
   int getHPstaff();
 
+  /**
+   * @return expected HP after bow attack
+   */
   int getHPbow();
 
+  /**
+   * @return expected HP after counterattack test en case 1
+   */
   int getHP1();
 
+  /**
+   * @return expected HP after counterattack test en case 2
+   */
   int getHP2();
 }
