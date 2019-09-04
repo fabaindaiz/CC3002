@@ -1,23 +1,14 @@
 package model.units;
 
 import model.items.IEquipableItem;
-import model.items.magicbook.Anima;
-import model.items.magicbook.Dark;
-import model.items.magicbook.Light;
-import model.items.otheritem.Staff;
-import model.items.weapon.Axe;
-import model.items.weapon.Bow;
-import model.items.weapon.Spear;
-import model.items.weapon.Sword;
+import model.items.magicbook.*;
+import model.items.otheritem.*;
+import model.items.weapon.*;
 import model.map.Field;
 import model.map.Location;
-import model.units.otherunit.Alpaca;
-import model.units.otherunit.Cleric;
-import model.units.sorcerer.Sorcerer;
-import model.units.warrior.Archer;
-import model.units.warrior.Fighter;
-import model.units.warrior.Hero;
-import model.units.warrior.SwordMaster;
+import model.units.otherunit.*;
+import model.units.sorcerer.*;
+import model.units.warrior.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +33,6 @@ public abstract class AbstractTestUnit implements ITestUnit {
   protected Light item3;
   protected Staff item4;
   protected Field field;
-
   protected Anima anima;
   protected Dark dark;
   protected Light light;
@@ -51,7 +41,6 @@ public abstract class AbstractTestUnit implements ITestUnit {
   protected Spear spear;
   protected Staff staff;
   protected Bow bow;
-
   protected Sorcerer sorcerer;
   protected Fighter fighter;
   protected Hero hero;
@@ -79,7 +68,6 @@ public abstract class AbstractTestUnit implements ITestUnit {
     targetCounterattack2 = new Cleric(50, 2, field.getCell(2, 0));
     targetCounterattack3 = new Sorcerer(50, 2, field.getCell(0, 2));
     targetCounterattack4 = new Alpaca(50, 2, field.getCell(2, 2));
-
   }
 
   /**

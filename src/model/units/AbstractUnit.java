@@ -193,6 +193,10 @@ public abstract class AbstractUnit implements IUnit {
   public void exchange(IUnit unit, IEquipableItem item){
     if(items.contains(item) && (int) getLocation().distanceTo(unit.getLocation()) == 1){
       if (unit.addItem(item)){
+        if(equippedItem == item) {
+          equippedItem = null;
+          item.setOwner(null);
+        }
         items.remove(item);
       }
     }
