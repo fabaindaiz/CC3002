@@ -65,6 +65,11 @@ public interface ITestUnit {
 
   /**
    * Prueba la muerte de la unidad
+   * (La muerte esta programada para no dejate hacer nada)
+   *
+   * Casos de borde una vez muerta la unidad:
+   *  - Intenta atacar
+   *  - Intenta transferir un objeto
    */
   @Test
   void deathTest();

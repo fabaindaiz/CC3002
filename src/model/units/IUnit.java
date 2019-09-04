@@ -25,6 +25,15 @@ public interface IUnit {
   void equipItem(IEquipableItem item);
 
   /**
+   * Verifica si una unidad esta viva o muerta
+   *
+   * @return es estado de la unidad
+   *    TRUE si esta viva
+   *    FALSE si esta muerta
+   */
+  boolean getDeathStatus();
+
+  /**
    * @return max hit points of the unit
    */
   int getMaxHitPoints();
@@ -83,7 +92,10 @@ public interface IUnit {
   void moveTo(Location targetLocation);
 
   /**
-   * La unidad muere
+   * Mata a esta unidad, sacandola del mapa
+   * De esta forma nadie puede interactuar con ella.
+   * (Despues del SMAAAASH!! unit ha recibido daño mortal)
+
    */
   void muerte();
 

@@ -52,6 +52,9 @@ public abstract class AbstractUnit implements IUnit {
   }
 
   @Override
+  public boolean getDeathStatus() {return location != null;}
+
+  @Override
   public int getMaxHitPoints() { return maxHitPoints; }
 
   @Override
@@ -97,6 +100,7 @@ public abstract class AbstractUnit implements IUnit {
 
   @Override
   public void moveTo(final Location targetLocation) {
+    if (!getDeathStatus()) return;
     if (getLocation().distanceTo(targetLocation) <= getMovement()
         && targetLocation.getUnit() == null) {
       setLocation(targetLocation);
@@ -105,18 +109,19 @@ public abstract class AbstractUnit implements IUnit {
 
   @Override
   public void muerte(){
-    this.currentHitPoints = 0;
-
+    location = null;
   }
 
   @Override
   public void attack(IUnit other, boolean counterattack) {
+    if (!getDeathStatus() || !other.getDeathStatus()) return;
     if (equippedItem != null)
       equippedItem.attack(other, counterattack);
   }
 
   @Override
   public boolean outOfRange(IUnit unit){
+    if (!getDeathStatus()) return true;
     IEquipableItem item = unit.getEquippedItem();
     int distancia = (int) getLocation().distanceTo( unit.getLocation() );
     if( distancia < item.getMinRange() || distancia > item.getMaxRange() )
@@ -130,7 +135,6 @@ public abstract class AbstractUnit implements IUnit {
     if( outOfRange( item.getOwner() ) ) return;
 
     int healed = item.getPower();
-
     if((maxHitPoints - currentHitPoints) < healed)
       currentHitPoints = maxHitPoints;
     else
@@ -191,6 +195,7 @@ public abstract class AbstractUnit implements IUnit {
 
   @Override
   public void exchange(IUnit unit, IEquipableItem item){
+    if (!getDeathStatus() || !unit.getDeathStatus()) return;
     if(items.contains(item) && (int) getLocation().distanceTo(unit.getLocation()) == 1){
       if (unit.addItem(item)){
         if(equippedItem == item) {
