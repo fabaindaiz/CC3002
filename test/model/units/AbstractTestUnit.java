@@ -140,6 +140,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
 
   @Override
   @Test
+  public void deathTest() {
+    
+  }
+
+  @Override
+  @Test
   public void counterattackTest() {
     IUnit unit = getTestUnit();
     IEquipableItem item = getWeapon();
@@ -274,6 +280,8 @@ public abstract class AbstractTestUnit implements ITestUnit {
    */
   @Override
   public void checkEquippedItem(IEquipableItem item) {
+    assertNull(getTestUnit().getEquippedItem());
+    getTestUnit().equipItem(item);
     assertNull(getTestUnit().getEquippedItem());
     getTestUnit().addItem(item);
     getTestUnit().equipItem(item);

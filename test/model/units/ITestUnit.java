@@ -27,6 +27,9 @@ public interface ITestUnit {
    */
   void setTargetIntercambio();
 
+  /**
+   * Configura la unidad para los test de contraataque
+   */
   void setTargetCounterattack();
 
   /**
@@ -49,6 +52,9 @@ public interface ITestUnit {
    */
   void setWeapons();
 
+  /**
+   * Creates a set of testing warriors
+   */
   void setWarriors();
 
   /**
@@ -57,11 +63,24 @@ public interface ITestUnit {
   @Test
   void constructorTest();
 
-    @Test
-    void counterattackTest();
+  /**
+   * Prueba la muerte de la unidad
+   */
+  @Test
+  void deathTest();
 
-    @Test
-    void healTest();
+  /**
+   * Test de contraataque
+   *   (no testea debilidades, eso esta en otros test)
+   */
+  @Test
+  void counterattackTest();
+
+  /**
+   * Test de curación
+   */
+  @Test
+  void healTest();
 
     /**
    * Prueba el funcionamiento basico del intercambio
