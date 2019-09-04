@@ -56,7 +56,7 @@ Testeo
     Además, en cada test especifico se han añadido casos de borde para verificar que ninguna método falle en estos
 
 Hecho con
-    Java 12
+    Java 12 (compatible con Java 11 o superior)
     Intellij - IDE java
     JUnit 5 - Framework para test
 
