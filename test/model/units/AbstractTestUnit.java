@@ -192,10 +192,22 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Override
   @Test
   public void intercambioTest() {
+    IUnit unit = getTestUnit();
+    IEquipableItem item = getWeapon();
     assertEquals(targetAlpaca.getItems(), List.of());
-    getTestUnit().addItem(staff);
-    getTestUnit().exchange(targetAlpaca,staff);
+    unit.addItem(staff);
+    if (item != null) {
+      unit.addItem(item);
+      unit.equipItem(item);
+    }
+    unit.exchange(targetAlpaca,staff);
     assertEquals(targetAlpaca.getItems(), List.of(staff));
+    if (item != null) {
+      unit.exchange(targetAlpaca,item);
+      assertEquals(targetAlpaca.getItems(), List.of(staff,item));
+      assertEquals(item.getOwner(),null);
+    }
+    assertEquals(unit.getEquippedItem(),null);
   }
 
   @Override
