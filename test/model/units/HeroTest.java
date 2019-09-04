@@ -53,6 +53,7 @@ public class HeroTest extends AbstractTestUnit {
   @Test
   public void equipSpearTest() {
     assertNull(hero.getEquippedItem());
+    hero.addItem(spear);
     hero.equipItem(spear);
     assertEquals(spear, hero.getEquippedItem());
   }

@@ -53,6 +53,7 @@ public class SorcererLightTest extends AbstractTestUnit {
     @Test
     public void equipAnimaTest() {
         assertNull(sorcerer.getEquippedItem());
+        sorcerer.addItem(anima);
         sorcerer.equipItem(anima);
         assertEquals(anima, sorcerer.getEquippedItem());
     }
@@ -61,6 +62,7 @@ public class SorcererLightTest extends AbstractTestUnit {
     @Test
     public void equipDarkTest() {
         assertNull(sorcerer.getEquippedItem());
+        sorcerer.addItem(dark);
         sorcerer.equipItem(dark);
         assertEquals(dark, sorcerer.getEquippedItem());
     }
@@ -69,6 +71,7 @@ public class SorcererLightTest extends AbstractTestUnit {
     @Test
     public void equipLightTest() {
         assertNull(sorcerer.getEquippedItem());
+        sorcerer.addItem(light);
         sorcerer.equipItem(light);
         assertEquals(light, sorcerer.getEquippedItem());
     }
