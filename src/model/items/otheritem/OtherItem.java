@@ -16,7 +16,7 @@ public abstract class OtherItem extends AbstractItem {
     }
 
     @Override
-    public boolean counterattack(){
+    public boolean counterattack() {
         return false;
     }
 }

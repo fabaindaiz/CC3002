@@ -8,18 +8,18 @@ package model.map;
  */
 public class InvalidLocation extends Location {
 
-  /**
-   * Creates an empty location on the game's map
-   */
-  public InvalidLocation() {
-    super(-1, -1);
-  }
+    /**
+     * Creates an empty location on the game's map
+     */
+    public InvalidLocation() {
+        super(-1, -1);
+    }
 
-  @Override
-  public void addNeighbour(final Location neighbour) {
-  }
+    @Override
+    public void addNeighbour(final Location neighbour) {
+    }
 
-  @Override
-  protected void addTo(final Location location) {
-  }
+    @Override
+    protected void addTo(final Location location) {
+    }
 }

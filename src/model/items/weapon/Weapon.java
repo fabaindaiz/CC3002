@@ -16,7 +16,7 @@ public abstract class Weapon extends AbstractItem {
     }
 
     @Override
-    public boolean counterattack(){
+    public boolean counterattack() {
         return true;
     }
 }

@@ -11,48 +11,70 @@ import model.units.otherunit.Alpaca;
  */
 public class AlpacaTest extends AbstractTestUnit {
 
-  private Alpaca alpaca;
+    private Alpaca alpaca;
 
-  @Override
-  public void setTestUnit() {
-    alpaca = new Alpaca(50, 2, field.getCell(0, 0));
-  }
+    @Override
+    public void setTestUnit() {
+        alpaca = new Alpaca(50, 2, field.getCell(0, 0));
+    }
 
-  @Override
-  public IEquipableItem getWeapon() {return null;}
+    @Override
+    public IEquipableItem getWeapon() {
+        return null;
+    }
 
-  @Override
-  public Alpaca getTestUnit() {
-    return alpaca;
-  }
+    @Override
+    public Alpaca getTestUnit() {
+        return alpaca;
+    }
 
-  @Override
-  public int getHPanima() {return 50;}
+    @Override
+    public int getHPanima() {
+        return 50;
+    }
 
-  @Override
-  public int getHPdark() {return 50;}
+    @Override
+    public int getHPdark() {
+        return 50;
+    }
 
-  @Override
-  public int getHPlight() {return 50;}
+    @Override
+    public int getHPlight() {
+        return 50;
+    }
 
-  @Override
-  public int getHPaxe() {return 50;}
+    @Override
+    public int getHPaxe() {
+        return 50;
+    }
 
-  @Override
-  public int getHPspear() {return 50;}
+    @Override
+    public int getHPspear() {
+        return 50;
+    }
 
-  @Override
-  public int getHPsword() {return 50;}
+    @Override
+    public int getHPsword() {
+        return 50;
+    }
 
-  @Override
-  public int getHPstaff() {return 50;}
+    @Override
+    public int getHPstaff() {
+        return 50;
+    }
 
-  @Override
-  public int getHPbow() {return 50;}
+    @Override
+    public int getHPbow() {
+        return 50;
+    }
 
-  @Override
-  public int getHP1() {return 30;} //Bow
+    @Override
+    public int getHP1() {
+        return 30;
+    } //Bow
 
-  @Override
-  public int getHP2() {return 20;} //Light
+    @Override
+    public int getHP2() {
+        return 20;
+    } //Light
 }

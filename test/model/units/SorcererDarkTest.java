@@ -24,7 +24,9 @@ public class SorcererDarkTest extends AbstractTestUnit {
     }
 
     @Override
-    public IEquipableItem getWeapon() {return dark;}
+    public IEquipableItem getWeapon() {
+        return dark;
+    }
 
     /**
      * @return the current unit being tested
@@ -39,7 +41,7 @@ public class SorcererDarkTest extends AbstractTestUnit {
     public void attackToDark() {
         IUnit unit = new Sorcerer(50, 2, field.getCell(1, 1));
         IEquipableItem item = new Dark("Example Dark", 10, 2, 3);
-        if(item != null) {
+        if (item != null) {
             unit.addItem(item);
             unit.equipItem(item);
             sorcerer.addItem(dark);
@@ -77,32 +79,52 @@ public class SorcererDarkTest extends AbstractTestUnit {
     }
 
     @Override
-    public int getHPanima() {return 35;}
+    public int getHPanima() {
+        return 35;
+    }
 
     @Override
-    public int getHPdark() {return 40;}
+    public int getHPdark() {
+        return 40;
+    }
 
     @Override
-    public int getHPlight() {return 50;}
+    public int getHPlight() {
+        return 50;
+    }
 
     @Override
-    public int getHPaxe() {return 35;}
+    public int getHPaxe() {
+        return 35;
+    }
 
     @Override
-    public int getHPspear() {return 35;}
+    public int getHPspear() {
+        return 35;
+    }
 
     @Override
-    public int getHPsword() {return 35;}
+    public int getHPsword() {
+        return 35;
+    }
 
     @Override
-    public int getHPstaff() {return 40;}
+    public int getHPstaff() {
+        return 40;
+    }
 
     @Override
-    public int getHPbow() {return 35;}
+    public int getHPbow() {
+        return 35;
+    }
 
     @Override
-    public int getHP1() {return 20;} //Bow
+    public int getHP1() {
+        return 20;
+    } //Bow
 
     @Override
-    public int getHP2() {return 5;} //Light
+    public int getHP2() {
+        return 5;
+    } //Light
 }

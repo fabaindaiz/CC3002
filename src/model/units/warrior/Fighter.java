@@ -13,22 +13,21 @@ import model.map.Location;
  */
 public class Fighter extends Warrior {
 
-  public Fighter(final int hitPoints, final int movement, final Location location,
-      IEquipableItem... items) {
-    super(hitPoints, movement, location, 3, items);
-  }
-
-  /**
-   * Sets the currently equipped item of this unit.
-   *
-   * @param item
-   *     the item to equip
-   */
-  @Override
-  public void equipItem(final IEquipableItem item) {
-    if (item instanceof Axe) {
-      equippedItem = item;
-      item.setOwner(this);
+    public Fighter(final int hitPoints, final int movement, final Location location,
+                   IEquipableItem... items) {
+        super(hitPoints, movement, location, 3, items);
     }
-  }
+
+    /**
+     * Sets the currently equipped item of this unit.
+     *
+     * @param item the item to equip
+     */
+    @Override
+    public void equipItem(final IEquipableItem item) {
+        if (item instanceof Axe) {
+            equippedItem = item;
+            item.setOwner(this);
+        }
+    }
 }

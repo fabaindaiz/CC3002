@@ -22,276 +22,275 @@ import org.junit.jupiter.api.Test;
  */
 public interface ITestUnit {
 
-  /**
-   * Configura la unidad para los test de intercambio
-   */
-  void setTargetIntercambio();
-
-  /**
-   * Configura la unidad para los test de contraataque
-   */
-  void setTargetCounterattack();
-
-  /**
-   * Set up the game field
-   */
-  void setField();
-
-  /**
-   * Set up the main unit that's going to be tested in the test set
-   */
-  void setTestUnit();
-
-  /**
-   * Configura la alpaca para los test
-   */
-  void setTargetAlpaca();
-
-  /**
-   * Creates a set of testing weapons
-   */
-  void setWeapons();
-
-  /**
-   * Creates a set of testing warriors
-   */
-  void setWarriors();
-
-  /**
-   * Checks that the constructor works properly.
-   */
-  @Test
-  void constructorTest();
-
-  /**
-   * Prueba la muerte de la unidad
-   * (La muerte esta programada para no dejate hacer nada)
-   *
-   * Casos de borde una vez muerta la unidad:
-   *  - Intenta atacar
-   *  - Intenta transferir un objeto
-   */
-  @Test
-  void deathTest();
-
-  /**
-   * Test de contraataque
-   *   (no testea debilidades, eso esta en otros test)
-   */
-  @Test
-  void counterattackTest();
-
-  /**
-   * Test de curación
-   */
-  @Test
-  void healTest();
+    /**
+     * Configura la unidad para los test de intercambio
+     */
+    void setTargetIntercambio();
 
     /**
-   * Prueba el funcionamiento basico del intercambio
-   */
-  @Test
-  void intercambioTest();
+     * Configura la unidad para los test de contraataque
+     */
+    void setTargetCounterattack();
 
-  /**
-   * Prueba casos borde de intercambio
-   * Casos:
-   * - Llenar un inventario
-   * - Transferir un objeto inexistente
-   * - Tener varios del mismo objeto
-   * - Transferir un objeto duplicado
-   */
-  @Test
-  void llenarInventarioTest();
+    /**
+     * Set up the game field
+     */
+    void setField();
 
-  /**
-   * @return the current unit being tested
-   */
-  IUnit getTestUnit();
+    /**
+     * Set up the main unit that's going to be tested in the test set
+     */
+    void setTestUnit();
 
-  /**
-   * Checks if the anima is equipped correctly to the unit
-   */
-  @Test
-  void equipAnimaTest();
+    /**
+     * Configura la alpaca para los test
+     */
+    void setTargetAlpaca();
 
-  @Test
-  void attackToAnima();
+    /**
+     * Creates a set of testing weapons
+     */
+    void setWeapons();
 
-  /**
-   * @return the test anima
-   */
-  Anima getAnima();
+    /**
+     * Creates a set of testing warriors
+     */
+    void setWarriors();
 
-  /**
-   * Checks if the dark is equipped correctly to the unit
-   */
-  @Test
-  void equipDarkTest();
+    /**
+     * Checks that the constructor works properly.
+     */
+    @Test
+    void constructorTest();
+
+    /**
+     * Prueba la muerte de la unidad
+     * (La muerte esta programada para no dejate hacer nada)
+     * <p>
+     * Casos de borde una vez muerta la unidad:
+     * - Intenta atacar
+     * - Intenta transferir un objeto
+     */
+    @Test
+    void deathTest();
+
+    /**
+     * Test de contraataque
+     * (no testea debilidades, eso esta en otros test)
+     */
+    @Test
+    void counterattackTest();
+
+    /**
+     * Test de curación
+     */
+    @Test
+    void healTest();
+
+    /**
+     * Prueba el funcionamiento basico del intercambio
+     */
+    @Test
+    void intercambioTest();
+
+    /**
+     * Prueba casos borde de intercambio
+     * Casos:
+     * - Llenar un inventario
+     * - Transferir un objeto inexistente
+     * - Tener varios del mismo objeto
+     * - Transferir un objeto duplicado
+     */
+    @Test
+    void llenarInventarioTest();
+
+    /**
+     * @return the current unit being tested
+     */
+    IUnit getTestUnit();
+
+    /**
+     * Checks if the anima is equipped correctly to the unit
+     */
+    @Test
+    void equipAnimaTest();
+
+    @Test
+    void attackToAnima();
+
+    /**
+     * @return the test anima
+     */
+    Anima getAnima();
+
+    /**
+     * Checks if the dark is equipped correctly to the unit
+     */
+    @Test
+    void equipDarkTest();
 
     @Test
     void attackToDark();
 
     /**
-   * @return the test dark
-   */
-  Dark getDark();
+     * @return the test dark
+     */
+    Dark getDark();
 
-  /**
-   * Checks if the light is equipped correctly to the unit
-   */
-  @Test
-  void equipLightTest();
+    /**
+     * Checks if the light is equipped correctly to the unit
+     */
+    @Test
+    void equipLightTest();
 
-  @Test
-  void attackToLight();
+    @Test
+    void attackToLight();
 
-  /**
-   * @return the test light
-   */
-  Light getLight();
+    /**
+     * @return the test light
+     */
+    Light getLight();
 
-  /**
-   * Tries to equip a weapon to the alpaca and verifies that it was not equipped
-   *
-   * @param item
-   *     to be equipped
-   */
-  void checkEquippedItem(IEquipableItem item);
+    /**
+     * Tries to equip a weapon to the alpaca and verifies that it was not equipped
+     *
+     * @param item to be equipped
+     */
+    void checkEquippedItem(IEquipableItem item);
 
-  /**
-   * Checks if the axe is equipped correctly to the unit
-   */
-  @Test
-  void equipAxeTest();
+    /**
+     * Checks if the axe is equipped correctly to the unit
+     */
+    @Test
+    void equipAxeTest();
 
-  @Test
-  void attackToAxe();
+    @Test
+    void attackToAxe();
 
-  /**
-   * @return the test axe
-   */
-  Axe getAxe();
+    /**
+     * @return the test axe
+     */
+    Axe getAxe();
 
-  /**
-   * Checks if the sword is equipped correctly to the unit
-   */
-  @Test
-  void equipSwordTest();
+    /**
+     * Checks if the sword is equipped correctly to the unit
+     */
+    @Test
+    void equipSwordTest();
 
-  @Test
-  void attackToSword();
+    @Test
+    void attackToSword();
 
-  /**
-   * @return the test sword
-   */
-  Sword getSword();
+    /**
+     * @return the test sword
+     */
+    Sword getSword();
 
-  /**
-   * Checks if the spear is equipped correctly to the unit
-   */
-  @Test
-  void equipSpearTest();
+    /**
+     * Checks if the spear is equipped correctly to the unit
+     */
+    @Test
+    void equipSpearTest();
 
-  @Test
-  void attackToSpear();
+    @Test
+    void attackToSpear();
 
-  /**
-   * @return the test spear
-   */
-  Spear getSpear();
+    /**
+     * @return the test spear
+     */
+    Spear getSpear();
 
-  /**
-   * Checks if the staff is equipped correctly to the unit
-   */
-  @Test
-  void equipStaffTest();
+    /**
+     * Checks if the staff is equipped correctly to the unit
+     */
+    @Test
+    void equipStaffTest();
 
-  @Test
-  void attackToStaff();
+    @Test
+    void attackToStaff();
 
-  /**
-   * @return the test staff
-   */
-  Staff getStaff();
+    /**
+     * @return the test staff
+     */
+    Staff getStaff();
 
-  /**
-   * Checks if the bow is equipped correctly to the unit
-   */
-  @Test
-  void equipBowTest();
+    /**
+     * Checks if the bow is equipped correctly to the unit
+     */
+    @Test
+    void equipBowTest();
 
-  @Test
-  void attackToBow();
+    @Test
+    void attackToBow();
 
-  /**
-   * @return the test bow
-   */
-  Bow getBow();
+    /**
+     * @return the test bow
+     */
+    Bow getBow();
 
-  /**
-   * Checks if the unit moves correctly
-   */
-  @Test
-  void testMovement();
+    /**
+     * Checks if the unit moves correctly
+     */
+    @Test
+    void testMovement();
 
-  /**
-   * @return the test field
-   */
-  Field getField();
+    /**
+     * @return the test field
+     */
+    Field getField();
 
-  /**
-   * @return the target Alpaca
-   */
-  Alpaca getTargetAlpaca();
+    /**
+     * @return the target Alpaca
+     */
+    Alpaca getTargetAlpaca();
 
-  /**
-   * @return expected HP after anima attack
-   */
-  int getHPanima();
+    /**
+     * @return expected HP after anima attack
+     */
+    int getHPanima();
 
-  /**
-   * @return expected HP after dark attack
-   */
-  int getHPdark();
+    /**
+     * @return expected HP after dark attack
+     */
+    int getHPdark();
 
-  /**
-   * @return expected HP after light attack
-   */
-  int getHPlight();
+    /**
+     * @return expected HP after light attack
+     */
+    int getHPlight();
 
-  /**
-   * @return expected HP after axe attack
-   */
-  int getHPaxe();
+    /**
+     * @return expected HP after axe attack
+     */
+    int getHPaxe();
 
-  /**
-   * @return expected HP after spear attack
-   */
-  int getHPspear();
+    /**
+     * @return expected HP after spear attack
+     */
+    int getHPspear();
 
-  /**
-   * @return expected HP after sword attack
-   */
-  int getHPsword();
+    /**
+     * @return expected HP after sword attack
+     */
+    int getHPsword();
 
-  /**
-   * @return expected HP after staff attack
-   */
-  int getHPstaff();
+    /**
+     * @return expected HP after staff attack
+     */
+    int getHPstaff();
 
-  /**
-   * @return expected HP after bow attack
-   */
-  int getHPbow();
+    /**
+     * @return expected HP after bow attack
+     */
+    int getHPbow();
 
-  /**
-   * @return expected HP after counterattack test en case 1
-   */
-  int getHP1();
+    /**
+     * @return expected HP after counterattack test en case 1
+     */
+    int getHP1();
 
-  /**
-   * @return expected HP after counterattack test en case 2
-   */
-  int getHP2();
+    /**
+     * @return expected HP after counterattack test en case 2
+     */
+    int getHP2();
 }

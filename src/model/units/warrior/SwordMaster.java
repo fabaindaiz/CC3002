@@ -14,22 +14,21 @@ import model.map.Location;
  */
 public class SwordMaster extends Warrior {
 
-  public SwordMaster(final int hitPoints, final int movement, final Location location,
-      IEquipableItem... items) {
-    super(hitPoints, movement, location, 3, items);
-  }
-
-  /**
-   * Sets the currently equipped item of this unit.
-   *
-   * @param item
-   *     the item to equip
-   */
-  @Override
-  public void equipItem(final IEquipableItem item) {
-    if (item instanceof Sword) {
-      equippedItem = item;
-      item.setOwner(this);
+    public SwordMaster(final int hitPoints, final int movement, final Location location,
+                       IEquipableItem... items) {
+        super(hitPoints, movement, location, 3, items);
     }
-  }
+
+    /**
+     * Sets the currently equipped item of this unit.
+     *
+     * @param item the item to equip
+     */
+    @Override
+    public void equipItem(final IEquipableItem item) {
+        if (item instanceof Sword) {
+            equippedItem = item;
+            item.setOwner(this);
+        }
+    }
 }

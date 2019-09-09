@@ -20,14 +20,13 @@ public class Anima extends MagicBook {
      * Performs a anima type attack.
      * {@inheritDoc}
      *
-     * @param other
-     *     Unit that receives the attack.
+     * @param other Unit that receives the attack.
      */
     @Override
     public void attack(IUnit other, boolean counterAttack) {
-        if(other.getEquippedItem() != null)
+        if (other.getEquippedItem() != null)
             other.getEquippedItem().receiveAnimaAttack(this, counterAttack);
-        else other.receiveAttack(this,false);
+        else other.receiveAttack(this, false);
     }
 
     @Override
@@ -36,13 +35,19 @@ public class Anima extends MagicBook {
     }
 
     @Override
-    public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) { owner.receiveAttack(item, counterAttack); }
+    public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveAttack(item, counterAttack);
+    }
 
     @Override
-    public void receiveDarkAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
+    public void receiveDarkAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
+    }
 
     @Override
-    public void receiveLightAttack(IEquipableItem item, boolean counterAttack) { owner.receiveResistantAttack(item, counterAttack); }
+    public void receiveLightAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveResistantAttack(item, counterAttack);
+    }
 
     @Override
     public void receiveStaffHeal(IEquipableItem item) {
@@ -50,14 +55,22 @@ public class Anima extends MagicBook {
     }
 
     @Override
-    public void receiveAxeAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
+    public void receiveAxeAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
+    }
 
     @Override
-    public void receiveSpearAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
+    public void receiveSpearAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
+    }
 
     @Override
-    public void receiveSwordAttack(IEquipableItem item, boolean counterAttack) {  owner.receiveWeaknessAttack(item, counterAttack); }
+    public void receiveSwordAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
+    }
 
     @Override
-    public void receiveBowAttack(IEquipableItem item, boolean counterAttack) { owner.receiveWeaknessAttack(item, counterAttack); }
+    public void receiveBowAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
+    }
 }
