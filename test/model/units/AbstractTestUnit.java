@@ -152,11 +152,11 @@ public abstract class AbstractTestUnit implements ITestUnit {
     public void deathTest() {
         Archer unit = new Archer(70, 2, field.getCell(1, 1));
         Bow item = new Bow("Pk flash", 100, 1, 3);
-        assertEquals(getTestUnit().getDeathStatus(), true);
+        assertTrue(getTestUnit().getDeathStatus());
         unit.addItem(item);
         unit.equipItem(item);
         unit.attack(getTestUnit(), false);
-        assertEquals(getTestUnit().getDeathStatus(), false);
+        assertFalse(getTestUnit().getDeathStatus());
         getTestUnit().addItem(getWeapon());
         getTestUnit().equipItem(getWeapon());
         getTestUnit().attack(unit, false);
@@ -232,9 +232,9 @@ public abstract class AbstractTestUnit implements ITestUnit {
         if (item != null) {
             unit.exchange(targetAlpaca, item);
             assertEquals(targetAlpaca.getItems(), List.of(staff, item));
-            assertEquals(item.getOwner(), null);
+            assertNull(item.getOwner());
         }
-        assertEquals(unit.getEquippedItem(), null);
+        assertNull(unit.getEquippedItem());
     }
 
     @Override
