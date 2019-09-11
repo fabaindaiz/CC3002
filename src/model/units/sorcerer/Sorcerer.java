@@ -31,7 +31,7 @@ public class Sorcerer extends MagicUnit {
      */
     @Override
     public void equipItem(final IEquipableItem item) {
-        if (items.contains(item) && (item instanceof MagicBook)) {
+        if (items.contains(item) && item instanceof MagicBook) {
             equippedItem = item;
             item.setOwner(this);
         }

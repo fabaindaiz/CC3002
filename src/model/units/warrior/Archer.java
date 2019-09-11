@@ -36,7 +36,7 @@ public class Archer extends Warrior {
      */
     @Override
     public void equipItem(final IEquipableItem item) {
-        if (item instanceof Bow) {
+        if (items.contains(item) && item instanceof Bow) {
             equippedItem = item;
             item.setOwner(this);
         }

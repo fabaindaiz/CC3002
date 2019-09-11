@@ -26,7 +26,7 @@ public class SwordMaster extends Warrior {
      */
     @Override
     public void equipItem(final IEquipableItem item) {
-        if (item instanceof Sword) {
+        if (items.contains(item) && item instanceof Sword) {
             equippedItem = item;
             item.setOwner(this);
         }

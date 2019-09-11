@@ -32,7 +32,7 @@ public class Hero extends Warrior {
      */
     @Override
     public void equipItem(final IEquipableItem item) {
-        if (item instanceof Spear) {
+        if (items.contains(item) && item instanceof Spear) {
             equippedItem = item;
             item.setOwner(this);
         }

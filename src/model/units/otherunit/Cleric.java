@@ -31,7 +31,7 @@ public class Cleric extends OtherUnit {
      */
     @Override
     public void equipItem(final IEquipableItem item) {
-        if (item instanceof Staff) {
+        if (items.contains(item) && item instanceof Staff) {
             equippedItem = item;
             item.setOwner(this);
         }

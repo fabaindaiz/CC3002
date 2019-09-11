@@ -25,7 +25,7 @@ public class Fighter extends Warrior {
      */
     @Override
     public void equipItem(final IEquipableItem item) {
-        if (item instanceof Axe) {
+        if (items.contains(item) && item instanceof Axe) {
             equippedItem = item;
             item.setOwner(this);
         }
