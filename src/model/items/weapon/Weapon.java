@@ -1,6 +1,7 @@
 package model.items.weapon;
 
 import model.items.AbstractItem;
+import model.items.IEquipableItem;
 
 public abstract class Weapon extends AbstractItem {
     /**
@@ -18,5 +19,25 @@ public abstract class Weapon extends AbstractItem {
     @Override
     public boolean counterattack() {
         return true;
+    }
+
+    @Override
+    public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
+    }
+
+    @Override
+    public void receiveDarkAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
+    }
+
+    @Override
+    public void receiveLightAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
+    }
+
+    @Override
+    public void receiveBowAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveAttack(item, counterAttack);
     }
 }

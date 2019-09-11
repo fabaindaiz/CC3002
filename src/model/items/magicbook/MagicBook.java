@@ -1,6 +1,7 @@
 package model.items.magicbook;
 
 import model.items.AbstractItem;
+import model.items.IEquipableItem;
 
 public abstract class MagicBook extends AbstractItem {
     /**
@@ -18,5 +19,25 @@ public abstract class MagicBook extends AbstractItem {
     @Override
     public boolean counterattack() {
         return true;
+    }
+
+    @Override
+    public void receiveAxeAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
+    }
+
+    @Override
+    public void receiveSpearAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
+    }
+
+    @Override
+    public void receiveSwordAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
+    }
+
+    @Override
+    public void receiveBowAttack(IEquipableItem item, boolean counterAttack) {
+        owner.receiveWeaknessAttack(item, counterAttack);
     }
 }

@@ -43,43 +43,4 @@ public class Staff extends OtherItem {
         return obj instanceof Staff;
     }
 
-    @Override
-    public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
-    }
-
-    @Override
-    public void receiveDarkAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
-    }
-
-    @Override
-    public void receiveLightAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
-    }
-
-    @Override
-    public void receiveStaffHeal(IEquipableItem item) {
-        owner.receiveHeal(item);
-    }
-
-    @Override
-    public void receiveAxeAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
-    }
-
-    @Override
-    public void receiveSpearAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
-    }
-
-    @Override
-    public void receiveSwordAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
-    }
-
-    @Override
-    public void receiveBowAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
-    }
 }

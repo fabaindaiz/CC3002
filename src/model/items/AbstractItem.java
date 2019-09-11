@@ -66,4 +66,9 @@ public abstract class AbstractItem implements IEquipableItem {
     public int getMaxRange() {
         return maxRange;
     }
+
+    @Override
+    public void receiveStaffHeal(IEquipableItem item) {
+        owner.receiveHeal(item);
+    }
 }

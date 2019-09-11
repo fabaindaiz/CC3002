@@ -45,26 +45,6 @@ public class Bow extends Weapon {
     }
 
     @Override
-    public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveWeaknessAttack(item, counterAttack);
-    }
-
-    @Override
-    public void receiveDarkAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveWeaknessAttack(item, counterAttack);
-    }
-
-    @Override
-    public void receiveLightAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveWeaknessAttack(item, counterAttack);
-    }
-
-    @Override
-    public void receiveStaffHeal(IEquipableItem item) {
-        owner.receiveHeal(item);
-    }
-
-    @Override
     public void receiveAxeAttack(IEquipableItem item, boolean counterAttack) {
         owner.receiveAttack(item, counterAttack);
     }
@@ -76,11 +56,6 @@ public class Bow extends Weapon {
 
     @Override
     public void receiveSwordAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
-    }
-
-    @Override
-    public void receiveBowAttack(IEquipableItem item, boolean counterAttack) {
         owner.receiveAttack(item, counterAttack);
     }
 }
