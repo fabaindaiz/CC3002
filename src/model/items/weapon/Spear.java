@@ -39,6 +39,11 @@ public class Spear extends Weapon {
     }
 
     @Override
+    public void equipTo(final IUnit unit) {
+        unit.equipSpear(this);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         return obj instanceof Spear;
     }

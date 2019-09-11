@@ -33,11 +33,6 @@ public interface IUnit {
     boolean getDeathStatus();
 
     /**
-     * @return max hit points of the unit
-     */
-    int getMaxHitPoints();
-
-    /**
      * @return hit points of the unit
      */
     int getCurrentHitPoints();
@@ -61,11 +56,6 @@ public interface IUnit {
      * @return the currently equipped item
      */
     IEquipableItem getEquippedItem();
-
-    /**
-     * @param item the item to be equipped
-     */
-    void setEquippedItem(IEquipableItem item);
 
     /**
      * @return the current location of the unit
@@ -167,4 +157,46 @@ public interface IUnit {
      * @param item Item que se quiere entregar
      */
     void exchange(IUnit unit, IEquipableItem item);
+
+    /**
+     * Equipa un item Magico en la unidad
+     *
+     * @param item Item a equipar
+     */
+    void equipMagicBook(IEquipableItem item);
+
+    /**
+     * Equipa una hacha a la unidad
+     *
+     * @param item Item a equipar
+     */
+    void equipAxe(IEquipableItem item);
+
+    /**
+     * Equipa una lanza a la unidad
+     *
+     * @param item Item a equipar
+     */
+    void equipSpear(IEquipableItem item);
+
+    /**
+     * Equipa una espada a la unidad
+     *
+     * @param item Item a equipar
+     */
+    void equipSword(IEquipableItem item);
+
+    /**
+     * Equipa un arco a la unidad
+     *
+     * @param item Item a equipar
+     */
+    void equipBow(IEquipableItem item);
+
+    /**
+     * Equipa un staff a la unidad
+     *
+     * @param item Item a equipar
+     */
+    void equipStaff(IEquipableItem item);
 }

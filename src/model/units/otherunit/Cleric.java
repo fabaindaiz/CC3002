@@ -3,6 +3,7 @@ package model.units.otherunit;
 import model.items.IEquipableItem;
 import model.items.otheritem.Staff;
 import model.map.Location;
+import model.units.IUnit;
 
 /**
  * This class represents a cleric type unit. A cleric can only use staff type weapons, which means
@@ -24,16 +25,9 @@ public class Cleric extends OtherUnit {
         super(hitPoints, movement, location, 3, items);
     }
 
-    /**
-     * Sets the currently equipped item of this unit.
-     *
-     * @param item the item to equip
-     */
     @Override
-    public void equipItem(final IEquipableItem item) {
-        if (items.contains(item) && item instanceof Staff) {
-            equippedItem = item;
-            item.setOwner(this);
-        }
+    public void equipStaff (IEquipableItem item) {
+        equippedItem = item;
+        item.setOwner(this);
     }
 }

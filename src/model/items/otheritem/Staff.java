@@ -38,6 +38,11 @@ public class Staff extends OtherItem {
     }
 
     @Override
+    public void equipTo(final IUnit unit) {
+        unit.equipStaff(this);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         return obj instanceof Staff;
     }

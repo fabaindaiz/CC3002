@@ -53,11 +53,6 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
-    public int getMaxHitPoints() {
-        return maxHitPoints;
-    }
-
-    @Override
     public int getCurrentHitPoints() {
         return currentHitPoints;
     }
@@ -80,11 +75,6 @@ public abstract class AbstractUnit implements IUnit {
     @Override
     public IEquipableItem getEquippedItem() {
         return equippedItem;
-    }
-
-    @Override
-    public void setEquippedItem(final IEquipableItem item) {
-        this.equippedItem = item;
     }
 
     @Override
@@ -195,4 +185,34 @@ public abstract class AbstractUnit implements IUnit {
             }
         }
     }
+
+    /**
+     * Sets the currently equipped item of this unit.
+     *
+     * @param item the item to equip
+     */
+    @Override
+    public void equipItem(final IEquipableItem item) {
+        if (items.contains(item)) {
+            item.equipTo(this);
+        }
+    }
+
+    @Override
+    public void equipMagicBook(IEquipableItem item) {}
+
+    @Override
+    public void equipAxe(IEquipableItem item) {}
+
+    @Override
+    public void equipSpear(IEquipableItem item) {}
+
+    @Override
+    public void equipSword(IEquipableItem item) {}
+
+    @Override
+    public void equipBow(IEquipableItem item) {}
+
+    @Override
+    public void equipStaff(IEquipableItem item) {}
 }

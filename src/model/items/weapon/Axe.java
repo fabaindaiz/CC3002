@@ -39,6 +39,11 @@ public class Axe extends Weapon {
     }
 
     @Override
+    public void equipTo(final IUnit unit) {
+        unit.equipAxe(this);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         return obj instanceof Axe;
     }

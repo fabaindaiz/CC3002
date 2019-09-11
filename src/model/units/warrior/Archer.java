@@ -27,18 +27,9 @@ public class Archer extends Warrior {
         super(hitPoints, movement, position, 3, items);
     }
 
-    /**
-     * Sets the currently equipped item of this unit.
-     * <p>
-     * The <i>Archer</i> can <b>only equip Bows</b>.
-     *
-     * @param item the item to equip
-     */
     @Override
-    public void equipItem(final IEquipableItem item) {
-        if (items.contains(item) && item instanceof Bow) {
-            equippedItem = item;
-            item.setOwner(this);
-        }
+    public void equipBow(IEquipableItem item) {
+        equippedItem = item;
+        item.setOwner(this);
     }
 }

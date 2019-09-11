@@ -2,6 +2,7 @@ package model.items.magicbook;
 
 import model.items.AbstractItem;
 import model.items.IEquipableItem;
+import model.units.IUnit;
 
 public abstract class MagicBook extends AbstractItem {
     /**
@@ -19,6 +20,11 @@ public abstract class MagicBook extends AbstractItem {
     @Override
     public boolean counterattack() {
         return true;
+    }
+
+    @Override
+    public void equipTo(final IUnit unit) {
+        unit.equipMagicBook(this);
     }
 
     @Override

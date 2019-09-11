@@ -18,16 +18,9 @@ public class Fighter extends Warrior {
         super(hitPoints, movement, location, 3, items);
     }
 
-    /**
-     * Sets the currently equipped item of this unit.
-     *
-     * @param item the item to equip
-     */
     @Override
-    public void equipItem(final IEquipableItem item) {
-        if (items.contains(item) && item instanceof Axe) {
-            equippedItem = item;
-            item.setOwner(this);
-        }
+    public void equipAxe(IEquipableItem item) {
+        equippedItem = item;
+        item.setOwner(this);
     }
 }

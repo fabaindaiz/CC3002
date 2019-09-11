@@ -24,16 +24,9 @@ public class Sorcerer extends MagicUnit {
         super(hitPoints, movement, location, 3, items);
     }
 
-    /**
-     * Sets the currently equipped item of this unit.
-     *
-     * @param item the item to equip
-     */
     @Override
-    public void equipItem(final IEquipableItem item) {
-        if (items.contains(item) && item instanceof MagicBook) {
-            equippedItem = item;
-            item.setOwner(this);
-        }
+    public void equipMagicBook(IEquipableItem item) {
+        equippedItem = item;
+        item.setOwner(this);
     }
 }
