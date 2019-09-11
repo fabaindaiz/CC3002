@@ -24,13 +24,19 @@ Decisiones relevantes
     Se enumeraran a continuación todas las decisiones no mencionadas en la descripción que se tomaron al realizar el proyecto
 
     Comentarios para la Tarea 1:
-    - Se crearon clases abstractas para agrupar armas similares para facilitar futuras implementaciones
+    - Se crearon clases abstractas para agrupar armas y unidades similares para facilitar futuras implementaciones
+        Asi, se redujo el codigo duplicado en situaciones similares, como al equipar un MagicBook en Sorcerer
+        o al atacar a unidades que tengan armas con las mismas debilidades, como Magias vs Armas normales.
+
     - Para el contraataque, se optó por tener el método ataque con un parámetro boolean que indica si es necesario
         Además, las armas poseen un método que indica si son armas que realizas contraataque o no.
 
     - Los sistemas de daño modificado se implementaron como métodos en las distintas armas
         Así además, según el arma que ataca se llama a un método de daño en la unidad distinto según el caso
         Se implemento la curación, como una llamada que se realiza al recibirse un ataque con Staff
+
+    - Los sistemas de equipados de items se hizo con Double Dispatch.
+        Cada arma es llamada al momento de ser equipada y devuelve un llamado a la unidad dependiendo de su tipo
 
     - Los ataques son recibidos y ejecutados por el arma equipada, desligando esto de las unidades
         (En un inicio se pensó usar una clase ataque, pero se descartó para usar esta implementación)
