@@ -3,7 +3,6 @@ package model.units.sorcerer;
 import model.items.IEquipableItem;
 import model.items.magicbook.MagicBook;
 import model.map.Location;
-import model.units.AbstractUnit;
 
 /**
  * This class represents a cleric type unit. A cleric can only use staff type weapons, which means
@@ -12,7 +11,7 @@ import model.units.AbstractUnit;
  * @author Fabián Díaz
  * @since 1.0
  */
-public class Sorcerer extends AbstractUnit {
+public class Sorcerer extends MagicUnit {
 
     /**
      * Creates a new Unit.

@@ -23,10 +23,10 @@ public abstract class AbstractUnit implements IUnit {
 
     protected final List<IEquipableItem> items = new ArrayList<>();
     private final int maxHitPoints;
-    private int currentHitPoints;
     private final int movement;
     private final int maxItems;
     protected IEquipableItem equippedItem;
+    private int currentHitPoints;
     private Location location;
 
     /**
@@ -132,47 +132,7 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
-    public void receiveHeal(IEquipableItem item) {
-        if (outOfRange(item.getOwner())) return;
-
-        int healed = item.getPower();
-        if ((maxHitPoints - currentHitPoints) < healed)
-            currentHitPoints = maxHitPoints;
-        else
-            this.currentHitPoints += healed;
-    }
-
-    @Override
-    public void receiveAttack(IEquipableItem item, boolean counterAttack) {
-        if (outOfRange(item.getOwner())) return;
-        int damage = item.getPower();
-
-        if (damage < currentHitPoints) {
-            this.currentHitPoints -= damage;
-            if (counterAttack && equippedItem.counterattack())
-                attack(item.getOwner(), false);
-        } else
-            muerte();
-    }
-
-    @Override
-    public void receiveWeaknessAttack(IEquipableItem item, boolean counterAttack) {
-        if (outOfRange(item.getOwner())) return;
-        int damage = (int) (item.getPower() * 1.5);
-
-        if (damage < currentHitPoints) {
-            this.currentHitPoints -= damage;
-            if (counterAttack && equippedItem.counterattack())
-                attack(item.getOwner(), false);
-        } else
-            muerte();
-    }
-
-    @Override
-    public void receiveResistantAttack(IEquipableItem item, boolean counterAttack) {
-        if (outOfRange(item.getOwner())) return;
-        int damage = item.getPower() - 20;
-
+    public void getDamage(IEquipableItem item, int damage, boolean counterAttack) {
         if (damage < currentHitPoints) {
             if (damage > 0)
                 this.currentHitPoints -= damage;
@@ -183,10 +143,41 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
+    public void receiveHeal(IEquipableItem item) {
+        if (outOfRange(item.getOwner())) return;
+        int healed = item.getPower();
+
+        if ((maxHitPoints - currentHitPoints) < healed)
+            currentHitPoints = maxHitPoints;
+        else
+            this.currentHitPoints += healed;
+    }
+
+    @Override
+    public void receiveAttack(IEquipableItem item, boolean counterAttack) {
+        if (outOfRange(item.getOwner())) return;
+        int damage = item.getPower();
+        getDamage(item, damage, counterAttack);
+    }
+
+    @Override
+    public void receiveWeaknessAttack(IEquipableItem item, boolean counterAttack) {
+        if (outOfRange(item.getOwner())) return;
+        int damage = (int) (item.getPower() * 1.5);
+        getDamage(item, damage, counterAttack);
+    }
+
+    @Override
+    public void receiveResistantAttack(IEquipableItem item, boolean counterAttack) {
+        if (outOfRange(item.getOwner())) return;
+        int damage = item.getPower() - 20;
+        getDamage(item, damage, counterAttack);
+    }
+
+    @Override
     public boolean addItem(IEquipableItem item) {
-        if (items.size() == maxItems) {
+        if (items.size() == maxItems)
             return false;
-        }
         items.add(item);
         return true;
     }

@@ -1,6 +1,5 @@
 package model.items.otheritem;
 
-import model.items.IEquipableItem;
 import model.units.IUnit;
 
 /**

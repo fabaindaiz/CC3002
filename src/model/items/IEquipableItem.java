@@ -21,16 +21,16 @@ public interface IEquipableItem {
     void equipTo(IUnit unit);
 
     /**
+     * @return the unit that has currently equipped this item
+     */
+    IUnit getOwner();
+
+    /**
      * Configura el dueño de un objeto equipado
      *
      * @param unit dueño del objeto
      */
     void setOwner(IUnit unit);
-
-    /**
-     * @return the unit that has currently equipped this item
-     */
-    IUnit getOwner();
 
     /**
      * @return the name of the item

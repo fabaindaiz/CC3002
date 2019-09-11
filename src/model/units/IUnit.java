@@ -113,6 +113,17 @@ public interface IUnit {
     boolean outOfRange(IUnit unit);
 
     /**
+     * Recibe una cantidad especifica de daño en una unidad
+     * - Contraataca dado el caso
+     * - Mata a la unidad dado el caso
+     *
+     * @param item          Arma que esta atacando
+     * @param damage        DAño que esta haciendo (Ya esta modificado)
+     * @param counterAttack
+     */
+    void getDamage(IEquipableItem item, int damage, boolean counterAttack);
+
+    /**
      * Receives an heal.
      *
      * @param item Received heal.
