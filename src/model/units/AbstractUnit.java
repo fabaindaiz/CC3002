@@ -173,7 +173,7 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
-    public void exchangeCondition(IUnit unit, IEquipableItem item){
+    public void exchangeCondition(IUnit unit, IEquipableItem item) {
         if (unit.addItem(item)) {
             if (equippedItem == item) {
                 equippedItem = null;
@@ -191,38 +191,33 @@ public abstract class AbstractUnit implements IUnit {
         }
     }
 
-    /**
-     * Sets the currently equipped item of this unit.
-     *
-     * @param item the item to equip
-     */
     @Override
     public void equipItem(final IEquipableItem item) {
-        if (items.contains(item))
+        if (item != null && items.contains(item))
             item.equipTo(this);
     }
 
-    /**
-     * Metodos para equipar las armas
-     * Las unidades que pueden ocuparlos hacen Override con sus propios metodos
-     *
-     * @param item Item a equipar
-     */
     @Override
-    public void equipMagicBook(IEquipableItem item) {}
+    public void equipMagicBook(IEquipableItem item) {
+    }
 
     @Override
-    public void equipAxe(IEquipableItem item) {}
+    public void equipAxe(IEquipableItem item) {
+    }
 
     @Override
-    public void equipSpear(IEquipableItem item) {}
+    public void equipSpear(IEquipableItem item) {
+    }
 
     @Override
-    public void equipSword(IEquipableItem item) {}
+    public void equipSword(IEquipableItem item) {
+    }
 
     @Override
-    public void equipBow(IEquipableItem item) {}
+    public void equipBow(IEquipableItem item) {
+    }
 
     @Override
-    public void equipStaff(IEquipableItem item) {}
+    public void equipStaff(IEquipableItem item) {
+    }
 }

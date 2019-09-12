@@ -3,6 +3,14 @@ package model.items.magicbook;
 import model.items.IEquipableItem;
 import model.units.IUnit;
 
+/**
+ * This class represents a <i>Anima</i> type item.
+ * <p>
+ * Anima are strong against light and weak against dark
+ *
+ * @author Fabian Diaz
+ * @since 1.0
+ */
 public class Anima extends MagicBook {
     /**
      * Constructor for a default item without any special behaviour.
@@ -17,13 +25,8 @@ public class Anima extends MagicBook {
     }
 
     @Override
-    public void specificAttack(IUnit other, boolean counterAttack){
+    public void specificAttack(IUnit other, boolean counterAttack) {
         other.getEquippedItem().receiveAnimaAttack(this, counterAttack);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof Anima;
     }
 
     @Override

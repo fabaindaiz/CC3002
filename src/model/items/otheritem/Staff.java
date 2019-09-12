@@ -25,23 +25,18 @@ public class Staff extends OtherItem {
     }
 
     @Override
-    public void specificAttack(IUnit other, boolean counterAttack){
+    public void specificAttack(IUnit other, boolean counterAttack) {
         other.getEquippedItem().receiveStaffHeal(this);
     }
 
     @Override
-    public void noItemAttack(IUnit other){
+    public void noItemAttack(IUnit other) {
         other.receiveHeal(this);
     }
 
     @Override
     public void equipTo(final IUnit unit) {
         unit.equipStaff(this);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof Staff;
     }
 
 }

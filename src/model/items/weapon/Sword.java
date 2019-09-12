@@ -26,18 +26,13 @@ public class Sword extends Weapon {
     }
 
     @Override
-    public void specificAttack(IUnit other, boolean counterAttack){
+    public void specificAttack(IUnit other, boolean counterAttack) {
         other.getEquippedItem().receiveSwordAttack(this, counterAttack);
     }
 
     @Override
     public void equipTo(final IUnit unit) {
         unit.equipSword(this);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof Sword;
     }
 
     @Override

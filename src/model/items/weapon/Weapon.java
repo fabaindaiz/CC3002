@@ -4,6 +4,16 @@ import model.items.AbstractItem;
 import model.items.IEquipableItem;
 import model.units.IUnit;
 
+/**
+ * This class represents a weapon item.
+ * <p>
+ * An abstract item is a item that cannot be used in the
+ * game, but that contains the implementation of some of the methods that are common for most
+ * item.
+ *
+ * @author Fabian Diaz
+ * @since 1.0
+ */
 public abstract class Weapon extends AbstractItem {
     /**
      * Constructor for a default item without any special behaviour.
@@ -23,7 +33,7 @@ public abstract class Weapon extends AbstractItem {
     }
 
     @Override
-    public void noItemAttack(IUnit other){
+    public void noItemAttack(IUnit other) {
         other.receiveAttack(this, false);
     }
 

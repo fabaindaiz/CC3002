@@ -1,7 +1,6 @@
 package model.units.warrior;
 
 import model.items.IEquipableItem;
-import model.items.weapon.Spear;
 import model.map.Location;
 
 /**

@@ -1,9 +1,7 @@
 package model.units.otherunit;
 
 import model.items.IEquipableItem;
-import model.items.otheritem.Staff;
 import model.map.Location;
-import model.units.IUnit;
 
 /**
  * This class represents a cleric type unit. A cleric can only use staff type weapons, which means
@@ -26,7 +24,7 @@ public class Cleric extends OtherUnit {
     }
 
     @Override
-    public void equipStaff (IEquipableItem item) {
+    public void equipStaff(IEquipableItem item) {
         equippedItem = item;
         item.setOwner(this);
     }

@@ -1,7 +1,6 @@
 package model.units.sorcerer;
 
 import model.items.IEquipableItem;
-import model.items.magicbook.MagicBook;
 import model.map.Location;
 
 /**

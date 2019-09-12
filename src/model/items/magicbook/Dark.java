@@ -3,6 +3,14 @@ package model.items.magicbook;
 import model.items.IEquipableItem;
 import model.units.IUnit;
 
+/**
+ * This class represents a <i>Dark</i> type item.
+ * <p>
+ * Dark are strong against Anima and weak against Light
+ *
+ * @author Fabian Diaz
+ * @since 1.0
+ */
 public class Dark extends MagicBook {
     /**
      * Constructor for a default item without any special behaviour.
@@ -17,13 +25,8 @@ public class Dark extends MagicBook {
     }
 
     @Override
-    public void specificAttack(IUnit other, boolean counterAttack){
+    public void specificAttack(IUnit other, boolean counterAttack) {
         other.getEquippedItem().receiveDarkAttack(this, counterAttack);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof Dark;
     }
 
     @Override

@@ -71,7 +71,6 @@ public interface IEquipableItem {
     void attack(IUnit other, boolean counterAttack);
 
     /**
-     *
      * @param other
      * @param counterAttack
      */

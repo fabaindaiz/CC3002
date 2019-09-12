@@ -167,6 +167,11 @@ public interface IUnit {
     void exchange(IUnit unit, IEquipableItem item);
 
     /**
+     * Metodos para equipar las armas
+     * Las unidades que pueden ocuparlos hacen Override con sus propios metodos
+     */
+
+    /**
      * Equipa un item Magico en la unidad
      *
      * @param item Item a equipar
@@ -207,4 +212,8 @@ public interface IUnit {
      * @param item Item a equipar
      */
     void equipStaff(IEquipableItem item);
+
+    /**
+     * Fin de metodos para equipar armas
+     */
 }

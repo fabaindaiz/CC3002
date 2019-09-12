@@ -300,6 +300,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
      */
     @Override
     public void checkEquippedItem(IEquipableItem item) {
+        getTestUnit().equipItem(null);
         assertNull(getTestUnit().getEquippedItem());
         getTestUnit().equipItem(item);
         assertNull(getTestUnit().getEquippedItem());

@@ -6,7 +6,7 @@ import model.units.IUnit;
 /**
  * This class represents a <i>spear</i>.
  * <p>
- * Spears are strong against swords and weak against axes
+ * Anima are strong against light and weak against dark
  *
  * @author Ignacio Slater Muñoz
  * @since 1.0
@@ -26,18 +26,13 @@ public class Spear extends Weapon {
     }
 
     @Override
-    public void specificAttack(IUnit other, boolean counterAttack){
+    public void specificAttack(IUnit other, boolean counterAttack) {
         other.getEquippedItem().receiveSpearAttack(this, counterAttack);
     }
 
     @Override
     public void equipTo(final IUnit unit) {
         unit.equipSpear(this);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof Spear;
     }
 
     @Override
