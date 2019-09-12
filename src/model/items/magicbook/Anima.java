@@ -16,17 +16,9 @@ public class Anima extends MagicBook {
         super(name, power, minRange, maxRange);
     }
 
-    /**
-     * Performs a anima type attack.
-     * {@inheritDoc}
-     *
-     * @param other Unit that receives the attack.
-     */
     @Override
-    public void attack(IUnit other, boolean counterAttack) {
-        if (other.getEquippedItem() != null)
-            other.getEquippedItem().receiveAnimaAttack(this, counterAttack);
-        else other.receiveAttack(this, false);
+    public void specificAttack(IUnit other, boolean counterAttack){
+        other.getEquippedItem().receiveAnimaAttack(this, counterAttack);
     }
 
     @Override

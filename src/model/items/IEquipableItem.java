@@ -20,6 +20,8 @@ public interface IEquipableItem {
      */
     void equipTo(IUnit unit);
 
+    void noItemAttack(IUnit other);
+
     /**
      * @return the unit that has currently equipped this item
      */
@@ -67,6 +69,13 @@ public interface IEquipableItem {
      * @param other Unit that receives the attack.
      */
     void attack(IUnit other, boolean counterAttack);
+
+    /**
+     *
+     * @param other
+     * @param counterAttack
+     */
+    void specificAttack(IUnit other, boolean counterAttack);
 
     /**
      * Receives damage from a Anima attack.

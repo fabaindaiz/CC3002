@@ -18,8 +18,11 @@ public abstract class MagicBook extends AbstractItem {
     }
 
     @Override
-    public boolean counterattack() {
-        return true;
+    public boolean counterattack() { return true; }
+
+    @Override
+    public void noItemAttack(IUnit other){
+        other.receiveAttack(this, false);
     }
 
     @Override

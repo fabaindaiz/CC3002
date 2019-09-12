@@ -26,17 +26,9 @@ public class Bow extends Weapon {
         this.maxRange = Math.max(maxRange, this.minRange);
     }
 
-    /**
-     * Performs a bow type attack.
-     * {@inheritDoc}
-     *
-     * @param other Unit that receives the attack.
-     */
     @Override
-    public void attack(IUnit other, boolean counterAttack) {
-        if (other.getEquippedItem() != null)
-            other.getEquippedItem().receiveBowAttack(this, counterAttack);
-        else other.receiveAttack(this, false);
+    public void specificAttack(IUnit other, boolean counterAttack){
+        other.getEquippedItem().receiveBowAttack(this, counterAttack);
     }
 
     @Override

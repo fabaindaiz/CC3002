@@ -24,17 +24,14 @@ public class Staff extends OtherItem {
         super(name, power, minRange, maxRange);
     }
 
-    /**
-     * Performs a staff type attack.
-     * {@inheritDoc}
-     *
-     * @param other Unit that receives the attack.
-     */
     @Override
-    public void attack(IUnit other, boolean counterAttack) {
-        if (other.getEquippedItem() != null)
-            other.getEquippedItem().receiveStaffHeal(this);
-        else other.receiveHeal(this);
+    public void specificAttack(IUnit other, boolean counterAttack){
+        other.getEquippedItem().receiveStaffHeal(this);
+    }
+
+    @Override
+    public void noItemAttack(IUnit other){
+        other.receiveHeal(this);
     }
 
     @Override

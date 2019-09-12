@@ -2,6 +2,7 @@ package model.items.weapon;
 
 import model.items.AbstractItem;
 import model.items.IEquipableItem;
+import model.units.IUnit;
 
 public abstract class Weapon extends AbstractItem {
     /**
@@ -19,6 +20,11 @@ public abstract class Weapon extends AbstractItem {
     @Override
     public boolean counterattack() {
         return true;
+    }
+
+    @Override
+    public void noItemAttack(IUnit other){
+        other.receiveAttack(this, false);
     }
 
     @Override

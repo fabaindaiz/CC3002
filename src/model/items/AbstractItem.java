@@ -31,6 +31,18 @@ public abstract class AbstractItem implements IEquipableItem {
         this.maxRange = Math.max(maxRange, this.minRange);
     }
 
+    /**
+     * Performs a attack.
+     *
+     * @param other Unit that receives the attack.
+     */
+    @Override
+    public void attack(IUnit other, boolean counterAttack) {
+        if (other.getEquippedItem() != null)
+            specificAttack (other, counterAttack);
+        else noItemAttack(other);
+    }
+
     @Override
     public IUnit getOwner() {
         return owner;
