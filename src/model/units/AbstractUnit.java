@@ -173,16 +173,21 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
+    public void exchangeCondition(IUnit unit, IEquipableItem item){
+        if (unit.addItem(item)) {
+            if (equippedItem == item) {
+                equippedItem = null;
+                item.setOwner(null);
+            }
+            items.remove(item);
+        }
+    }
+
+    @Override
     public void exchange(IUnit unit, IEquipableItem item) {
         if (!getDeathStatus() || !unit.getDeathStatus()) return;
         if (items.contains(item) && (int) getLocation().distanceTo(unit.getLocation()) == 1) {
-            if (unit.addItem(item)) {
-                if (equippedItem == item) {
-                    equippedItem = null;
-                    item.setOwner(null);
-                }
-                items.remove(item);
-            }
+            exchangeCondition(unit, item);
         }
     }
 
@@ -193,11 +198,16 @@ public abstract class AbstractUnit implements IUnit {
      */
     @Override
     public void equipItem(final IEquipableItem item) {
-        if (items.contains(item)) {
+        if (items.contains(item))
             item.equipTo(this);
-        }
     }
 
+    /**
+     * Metodos para equipar las armas
+     * Las unidades que pueden ocuparlos hacen Override con sus propios metodos
+     *
+     * @param item Item a equipar
+     */
     @Override
     public void equipMagicBook(IEquipableItem item) {}
 

@@ -151,6 +151,14 @@ public interface IUnit {
     boolean addItem(IEquipableItem item);
 
     /**
+     * Verifica las condiciones para el intercambio
+     *
+     * @param unit Unidad de destino para el intercambio
+     * @param item Item para intercambiar
+     */
+    void exchangeCondition(IUnit unit, IEquipableItem item);
+
+    /**
      * Entrega un item a otra unidad
      *
      * @param unit Unidad con la que se queire intercambiar
