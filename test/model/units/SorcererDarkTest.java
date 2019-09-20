@@ -46,7 +46,7 @@ public class SorcererDarkTest extends AbstractTestUnit {
             unit.equipItem(item);
             sorcerer.addItem(dark);
             sorcerer.equipItem(dark);
-            unit.attack(sorcerer, false);
+            unit.useItem(sorcerer, false);
             assertEquals(sorcerer.getCurrentHitPoints(), getHPdark());
         }
     }

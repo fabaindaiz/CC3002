@@ -46,7 +46,7 @@ public class SorcererLightTest extends AbstractTestUnit {
             unit.equipItem(item);
             sorcerer.addItem(light);
             sorcerer.equipItem(light);
-            unit.attack(sorcerer, false);
+            unit.useItem(sorcerer, false);
             assertEquals(sorcerer.getCurrentHitPoints(), getHPlight());
         }
     }

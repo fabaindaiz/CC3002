@@ -46,7 +46,7 @@ public class FighterTest extends AbstractTestUnit {
             unit.equipItem(item);
             fighter.addItem(axe);
             fighter.equipItem(axe);
-            unit.attack(fighter, false);
+            unit.useItem(fighter, false);
             assertEquals(fighter.getCurrentHitPoints(), getHPaxe());
         }
     }

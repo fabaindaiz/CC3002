@@ -84,14 +84,14 @@ public interface IUnit {
      * De esta forma nadie puede interactuar con ella.
      * (Despues del SMAAAASH!! unit ha recibido daño mortal)
      */
-    void muerte();
+    void death();
 
     /**
      * Attacks another Unit.
      *
      * @param other Target of the attack.
      */
-    void attack(IUnit other, boolean counterattack);
+    void useItem(IUnit other, boolean counterattack);
 
     /**
      * Verifica si el ataque esta fuera de rango
@@ -111,7 +111,7 @@ public interface IUnit {
      * @param damage        DAño que esta haciendo (Ya esta modificado)
      * @param counterAttack
      */
-    void getDamage(IEquipableItem item, int damage, boolean counterAttack);
+    void receiveDamage(IEquipableItem item, int damage, boolean counterAttack);
 
     /**
      * Receives an heal.

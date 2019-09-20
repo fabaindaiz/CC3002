@@ -46,7 +46,7 @@ public class ClericTest extends AbstractTestUnit {
             unit.equipItem(item);
             cleric.addItem(staff);
             cleric.equipItem(staff);
-            unit.attack(cleric, false);
+            unit.useItem(cleric, false);
             assertEquals(cleric.getCurrentHitPoints(), getHPstaff());
         }
     }

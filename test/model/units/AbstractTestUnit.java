@@ -155,11 +155,11 @@ public abstract class AbstractTestUnit implements ITestUnit {
         assertTrue(getTestUnit().getDeathStatus());
         unit.addItem(item);
         unit.equipItem(item);
-        unit.attack(getTestUnit(), false);
+        unit.useItem(getTestUnit(), false);
         assertFalse(getTestUnit().getDeathStatus());
         getTestUnit().addItem(getWeapon());
         getTestUnit().equipItem(getWeapon());
-        getTestUnit().attack(unit, false);
+        getTestUnit().useItem(unit, false);
         assertEquals(unit.getCurrentHitPoints(), 70);
         getTestUnit().exchange(unit, getWeapon());
         assertEquals(unit.items, List.of(item));
@@ -179,17 +179,17 @@ public abstract class AbstractTestUnit implements ITestUnit {
         if (item != null) {
             unit.addItem(item);
             unit.equipItem(item);
-            unit.attack(targetCounterattack1, true);
+            unit.useItem(targetCounterattack1, true);
             assertEquals(unit.getCurrentHitPoints(), getHP1());
-            unit.attack(targetCounterattack1, true);
+            unit.useItem(targetCounterattack1, true);
             assertEquals(unit.getCurrentHitPoints(), getHP1());
-            unit.attack(targetCounterattack2, true);
+            unit.useItem(targetCounterattack2, true);
             assertEquals(unit.getCurrentHitPoints(), getHP1());
-            unit.attack(targetCounterattack3, true);
+            unit.useItem(targetCounterattack3, true);
             assertEquals(unit.getCurrentHitPoints(), getHP2());
-            unit.attack(targetCounterattack4, true);
+            unit.useItem(targetCounterattack4, true);
             assertEquals(unit.getCurrentHitPoints(), getHP2());
-            targetCounterattack2.attack(unit, true);
+            targetCounterattack2.useItem(unit, true);
             assertEquals(unit.getCurrentHitPoints(), 50);
             if (item != staff)
                 assertEquals(targetCounterattack2.getCurrentHitPoints(), 40);
@@ -206,12 +206,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
         targetCounterattack2.addItem(item4);
         unit.setCurrentHitPoints(20);
         targetCounterattack2.equipItem(item4);
-        targetCounterattack2.attack(unit, false);
+        targetCounterattack2.useItem(unit, false);
         assertEquals(unit.getCurrentHitPoints(), 20);
         targetCounterattack2.equipItem(staff);
-        targetCounterattack2.attack(unit, false);
+        targetCounterattack2.useItem(unit, false);
         assertEquals(unit.getCurrentHitPoints(), 30);
-        targetCounterattack2.attack(unit, true);
+        targetCounterattack2.useItem(unit, true);
         assertEquals(unit.getCurrentHitPoints(), 40);
         assertEquals(targetCounterattack2.getCurrentHitPoints(), 50);
     }
@@ -327,10 +327,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
             unit.equipItem(item);
             sorcerer.addItem(anima);
             sorcerer.equipItem(anima);
-            unit.attack(sorcerer, false);
+            unit.useItem(sorcerer, false);
             assertEquals(sorcerer.getCurrentHitPoints(), getHPanima());
         } else {
-            unit.attack(sorcerer, false);
+            unit.useItem(sorcerer, false);
             assertEquals(sorcerer.getCurrentHitPoints(), 50);
         }
     }
@@ -360,10 +360,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
             unit.equipItem(item);
             sorcerer.addItem(dark);
             sorcerer.equipItem(dark);
-            unit.attack(sorcerer, false);
+            unit.useItem(sorcerer, false);
             assertEquals(sorcerer.getCurrentHitPoints(), getHPdark());
         } else {
-            unit.attack(sorcerer, false);
+            unit.useItem(sorcerer, false);
             assertEquals(sorcerer.getCurrentHitPoints(), 50);
         }
     }
@@ -393,10 +393,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
             unit.equipItem(item);
             sorcerer.addItem(light);
             sorcerer.equipItem(light);
-            unit.attack(sorcerer, false);
+            unit.useItem(sorcerer, false);
             assertEquals(sorcerer.getCurrentHitPoints(), getHPlight());
         } else {
-            unit.attack(sorcerer, false);
+            unit.useItem(sorcerer, false);
             assertEquals(sorcerer.getCurrentHitPoints(), 50);
         }
     }
@@ -426,10 +426,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
             unit.equipItem(item);
             fighter.addItem(axe);
             fighter.equipItem(axe);
-            unit.attack(fighter, false);
+            unit.useItem(fighter, false);
             assertEquals(fighter.getCurrentHitPoints(), getHPaxe());
         } else {
-            unit.attack(fighter, false);
+            unit.useItem(fighter, false);
             assertEquals(fighter.getCurrentHitPoints(), 50);
         }
     }
@@ -459,10 +459,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
             unit.equipItem(item);
             swordMaster.addItem(sword);
             swordMaster.equipItem(sword);
-            unit.attack(swordMaster, false);
+            unit.useItem(swordMaster, false);
             assertEquals(swordMaster.getCurrentHitPoints(), getHPsword());
         } else {
-            unit.attack(swordMaster, false);
+            unit.useItem(swordMaster, false);
             assertEquals(swordMaster.getCurrentHitPoints(), 50);
         }
     }
@@ -492,10 +492,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
             unit.equipItem(item);
             hero.addItem(spear);
             hero.equipItem(spear);
-            unit.attack(hero, false);
+            unit.useItem(hero, false);
             assertEquals(hero.getCurrentHitPoints(), getHPspear());
         } else {
-            unit.attack(hero, false);
+            unit.useItem(hero, false);
             assertEquals(hero.getCurrentHitPoints(), 50);
         }
     }
@@ -525,10 +525,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
             unit.equipItem(item);
             cleric.addItem(staff);
             cleric.equipItem(staff);
-            unit.attack(cleric, false);
+            unit.useItem(cleric, false);
             assertEquals(cleric.getCurrentHitPoints(), getHPstaff());
         } else {
-            unit.attack(cleric, false);
+            unit.useItem(cleric, false);
             assertEquals(cleric.getCurrentHitPoints(), 50);
         }
     }
@@ -558,10 +558,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
             unit.equipItem(item);
             archer.addItem(bow);
             archer.equipItem(bow);
-            unit.attack(archer, false);
+            unit.useItem(archer, false);
             assertEquals(archer.getCurrentHitPoints(), getHPbow());
         } else {
-            unit.attack(archer, false);
+            unit.useItem(archer, false);
             assertEquals(archer.getCurrentHitPoints(), 50);
         }
     }

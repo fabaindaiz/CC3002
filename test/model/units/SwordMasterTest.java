@@ -46,7 +46,7 @@ public class SwordMasterTest extends AbstractTestUnit {
             unit.equipItem(item);
             swordMaster.addItem(sword);
             swordMaster.equipItem(sword);
-            unit.attack(swordMaster, false);
+            unit.useItem(swordMaster, false);
             assertEquals(swordMaster.getCurrentHitPoints(), getHPsword());
         }
     }

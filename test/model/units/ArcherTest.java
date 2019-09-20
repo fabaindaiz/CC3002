@@ -49,7 +49,7 @@ public class ArcherTest extends AbstractTestUnit {
             unit.equipItem(item);
             archer.addItem(bow);
             archer.equipItem(bow);
-            unit.attack(archer, false);
+            unit.useItem(archer, false);
             assertEquals(archer.getCurrentHitPoints(), getHPbow());
         }
     }

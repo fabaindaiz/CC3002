@@ -102,12 +102,12 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
-    public void muerte() {
+    public void death() {
         location = null;
     }
 
     @Override
-    public void attack(IUnit other, boolean counterattack) {
+    public void useItem(IUnit other, boolean counterattack) {
         if (!getDeathStatus() || !other.getDeathStatus()) return;
         if (equippedItem != null)
             equippedItem.attack(other, counterattack);
@@ -122,21 +122,20 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
-    public void getDamage(IEquipableItem item, int damage, boolean counterAttack) {
+    public void receiveDamage(IEquipableItem item, int damage, boolean counterAttack) {
         if (damage < currentHitPoints) {
             if (damage > 0)
                 this.currentHitPoints -= damage;
             if (counterAttack && equippedItem.counterattack())
-                attack(item.getOwner(), false);
+                useItem(item.getOwner(), false);
         } else
-            muerte();
+            death();
     }
 
     @Override
     public void receiveHeal(IEquipableItem item) {
         if (outOfRange(item.getOwner())) return;
         int healed = item.getPower();
-
         if ((maxHitPoints - currentHitPoints) < healed)
             currentHitPoints = maxHitPoints;
         else
@@ -147,21 +146,21 @@ public abstract class AbstractUnit implements IUnit {
     public void receiveAttack(IEquipableItem item, boolean counterAttack) {
         if (outOfRange(item.getOwner())) return;
         int damage = item.getPower();
-        getDamage(item, damage, counterAttack);
+        receiveDamage(item, damage, counterAttack);
     }
 
     @Override
     public void receiveWeaknessAttack(IEquipableItem item, boolean counterAttack) {
         if (outOfRange(item.getOwner())) return;
         int damage = (int) (item.getPower() * 1.5);
-        getDamage(item, damage, counterAttack);
+        receiveDamage(item, damage, counterAttack);
     }
 
     @Override
     public void receiveResistantAttack(IEquipableItem item, boolean counterAttack) {
         if (outOfRange(item.getOwner())) return;
         int damage = item.getPower() - 20;
-        getDamage(item, damage, counterAttack);
+        receiveDamage(item, damage, counterAttack);
     }
 
     @Override

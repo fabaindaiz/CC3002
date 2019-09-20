@@ -46,7 +46,7 @@ public class SorcererAnimaTest extends AbstractTestUnit {
             unit.equipItem(item);
             sorcerer.addItem(anima);
             sorcerer.equipItem(anima);
-            unit.attack(sorcerer, false);
+            unit.useItem(sorcerer, false);
             assertEquals(sorcerer.getCurrentHitPoints(), getHPanima());
         }
     }

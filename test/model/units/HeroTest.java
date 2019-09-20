@@ -46,7 +46,7 @@ public class HeroTest extends AbstractTestUnit {
             unit.equipItem(item);
             hero.addItem(spear);
             hero.equipItem(spear);
-            unit.attack(hero, false);
+            unit.useItem(hero, false);
             assertEquals(hero.getCurrentHitPoints(), getHPspear());
         }
     }

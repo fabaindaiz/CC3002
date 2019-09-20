@@ -6,7 +6,7 @@ import model.units.IUnit;
 /**
  * This class represents a <i>spear</i>.
  * <p>
- * Anima are strong against light and weak against dark
+ * Spears are strong against swords and weak against axes
  *
  * @author Ignacio Slater Muñoz
  * @since 1.0
