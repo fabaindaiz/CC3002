@@ -1,5 +1,6 @@
 package controller;
 
+import model.Tactician;
 import model.map.Field;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -86,6 +87,9 @@ class GameControllerTest {
     void endTurn() {
         Tactician firstPlayer = controller.getTurnOwner();
         // Nuevamente, para determinar el orden de los jugadores se debe usar una semilla
+
+        String name = null; //Nota Mia: cambiar
+
         Tactician secondPlayer = new Tactician(name); // <- Deben cambiar esto (!)
         assertNotEquals(secondPlayer.getName(), firstPlayer.getName());
 

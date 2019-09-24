@@ -18,6 +18,12 @@ public class Field {
     private Random random = new Random();
     private StringBuilder builder = new StringBuilder();
 
+    public int getSize() {
+
+        return 0;   //Nota Mia: cambiar
+
+    }
+
     /**
      * Add cells to the map.
      *
@@ -132,4 +138,5 @@ public class Field {
     public boolean checkConnection(final Location cell1, final Location cell2) {
         return cell1.isNeighbour(cell2);
     }
+
 }
