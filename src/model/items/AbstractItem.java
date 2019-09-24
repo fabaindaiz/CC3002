@@ -37,7 +37,7 @@ public abstract class AbstractItem implements IEquipableItem {
      * @param other Unit that receives the attack.
      */
     @Override
-    public void attack(IUnit other, boolean counterAttack) {
+    public void useItem(IUnit other, boolean counterAttack) {
         if (other.getEquippedItem() != null)
             specificAttack(other, counterAttack);
         else noItemAttack(other);

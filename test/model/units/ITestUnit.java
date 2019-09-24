@@ -64,17 +64,6 @@ public interface ITestUnit {
     void constructorTest();
 
     /**
-     * Prueba la muerte de la unidad
-     * (La muerte esta programada para no dejate hacer nada)
-     * <p>
-     * Casos de borde una vez muerta la unidad:
-     * - Intenta atacar
-     * - Intenta transferir un objeto
-     */
-    @Test
-    void deathTest();
-
-    /**
      * Test de contraataque
      * (no testea debilidades, eso esta en otros test)
      */

@@ -24,15 +24,6 @@ public interface IUnit {
     void equipItem(IEquipableItem item);
 
     /**
-     * Verifica si una unidad esta viva o muerta
-     *
-     * @return es estado de la unidad
-     * TRUE si esta viva
-     * FALSE si esta muerta
-     */
-    boolean getDeathStatus();
-
-    /**
      * @return hit points of the unit
      */
     int getCurrentHitPoints();

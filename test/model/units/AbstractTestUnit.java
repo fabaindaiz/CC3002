@@ -149,24 +149,6 @@ public abstract class AbstractTestUnit implements ITestUnit {
 
     @Override
     @Test
-    public void deathTest() {
-        Archer unit = new Archer(70, 2, field.getCell(1, 1));
-        Bow item = new Bow("Pk flash", 100, 1, 3);
-        assertTrue(getTestUnit().getDeathStatus());
-        unit.addItem(item);
-        unit.equipItem(item);
-        unit.useItem(getTestUnit(), false);
-        assertFalse(getTestUnit().getDeathStatus());
-        getTestUnit().addItem(getWeapon());
-        getTestUnit().equipItem(getWeapon());
-        getTestUnit().useItem(unit, false);
-        assertEquals(unit.getCurrentHitPoints(), 70);
-        getTestUnit().exchange(unit, getWeapon());
-        assertEquals(unit.items, List.of(item));
-    }
-
-    @Override
-    @Test
     public void counterattackTest() {
         IUnit unit = getTestUnit();
         IEquipableItem item = getWeapon();

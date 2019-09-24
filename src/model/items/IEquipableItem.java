@@ -68,7 +68,7 @@ public interface IEquipableItem {
      *
      * @param other Unit that receives the attack.
      */
-    void attack(IUnit other, boolean counterAttack);
+    void useItem(IUnit other, boolean counterAttack);
 
     /**
      * @param other
