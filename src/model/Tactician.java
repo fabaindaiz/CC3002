@@ -23,7 +23,7 @@ public class Tactician {
      */
     public Tactician() {
     }
-    
+
     public Tactician(String name) {
         this.name = name;
     }

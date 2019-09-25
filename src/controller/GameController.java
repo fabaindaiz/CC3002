@@ -6,7 +6,9 @@ import model.map.Field;
 import model.units.IUnit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Controller of the game.
@@ -24,7 +26,7 @@ public class GameController {
     protected IUnit selectedUnit;
     protected IEquipableItem selectedItem;
     protected Field gameMap = new Field();
-    protected final List<Tactician> tacticians = new ArrayList<>(); //Cambiar ------------------------------------------
+    protected Map<String, Tactician> tacticians = new HashMap<>();
 
     /**
      * Creates the controller for a new game.
@@ -33,12 +35,14 @@ public class GameController {
      * @param mapSize         the dimensions of the map, for simplicity, all maps are squares
      */
     public GameController(int numberOfPlayers, int mapSize) {
+        for (int i=0; i<numberOfPlayers; i++)
+            tacticians.put("Player " + i, new Tactician("Player " + i));
     }
 
     /**
      * @return the list of all the tacticians participating in the game.
      */
-    public List<Tactician> getTacticians() { return tacticians; }
+    public List<Tactician> getTacticians() { return new ArrayList<Tactician>(tacticians.values()); }
 
     /**
      * @return the map of the current game
@@ -81,7 +85,7 @@ public class GameController {
      * @param tactician the player to be removed
      */
     public void removeTactician(String tactician) {
-
+        tacticians.remove(tactician);
     }
 
     /**
@@ -96,9 +100,8 @@ public class GameController {
     /**
      * Starts a game without a limit of turns.
      */
-    public void initEndlessGame() {
+    public void initEndlessGame() { //Cambiar --------------------------------------------------------------------------
         maxRounds = -1;
-
     }
 
     /**

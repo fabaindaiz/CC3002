@@ -79,6 +79,7 @@ public abstract class AbstractUnit implements IUnit {
 
     @Override
     public void setLocation(final Location location) {
+        this.location.setUnit(null);
         this.location = location;
         location.setUnit(this);
     }
@@ -98,6 +99,7 @@ public abstract class AbstractUnit implements IUnit {
 
     @Override
     public void death() {
+        location.setUnit(null);
         location = null;
     }
 
