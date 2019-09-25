@@ -76,8 +76,9 @@ class GameControllerTest {
     void getMaxRounds() {
         Random randomTurnSequence = new Random();
         IntStream.range(0, 50).forEach(i -> {
-            controller.initGame(randomTurnSequence.nextInt());
-            assertEquals(randomTurnSequence.nextInt(), controller.getMaxRounds());
+            int randomNum = randomTurnSequence.nextInt();
+            controller.initGame(randomNum);
+            assertEquals(randomNum, controller.getMaxRounds());
         });
         controller.initEndlessGame();
         assertEquals(-1, controller.getMaxRounds());
@@ -88,7 +89,7 @@ class GameControllerTest {
         Tactician firstPlayer = controller.getTurnOwner();
         // Nuevamente, para determinar el orden de los jugadores se debe usar una semilla
 
-        String name = null; //Nota Mia: cambiar
+        String name = "generic"; //Cambiar ----------------------------------------------------------------------------------
 
         Tactician secondPlayer = new Tactician(name); // <- Deben cambiar esto (!)
         assertNotEquals(secondPlayer.getName(), firstPlayer.getName());

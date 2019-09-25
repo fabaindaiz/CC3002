@@ -5,6 +5,7 @@ import model.items.IEquipableItem;
 import model.map.Field;
 import model.units.IUnit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,12 @@ import java.util.List;
  */
 public class GameController {
 
+    private int maxRounds;
+    private int currentPlayers;
+    private int roundNumber = 0;
+    protected Field gameMap = new Field();
+    protected final List<Tactician> tacticians = new ArrayList<>();
+
     /**
      * Creates the controller for a new game.
      *
@@ -24,21 +31,19 @@ public class GameController {
      * @param mapSize         the dimensions of the map, for simplicity, all maps are squares
      */
     public GameController(int numberOfPlayers, int mapSize) {
-
+        currentPlayers = numberOfPlayers;
     }
 
     /**
      * @return the list of all the tacticians participating in the game.
      */
-    public List<Tactician> getTacticians() {
-        return null;
-    }
+    public List<Tactician> getTacticians() { return tacticians; }
 
     /**
      * @return the map of the current game
      */
     public Field getGameMap() {
-        return null;
+        return gameMap;
     }
 
     /**
@@ -52,14 +57,14 @@ public class GameController {
      * @return the number of rounds since the start of the game.
      */
     public int getRoundNumber() {
-        return 0;
+        return roundNumber;
     }
 
     /**
      * @return the maximum number of rounds a match can last
      */
     public int getMaxRounds() {
-        return 0;
+        return maxRounds;
     }
 
     /**
@@ -84,14 +89,14 @@ public class GameController {
      * @param maxTurns the maximum number of turns the game can last
      */
     public void initGame(final int maxTurns) {
-
+        maxRounds = maxTurns;
     }
 
     /**
      * Starts a game without a limit of turns.
      */
     public void initEndlessGame() {
-
+        maxRounds = -1;
     }
 
     /**

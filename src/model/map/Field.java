@@ -20,7 +20,7 @@ public class Field {
 
     public int getSize() {
 
-        return 0;   //Nota Mia: cambiar
+        return 0;   //Cambiar ------------------------------------------------------------------------------------------
 
     }
 
