@@ -19,10 +19,12 @@ import java.util.List;
 public class GameController {
 
     private int maxRounds;
-    private int currentPlayers;
     private int roundNumber = 0;
+    protected Tactician turnOwner;
+    protected IUnit selectedUnit;
+    protected IEquipableItem selectedItem;
     protected Field gameMap = new Field();
-    protected final List<Tactician> tacticians = new ArrayList<>();
+    protected final List<Tactician> tacticians = new ArrayList<>(); //Cambiar ------------------------------------------
 
     /**
      * Creates the controller for a new game.
@@ -31,7 +33,6 @@ public class GameController {
      * @param mapSize         the dimensions of the map, for simplicity, all maps are squares
      */
     public GameController(int numberOfPlayers, int mapSize) {
-        currentPlayers = numberOfPlayers;
     }
 
     /**
@@ -50,7 +51,7 @@ public class GameController {
      * @return the tactician that's currently playing
      */
     public Tactician getTurnOwner() {
-        return null;
+        return turnOwner;
     }
 
     /**
@@ -97,6 +98,7 @@ public class GameController {
      */
     public void initEndlessGame() {
         maxRounds = -1;
+
     }
 
     /**
@@ -110,7 +112,7 @@ public class GameController {
      * @return the current player's selected unit
      */
     public IUnit getSelectedUnit() {
-        return null;
+        return selectedUnit;
     }
 
     /**
@@ -120,14 +122,16 @@ public class GameController {
      * @param y vertical position of the unit
      */
     public void selectUnitIn(int x, int y) {
-
+        selectedUnit = gameMap.getCell(x,y).getUnit();
     }
 
     /**
      * @return the inventory of the currently selected unit.
      */
     public List<IEquipableItem> getItems() {
-        return null;
+        if (selectedUnit != null)
+            return selectedUnit.getItems();
+        else return null;
     }
 
     /**
@@ -136,7 +140,8 @@ public class GameController {
      * @param index the location of the item in the inventory.
      */
     public void equipItem(int index) {
-
+        if (selectedUnit.getItems().size() > index)
+            selectedUnit.equipItem(selectedUnit.getItems().get(index));
     }
 
     /**
@@ -146,7 +151,9 @@ public class GameController {
      * @param y vertical position of the target
      */
     public void useItemOn(int x, int y) {
-
+        IUnit unit = gameMap.getCell(x,y).getUnit();
+        if (unit != null)
+            selectedUnit.useItem(unit,true);
     }
 
     /**
@@ -155,7 +162,8 @@ public class GameController {
      * @param index the location of the item in the inventory.
      */
     public void selectItem(int index) {
-
+        if (selectedUnit.getItems().size() > index)
+            selectedItem = selectedUnit.getItems().get(index);
     }
 
     /**
@@ -165,6 +173,10 @@ public class GameController {
      * @param y vertical position of the target
      */
     public void giveItemTo(int x, int y) {
-
+        IUnit unit = gameMap.getCell(x,y).getUnit();
+        if (unit != null) {
+            selectedUnit.exchange(unit, selectedItem);
+            selectedItem = null;
+        }
     }
 }

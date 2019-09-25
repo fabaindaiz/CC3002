@@ -23,12 +23,7 @@ public class Tactician {
      */
     public Tactician() {
     }
-
-    /**
-     * Crea un jugador para el juego (se ejecuta desde GameController)
-     *
-     * @param name Nombre del jugador
-     */
+    
     public Tactician(String name) {
         this.name = name;
     }
