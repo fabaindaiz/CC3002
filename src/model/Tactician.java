@@ -31,9 +31,16 @@ public class Tactician {
     public Tactician(String name, final IUnit... units) {
         this.name = name;
         this.units.addAll(Arrays.asList(units));
+
     }
 
     public String getName() {
         return name;
     }
+
+    public List<IUnit> getUnits() { return units; }
+
+    public void addUnit (IUnit unit) {units.add(unit);}
+
+
 }
