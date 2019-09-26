@@ -26,7 +26,7 @@ class GameControllerTest {
     void setUp() {
         // Se define la semilla como un número aleatorio para generar variedad en los tests
         randomSeed = new Random().nextLong();
-        controller = new GameController(4, 128);
+        controller = new GameController(4,128);
         testTacticians = List.of("Player 0", "Player 1", "Player 2", "Player 3");
     }
 
@@ -45,6 +45,8 @@ class GameControllerTest {
         assertEquals(128, gameMap.getSize()); // getSize deben definirlo
         assertTrue(controller.getGameMap().isConnected());
         Random testRandom = new Random(randomSeed);
+        gameMap.setSeed(randomSeed);
+
         // Para testear funcionalidades que dependen de valores aleatorios se hacen 2 cosas:
         //  - Comprobar las invariantes de las estructuras que se crean (en este caso que el mapa tenga
         //    las dimensiones definidas y que sea conexo.
@@ -58,7 +60,8 @@ class GameControllerTest {
 
     @Test
     void getTurnOwner() {
-        //  En este caso deben hacer lo mismo que para el mapa
+        controller.setSeed(randomSeed);
+
     }
 
     @Test
@@ -87,9 +90,14 @@ class GameControllerTest {
     @Test
     void endTurn() {
         Tactician firstPlayer = controller.getTurnOwner();
+        Random random = new Random();
+        random.setSeed(randomSeed);
         // Nuevamente, para determinar el orden de los jugadores se debe usar una semilla
 
-        String name = "generic"; //Cambiar ----------------------------------------------------------------------------------
+        List<Tactician> tacticiansTemp = controller.getTacticians();
+        tacticiansTemp.remove((int) random.nextFloat() * tacticiansTemp.size());
+
+        String name = tacticiansTemp.get((int) random.nextFloat() * tacticiansTemp.size()).getName();
 
         Tactician secondPlayer = new Tactician(name); // <- Deben cambiar esto (!)
         assertNotEquals(secondPlayer.getName(), firstPlayer.getName());
@@ -133,7 +141,7 @@ class GameControllerTest {
         IntStream.range(0, 2).forEach(i -> controller.endTurn());
         List<String> winners = controller.getWinners();
         assertEquals(2, winners.size());
-        assertTrue(List.of("Player 1", "Player 2").containsAll(winners));
+        assertTrue(List.of("Player 1", "Player 3").containsAll(winners));
 
         controller.initEndlessGame();
         for (int i = 0; i < 3; i++) {

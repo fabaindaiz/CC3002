@@ -18,11 +18,9 @@ public class Field {
     private Random random = new Random();
     private StringBuilder builder = new StringBuilder();
 
-    public int getSize() {
+    public void setSeed(long seed){ random.setSeed(seed); }
 
-        return 0;   //Cambiar ------------------------------------------------------------------------------------------
-
-    }
+    public int getSize() { return map.size(); }
 
     /**
      * Add cells to the map.

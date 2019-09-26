@@ -18,7 +18,13 @@ import java.util.*;
 public class GameController {
 
     private int maxRounds;
-    private int roundNumber = 0;
+    private int roundNumber;
+    private int turnInRound;
+    private Random random = new Random();
+
+    protected Tactician lastTurn;
+    protected ArrayList<Tactician> turns = new ArrayList<Tactician>();
+
     protected Tactician turnOwner;
     protected IUnit selectedUnit;
     protected IEquipableItem selectedItem;
@@ -34,48 +40,79 @@ public class GameController {
     public GameController(int numberOfPlayers, int mapSize) {
         for (int i=0; i<numberOfPlayers; i++)
             tacticians.put("Player " + i, new Tactician("Player " + i));
+        assignTurns();
+    }
 
+    /**
+     * Creates the controller for a new game.
+     *
+     * @param numberOfPlayers the number of players for this game
+     * @param mapSize         the dimensions of the map, for simplicity, all maps are squares
+     * @param names           Recibe un arreglo con los nombres a asignar a los Tacticians
+     */
+    public GameController(int numberOfPlayers, int mapSize, String... names) {
+        for (int i=0; i<numberOfPlayers; i++)
+            tacticians.put(names[i], new Tactician(names[i]));
+
+    }
+
+    public void setSeed (long seed) { random.setSeed(seed); }
+
+    public void assignTurns() {
+         do {
+             turns.clear();
+             List<Tactician> tacticiansTemp = getTacticians();
+
+             for (int i = 0; i < tacticians.size(); i++) {
+                int generated = (int) random.nextFloat() * tacticiansTemp.size();
+                turns.add(tacticiansTemp.get(generated));
+                tacticiansTemp.remove(generated);
+            }
+        } while ( lastTurn == turns.get(0) );
+
+        lastTurn = turns.get(turns.size()-1);
+        turnOwner = turns.get(0);
     }
 
     /**
      * @return the list of all the tacticians participating in the game.
      */
-    public List<Tactician> getTacticians() { return new ArrayList<Tactician>(tacticians.values());
-    }
+    public List<Tactician> getTacticians() { return new ArrayList<Tactician>(tacticians.values()); }
 
     /**
      * @return the map of the current game
      */
-    public Field getGameMap() {
-        return gameMap;
-    }
+    public Field getGameMap() { return gameMap; }
 
     /**
      * @return the tactician that's currently playing
      */
-    public Tactician getTurnOwner() {
-        return turnOwner;
-    }
+    public Tactician getTurnOwner() { return turnOwner; }
 
     /**
      * @return the number of rounds since the start of the game.
      */
-    public int getRoundNumber() {
-        return roundNumber;
-    }
+    public int getRoundNumber() { return roundNumber +1; }
 
     /**
      * @return the maximum number of rounds a match can last
      */
-    public int getMaxRounds() {
-        return maxRounds;
-    }
+    public int getMaxRounds() { return maxRounds; }
 
     /**
      * Finishes the current player's turn.
      */
     public void endTurn() {
+        selectedUnit = null;
+        selectedItem = null;
 
+        turnInRound++;
+        if (turnInRound == tacticians.size()) {
+            turnInRound = 0;
+            roundNumber++;
+            assignTurns();
+        }
+        turnOwner = turns.get(turnInRound);
     }
 
     /**
@@ -93,20 +130,24 @@ public class GameController {
      * @param maxTurns the maximum number of turns the game can last
      */
     public void initGame(final int maxTurns) {
+        turnOwner = turns.get(0);
         maxRounds = maxTurns;
+        roundNumber = 0;
+        turnInRound = 0;
     }
 
     /**
      * Starts a game without a limit of turns.
      */
-    public void initEndlessGame() { //Cambiar --------------------------------------------------------------------------
-        maxRounds = -1;
-    }
+    public void initEndlessGame() { initGame(-1); }
 
     /**
      * @return the winner of this game, if the match ends in a draw returns a list of all the winners
      */
     public List<String> getWinners() {
+        if (roundNumber == maxRounds || tacticians.size() == 1) {
+            return new ArrayList<String>(tacticians.keySet());
+        }
         return null;
     }
 
@@ -123,6 +164,7 @@ public class GameController {
      */
     public void selectUnitIn(int x, int y) {
         selectedUnit = gameMap.getCell(x,y).getUnit();
+        selectedItem = null;
     }
 
     /**
