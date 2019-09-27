@@ -89,6 +89,7 @@ class GameControllerTest {
 
     @Test
     void endTurn() {
+        controller.initGame(-1);
         Tactician firstPlayer = controller.getTurnOwner();
         Random random = new Random();
         random.setSeed(randomSeed);
@@ -109,6 +110,7 @@ class GameControllerTest {
 
     @Test
     void removeTactician() {
+        controller.initGame(-1);
         assertEquals(4, controller.getTacticians().size());
         controller.getTacticians()
                 .forEach(tactician -> Assertions.assertTrue(testTacticians.contains(tactician.getName())));

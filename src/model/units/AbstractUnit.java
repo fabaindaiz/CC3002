@@ -105,7 +105,7 @@ public abstract class AbstractUnit implements IUnit {
 
     @Override
     public void useItem(IUnit other, boolean counterattack) {
-        if (equippedItem != null)
+        if (equippedItem != null && other != null)
             equippedItem.useItem(other, counterattack);
     }
 
@@ -180,7 +180,7 @@ public abstract class AbstractUnit implements IUnit {
     @Override
     public void exchange(IUnit unit, IEquipableItem item) {
         if (items.contains(item) && (int) getLocation().distanceTo(unit.getLocation()) == 1) {
-            exchangeCondition(unit, item);
+            if (unit != null) exchangeCondition(unit, item);
         }
     }
 

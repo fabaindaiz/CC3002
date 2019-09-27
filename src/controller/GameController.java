@@ -17,6 +17,7 @@ import java.util.*;
  */
 public class GameController {
 
+    private boolean initedGame = false;
     private int maxRounds;
     private int roundNumber;
     private int turnInRound;
@@ -24,11 +25,12 @@ public class GameController {
 
     protected Tactician lastTurn;
     protected ArrayList<Tactician> turns = new ArrayList<Tactician>();
-
     protected Tactician turnOwner;
     protected IUnit selectedUnit;
     protected IEquipableItem selectedItem;
     protected Field gameMap = new Field();
+
+    private Map<String, Tactician> tacticiansGame = new TreeMap<>();
     protected Map<String, Tactician> tacticians = new TreeMap<>();
 
     /**
@@ -39,21 +41,7 @@ public class GameController {
      */
     public GameController(int numberOfPlayers, int mapSize) {
         for (int i=0; i<numberOfPlayers; i++)
-            tacticians.put("Player " + i, new Tactician("Player " + i));
-        assignTurns();
-    }
-
-    /**
-     * Creates the controller for a new game.
-     *
-     * @param numberOfPlayers the number of players for this game
-     * @param mapSize         the dimensions of the map, for simplicity, all maps are squares
-     * @param names           Recibe un arreglo con los nombres a asignar a los Tacticians
-     */
-    public GameController(int numberOfPlayers, int mapSize, String... names) {
-        for (int i=0; i<numberOfPlayers; i++)
-            tacticians.put(names[i], new Tactician(names[i]));
-
+            tacticiansGame.put("Player " + i, new Tactician("Player " + i));
     }
 
     public void setSeed (long seed) { random.setSeed(seed); }
@@ -77,7 +65,9 @@ public class GameController {
     /**
      * @return the list of all the tacticians participating in the game.
      */
-    public List<Tactician> getTacticians() { return new ArrayList<Tactician>(tacticians.values()); }
+    public List<Tactician> getTacticians() {
+        return initedGame? new ArrayList<Tactician>(tacticians.values()) : new ArrayList<Tactician>(tacticiansGame.values());
+    }
 
     /**
      * @return the map of the current game
@@ -130,6 +120,10 @@ public class GameController {
      * @param maxTurns the maximum number of turns the game can last
      */
     public void initGame(final int maxTurns) {
+        tacticians.putAll(tacticiansGame);
+        assignTurns();
+        initedGame = true;
+
         turnOwner = turns.get(0);
         maxRounds = maxTurns;
         roundNumber = 0;
@@ -171,7 +165,7 @@ public class GameController {
      * @return the inventory of the currently selected unit.
      */
     public List<IEquipableItem> getItems() {
-        if (unitNotNull(selectedUnit))
+        if (selectedUnit != null)
             return selectedUnit.getItems();
         else return null;
     }
@@ -182,7 +176,7 @@ public class GameController {
      * @param index the location of the item in the inventory.
      */
     public void equipItem(int index) {
-        if (unitNotNull(selectedUnit) && selectedUnit.getItems().size() > index)
+        if (selectedUnit != null && selectedUnit.getItems().size() > index)
             selectedUnit.equipItem(selectedUnit.getItems().get(index));
     }
 
@@ -194,7 +188,7 @@ public class GameController {
      */
     public void useItemOn(int x, int y) {
         IUnit unit = gameMap.getCell(x,y).getUnit();
-        if (unitNotNull(selectedUnit, unit))
+        if (selectedUnit != null)
             selectedUnit.useItem(unit,true);
     }
 
@@ -204,7 +198,7 @@ public class GameController {
      * @param index the location of the item in the inventory.
      */
     public void selectItem(int index) {
-        if (unitNotNull(selectedUnit) && selectedUnit.getItems().size() > index)
+        if (selectedUnit != null && selectedUnit.getItems().size() > index)
             selectedItem = selectedUnit.getItems().get(index);
     }
 
@@ -216,16 +210,9 @@ public class GameController {
      */
     public void giveItemTo(int x, int y) {
         IUnit unit = gameMap.getCell(x,y).getUnit();
-        if (unitNotNull(selectedUnit, unit)) {
+        if (selectedUnit != null) {
             selectedUnit.exchange(unit, selectedItem);
             selectedItem = null;
         }
-    }
-
-    public boolean unitNotNull(IUnit... units){
-        for (IUnit unit : units)
-            if (unit == null)
-                return false;
-        return true;
     }
 }
