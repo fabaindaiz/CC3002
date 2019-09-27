@@ -18,8 +18,16 @@ public class Field {
     private Random random = new Random();
     private StringBuilder builder = new StringBuilder();
 
+    /**
+     * Establece una semilla para el generador de numero aleatorios
+     *
+     * @param seed semilla a configurar
+     */
     public void setSeed(long seed){ random.setSeed(seed); }
 
+    /**
+     * @return tamaño del mapa generado
+     */
     public int getSize() { return map.size(); }
 
     /**

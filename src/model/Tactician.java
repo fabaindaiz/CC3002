@@ -15,32 +15,42 @@ import java.util.List;
  */
 public class Tactician {
 
-    private String name;
+    private final String name;
     protected final List<IUnit> units = new ArrayList<>();
 
     /**
      * Crea un jugador para el juego (se ejecuta desde GameController)
      */
-    public Tactician() {
-    }
-
     public Tactician(String name) {
         this.name = name;
     }
 
-    public Tactician(String name, final IUnit... units) {
-        this.name = name;
-        this.units.addAll(Arrays.asList(units));
-
-    }
-
+    /**
+     * @return el nombre del Tactician
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return Una lista con ls unidades del Tactician
+     */
     public List<IUnit> getUnits() { return units; }
 
-    public void addUnit (IUnit unit) {units.add(unit);}
+    /**
+     * Añade unidades a un Tactician
+     *
+     * @param unit unidad o unidades a añadir
+     */
+    public void addUnit (IUnit... unit) {units.addAll(Arrays.asList(unit));}
+
+    /**
+     * Elimina unidades de un Tactician
+     *
+     * @param unit unidad a eliminar
+     */
+    public void removeUnit (IUnit unit) {units.remove(unit);}
+
 
 
 }

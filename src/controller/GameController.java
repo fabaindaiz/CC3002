@@ -44,8 +44,16 @@ public class GameController {
             tacticiansGame.put("Player " + i, new Tactician("Player " + i));
     }
 
+    /**
+     * Establece una semilla para el generador de numero aleatorios
+     *
+     * @param seed semilla a configurar
+     */
     public void setSeed (long seed) { random.setSeed(seed); }
 
+    /**
+     * Asigna el orden de los turnos antes de la ronda
+     */
     public void assignTurns() {
         if (!initiatedGame) return;
          do {
@@ -55,6 +63,9 @@ public class GameController {
         turnOwner = turns.get(0);
     }
 
+    /**
+     * Genera los turnos de forma aleatoria (se ejecuta desde assignTurns)
+     */
     public void generateRandomTurn() {
         turns.clear();
         List<Tactician> tacticiansTemp = getTacticians();
@@ -102,6 +113,9 @@ public class GameController {
         turnOwner = turns.get(turnInRound);
     }
 
+    /**
+     * Verifica si la ronda termino al finalizar un turno (se ejecuta desde endTurn)
+     */
     public void verificateEndRound() {
         turnInRound++;
         if (turnInRound == tacticians.size()) {
@@ -224,6 +238,11 @@ public class GameController {
         selectedItem = null;
     }
 
+    /**
+     * Verificación estandar antes de realizar una accion con una selectedUnit
+     *
+     * @return true: algo va mal, no ejecuta de la función que se llamo | false: continua normal
+     */
     public boolean standarVerification() {
         if (!initiatedGame || selectedUnit == null) return true;
         return false;
