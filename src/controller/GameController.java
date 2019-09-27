@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class GameController {
 
-    private boolean initedGame = false;
+    private boolean initiatedGame = false;
     private int maxRounds;
     private int roundNumber;
     private int turnInRound;
@@ -47,26 +47,29 @@ public class GameController {
     public void setSeed (long seed) { random.setSeed(seed); }
 
     public void assignTurns() {
+        if (!initiatedGame) return;
          do {
-             turns.clear();
-             List<Tactician> tacticiansTemp = getTacticians();
-
-             for (int i = 0; i < tacticians.size(); i++) {
-                int generated = (int) random.nextFloat() * tacticiansTemp.size();
-                turns.add(tacticiansTemp.get(generated));
-                tacticiansTemp.remove(generated);
-            }
+             generateRandomTurn();
         } while ( lastTurn == turns.get(0) );
-
         lastTurn = turns.get(turns.size()-1);
         turnOwner = turns.get(0);
+    }
+
+    public void generateRandomTurn() {
+        turns.clear();
+        List<Tactician> tacticiansTemp = getTacticians();
+        for (int i = 0; i < tacticians.size(); i++) {
+            int generated = (int) random.nextFloat() * tacticiansTemp.size();
+            turns.add(tacticiansTemp.get(generated));
+            tacticiansTemp.remove(generated);
+        }
     }
 
     /**
      * @return the list of all the tacticians participating in the game.
      */
     public List<Tactician> getTacticians() {
-        return initedGame? new ArrayList<Tactician>(tacticians.values()) : new ArrayList<Tactician>(tacticiansGame.values());
+        return initiatedGame ? new ArrayList<Tactician>(tacticians.values()) : new ArrayList<Tactician>(tacticiansGame.values());
     }
 
     /**
@@ -95,14 +98,17 @@ public class GameController {
     public void endTurn() {
         selectedUnit = null;
         selectedItem = null;
+        verificateEndRound();
+        turnOwner = turns.get(turnInRound);
+    }
 
+    public void verificateEndRound() {
         turnInRound++;
         if (turnInRound == tacticians.size()) {
             turnInRound = 0;
             roundNumber++;
             assignTurns();
         }
-        turnOwner = turns.get(turnInRound);
     }
 
     /**
@@ -111,6 +117,7 @@ public class GameController {
      * @param tactician the player to be removed
      */
     public void removeTactician(String tactician) {
+        if(!initiatedGame) return;
         tacticians.remove(tactician);
     }
 
@@ -121,8 +128,8 @@ public class GameController {
      */
     public void initGame(final int maxTurns) {
         tacticians.putAll(tacticiansGame);
+        initiatedGame = true;
         assignTurns();
-        initedGame = true;
 
         turnOwner = turns.get(0);
         maxRounds = maxTurns;
@@ -157,6 +164,7 @@ public class GameController {
      * @param y vertical position of the unit
      */
     public void selectUnitIn(int x, int y) {
+        if (standarVerification()) return;
         selectedUnit = gameMap.getCell(x,y).getUnit();
         selectedItem = null;
     }
@@ -165,9 +173,8 @@ public class GameController {
      * @return the inventory of the currently selected unit.
      */
     public List<IEquipableItem> getItems() {
-        if (selectedUnit != null)
-            return selectedUnit.getItems();
-        else return null;
+        if (standarVerification()) return null;
+        else return selectedUnit.getItems();
     }
 
     /**
@@ -176,7 +183,8 @@ public class GameController {
      * @param index the location of the item in the inventory.
      */
     public void equipItem(int index) {
-        if (selectedUnit != null && selectedUnit.getItems().size() > index)
+        if (standarVerification()) return;
+        if (selectedUnit.getItems().size() > index)
             selectedUnit.equipItem(selectedUnit.getItems().get(index));
     }
 
@@ -187,9 +195,9 @@ public class GameController {
      * @param y vertical position of the target
      */
     public void useItemOn(int x, int y) {
+        if (standarVerification()) return;
         IUnit unit = gameMap.getCell(x,y).getUnit();
-        if (selectedUnit != null)
-            selectedUnit.useItem(unit,true);
+        selectedUnit.useItem(unit,true);
     }
 
     /**
@@ -198,7 +206,8 @@ public class GameController {
      * @param index the location of the item in the inventory.
      */
     public void selectItem(int index) {
-        if (selectedUnit != null && selectedUnit.getItems().size() > index)
+        if (standarVerification()) return;
+        if (selectedUnit.getItems().size() > index)
             selectedItem = selectedUnit.getItems().get(index);
     }
 
@@ -209,10 +218,14 @@ public class GameController {
      * @param y vertical position of the target
      */
     public void giveItemTo(int x, int y) {
+        if (standarVerification()) return;
         IUnit unit = gameMap.getCell(x,y).getUnit();
-        if (selectedUnit != null) {
-            selectedUnit.exchange(unit, selectedItem);
-            selectedItem = null;
-        }
+        selectedUnit.exchange(unit, selectedItem);
+        selectedItem = null;
+    }
+
+    public boolean standarVerification() {
+        if (!initiatedGame || selectedUnit == null) return true;
+        return false;
     }
 }
