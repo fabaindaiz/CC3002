@@ -41,6 +41,7 @@ class GameControllerTest {
 
     @Test
     void getGameMap() {
+        controller.printMap();
         Field gameMap = controller.getGameMap();
         assertEquals(128, gameMap.getSize()); // getSize deben definirlo
         assertTrue(controller.getGameMap().isConnected());

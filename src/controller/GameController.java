@@ -3,6 +3,8 @@ package controller;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
+import model.map.InvalidLocation;
+import model.map.Location;
 import model.units.IUnit;
 
 import java.util.*;
@@ -21,6 +23,7 @@ public class GameController {
     private int maxRounds;
     private int roundNumber;
     private int turnInRound;
+    private int sideSquare;
     private Random random = new Random();
 
     protected Tactician lastTurn;
@@ -29,6 +32,7 @@ public class GameController {
     protected IUnit selectedUnit;
     protected IEquipableItem selectedItem;
     protected Field gameMap = new Field();
+    protected Location invalidLocation = new InvalidLocation();
 
     private Map<String, Tactician> tacticiansGame = new TreeMap<>();
     protected Map<String, Tactician> tacticians = new TreeMap<>();
@@ -42,6 +46,7 @@ public class GameController {
     public GameController(int numberOfPlayers, int mapSize) {
         for (int i=0; i<numberOfPlayers; i++)
             tacticiansGame.put("Player " + i, new Tactician("Player " + i));
+            generateMap(mapSize);
     }
 
     /**
@@ -50,7 +55,52 @@ public class GameController {
      * @param mapSize tamaño del mapa
      */
     public void generateMap (int mapSize) {
+        sideSquare = (int) (Math.sqrt(mapSize) + 1);
+        int x, y;
+        while (gameMap.getSize() < mapSize/4) {
+            x = (int) ((random.nextGaussian()*sideSquare/4)+sideSquare/4);
+            y = (int) ((random.nextGaussian()*sideSquare/4)+sideSquare/4);
+            addCell(true , x, y, sideSquare);
+        }
+        while (gameMap.getSize() < mapSize/2) {
+            x = (int) ((random.nextGaussian()*sideSquare/4)+(3*sideSquare)/4);
+            y = (int) ((random.nextGaussian()*sideSquare/4)+sideSquare/4);
+            addCell(true , x, y, sideSquare);
+        }
+        while (gameMap.getSize() < (3*mapSize)/4) {
+            x = (int) ((random.nextGaussian()*sideSquare/4)+sideSquare/4);
+            y = (int) ((random.nextGaussian()*sideSquare/4)+(3*sideSquare)/4);
+            addCell(true , x, y, sideSquare);
+        }
+        while (gameMap.getSize() < mapSize) {
+            x = (int) ((random.nextGaussian()*sideSquare/4)+(3*sideSquare)/4);
+            y = (int) ((random.nextGaussian()*sideSquare/4)+(3*sideSquare)/4);
+            addCell(true , x, y, sideSquare);
+        }
+    }
 
+    public void addCell(boolean connectAll, int x, int y, int sideSquare) {
+        if (gameMap.getCell(x, y).getRow() == -1)
+            if(x >= 0 && x <= sideSquare-1 && y >= 0 && y <= sideSquare-1)
+            gameMap.addCells(connectAll, new Location(x,y));
+    }
+
+    /**
+     * Imprime el mapa en pantalla para facilitar el testeo
+     */
+    public void printMap() {
+        int size = 0;
+        for (int i = 0; i< sideSquare; i++) {
+            for (int j = 0; j< sideSquare; j++) {
+                if (gameMap.getCell(i,j).getRow() == -1 ) System.out.print("  ");
+                else {
+                    System.out.print("x ");
+                    size++;
+                }
+            }
+            System.out.println("");
+        }
+        System.out.println("Tamaño> "+ size +" Mapa> "+ gameMap.getSize() );
     }
 
     /**
