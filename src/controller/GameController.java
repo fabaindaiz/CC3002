@@ -45,6 +45,15 @@ public class GameController {
     }
 
     /**
+     * Genera un mapa aleatoria para la partida de un tamaño específico
+     *
+     * @param mapSize tamaño del mapa
+     */
+    public void generateMap (int mapSize) {
+
+    }
+
+    /**
      * Establece una semilla para el generador de numero aleatorios
      *
      * @param seed semilla a configurar
@@ -70,17 +79,24 @@ public class GameController {
         turns.clear();
         List<Tactician> tacticiansTemp = getTacticians();
         for (int i = 0; i < tacticians.size(); i++) {
-            int generated = (int) random.nextFloat() * tacticiansTemp.size();
+            int generated = (int) (random.nextFloat() * tacticiansTemp.size());
             turns.add(tacticiansTemp.get(generated));
             tacticiansTemp.remove(generated);
         }
     }
 
     /**
-     * @return the list of all the tacticians participating in the game.
+     * @return the list of all the tacticians participating in this specific initiated Game.
      */
     public List<Tactician> getTacticians() {
         return initiatedGame ? new ArrayList<Tactician>(tacticians.values()) : new ArrayList<Tactician>(tacticiansGame.values());
+    }
+
+    /**
+     * @return the list of all the tacticians participating in all the games.
+     */
+    public List<Tactician> getTacticiansGame() {
+        return new ArrayList<Tactician>(tacticiansGame.values());
     }
 
     /**
@@ -141,6 +157,7 @@ public class GameController {
      * @param maxTurns the maximum number of turns the game can last
      */
     public void initGame(final int maxTurns) {
+        tacticians.clear();
         tacticians.putAll(tacticiansGame);
         initiatedGame = true;
         assignTurns();

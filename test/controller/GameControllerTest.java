@@ -89,16 +89,18 @@ class GameControllerTest {
 
     @Test
     void endTurn() {
-        controller.initGame(-1);
-        Tactician firstPlayer = controller.getTurnOwner();
         Random random = new Random();
         random.setSeed(randomSeed);
+        controller.setSeed(randomSeed);
+        controller.initGame(-1);
+        Tactician firstPlayer = controller.getTurnOwner();
+
         // Nuevamente, para determinar el orden de los jugadores se debe usar una semilla
 
         List<Tactician> tacticiansTemp = controller.getTacticians();
-        tacticiansTemp.remove((int) random.nextFloat() * tacticiansTemp.size());
+        tacticiansTemp.remove((int) (random.nextFloat() * tacticiansTemp.size()));
 
-        String name = tacticiansTemp.get((int) random.nextFloat() * tacticiansTemp.size()).getName();
+        String name = tacticiansTemp.get((int) (random.nextFloat() * tacticiansTemp.size())).getName();
 
         Tactician secondPlayer = new Tactician(name); // <- Deben cambiar esto (!)
         assertNotEquals(secondPlayer.getName(), firstPlayer.getName());
