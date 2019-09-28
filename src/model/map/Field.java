@@ -17,6 +17,7 @@ public class Field {
     private Map<String, Location> map = new HashMap<>();
     private Random random = new Random();
     private StringBuilder builder = new StringBuilder();
+    int sideSquare;
 
     /**
      * Establece una semilla para el generador de numero aleatorios
@@ -31,6 +32,71 @@ public class Field {
     public int getSize() { return map.size(); }
 
     /**
+     * Genera un mapa aleatoria para la partida de un tamaño específico
+     *
+     * @param mapSize tamaño del mapa
+     */
+    public void generateMap (int mapSize) {
+        sideSquare = (int) (Math.sqrt(mapSize) + 2);
+        generateMapGaussian(mapSize);
+    }
+
+    public void generateMapGaussian (int mapSize) {
+        int x, y;
+        boolean mode = true;
+        while (getSize() < (3*mapSize)/4) {
+            x = (int) ((random.nextGaussian()*sideSquare/8)+sideSquare/2);
+            y = (int) ((random.nextGaussian()*sideSquare/8)+sideSquare/2);
+            if (x >= 0 && x < sideSquare && y >= 0 && y < sideSquare) {
+                addCellForGenerator(mode, (x - 1), y, 0, sideSquare);
+                addCellForGenerator(mode, (x + 1), y, 0, sideSquare);
+                addCellForGenerator(mode, x, (y - 1), 0, sideSquare);
+                addCellForGenerator(mode, x, (y + 1), 0, sideSquare);
+                addCellForGenerator(true, x, y, 0, sideSquare);
+            }
+        }
+        while (getSize() < mapSize) {
+            x = (int) ((random.nextGaussian()*sideSquare/8)+(sideSquare)/2);
+            y = (int) ((random.nextGaussian()*sideSquare/8)+(sideSquare)/2);
+            addCellForGenerator(mode , x, y, 0, sideSquare);
+        }
+    }
+
+    public void generateMapRecursive (int mapSize) {
+        sideSquare = (int) (Math.sqrt(mapSize) + 2);
+        revursiveMap(sideSquare/2, sideSquare/2, true);
+    }
+
+    public void revursiveMap (int x, int y, boolean mod) {
+        boolean mode = true;
+        addCellForGenerator(mode, x, y, 0, sideSquare);
+    }
+
+    public void addCellForGenerator(boolean connectAll, int x, int y, int minPosition, int maxPosition) {
+        if (getCell(x, y).getRow() == -1)
+            if(x >= minPosition && x < maxPosition && y >= minPosition && y < maxPosition)
+                addCells(connectAll, new Location(x,y));
+    }
+
+    /**
+     * Imprime el mapa en pantalla para facilitar el testeo
+     */
+    public void printMap() {
+        int size = 0;
+        for (int i = 0; i< sideSquare; i++) {
+            for (int j = 0; j< sideSquare; j++) {
+                if (getCell(i,j).getRow() == -1 ) System.out.print("  ");
+                else {
+                    size++;
+                    System.out.print(getCell(i,j).getNeighbours().size() +" ");
+                }
+            }
+            System.out.println("");
+        }
+        System.out.println("realSize> "+ size +" mapSize> "+ getSize() );
+    }
+
+    /**
      * Add cells to the map.
      *
      * @param connectAll a flag that indicates if all the cells should be connected to it's neighbours
@@ -41,7 +107,7 @@ public class Field {
             addCell(cell);
             Location[] adjacentCells = getAdjacentCells(cell);
             for (Location adjacentCell : adjacentCells) {
-                if (connectAll || random.nextDouble() > 1.0 / 3 || cell.getNeighbours().size() < 1) {
+                if (connectAll || random.nextDouble() > 1.0 / 2 || cell.getNeighbours().size() < 2) { //Original: 3 y 1
                     addConnection(cell, adjacentCell);
                 }
             }

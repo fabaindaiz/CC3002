@@ -40,9 +40,15 @@ class GameControllerTest {
     }
 
     @Test
+    void BenchmarkGenerateMap() {
+        controller.gameMap.generateMap(1000);
+        controller.gameMap.printMap();
+    }
+
+    @Test
     void getGameMap() {
-        controller.printMap();
         Field gameMap = controller.getGameMap();
+        controller.gameMap.printMap();
         assertEquals(128, gameMap.getSize()); // getSize deben definirlo
         assertTrue(controller.getGameMap().isConnected());
         Random testRandom = new Random(randomSeed);
@@ -96,14 +102,10 @@ class GameControllerTest {
         controller.initGame(-1);
         Tactician firstPlayer = controller.getTurnOwner();
 
-        // Nuevamente, para determinar el orden de los jugadores se debe usar una semilla
-
         List<Tactician> tacticiansTemp = controller.getTacticians();
         tacticiansTemp.remove((int) (random.nextFloat() * tacticiansTemp.size()));
-
         String name = tacticiansTemp.get((int) (random.nextFloat() * tacticiansTemp.size())).getName();
-
-        Tactician secondPlayer = new Tactician(name); // <- Deben cambiar esto (!)
+        Tactician secondPlayer = new Tactician(name);
         assertNotEquals(secondPlayer.getName(), firstPlayer.getName());
 
         controller.endTurn();
@@ -113,7 +115,6 @@ class GameControllerTest {
 
     @Test
     void removeTactician() {
-        controller.initGame(-1);
         assertEquals(4, controller.getTacticians().size());
         controller.getTacticians()
                 .forEach(tactician -> Assertions.assertTrue(testTacticians.contains(tactician.getName())));
