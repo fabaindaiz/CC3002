@@ -18,6 +18,7 @@ public class Field {
     private Random random = new Random();
     private StringBuilder builder = new StringBuilder();
     int sideSquare;
+    int maxSize;
 
     /**
      * Establece una semilla para el generador de numero aleatorios
@@ -33,67 +34,61 @@ public class Field {
 
     /**
      * Genera un mapa aleatoria para la partida de un tamaño específico
+     * Idealmente usar solo tamaños inferiores a 5000
      *
      * @param mapSize tamaño del mapa
      */
     public void generateMap (int mapSize) {
-        sideSquare = (int) (Math.sqrt(mapSize) + 2);
-        generateMapGaussian(mapSize);
+        map.clear();
+        maxSize = mapSize;
+        double mult;
+        if (mapSize < 2000)
+            mult = 1.5;
+        else if (mapSize < 1000)
+            mult = 2.0;
+        else
+            mult = 3.0;
+            sideSquare = (int) ((Math.sqrt(mapSize)+1)*mult);
+        recursiveMap(sideSquare/2, sideSquare/2, 0);
     }
 
-    public void generateMapGaussian (int mapSize) {
-        int x, y;
-        boolean mode = true;
-        while (getSize() < (3*mapSize)/4) {
-            x = (int) ((random.nextGaussian()*sideSquare/8)+sideSquare/2);
-            y = (int) ((random.nextGaussian()*sideSquare/8)+sideSquare/2);
-            if (x >= 0 && x < sideSquare && y >= 0 && y < sideSquare) {
-                addCellForGenerator(mode, (x - 1), y, 0, sideSquare);
-                addCellForGenerator(mode, (x + 1), y, 0, sideSquare);
-                addCellForGenerator(mode, x, (y - 1), 0, sideSquare);
-                addCellForGenerator(mode, x, (y + 1), 0, sideSquare);
-                addCellForGenerator(true, x, y, 0, sideSquare);
-            }
+    public void recursiveMap (int x, int y, int step) {
+        if (getCell(x,y).getRow() == x || getCell(x,y).getColumn() == y) return;
+        if (step > sideSquare*Math.log10(maxSize) || map.size() >= maxSize) return;
+        addCells(true, new Location(x,y));
+
+        int a1[]={x-1, y}, a2[]={x+1, y}, a3[]={x, y-1}, a4[]={x, y+1};
+        ArrayList <int[]> order = new ArrayList<int[]>(List.of(a1, a2, a3, a4));
+        if(x-1 < 0) order.remove(a1);
+        if(x+1 >= sideSquare) order.remove(a2);
+        if(y-1 < 0) order.remove(a3);
+        if(y+1 >= sideSquare) order.remove(a4);
+
+        int randomInt;
+        while (map.size() < maxSize && order.size() > 1){
+            randomInt = (int) (random.nextFloat() * order.size());
+            int[] next = order.get(randomInt);
+            order.remove(randomInt);
+            recursiveMap( next[0], next[1], step+1);
         }
-        while (getSize() < mapSize) {
-            x = (int) ((random.nextGaussian()*sideSquare/8)+(sideSquare)/2);
-            y = (int) ((random.nextGaussian()*sideSquare/8)+(sideSquare)/2);
-            addCellForGenerator(mode , x, y, 0, sideSquare);
-        }
-    }
-
-    public void generateMapRecursive (int mapSize) {
-        sideSquare = (int) (Math.sqrt(mapSize) + 2);
-        revursiveMap(sideSquare/2, sideSquare/2, true);
-    }
-
-    public void revursiveMap (int x, int y, boolean mod) {
-        boolean mode = true;
-        addCellForGenerator(mode, x, y, 0, sideSquare);
-    }
-
-    public void addCellForGenerator(boolean connectAll, int x, int y, int minPosition, int maxPosition) {
-        if (getCell(x, y).getRow() == -1)
-            if(x >= minPosition && x < maxPosition && y >= minPosition && y < maxPosition)
-                addCells(connectAll, new Location(x,y));
     }
 
     /**
      * Imprime el mapa en pantalla para facilitar el testeo
      */
     public void printMap() {
-        int size = 0;
         for (int i = 0; i< sideSquare; i++) {
             for (int j = 0; j< sideSquare; j++) {
-                if (getCell(i,j).getRow() == -1 ) System.out.print("  ");
+                if (getCell(i,j).getRow() < 0 || getCell(i,j).getRow() < 0) System.out.print("  ");
                 else {
-                    size++;
                     System.out.print(getCell(i,j).getNeighbours().size() +" ");
+                    //System.out.print("x ");
                 }
             }
             System.out.println("");
         }
-        System.out.println("realSize> "+ size +" mapSize> "+ getSize() );
+        System.out.println("sideSquare> "+ sideSquare +" step> "+ Math.log10(maxSize) +" mapSize> "+ getSize() );
+        System.out.println("");
     }
 
     /**

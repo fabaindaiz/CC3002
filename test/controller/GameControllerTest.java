@@ -41,8 +41,20 @@ class GameControllerTest {
 
     @Test
     void BenchmarkGenerateMap() {
-        controller.gameMap.generateMap(1000);
-        controller.gameMap.printMap();
+        Field gameMap = controller.getGameMap();
+
+        gameMap.generateMap(1000);
+        gameMap.printMap();
+        assertEquals(1000, gameMap.getSize());
+        assertTrue(controller.getGameMap().isConnected());
+        gameMap.generateMap(2000);
+        gameMap.printMap();
+        assertEquals(2000, gameMap.getSize());
+        assertTrue(controller.getGameMap().isConnected());
+        gameMap.generateMap(5000);
+        gameMap.printMap();
+        assertEquals(5000, gameMap.getSize());
+        assertTrue(controller.getGameMap().isConnected());
     }
 
     @Test

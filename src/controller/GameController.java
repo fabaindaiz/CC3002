@@ -24,6 +24,8 @@ public class GameController {
     private int roundNumber;
     private int turnInRound;
     private Random random = new Random();
+    long defaultSeed = random.nextLong();
+    int defaultMapSize;
 
     protected Tactician lastTurn;
     protected ArrayList<Tactician> turns = new ArrayList<Tactician>();
@@ -45,8 +47,10 @@ public class GameController {
     public GameController(int numberOfPlayers, int mapSize) {
         for (int i=0; i<numberOfPlayers; i++)
             tacticiansGame.put("Player " + i, new Tactician("Player " + i));
-        tacticians.putAll(tacticiansGame);
+        initTacticians(tacticiansGame, tacticians);
+        gameMap.setSeed(defaultSeed);
         gameMap.generateMap(mapSize);
+        defaultMapSize = mapSize;
     }
 
     /**
@@ -54,7 +58,9 @@ public class GameController {
      *
      * @param seed semilla a configurar
      */
-    public void setSeed (long seed) { random.setSeed(seed); }
+    public void setSeed (long seed) {
+        random.setSeed(seed);
+    }
 
     /**
      * Asigna el orden de los turnos antes de la ronda
@@ -78,6 +84,17 @@ public class GameController {
             int generated = (int) (random.nextFloat() * tacticiansTemp.size());
             turns.add(tacticiansTemp.get(generated));
             tacticiansTemp.remove(generated);
+        }
+    }
+
+    public void changeMap() {
+        defaultSeed = random.nextLong();
+    }
+
+    public void initTacticians (Map<String, Tactician> tacticiansGame, Map<String, Tactician> tacticians) {
+        tacticians.clear();
+        for (Tactician tactician:tacticiansGame.values()) {
+            tacticians.put(tactician.getName(),tactician.clone());
         }
     }
 
@@ -153,8 +170,10 @@ public class GameController {
      */
     public void initGame(final int maxTurns) {
         tacticians.clear();
-        tacticians.putAll(tacticiansGame);
+        initTacticians(tacticiansGame, tacticians);
         initiatedGame = true;
+        gameMap.setSeed(defaultSeed);
+        gameMap.generateMap(defaultMapSize);
         assignTurns();
 
         turnOwner = turns.get(0);
@@ -173,7 +192,18 @@ public class GameController {
      */
     public List<String> getWinners() {
         if (roundNumber == maxRounds || tacticians.size() == 1) {
-            return new ArrayList<String>(tacticians.keySet());
+            int maxUnits = 0;
+            ArrayList<String> winners = new ArrayList<String>();
+            for (Tactician tactician:tacticians.values()) {
+                if (tactician.getUnits().size() > maxUnits) {
+                    maxUnits = tactician.getUnits().size();
+                    winners.clear();
+                    winners.add(tactician.getName());
+                }
+                else if (tactician.getUnits().size() == maxUnits)
+                    winners.add(tactician.getName());
+            }
+            return winners;
         }
         return null;
     }
