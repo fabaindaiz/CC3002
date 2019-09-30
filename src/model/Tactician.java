@@ -13,7 +13,7 @@ import java.util.List;
  * @version 2.0
  * @since 2.0
  */
-public class Tactician implements Cloneable {
+public class Tactician implements ITactician, Cloneable {
 
     private final String name;
     protected final List<IUnit> units = new ArrayList<>();
@@ -25,40 +25,34 @@ public class Tactician implements Cloneable {
         this.name = name;
     }
 
-    public Tactician clone(){
-        Tactician clon = null;
-        try{
-            clon=(Tactician) super.clone();
-        }catch(CloneNotSupportedException ex){
-
-        }
-        return clon;
-    }
-
-    /**
-     * @return el nombre del Tactician
-     */
+    @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * @return Una lista con ls unidades del Tactician
-     */
+    @Override
     public List<IUnit> getUnits() { return units; }
 
-    /**
-     * Añade unidades a un Tactician
-     *
-     * @param unit unidad o unidades a añadir
-     */
-    public void addUnit (IUnit... unit) {units.addAll(Arrays.asList(unit));}
+    @Override
+    public Tactician clone(){
+        Tactician clon = null;
+        try { clon=(Tactician) super.clone();
+        } catch (CloneNotSupportedException ex) {}
+        return clon;
+    }
 
-    /**
-     * Elimina unidades de un Tactician
-     *
-     * @param unit unidad a eliminar
-     */
-    public void removeUnit (IUnit unit) {units.remove(unit);}
+    @Override
+    public void addUnit(IUnit... unit) {
+        for (IUnit newUnit:unit) {
+            if (newUnit.getLocation().addUnitToCell(newUnit))
+                units.add(newUnit);
+        }
+    }
+
+    @Override
+    public void removeUnit(IUnit unit) {
+        unit.getLocation().setUnit(null);
+        units.remove(unit);
+    }
 
 }

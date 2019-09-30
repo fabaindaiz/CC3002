@@ -26,7 +26,12 @@ public abstract class OtherItem extends AbstractItem {
         super(name, power, minRange, maxRange);
     }
 
-    @Override
+    /**
+     * Verifica si este item contraataca
+     *
+     * @return un valor booleano dependiendo de la condicion
+     * TRUE si este item contraataca
+     */
     public boolean counterattack() {
         return false;
     }

@@ -33,13 +33,13 @@ public abstract class MagicBook extends AbstractItem {
     }
 
     @Override
-    public void noItemAttack(IUnit other) {
-        other.receiveAttack(this, false);
+    public void equipTo(final IUnit unit) {
+        unit.equipMagicBook(this);
     }
 
     @Override
-    public void equipTo(final IUnit unit) {
-        unit.equipMagicBook(this);
+    public void noItemAttack(IUnit other) {
+        other.receiveAttack(this, false);
     }
 
     @Override

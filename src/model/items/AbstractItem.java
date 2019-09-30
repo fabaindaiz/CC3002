@@ -24,33 +24,11 @@ public abstract class AbstractItem implements IEquipableItem {
      * @param minRange the minimum range of the item
      * @param maxRange the maximum range of the item
      */
-    public AbstractItem(final String name, final int power, final int minRange, final int maxRange) {
+    protected AbstractItem(final String name, final int power, final int minRange, final int maxRange) {
         this.name = name;
         this.power = power;
         this.minRange = Math.max(minRange, 1);
         this.maxRange = Math.max(maxRange, this.minRange);
-    }
-
-    /**
-     * Performs a attack.
-     *
-     * @param other Unit that receives the attack.
-     */
-    @Override
-    public void useItem(IUnit other, boolean counterAttack) {
-        if (other.getEquippedItem() != null)
-            specificAttack(other, counterAttack);
-        else noItemAttack(other);
-    }
-
-    @Override
-    public IUnit getOwner() {
-        return owner;
-    }
-
-    @Override
-    public void setOwner(IUnit unit) {
-        owner = unit;
     }
 
     @Override
@@ -71,6 +49,23 @@ public abstract class AbstractItem implements IEquipableItem {
     @Override
     public int getMaxRange() {
         return maxRange;
+    }
+
+    @Override
+    public IUnit getOwner() {
+        return owner;
+    }
+
+    @Override
+    public void setOwner(IUnit unit) {
+        owner = unit;
+    }
+
+    @Override
+    public void useItem(IUnit other, boolean counterAttack) {
+        if (other.getEquippedItem() != null)
+            specificAttack(other, counterAttack);
+        else noItemAttack(other);
     }
 
     @Override

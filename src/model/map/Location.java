@@ -40,6 +40,14 @@ public class Location {
         id = "(" + row + ", " + column + ")";
     }
 
+    public boolean addUnitToCell (IUnit unit) {
+        if (unit.getLocation() == this && this.getUnit() == null) {
+            this.setUnit(unit);
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Checks if a location is equal to another object.
      * <p>

@@ -1,5 +1,7 @@
 package model.map;
 
+import model.units.IUnit;
+
 /**
  * This class represents an empty or invalid location on the game's map.
  *
@@ -13,6 +15,10 @@ public class InvalidLocation extends Location {
      */
     public InvalidLocation() {
         super(-1, -1);
+    }
+
+    public boolean addUnitToCell (IUnit unit) {
+        return false;
     }
 
     @Override

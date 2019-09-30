@@ -23,6 +23,8 @@ public interface IUnit {
      */
     void equipItem(IEquipableItem item);
 
+    int getMaxHitPoints();
+
     /**
      * @return hit points of the unit
      */
@@ -34,9 +36,19 @@ public interface IUnit {
     void setCurrentHitPoints(int HP);
 
     /**
+     * @return the number of cells this unit can move
+     */
+    int getMovement();
+
+    /**
      * @return max item slots of the unit
      */
     int getMaxItems();
+
+    /**
+     * @return the current location of the unit
+     */
+    Location getLocation();
 
     /**
      * @return the items carried by this unit
@@ -49,21 +61,6 @@ public interface IUnit {
     IEquipableItem getEquippedItem();
 
     /**
-     * @return the current location of the unit
-     */
-    Location getLocation();
-
-    /**
-     * Sets a new location for this unit,
-     */
-    void setLocation(final Location location);
-
-    /**
-     * @return the number of cells this unit can move
-     */
-    int getMovement();
-
-    /**
      * Moves this unit to another location.
      * <p>
      * If the other location is out of this unit's movement range, the unit doesn't move.
@@ -71,11 +68,13 @@ public interface IUnit {
     void moveTo(Location targetLocation);
 
     /**
-     * Mata a esta unidad, sacandola del mapa
-     * De esta forma nadie puede interactuar con ella.
-     * (Despues del SMAAAASH!! unit ha recibido daño mortal)
+     * Añade un item al inventario de la unidad
+     *
+     * @param item Es el item que se quiere añadir
+     * @return si se pudo añadir el item
+     * TRUE si se logro
      */
-    void death();
+    boolean addItem(IEquipableItem item);
 
     /**
      * Attacks another Unit.
@@ -83,26 +82,6 @@ public interface IUnit {
      * @param other Target of the attack.
      */
     void useItem(IUnit other, boolean counterattack);
-
-    /**
-     * Verifica si el ataque esta fuera de rango
-     *
-     * @return un valor booleano segun la condicion
-     * TRUE es fuera de rango
-     * FALSE es dentro de rango
-     */
-    boolean outOfRange(IUnit unit);
-
-    /**
-     * Recibe una cantidad especifica de daño en una unidad
-     * - Contraataca dado el caso
-     * - Mata a la unidad dado el caso
-     *
-     * @param item          Arma que esta atacando
-     * @param damage        DAño que esta haciendo (Ya esta modificado)
-     * @param counterAttack
-     */
-    void receiveDamage(IEquipableItem item, int damage, boolean counterAttack);
 
     /**
      * Receives an heal.
@@ -131,23 +110,6 @@ public interface IUnit {
      * @param item Received attack.
      */
     void receiveResistantAttack(IEquipableItem item, boolean counterAttack);
-
-    /**
-     * Añade un item al inventario de la unidad
-     *
-     * @param item Es el item que se quiere añadir
-     * @return si se pudo añadir el item
-     * TRUE si se logro
-     */
-    boolean addItem(IEquipableItem item);
-
-    /**
-     * Verifica las condiciones para el intercambio
-     *
-     * @param unit Unidad de destino para el intercambio
-     * @param item Item para intercambiar
-     */
-    void exchangeCondition(IUnit unit, IEquipableItem item);
 
     /**
      * Entrega un item a otra unidad
@@ -203,8 +165,4 @@ public interface IUnit {
      * @param item Item a equipar
      */
     void equipStaff(IEquipableItem item);
-
-    /**
-     * Fin de metodos para equipar armas
-     */
 }

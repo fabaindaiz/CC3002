@@ -21,13 +21,14 @@ import static java.lang.Math.min;
  */
 public abstract class AbstractUnit implements IUnit {
 
-    protected final List<IEquipableItem> items = new ArrayList<>();
     private final int maxHitPoints;
+    private int currentHitPoints;
     private final int movement;
     private final int maxItems;
-    protected IEquipableItem equippedItem;
-    private int currentHitPoints;
     private Location location;
+
+    protected List<IEquipableItem> items = new ArrayList<>();
+    protected IEquipableItem equippedItem;
 
     /**
      * Creates a new Unit.
@@ -48,6 +49,9 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
+    public int getMaxHitPoints() { return maxHitPoints; }
+
+    @Override
     public int getCurrentHitPoints() {
         return currentHitPoints;
     }
@@ -58,8 +62,16 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
+    public int getMovement() { return movement; }
+
+    @Override
     public int getMaxItems() {
         return maxItems;
+    }
+
+    @Override
+    public Location getLocation() {
+        return location;
     }
 
     @Override
@@ -72,21 +84,36 @@ public abstract class AbstractUnit implements IUnit {
         return equippedItem;
     }
 
-    @Override
-    public Location getLocation() {
-        return location;
+    /**
+     * Verifica si el ataque esta fuera de rango
+     *
+     * @return un valor booleano segun la condicion
+     * TRUE es fuera de rango
+     * FALSE es dentro de rango
+     */
+    private boolean outOfRange(IUnit unit) {
+        IEquipableItem item = unit.getEquippedItem();
+        int distancia = (int) getLocation().distanceTo(unit.getLocation());
+        return distancia < item.getMinRange() || distancia > item.getMaxRange();
     }
 
-    @Override
-    public void setLocation(final Location location) {
+    /**
+     * Mata a esta unidad, sacandola del mapa
+     * De esta forma nadie puede interactuar con ella.
+     * (Despues del SMAAAASH!! unit ha recibido daño mortal)
+     */
+    private void death() {
+        location.setUnit(null);
+        location = null;
+    }
+
+    /**
+     * Sets a new location for this unit,
+     */
+    private void setLocation(final Location location) {
         this.location.setUnit(null);
         this.location = location;
         location.setUnit(this);
-    }
-
-    @Override
-    public int getMovement() {
-        return movement;
     }
 
     @Override
@@ -98,9 +125,11 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
-    public void death() {
-        location.setUnit(null);
-        location = null;
+    public boolean addItem(IEquipableItem item) {
+        if (items.size() == maxItems)
+            return false;
+        items.add(item);
+        return true;
     }
 
     @Override
@@ -110,14 +139,21 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
-    public boolean outOfRange(IUnit unit) {
-        IEquipableItem item = unit.getEquippedItem();
-        int distancia = (int) getLocation().distanceTo(unit.getLocation());
-        return distancia < item.getMinRange() || distancia > item.getMaxRange();
+    public void equipItem(final IEquipableItem item) {
+        if (item != null && items.contains(item))
+            item.equipTo(this);
     }
 
-    @Override
-    public void receiveDamage(IEquipableItem item, int damage, boolean counterAttack) {
+    /**
+     * Recibe una cantidad especifica de daño en una unidad
+     * - Contraataca dado el caso
+     * - Mata a la unidad dado el caso
+     *
+     * @param item          Arma que esta atacando
+     * @param damage        DAño que esta haciendo (Ya esta modificado)
+     * @param counterAttack
+     */
+    private void receiveDamage(IEquipableItem item, int damage, boolean counterAttack) {
         if (damage < currentHitPoints) {
             if (damage > 0)
                 this.currentHitPoints -= damage;
@@ -158,16 +194,13 @@ public abstract class AbstractUnit implements IUnit {
         receiveDamage(item, damage, counterAttack);
     }
 
-    @Override
-    public boolean addItem(IEquipableItem item) {
-        if (items.size() == maxItems)
-            return false;
-        items.add(item);
-        return true;
-    }
-
-    @Override
-    public void exchangeCondition(IUnit unit, IEquipableItem item) {
+    /**
+     * Verifica las condiciones para el intercambio
+     *
+     * @param unit Unidad de destino para el intercambio
+     * @param item Item para intercambiar
+     */
+    private void exchangeCondition(IUnit unit, IEquipableItem item) {
         if (unit.addItem(item)) {
             if (equippedItem == item) {
                 equippedItem = null;
@@ -182,12 +215,6 @@ public abstract class AbstractUnit implements IUnit {
         if (items.contains(item) && (int) getLocation().distanceTo(unit.getLocation()) == 1) {
             if (unit != null) exchangeCondition(unit, item);
         }
-    }
-
-    @Override
-    public void equipItem(final IEquipableItem item) {
-        if (item != null && items.contains(item))
-            item.equipTo(this);
     }
 
     @Override

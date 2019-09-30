@@ -1,5 +1,7 @@
 package model.map;
 
+import model.units.IUnit;
+
 import java.util.*;
 
 /**
@@ -12,47 +14,42 @@ import java.util.*;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class Field {
+public class Field implements IField{
 
     private Map<String, Location> map = new HashMap<>();
     private Random random = new Random();
     private StringBuilder builder = new StringBuilder();
-    int sideSquare;
-    int maxSize;
 
-    /**
-     * Establece una semilla para el generador de numero aleatorios
-     *
-     * @param seed semilla a configurar
-     */
+    private int sideSquare;
+    private int maxSize;
+
+    @Override
     public void setSeed(long seed){ random.setSeed(seed); }
 
-    /**
-     * @return tamaño del mapa generado
-     */
+    @Override
     public int getSize() { return map.size(); }
 
-    /**
-     * Genera un mapa aleatoria para la partida de un tamaño específico
-     * Idealmente usar solo tamaños inferiores a 5000
-     *
-     * @param mapSize tamaño del mapa
-     */
-    public void generateMap (int mapSize) {
+     @Override
+    public int getSideSquare() { return sideSquare; }
+
+    @Override
+    public void generateMap(int mapSize) {
         map.clear();
         maxSize = mapSize;
         double mult;
-        if (mapSize < 2000)
+        if (mapSize <= 500)
             mult = 1.5;
-        else if (mapSize < 1000)
+        else if (mapSize <= 2000)
             mult = 2.0;
+        else if (mapSize <= 6000)
+            mult = 2.5;
         else
             mult = 3.0;
-            sideSquare = (int) ((Math.sqrt(mapSize)+1)*mult);
+        sideSquare = (int) ((Math.sqrt(mapSize)+1)*mult);
         recursiveMap(sideSquare/2, sideSquare/2, 0);
     }
 
-    public void recursiveMap (int x, int y, int step) {
+    private void recursiveMap(int x, int y, int step) {
         if (getCell(x,y).getRow() == x || getCell(x,y).getColumn() == y) return;
         if (step > sideSquare*Math.log10(maxSize) || map.size() >= maxSize) return;
         addCells(true, new Location(x,y));
@@ -73,9 +70,7 @@ public class Field {
         }
     }
 
-    /**
-     * Imprime el mapa en pantalla para facilitar el testeo
-     */
+    @Override
     public void printMap() {
         for (int i = 0; i< sideSquare; i++) {
             for (int j = 0; j< sideSquare; j++) {
@@ -91,12 +86,7 @@ public class Field {
         System.out.println("");
     }
 
-    /**
-     * Add cells to the map.
-     *
-     * @param connectAll a flag that indicates if all the cells should be connected to it's neighbours
-     * @param cells      the locations that are going to be added to the map
-     */
+    @Override
     public void addCells(final boolean connectAll, final Location... cells) {
         for (Location cell : cells) {
             addCell(cell);
@@ -138,11 +128,7 @@ public class Field {
         cell1.addNeighbour(cell2);
     }
 
-    /**
-     * @param row the row of the cell
-     * @param col the column of the cell
-     * @return the Location that represents the cell at (row, col)
-     */
+    @Override
     public Location getCell(final int row, final int col) {
         String id = generateID(row, col);
         return map.getOrDefault(id, new InvalidLocation());
@@ -161,7 +147,7 @@ public class Field {
         return builder.toString();
     }
 
-    public Map<String, Location> getMap() {
+    protected Map<String, Location> getMap() {
         return Map.copyOf(map);
     }
 
@@ -193,7 +179,7 @@ public class Field {
     /**
      * Removes a connection from two locations of the field
      */
-    public void removeConnection(final Location cell1, final Location cell2) {
+    protected void removeConnection(final Location cell1, final Location cell2) {
         if (cell1.getNeighbours().size() > 1 && cell2.getNeighbours().size() > 1) {
             cell1.removeNeighbour(cell2);
         }
@@ -202,7 +188,7 @@ public class Field {
     /**
      * Checks if two cells of the map are connected
      */
-    public boolean checkConnection(final Location cell1, final Location cell2) {
+    protected boolean checkConnection(final Location cell1, final Location cell2) {
         return cell1.isNeighbour(cell2);
     }
 
