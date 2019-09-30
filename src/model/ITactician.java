@@ -22,7 +22,7 @@ public interface ITactician {
      *
      * @param unit unidad o unidades a añadir
      */
-    void addUnit(IUnit... unit);
+    void addUnit(IUnit unit);
 
     /**
      * Elimina unidades de un Tactician

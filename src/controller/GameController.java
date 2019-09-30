@@ -84,6 +84,14 @@ public class GameController implements IGameController {
     }
 
     @Override
+    public void addUnit(IUnit... units) {
+        for (IUnit unit:units) {
+            if (unit.getLocation().addUnitToCell(unit))
+                turnOwner.addUnit(unit);
+        }
+    }
+
+    @Override
     public void setSeed(long seed) {
         random.setSeed(seed);
     }

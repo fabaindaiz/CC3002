@@ -42,11 +42,8 @@ public class Tactician implements ITactician, Cloneable {
     }
 
     @Override
-    public void addUnit(IUnit... unit) {
-        for (IUnit newUnit:unit) {
-            if (newUnit.getLocation().addUnitToCell(newUnit))
-                units.add(newUnit);
-        }
+    public void addUnit(IUnit unit) {
+        units.add(unit);
     }
 
     @Override

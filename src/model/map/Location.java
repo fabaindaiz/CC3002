@@ -40,9 +40,9 @@ public class Location {
         id = "(" + row + ", " + column + ")";
     }
 
-    public boolean addUnitToCell (IUnit unit) {
-        if (unit.getLocation() == this && this.getUnit() == null) {
-            this.setUnit(unit);
+    public boolean addUnitToCell (IUnit newUnit) {
+        if (newUnit.getLocation() == this && this.getUnit() == null) {
+            unit = newUnit;
             return true;
         }
         return false;

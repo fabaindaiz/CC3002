@@ -41,6 +41,13 @@ public interface IGameController {
     Tactician getTurnOwner();
 
     /**
+     * Añade una unidad a un tactician
+     *
+     * @param unit Unidad a añadir
+     */
+    void addUnit(IUnit... unit);
+
+    /**
      * Establece una semilla para el generador de numero aleatorios
      *
      * @param seed semilla a configurar
