@@ -6,8 +6,15 @@ import model.map.Field;
 import model.units.IUnit;
 
 import java.util.List;
-import java.util.Map;
 
+/**
+ * This interface represents a Game Controller.
+ * <p>
+ * Este metodo es usado para agrupar la documentación y para facilitar algunas implementaciones
+ *
+ * @author Fabián Díaz
+ * @since 2.0
+ */
 public interface IGameController {
 
     /**
@@ -102,6 +109,13 @@ public interface IGameController {
     void selectUnitIn(int x, int y);
 
     /**
+     * Selectes a unit in the ArrayList unit in Tactician
+     *
+     * @param index the location of the unit in the inventory.
+     */
+    void selectUnitId(int index);
+
+    /**
      * @return the current player's selected unit
      */
     IUnit getSelectedUnit();
@@ -117,6 +131,11 @@ public interface IGameController {
      * @param index the location of the item in the inventory.
      */
     void selectItem(int index);
+
+    /**
+     * @return El item seleccionado por selectItem(index)
+     */
+    IEquipableItem getSelectedItem();
 
     /**
      * Equips an item from the inventory to the currently selected unit.

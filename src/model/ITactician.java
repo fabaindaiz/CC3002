@@ -4,6 +4,14 @@ import model.units.IUnit;
 
 import java.util.List;
 
+/**
+ * This interface represents a Tactician.
+ * <p>
+ * Este metodo es usado para agrupar la documentación y para facilitar algunas implementaciones
+ *
+ * @author Fabián Díaz
+ * @since 2.0
+ */
 public interface ITactician {
 
     /**

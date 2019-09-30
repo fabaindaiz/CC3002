@@ -153,7 +153,7 @@ public class Location {
         double distance = Double.POSITIVE_INFINITY;
         for (Location node :
                 neighbours) {
-            if (!visited.contains(node)) {
+            if (!visited.contains(node) && node.getRow() !=-1 && node.getColumn() !=-1) {
                 distance = Math.min(distance, 1 + node.shortestPathTo(otherNode, new HashSet<>(visited)));
             }
         }

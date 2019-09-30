@@ -34,9 +34,9 @@ public class GameController implements IGameController {
     private int roundNumber;
 
     protected Field gameMap = new Field();
-    protected Tactician turnOwner;
-    protected IUnit selectedUnit;
-    protected IEquipableItem selectedItem;
+    private Tactician turnOwner;
+    private IUnit selectedUnit;
+    private IEquipableItem selectedItem;
 
     /**
      * Creates the controller for a new game.
@@ -214,6 +214,15 @@ public class GameController implements IGameController {
     }
 
     @Override
+    public void selectUnitId(int index){
+        if (turnOwner.getUnits().size() > index)
+            selectedUnit = turnOwner.getUnits().get(index);
+        else
+            selectedUnit = null;
+        selectedItem = null;
+    }
+
+    @Override
     public IUnit getSelectedUnit() { return selectedUnit; }
 
     @Override
@@ -228,6 +237,9 @@ public class GameController implements IGameController {
         if (selectedUnit.getItems().size() > index)
             selectedItem = selectedUnit.getItems().get(index);
     }
+
+    @Override
+    public IEquipableItem getSelectedItem() { return selectedItem; }
 
     @Override
     public void equipItem(int index) {
@@ -245,9 +257,10 @@ public class GameController implements IGameController {
 
     @Override
     public void giveItemTo(int x, int y) {
-        if (standarVerification()) return;
+        if (standarVerification() || selectedItem == null) return;
         IUnit unit = gameMap.getCell(x,y).getUnit();
-        selectedUnit.exchange(unit, selectedItem);
+        if (unit != null)
+            selectedUnit.exchange(unit, selectedItem);
         selectedItem = null;
     }
 

@@ -93,7 +93,7 @@ public abstract class AbstractUnit implements IUnit {
      */
     private boolean outOfRange(IUnit unit) {
         IEquipableItem item = unit.getEquippedItem();
-        int distancia = (int) getLocation().distanceTo(unit.getLocation());
+        int distancia = (int) unit.getLocation().distanceTo(getLocation());
         return distancia < item.getMinRange() || distancia > item.getMaxRange();
     }
 
@@ -212,9 +212,9 @@ public abstract class AbstractUnit implements IUnit {
 
     @Override
     public void exchange(IUnit unit, IEquipableItem item) {
-        if (items.contains(item) && (int) getLocation().distanceTo(unit.getLocation()) == 1) {
-            if (unit != null) exchangeCondition(unit, item);
-        }
+        if (unit != null && items.contains(item))
+            if ((int) unit.getLocation().distanceTo(getLocation()) == 1)
+                exchangeCondition(unit, item);
     }
 
     @Override

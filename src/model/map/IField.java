@@ -1,5 +1,13 @@
 package model.map;
 
+/**
+ * This interface represents a Field.
+ * <p>
+ * Este metodo es usado para agrupar la documentación y para facilitar algunas implementaciones
+ *
+ * @author Fabián Díaz
+ * @since 2.0
+ */
 public interface IField {
 
     /**
