@@ -332,43 +332,40 @@ class GameControllerTest {
 
     @Test
     void giveItemTo() {
+        controller = new GameController(4, 100);
         controller.initGame(-1);
         sideSquare = controller.gameMap.getSideSquare();
-        unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare/2, sideSquare/2));
-        if (controller.gameMap.getCell((sideSquare/2)-1, (sideSquare/2)).getRow() == -1)
-            controller.gameMap.addCells(true, new Location((sideSquare/2)-1, (sideSquare/2)));
-        unit2 = new Cleric(50, 2, controller.gameMap.getCell((sideSquare/2)-1, (sideSquare/2)));
-        if (controller.gameMap.getCell((sideSquare/2)+1, (sideSquare/2)+1).getRow() == -1)
-            controller.gameMap.addCells(true, new Location((sideSquare/2)+1, (sideSquare/2)+1));
-        unit3 = new Hero(50, 2, controller.gameMap.getCell((sideSquare/2)+1, (sideSquare/2)+1));
+        unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare/2-1, sideSquare/2));
+        unit2 = new Cleric(50, 2, controller.gameMap.getCell(sideSquare/2, sideSquare/2));
+        unit3 = new Hero(50, 2, controller.gameMap.getCell(sideSquare/2+1, sideSquare/2));
+
         item1 = new Spear("Spear", 10, 1,3);
         item2 = new Staff("Staff", 10, 1,3);
-        controller.getGameMap().printMap();
 
         unit1.addItem(item1);
         unit1.addItem(item2);
         controller.addUnit(unit1);
         controller.addUnit(unit2);
         controller.addUnit(unit3);
+
         controller.selectUnitId(1);
         assertEquals(controller.getItems(), List.of());
         controller.selectUnitId(0);
         assertEquals(controller.getItems(), List.of(item1,item2));
         controller.selectItem(0);
-        controller.giveItemTo((sideSquare/2)-1, (sideSquare/2));
+
+        controller.giveItemTo(sideSquare/2, sideSquare/2);
         assertEquals(controller.getItems(), List.of(item2));
         controller.selectUnitId(1);
         assertEquals(controller.getItems(), List.of(item1));
         controller.selectUnitId(0);
         controller.selectItem(0);
-        controller.giveItemTo((sideSquare/2)-1, (sideSquare/2));
+        controller.giveItemTo(sideSquare/2, sideSquare/2);
         assertEquals(controller.getItems(), List.of());
         controller.selectUnitId(1);
         assertEquals(controller.getItems(), List.of(item1, item2));
         controller.selectItem(0);
-        /*
-        controller.giveItemTo((sideSquare/2)+1, (sideSquare/2)+1);
-        assertEquals(controller.getItems(), List.of(item1, item2));*/
-
+        controller.giveItemTo(sideSquare/2+1, sideSquare/2);
+        assertEquals(controller.getItems(), List.of(item1, item2));
     }
 }

@@ -3,8 +3,6 @@ package controller;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
-import model.map.InvalidLocation;
-import model.map.Location;
 import model.units.IUnit;
 
 import java.util.*;
@@ -106,7 +104,7 @@ public class GameController implements IGameController {
      *
      * @return true: algo va mal, no ejecuta de la función que se llamo | false: continua normal
      */
-    private boolean standarVerification() {
+    private boolean standardVerification() {
         if (!initiatedGame || selectedUnit == null) return true;
         return false;
     }
@@ -227,13 +225,13 @@ public class GameController implements IGameController {
 
     @Override
     public List<IEquipableItem> getItems() {
-        if (standarVerification()) return null;
+        if (standardVerification()) return null;
         else return selectedUnit.getItems();
     }
 
     @Override
     public void selectItem(int index) {
-        if (standarVerification()) return;
+        if (standardVerification()) return;
         if (selectedUnit.getItems().size() > index)
             selectedItem = selectedUnit.getItems().get(index);
     }
@@ -243,21 +241,21 @@ public class GameController implements IGameController {
 
     @Override
     public void equipItem(int index) {
-        if (standarVerification()) return;
+        if (standardVerification()) return;
         if (selectedUnit.getItems().size() > index)
             selectedUnit.equipItem(selectedUnit.getItems().get(index));
     }
 
     @Override
     public void useItemOn(int x, int y) {
-        if (standarVerification()) return;
+        if (standardVerification()) return;
         IUnit unit = gameMap.getCell(x,y).getUnit();
         selectedUnit.useItem(unit,true);
     }
 
     @Override
     public void giveItemTo(int x, int y) {
-        if (standarVerification() || selectedItem == null) return;
+        if (standardVerification() || selectedItem == null) return;
         IUnit unit = gameMap.getCell(x,y).getUnit();
         if (unit != null)
             selectedUnit.exchange(unit, selectedItem);

@@ -46,6 +46,7 @@ public class Field implements IField{
         else
             mult = 3.0;
         sideSquare = (int) ((Math.sqrt(mapSize)+1)*mult);
+
         recursiveMap(sideSquare/2, sideSquare/2, 0);
     }
 
@@ -76,6 +77,7 @@ public class Field implements IField{
             for (int j = 0; j< sideSquare; j++) {
                 if (getCell(i,j).getRow() < 0 || getCell(i,j).getRow() < 0) System.out.print("  ");
                 else {
+                    //System.out.print(" ("+ i +","+ j +")");
                     System.out.print(getCell(i,j).getNeighbours().size() +" ");
                     //System.out.print("x ");
                 }

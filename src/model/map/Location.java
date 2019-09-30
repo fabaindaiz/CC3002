@@ -3,6 +3,7 @@ package model.map;
 import model.units.IUnit;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -27,6 +28,11 @@ public class Location {
     private final String id;
     private Set<Location> neighbours = new HashSet<>();
     private IUnit unit;
+
+    Random random = new Random();
+
+    private long searchCode = random.nextLong();
+    private double shortestPath;
 
     /**
      * Creates a new location of the game map.
@@ -137,7 +143,8 @@ public class Location {
      * @return the length of the shortest path to the other location
      */
     public double distanceTo(final Location otherNode) {
-        return shortestPathTo(otherNode, new HashSet<>());
+
+        return shortestPath(otherNode, new HashSet<>(), random.nextLong());
     }
 
     /**
@@ -153,8 +160,34 @@ public class Location {
         double distance = Double.POSITIVE_INFINITY;
         for (Location node :
                 neighbours) {
-            if (!visited.contains(node) && node.getRow() !=-1 && node.getColumn() !=-1) {
+            if (!visited.contains(node)) {
                 distance = Math.min(distance, 1 + node.shortestPathTo(otherNode, new HashSet<>(visited)));
+            }
+        }
+        return distance;
+    }
+
+    private double shortestPath(final Location otherNode, final Set<Location> visited, long code) {
+        if (otherNode.equals(this)) {
+            return 0;
+        }
+        visited.add(this);
+
+        if (code != searchCode) {
+            searchCode=code;
+            shortestPath = Double.POSITIVE_INFINITY;
+        }
+        if (visited.size() < shortestPath) {
+            shortestPath = visited.size();
+        }
+        double distance = Double.POSITIVE_INFINITY;
+        for (Location node :
+                neighbours) {
+            if (!visited.contains(node)) {
+                distance = Math.min(distance, 1 + node.shortestPath(otherNode, new HashSet<>(visited), code));
+            }
+            if (visited.size() > shortestPath) {
+                return Double.POSITIVE_INFINITY;
             }
         }
         return distance;
