@@ -1,24 +1,28 @@
 package controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import model.map.Location;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.items.otheritem.Staff;
 import model.items.weapon.Spear;
 import model.map.Field;
-import model.map.Location;
 import model.units.IUnit;
 import model.units.otherunit.Cleric;
 import model.units.warrior.Hero;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Ignacio Slater Muñoz
@@ -41,7 +45,7 @@ class GameControllerTest {
     void setUp() {
         // Se define la semilla como un número aleatorio para generar variedad en los tests
         randomSeed = new Random().nextLong();
-        controller = new GameController(4,128);
+        controller = new GameController(4,7);
         testTacticians = List.of("Player 0", "Player 1", "Player 2", "Player 3");
     }
 
@@ -75,7 +79,7 @@ class GameControllerTest {
     void getGameMap() {
         Field gameMap = controller.getGameMap();
         controller.gameMap.printMap();
-        assertEquals(128, gameMap.getSize()); // getSize deben definirlo
+        assertEquals(7, gameMap.getSize()); // getSize deben definirlo
         assertTrue(controller.getGameMap().isConnected());
         Random testRandom = new Random(randomSeed);
         gameMap.setSeed(randomSeed);
@@ -139,10 +143,11 @@ class GameControllerTest {
     @Test
     void getMaxRounds() {
         Random randomTurnSequence = new Random();
-        IntStream.range(0, 50).forEach(i -> {
-            int randomNum = randomTurnSequence.nextInt();
-            controller.initGame(randomNum);
-            assertEquals(randomNum, controller.getMaxRounds());
+        IntStream.range(0, 50).map(i -> randomTurnSequence.nextInt() & Integer.MAX_VALUE).forEach(nextInt -> {
+            controller.initGame(nextInt);
+            System.out.println(nextInt);
+            assertEquals(nextInt, controller.getMaxRounds());
+            System.out.println(nextInt);
         });
         controller.initEndlessGame();
         assertEquals(-1, controller.getMaxRounds());
@@ -305,6 +310,17 @@ class GameControllerTest {
 
     @Test
     void useItemOn() {
+        controller.initGame(-1);
+        sideSquare = controller.gameMap.getSideSquare();
+
+        unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare/2, sideSquare/2));
+        item1 = new Spear("Spear", 10, 1,3);
+        item2 = new Staff("Staff", 10, 1,3);
+
+        unit1.addItem(item1);
+        unit1.addItem(item2);
+        controller.addUnit(unit1);
+
     }
 
     @Test
@@ -335,6 +351,10 @@ class GameControllerTest {
         controller = new GameController(4, 100);
         controller.initGame(-1);
         sideSquare = controller.gameMap.getSideSquare();
+        if (controller.gameMap.getCell(sideSquare/2-1, sideSquare/2).getRow() == -1)
+            controller.gameMap.addCells(true, new Location(sideSquare/2-1, sideSquare/2));
+        if (controller.gameMap.getCell(sideSquare/2+1, sideSquare/2).getRow() == -1)
+            controller.gameMap.addCells(true, new Location(sideSquare/2+1, sideSquare/2));
         unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare/2-1, sideSquare/2));
         unit2 = new Cleric(50, 2, controller.gameMap.getCell(sideSquare/2, sideSquare/2));
         unit3 = new Hero(50, 2, controller.gameMap.getCell(sideSquare/2+1, sideSquare/2));

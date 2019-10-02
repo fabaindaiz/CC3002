@@ -3,7 +3,11 @@ package controller;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
+import model.map.Location;
 import model.units.IUnit;
+import model.units.otherunit.*;
+import model.units.sorcerer.*;
+import model.units.warrior.*;
 
 import java.util.*;
 
@@ -79,6 +83,42 @@ public class GameController implements IGameController {
     @Override
     public Tactician getTurnOwner() {
         return turnOwner;
+    }
+
+    @Override
+    public IUnit createRandomUnit() {
+        return null;
+    }
+
+    @Override
+    public IUnit createUnit(String type, final int hitPoints, final int movement, final Location location, IEquipableItem... items) {
+        switch (type.toLowerCase()) {
+            case "alpaca":
+                return new Alpaca(hitPoints, movement, location, items);
+            case "cleric":
+                return new Cleric(hitPoints, movement, location, items);
+            case "sorcerer":
+                return new Sorcerer(hitPoints, movement, location, items);
+            case "archer":
+                return new Archer(hitPoints, movement, location, items);
+            case "fighter":
+                return new Fighter(hitPoints, movement, location, items);
+            case "hero":
+                return new Hero(hitPoints, movement, location, items);
+            case "swordmaster":
+                return new SwordMaster(hitPoints, movement, location, items);
+
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public void addUnit(Tactician tactician, IUnit... units) {
+        for (IUnit unit:units) {
+            if (unit.getLocation().addUnitToCell(unit))
+                tactician.addUnit(unit);
+        }
     }
 
     @Override
