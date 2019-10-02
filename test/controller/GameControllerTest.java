@@ -112,7 +112,7 @@ class GameControllerTest {
             do {
                 tacticiansTurn.clear();
                 tacticiansTemp = controller.getTacticians();
-                for (int j = 0; j < controller.getTacticiansGame().size(); j++) {
+                for (int j = 0; j < controller.getTacticians().size(); j++) {
                     randomNum = (int) (random.nextFloat() * tacticiansTemp.size());
                     tacticiansTurn.add(tacticiansTemp.get(randomNum));
                     tacticiansTemp.remove(randomNum);
@@ -120,7 +120,7 @@ class GameControllerTest {
             } while ( lastTurn == tacticiansTurn.get(0));
             lastTurn = tacticiansTurn.get(tacticiansTurn.size()-1);
 
-            for (int j = 0; j < controller.getTacticiansGame().size(); j++) {
+            for (int j = 0; j < controller.getTacticians().size(); j++) {
                 tactician = controller.getTurnOwner();
                 assertEquals(tacticiansTurn.get(j), tactician);
                 controller.endTurn();
@@ -314,6 +314,9 @@ class GameControllerTest {
         sideSquare = controller.gameMap.getSideSquare();
 
         unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare/2, sideSquare/2));
+        if (controller.gameMap.getCell(sideSquare/2+1, sideSquare/2).getRow() == -1)
+            controller.gameMap.addCells(true, new Location(sideSquare/2+1, sideSquare/2));
+        unit2 = new Cleric(50, 2, controller.gameMap.getCell(sideSquare/2+1, sideSquare/2));
         item1 = new Spear("Spear", 10, 1,3);
         item2 = new Staff("Staff", 10, 1,3);
 

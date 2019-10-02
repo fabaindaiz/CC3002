@@ -78,3 +78,6 @@ Autores
 
 Licencia
     Este proyecto no posee licencia, puede usarse con cualquier fin
+
+A tener en cuenta:
+    - Null patern en units

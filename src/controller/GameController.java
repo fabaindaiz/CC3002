@@ -19,24 +19,15 @@ import java.util.*;
  * @version 2.0
  * @since 2.0
  */
-public class GameController implements IGameController {
+public class GameController extends GameInitialization implements IGameController {
 
-    private Random random = new Random();
-    private long defaultSeed = random.nextLong();
-    private boolean initiatedGame = false;
-    private int defaultMapSize;
     private int turnInRound;
     private Tactician lastTurn;
 
-    private Map<String, Tactician> tacticiansGame = new TreeMap<>();
-    private Map<String, Tactician> tacticians = new TreeMap<>();
     private ArrayList<Tactician> turns = new ArrayList<Tactician>();
-
+    protected Tactician turnOwner;
     private int maxRounds;
     private int roundNumber;
-
-    protected Field gameMap = new Field();
-    private Tactician turnOwner;
     private IUnit selectedUnit;
     private IEquipableItem selectedItem;
 
@@ -47,12 +38,8 @@ public class GameController implements IGameController {
      * @param mapSize         the dimensions of the map, for simplicity, all maps are squares
      */
     public GameController(int numberOfPlayers, int mapSize) {
-        for (int i = 0; i < numberOfPlayers; i++)
-            tacticiansGame.put("Player " + i, new Tactician("Player " + i));
-        initTacticians(tacticiansGame, tacticians);
-        gameMap.setSeed(defaultSeed);
-        gameMap.generateMap(mapSize);
-        defaultMapSize = mapSize;
+        super(numberOfPlayers, mapSize);
+        initAll();
     }
 
     @Override
@@ -63,11 +50,6 @@ public class GameController implements IGameController {
     @Override
     public int getRoundNumber() {
         return roundNumber + 1;
-    }
-
-    @Override
-    public List<Tactician> getTacticiansGame() {
-        return new ArrayList<Tactician>(tacticiansGame.values());
     }
 
     @Override
@@ -152,10 +134,8 @@ public class GameController implements IGameController {
     @Override
     public void initGame(final int maxTurns) {
         tacticians.clear();
-        initTacticians(tacticiansGame, tacticians);
         initiatedGame = true;
-        gameMap.setSeed(defaultSeed);
-        gameMap.generateMap(defaultMapSize);
+        initAll();
         assignTurns();
 
         turnOwner = turns.get(0);
@@ -167,16 +147,8 @@ public class GameController implements IGameController {
     @Override
     public void initEndlessGame() { initGame(-1); }
 
-    private void initTacticians(Map<String, Tactician> tacticiansGame, Map<String, Tactician> tacticians) {
-        tacticians.clear();
-        for (Tactician tactician:tacticiansGame.values()) {
-            tacticians.put(tactician.getName(),tactician.clone());
-        }
-    }
-
     @Override
     public void assignTurns() {
-        if (!initiatedGame) return;
         do {
             generateRandomTurn();
         } while ( lastTurn == turns.get(0) );
@@ -228,6 +200,7 @@ public class GameController implements IGameController {
         if (roundNumber == maxRounds || tacticians.size() == 1) {
             int maxUnits = 0;
             ArrayList<String> winners = new ArrayList<String>();
+
             for (Tactician tactician:tacticians.values()) {
                 if (tactician.getUnits().size() > maxUnits) {
                     maxUnits = tactician.getUnits().size();

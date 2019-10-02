@@ -35,11 +35,6 @@ public interface IGameController {
     List<Tactician> getTacticians();
 
     /**
-     * @return the list of all the tacticians participating in all the games.
-     */
-    List<Tactician> getTacticiansGame();
-
-    /**
      * @return the map of the current game
      */
     Field getGameMap();
