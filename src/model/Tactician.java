@@ -12,7 +12,7 @@ import java.util.List;
  * @version 2.0
  * @since 2.0
  */
-public class Tactician implements ITactician {
+public class Tactician implements ITactician, Cloneable {
 
     protected final List<IUnit> units = new ArrayList<>();
     private final String name;
@@ -43,6 +43,14 @@ public class Tactician implements ITactician {
     public void removeUnit(IUnit unit) {
         unit.getLocation().setUnit(null);
         units.remove(unit);
+    }
+
+    @Override
+    public Tactician clone(){
+        Tactician clon = null;
+        try { clon = (Tactician) super.clone();
+        } catch (CloneNotSupportedException ex) {}
+        return clon;
     }
 
 }

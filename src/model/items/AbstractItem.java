@@ -8,7 +8,7 @@ import model.units.IUnit;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public abstract class AbstractItem implements IEquipableItem {
+public abstract class AbstractItem implements IEquipableItem, Cloneable {
 
     private final String name;
     private final int power;
@@ -71,5 +71,13 @@ public abstract class AbstractItem implements IEquipableItem {
     @Override
     public void receiveStaffHeal(IEquipableItem item) {
         owner.receiveHeal(item);
+    }
+
+    @Override
+    public IEquipableItem clone(){
+        IEquipableItem clon = null;
+        try { clon = (IEquipableItem) super.clone();
+        } catch (CloneNotSupportedException ex) {}
+        return clon;
     }
 }
