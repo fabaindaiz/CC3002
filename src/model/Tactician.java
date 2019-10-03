@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class Tactician implements ITactician {
 
-    private final String name;
     protected final List<IUnit> units = new ArrayList<>();
+    private final String name;
 
     /**
      * Crea un jugador para el juego (se ejecuta desde GameController)
@@ -30,7 +30,9 @@ public class Tactician implements ITactician {
     }
 
     @Override
-    public List<IUnit> getUnits() { return units; }
+    public List<IUnit> getUnits() {
+        return units;
+    }
 
     @Override
     public void addUnit(IUnit unit) {

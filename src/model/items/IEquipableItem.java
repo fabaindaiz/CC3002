@@ -78,7 +78,7 @@ public interface IEquipableItem {
     /**
      * Ataque que se activa en un combate normal cuando el atacado tiene un arma equipada
      *
-     * @param other Unidad que se ataca
+     * @param other         Unidad que se ataca
      * @param counterAttack Si se realiza un contraataque
      */
     void specificAttack(IUnit other, boolean counterAttack);

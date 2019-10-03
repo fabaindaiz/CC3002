@@ -26,11 +26,9 @@ public class Location {
     private final int row;
     private final int column;
     private final String id;
+    Random random = new Random();
     private Set<Location> neighbours = new HashSet<>();
     private IUnit unit;
-
-    Random random = new Random();
-
     private long searchCode = random.nextLong();
     private double shortestPath;
 
@@ -46,7 +44,7 @@ public class Location {
         id = "(" + row + ", " + column + ")";
     }
 
-    public boolean addUnitToCell (IUnit newUnit) {
+    public boolean addUnitToCell(IUnit newUnit) {
         if (newUnit.getLocation() == this && this.getUnit() == null) {
             unit = newUnit;
             return true;
@@ -174,7 +172,7 @@ public class Location {
         visited.add(this);
 
         if (code != searchCode) {
-            searchCode=code;
+            searchCode = code;
             shortestPath = Double.POSITIVE_INFINITY;
         }
         if (visited.size() < shortestPath) {

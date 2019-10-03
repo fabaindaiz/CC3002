@@ -9,17 +9,16 @@ import java.util.TreeMap;
 
 public abstract class GameInitialization {
 
+    protected final int numPlayers;
     protected Random random = new Random();
     protected long defaultSeed = random.nextLong();
-
     protected boolean initiatedGame = false;
-    protected final int numPlayers;
     protected int defaultMapSize;
 
     protected Map<String, Tactician> tacticians = new TreeMap<>();
     protected Field gameMap = new Field();
 
-    public GameInitialization(int numberOfPlayers, int mapSize){
+    public GameInitialization(int numberOfPlayers, int mapSize) {
         numPlayers = numberOfPlayers;
         defaultMapSize = mapSize;
     }

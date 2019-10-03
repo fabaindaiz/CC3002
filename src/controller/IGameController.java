@@ -5,7 +5,6 @@ import model.items.IEquipableItem;
 import model.map.Field;
 import model.map.Location;
 import model.units.IUnit;
-import model.units.sorcerer.Sorcerer;
 
 import java.util.List;
 
@@ -53,7 +52,7 @@ public interface IGameController {
      * Crea una unidad
      *
      * @param type Tipo de la unidad
-     * Los otros parametros son entregados directamente al constructor de abstractUnit
+     *             Los otros parametros son entregados directamente al constructor de abstractUnit
      */
     IUnit createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items);
 
@@ -61,7 +60,7 @@ public interface IGameController {
      * Añade una unidad a un tactician antes de inicializar en juego
      *
      * @param tactician Este tactician recibira la unidad
-     * @param units Unidad a añadir
+     * @param units     Unidad a añadir
      */
     void addUnit(Tactician tactician, IUnit... units);
 

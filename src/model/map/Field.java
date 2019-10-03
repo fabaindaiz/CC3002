@@ -1,7 +1,5 @@
 package model.map;
 
-import model.units.IUnit;
-
 import java.util.*;
 
 /**
@@ -14,7 +12,7 @@ import java.util.*;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public class Field implements IField{
+public class Field implements IField {
 
     private Map<String, Location> map = new HashMap<>();
     private Random random = new Random();
@@ -24,13 +22,19 @@ public class Field implements IField{
     private int maxSize;
 
     @Override
-    public void setSeed(long seed){ random.setSeed(seed); }
+    public void setSeed(long seed) {
+        random.setSeed(seed);
+    }
 
     @Override
-    public int getSize() { return map.size(); }
+    public int getSize() {
+        return map.size();
+    }
 
-     @Override
-    public int getSideSquare() { return sideSquare; }
+    @Override
+    public int getSideSquare() {
+        return sideSquare;
+    }
 
     @Override
     public void generateMap(int mapSize) {
@@ -45,46 +49,46 @@ public class Field implements IField{
             mult = 2.5;
         else
             mult = 3.0;
-        sideSquare = (int) ((Math.sqrt(mapSize)+1)*mult);
+        sideSquare = (int) ((Math.sqrt(mapSize) + 1) * mult);
 
-        recursiveMap(sideSquare/2, sideSquare/2, 0);
+        recursiveMap(sideSquare / 2, sideSquare / 2, 0);
     }
 
     private void recursiveMap(int x, int y, int step) {
-        if (getCell(x,y).getRow() == x || getCell(x,y).getColumn() == y) return;
-        if (step > sideSquare*Math.log10(maxSize) || map.size() >= maxSize) return;
-        addCells(true, new Location(x,y));
+        if (getCell(x, y).getRow() == x || getCell(x, y).getColumn() == y) return;
+        if (step > sideSquare * Math.log10(maxSize) || map.size() >= maxSize) return;
+        addCells(true, new Location(x, y));
 
-        int a1[]={x-1, y}, a2[]={x+1, y}, a3[]={x, y-1}, a4[]={x, y+1};
-        ArrayList <int[]> order = new ArrayList<int[]>(List.of(a1, a2, a3, a4));
-        if(x-1 < 0) order.remove(a1);
-        if(x+1 >= sideSquare) order.remove(a2);
-        if(y-1 < 0) order.remove(a3);
-        if(y+1 >= sideSquare) order.remove(a4);
+        int a1[] = {x - 1, y}, a2[] = {x + 1, y}, a3[] = {x, y - 1}, a4[] = {x, y + 1};
+        ArrayList<int[]> order = new ArrayList<int[]>(List.of(a1, a2, a3, a4));
+        if (x - 1 < 0) order.remove(a1);
+        if (x + 1 >= sideSquare) order.remove(a2);
+        if (y - 1 < 0) order.remove(a3);
+        if (y + 1 >= sideSquare) order.remove(a4);
 
         int randomInt;
-        while (map.size() < maxSize && order.size() > 1){
+        while (map.size() < maxSize && order.size() > 1) {
             randomInt = (int) (random.nextFloat() * order.size());
             int[] next = order.get(randomInt);
             order.remove(randomInt);
-            recursiveMap( next[0], next[1], step+1);
+            recursiveMap(next[0], next[1], step + 1);
         }
     }
 
     @Override
     public void printMap() {
-        for (int i = 0; i< sideSquare; i++) {
-            for (int j = 0; j< sideSquare; j++) {
-                if (getCell(i,j).getRow() < 0 || getCell(i,j).getRow() < 0) System.out.print("  ");
+        for (int i = 0; i < sideSquare; i++) {
+            for (int j = 0; j < sideSquare; j++) {
+                if (getCell(i, j).getRow() < 0 || getCell(i, j).getRow() < 0) System.out.print("  ");
                 else {
                     //System.out.print(" ("+ i +","+ j +")");
-                    System.out.print(getCell(i,j).getNeighbours().size() +" ");
+                    System.out.print(getCell(i, j).getNeighbours().size() + " ");
                     //System.out.print("x ");
                 }
             }
             System.out.println("");
         }
-        System.out.println("sideSquare> "+ sideSquare +" step> "+ Math.log10(maxSize) +" mapSize> "+ getSize() );
+        System.out.println("sideSquare> " + sideSquare + " step> " + Math.log10(maxSize) + " mapSize> " + getSize());
         System.out.println("");
     }
 

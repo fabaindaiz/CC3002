@@ -5,11 +5,16 @@ import model.items.IEquipableItem;
 import model.map.Field;
 import model.map.Location;
 import model.units.IUnit;
-import model.units.otherunit.*;
-import model.units.sorcerer.*;
-import model.units.warrior.*;
+import model.units.otherunit.Alpaca;
+import model.units.otherunit.Cleric;
+import model.units.sorcerer.Sorcerer;
+import model.units.warrior.Archer;
+import model.units.warrior.Fighter;
+import model.units.warrior.Hero;
+import model.units.warrior.SwordMaster;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controller of the game.
@@ -21,11 +26,10 @@ import java.util.*;
  */
 public class GameController extends GameInitialization implements IGameController {
 
+    protected Tactician turnOwner;
     private int turnInRound;
     private Tactician lastTurn;
-
     private ArrayList<Tactician> turns = new ArrayList<Tactician>();
-    protected Tactician turnOwner;
     private int maxRounds;
     private int roundNumber;
     private IUnit selectedUnit;
@@ -97,7 +101,7 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public void addUnit(Tactician tactician, IUnit... units) {
-        for (IUnit unit:units) {
+        for (IUnit unit : units) {
             if (unit.getLocation().addUnitToCell(unit))
                 tactician.addUnit(unit);
         }
@@ -105,7 +109,7 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public void addUnit(IUnit... units) {
-        for (IUnit unit:units) {
+        for (IUnit unit : units) {
             if (unit.getLocation().addUnitToCell(unit))
                 turnOwner.addUnit(unit);
         }
@@ -145,14 +149,16 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void initEndlessGame() { initGame(-1); }
+    public void initEndlessGame() {
+        initGame(-1);
+    }
 
     @Override
     public void assignTurns() {
         do {
             generateRandomTurn();
-        } while ( lastTurn == turns.get(0) );
-        lastTurn = turns.get(turns.size()-1);
+        } while (lastTurn == turns.get(0));
+        lastTurn = turns.get(turns.size() - 1);
         turnOwner = turns.get(0);
     }
 
@@ -201,13 +207,12 @@ public class GameController extends GameInitialization implements IGameControlle
             int maxUnits = 0;
             ArrayList<String> winners = new ArrayList<String>();
 
-            for (Tactician tactician:tacticians.values()) {
+            for (Tactician tactician : tacticians.values()) {
                 if (tactician.getUnits().size() > maxUnits) {
                     maxUnits = tactician.getUnits().size();
                     winners.clear();
                     winners.add(tactician.getName());
-                }
-                else if (tactician.getUnits().size() == maxUnits)
+                } else if (tactician.getUnits().size() == maxUnits)
                     winners.add(tactician.getName());
             }
             return winners;
@@ -217,7 +222,7 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public void selectUnitIn(int x, int y) {
-        if (turnOwner.getUnits().contains(gameMap.getCell(x,y).getUnit()))
+        if (turnOwner.getUnits().contains(gameMap.getCell(x, y).getUnit()))
             selectedUnit = gameMap.getCell(x, y).getUnit();
         else
             selectedUnit = null;
@@ -225,7 +230,7 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void selectUnitId(int index){
+    public void selectUnitId(int index) {
         if (turnOwner.getUnits().size() > index)
             selectedUnit = turnOwner.getUnits().get(index);
         else
@@ -234,7 +239,9 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public IUnit getSelectedUnit() { return selectedUnit; }
+    public IUnit getSelectedUnit() {
+        return selectedUnit;
+    }
 
     @Override
     public List<IEquipableItem> getItems() {
@@ -250,7 +257,9 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public IEquipableItem getSelectedItem() { return selectedItem; }
+    public IEquipableItem getSelectedItem() {
+        return selectedItem;
+    }
 
     @Override
     public void equipItem(int index) {
@@ -262,14 +271,14 @@ public class GameController extends GameInitialization implements IGameControlle
     @Override
     public void useItemOn(int x, int y) {
         if (standardVerification()) return;
-        IUnit unit = gameMap.getCell(x,y).getUnit();
-        selectedUnit.useItem(unit,true);
+        IUnit unit = gameMap.getCell(x, y).getUnit();
+        selectedUnit.useItem(unit, true);
     }
 
     @Override
     public void giveItemTo(int x, int y) {
         if (standardVerification() || selectedItem == null) return;
-        IUnit unit = gameMap.getCell(x,y).getUnit();
+        IUnit unit = gameMap.getCell(x, y).getUnit();
         if (unit != null)
             selectedUnit.exchange(unit, selectedItem);
         selectedItem = null;

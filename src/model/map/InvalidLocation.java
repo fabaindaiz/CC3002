@@ -17,7 +17,7 @@ public class InvalidLocation extends Location {
         super(-1, -1);
     }
 
-    public boolean addUnitToCell (IUnit unit) {
+    public boolean addUnitToCell(IUnit unit) {
         return false;
     }
 

@@ -22,13 +22,12 @@ import static java.lang.Math.min;
 public abstract class AbstractUnit implements IUnit {
 
     private final int maxHitPoints;
-    private int currentHitPoints;
     private final int movement;
     private final int maxItems;
-    private Location location;
-
     protected List<IEquipableItem> items = new ArrayList<>();
     protected IEquipableItem equippedItem;
+    private int currentHitPoints;
+    private Location location;
 
     /**
      * Creates a new Unit.
@@ -49,7 +48,9 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
-    public int getMaxHitPoints() { return maxHitPoints; }
+    public int getMaxHitPoints() {
+        return maxHitPoints;
+    }
 
     @Override
     public int getCurrentHitPoints() {
@@ -62,7 +63,9 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
-    public int getMovement() { return movement; }
+    public int getMovement() {
+        return movement;
+    }
 
     @Override
     public int getMaxItems() {
@@ -72,6 +75,15 @@ public abstract class AbstractUnit implements IUnit {
     @Override
     public Location getLocation() {
         return location;
+    }
+
+    /**
+     * Sets a new location for this unit,
+     */
+    private void setLocation(final Location location) {
+        this.location.setUnit(null);
+        this.location = location;
+        location.setUnit(this);
     }
 
     @Override
@@ -105,15 +117,6 @@ public abstract class AbstractUnit implements IUnit {
     private void death() {
         location.setUnit(null);
         location = null;
-    }
-
-    /**
-     * Sets a new location for this unit,
-     */
-    private void setLocation(final Location location) {
-        this.location.setUnit(null);
-        this.location = location;
-        location.setUnit(this);
     }
 
     @Override
