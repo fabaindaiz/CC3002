@@ -77,29 +77,6 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public IUnit createUnit(String type, final int hitPoints, final int movement, final Location location, IEquipableItem... items) {
-        switch (type.toLowerCase()) {
-            case "alpaca":
-                return new Alpaca(hitPoints, movement, location, items);
-            case "cleric":
-                return new Cleric(hitPoints, movement, location, items);
-            case "sorcerer":
-                return new Sorcerer(hitPoints, movement, location, items);
-            case "archer":
-                return new Archer(hitPoints, movement, location, items);
-            case "fighter":
-                return new Fighter(hitPoints, movement, location, items);
-            case "hero":
-                return new Hero(hitPoints, movement, location, items);
-            case "swordmaster":
-                return new SwordMaster(hitPoints, movement, location, items);
-
-            default:
-                return null;
-        }
-    }
-
-    @Override
     public void addUnit(Tactician tactician, IUnit... units) {
         for (IUnit unit : units) {
             if (unit.getLocation().addUnitToCell(unit))

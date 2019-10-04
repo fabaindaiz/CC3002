@@ -16,30 +16,31 @@ public abstract class GameInitialization {
     protected boolean initiatedGame = false;
     protected int defaultMapSize;
 
-    protected Map<String, Tactician> tacticiansGame = new TreeMap<>();
+    protected Map<String, Tactician> tacticiansMaster = new TreeMap<>();
     protected Map<String, Tactician> tacticians = new TreeMap<>();
+    protected Field gameMapMaster = new Field();
     protected Field gameMap = new Field();
 
     public GameInitialization(int numberOfPlayers, int mapSize) {
         numPlayers = numberOfPlayers;
         defaultMapSize = mapSize;
-        gameMap.setSeed(defaultSeed);
-        gameMap.generateMap(defaultMapSize);
+        gameMapMaster.setSeed(defaultSeed);
+        gameMapMaster.generateMap(defaultMapSize);
 
         for (int i = 0; i < numPlayers; i++)
-            tacticiansGame.put("Player " + i, new Tactician("Player " + i));
+            tacticiansMaster.put("Player " + i, new Tactician("Player " + i));
     }
 
     public void initAll() {
         tacticians.clear();
-        for (Tactician tactician : tacticiansGame.values()) {
-            for (IUnit unit : tactician.getUnits()) {
-
+        for (Tactician tactician : tacticiansMaster.values()) {
+            /**for (IUnit unit : tactician.getUnits()) {
                 IUnit actualUnit = unit.clone();
-            }
+            }**/
             Tactician actualTactician =  tactician.clone();
             tacticians.put(tactician.getName(), actualTactician);
         }
+
     }
 
 }
