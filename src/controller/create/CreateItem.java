@@ -1,6 +1,6 @@
 package controller.create;
 
-public class CreateItem implements ICreate {
+public class CreateItem extends AbstractFactory {
 
     public CreateItem () {
         super();

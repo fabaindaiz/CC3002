@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class CreateTactician implements ICreate {
+public class CreateTactician extends AbstractFactory {
 
     Map<String, Tactician> tacticians;
 
@@ -15,9 +15,7 @@ public class CreateTactician implements ICreate {
     }
 
     public Tactician createTactician(String name) {
-        Tactician newTactician = new Tactician(name);
-        tacticians.put(name, newTactician);
-        return newTactician;
+        return null;
     }
 
     public ArrayList<Tactician> getTacticians() {

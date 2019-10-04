@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class CreateUnit implements ICreate {
+public class CreateUnit extends AbstractFactory {
 
     Map<String, IUnit> units;
 
@@ -24,9 +24,10 @@ public class CreateUnit implements ICreate {
     }
 
     public IUnit createUnit(IUnit unit) {
-        IUnit newTactician = new (name);
+        /*IUnit newTactician = new (name);
         units.put(name, newTactician);
-        return newTactician;
+        return newTactician;*/
+        return null;
     }
 
     @Override

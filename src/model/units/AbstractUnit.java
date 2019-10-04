@@ -19,7 +19,7 @@ import static java.lang.Math.min;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public abstract class AbstractUnit implements IUnit, Cloneable {
+public abstract class AbstractUnit implements IUnit {
 
     private final int maxHitPoints;
     private final int movement;
@@ -244,11 +244,4 @@ public abstract class AbstractUnit implements IUnit, Cloneable {
     public void equipStaff(IEquipableItem item) {
     }
 
-    @Override
-    public IUnit clone(){
-        IUnit clon = null;
-        try { clon = (IUnit) super.clone();
-        } catch (CloneNotSupportedException ex) {}
-        return clon;
-    }
 }

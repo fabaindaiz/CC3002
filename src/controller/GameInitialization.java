@@ -28,17 +28,12 @@ public abstract class GameInitialization {
         gameMapMaster.generateMap(defaultMapSize);
 
         for (int i = 0; i < numPlayers; i++)
-            tacticiansMaster.put("Player " + i, new Tactician("Player " + i));
+            tacticiansMaster.put("Player " + i, new Tactician("Player " + i, gameMap));
     }
 
     public void initAll() {
         tacticians.clear();
         for (Tactician tactician : tacticiansMaster.values()) {
-            /**for (IUnit unit : tactician.getUnits()) {
-                IUnit actualUnit = unit.clone();
-            }**/
-            Tactician actualTactician =  tactician.clone();
-            tacticians.put(tactician.getName(), actualTactician);
         }
 
     }

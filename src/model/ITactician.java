@@ -1,5 +1,6 @@
 package model;
 
+import model.items.IEquipableItem;
 import model.units.IUnit;
 
 import java.util.List;
@@ -38,4 +39,24 @@ public interface ITactician {
      * @param unit unidad a eliminar
      */
     void removeUnit(IUnit unit);
+
+    void removeAllUnit();
+
+    void selectUnitIn(int x, int y);
+
+    void selectUnitId(int index);
+
+    IUnit getSelectedUnit();
+
+    List<IEquipableItem> getItems();
+
+    void selectItem(int index);
+
+    IEquipableItem getSelectedItem();
+
+    void equipItem(int index);
+
+    void useItemOn(int x, int y);
+
+    void giveItemTo(int x, int y);
 }

@@ -3,15 +3,7 @@ package controller;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
-import model.map.Location;
 import model.units.IUnit;
-import model.units.otherunit.Alpaca;
-import model.units.otherunit.Cleric;
-import model.units.sorcerer.Sorcerer;
-import model.units.warrior.Archer;
-import model.units.warrior.Fighter;
-import model.units.warrior.Hero;
-import model.units.warrior.SwordMaster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +24,6 @@ public class GameController extends GameInitialization implements IGameControlle
     private ArrayList<Tactician> turns = new ArrayList<Tactician>();
     private int maxRounds;
     private int roundNumber;
-    private IUnit selectedUnit;
-    private IEquipableItem selectedItem;
 
     /**
      * Creates the controller for a new game.
@@ -108,7 +98,7 @@ public class GameController extends GameInitialization implements IGameControlle
      * @return true: algo va mal, no ejecuta de la función que se llamo | false: continua normal
      */
     private boolean standardVerification() {
-        if (!initiatedGame || selectedUnit == null) return true;
+        if (!initiatedGame) return true;
         return false;
     }
 
@@ -155,8 +145,6 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public void endTurn() {
-        selectedUnit = null;
-        selectedItem = null;
         verificateEndRound();
         turnOwner = turns.get(turnInRound);
     }
@@ -175,6 +163,8 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public void removeTactician(String tactician) {
+        tacticians.get(tactician).removeAllUnit();
+        turns.remove(tacticians.get(tactician));
         tacticians.remove(tactician);
     }
 
@@ -198,67 +188,62 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
+    public void endGame() {
+        initiatedGame = false;
+    }
+
+    @Override
     public void selectUnitIn(int x, int y) {
-        if (turnOwner.getUnits().contains(gameMap.getCell(x, y).getUnit()))
-            selectedUnit = gameMap.getCell(x, y).getUnit();
-        else
-            selectedUnit = null;
-        selectedItem = null;
+        if (standardVerification()) return;
+        turnOwner.selectUnitIn(x,y);
     }
 
     @Override
     public void selectUnitId(int index) {
-        if (turnOwner.getUnits().size() > index)
-            selectedUnit = turnOwner.getUnits().get(index);
-        else
-            selectedUnit = null;
-        selectedItem = null;
+        if (standardVerification()) return;
+        turnOwner.selectUnitId(index);
     }
 
     @Override
     public IUnit getSelectedUnit() {
-        return selectedUnit;
+        if (standardVerification()) return null;
+        return turnOwner.getSelectedUnit();
     }
 
     @Override
     public List<IEquipableItem> getItems() {
         if (standardVerification()) return null;
-        else return selectedUnit.getItems();
+        return turnOwner.getItems();
     }
 
     @Override
     public void selectItem(int index) {
         if (standardVerification()) return;
-        if (selectedUnit.getItems().size() > index)
-            selectedItem = selectedUnit.getItems().get(index);
+        turnOwner.selectItem(index);
     }
 
     @Override
     public IEquipableItem getSelectedItem() {
-        return selectedItem;
+        if (standardVerification()) return null;
+        return turnOwner.getSelectedItem();
     }
 
     @Override
     public void equipItem(int index) {
         if (standardVerification()) return;
-        if (selectedUnit.getItems().size() > index)
-            selectedUnit.equipItem(selectedUnit.getItems().get(index));
+        turnOwner.equipItem(index);
     }
 
     @Override
     public void useItemOn(int x, int y) {
         if (standardVerification()) return;
-        IUnit unit = gameMap.getCell(x, y).getUnit();
-        selectedUnit.useItem(unit, true);
+        turnOwner.useItemOn(x,y);
     }
 
     @Override
     public void giveItemTo(int x, int y) {
-        if (standardVerification() || selectedItem == null) return;
-        IUnit unit = gameMap.getCell(x, y).getUnit();
-        if (unit != null)
-            selectedUnit.exchange(unit, selectedItem);
-        selectedItem = null;
+        if (standardVerification()) return;
+        turnOwner.giveItemTo(x, y);
     }
 
 }

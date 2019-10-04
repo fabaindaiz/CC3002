@@ -54,7 +54,7 @@ public interface IGameController {
      * @param type Tipo de la unidad
      *             Los otros parametros son entregados directamente al constructor de abstractUnit
      */
-    IUnit createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items);
+    /*IUnit createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items);*/
 
     /**
      * Añade una unidad a un tactician antes de inicializar en juego
@@ -116,6 +116,8 @@ public interface IGameController {
      * @return the winner of this game, if the match ends in a draw returns a list of all the winners
      */
     List<String> getWinners();
+
+    void endGame();
 
     /**
      * Selects a unit in the game map
