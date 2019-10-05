@@ -4,7 +4,6 @@ import controller.Parameter.IParameter;
 import model.items.IEquipableItem;
 import model.map.Location;
 
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -248,9 +247,13 @@ public abstract class AbstractUnit implements IUnit {
     }
 
     @Override
-    public void setParameter(IParameter parameter) { this.parameter = parameter; }
+    public IParameter getParameter() {
+        return parameter;
+    }
 
     @Override
-    public IParameter getParameter() { return parameter; }
+    public void setParameter(IParameter parameter) {
+        this.parameter = parameter;
+    }
 
 }

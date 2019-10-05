@@ -167,7 +167,7 @@ public interface IUnit {
      */
     void equipStaff(IEquipableItem item);
 
-    void setParameter(IParameter parameter);
-
     IParameter getParameter();
+
+    void setParameter(IParameter parameter);
 }

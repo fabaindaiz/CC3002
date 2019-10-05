@@ -3,6 +3,7 @@ package controller;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
+import model.map.Location;
 import model.units.IUnit;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public interface IGameController {
     /**
      * Crea una unidad aleatoria
      */
-    IUnit createRandomUnit();
+    void createRandomUnit();
 
     /**
      * Crea una unidad
@@ -53,7 +54,24 @@ public interface IGameController {
      * @param type Tipo de la unidad
      *             Los otros parametros son entregados directamente al constructor de abstractUnit
      */
-    /*IUnit createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items);*/
+    void createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items);
+
+    /**
+     *
+     */
+    void createRandomItem();
+
+    /**
+     *
+     *
+     * @param type
+     * @param name
+     * @param power
+     * @param minRange
+     * @param maxRange
+     * @param equiped
+     */
+    void createItem(String type, String name, int power, int minRange, int maxRange, boolean equiped);
 
     /**
      * Añade una unidad a un tactician antes de inicializar en juego
@@ -69,6 +87,13 @@ public interface IGameController {
      * @param unit Unidad a añadir
      */
     void addUnit(IUnit... unit);
+
+    /**
+     * Añade un item a una unidad
+     *
+     * @param items Item a añadir
+     */
+    void addItem(IEquipableItem... items);
 
     /**
      * Establece una semilla para el generador de numero aleatorios

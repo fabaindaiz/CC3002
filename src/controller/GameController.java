@@ -1,8 +1,11 @@
 package controller;
 
+import controller.Parameter.ItemParameter;
+import controller.Parameter.UnitParameter;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
+import model.map.Location;
 import model.units.IUnit;
 
 import java.util.ArrayList;
@@ -33,7 +36,8 @@ public class GameController extends GameInitialization implements IGameControlle
      */
     public GameController(int numberOfPlayers, int mapSize) {
         super(numberOfPlayers, mapSize);
-        initAll();
+        assignTurns();
+        turnOwner = turns.get(0);
     }
 
     @Override
@@ -62,8 +66,28 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public IUnit createRandomUnit() {
-        return null;
+    public void createRandomUnit() {}
+
+    //@Override
+    public void CreatePredefinedUnit() {}
+
+    @Override
+    public void createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items) {
+        parameters.add(new UnitParameter(type, hitPoints, movement, location, turnInRound));
+    }
+
+    @Override
+    public void createRandomItem() {}
+
+    //@Override
+    public void createPredefineditem() {
+
+    }
+
+    @Override
+    public void createItem(String type, final String name, final int power, final int minRange, final int maxRange, boolean equiped) {
+        parameters.add(new ItemParameter(type, name, power, minRange, maxRange, turnInRound,
+                turnOwner.getUnits().indexOf(turnOwner.getSelectedUnit()), equiped));
     }
 
     @Override
@@ -75,10 +99,17 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void addUnit(IUnit... units) {
+    public void addUnit (IUnit... units) {
         for (IUnit unit : units) {
             if (unit.getLocation().addUnitToCell(unit))
                 turnOwner.addUnit(unit);
+        }
+    }
+
+    @Override
+    public void addItem (IEquipableItem... items) {
+        for (IEquipableItem item : items) {
+            turnOwner.getSelectedUnit().addItem(item);
         }
     }
 

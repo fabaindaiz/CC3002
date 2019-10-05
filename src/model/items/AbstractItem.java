@@ -76,9 +76,13 @@ public abstract class AbstractItem implements IEquipableItem {
     }
 
     @Override
-    public void setParameter(IParameter parameter) { this.parameter = parameter; }
+    public IParameter getParameter() {
+        return parameter;
+    }
 
     @Override
-    public IParameter getParameter() { return parameter; }
+    public void setParameter(IParameter parameter) {
+        this.parameter = parameter;
+    }
 
 }

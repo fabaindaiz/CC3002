@@ -1,6 +1,5 @@
 package controller.Parameter;
 
-import controller.create.ICreate;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.units.IUnit;
@@ -32,8 +31,8 @@ public class ItemParameter extends AbstractParameter {
     }
 
     @Override
-    public void create(ICreate factory, ArrayList<Tactician> tacticians) {
-        IEquipableItem createdItem = factory.createItem(type, name, power, minRange, maxRange);
+    public void create(ArrayList<Tactician> tacticians) {
+        IEquipableItem createdItem = createItem(type, name, power, minRange, maxRange);
         IUnit unit = tacticians.get(ownerTactician).getUnits().get(ownerUnit);
         unit.addItem(createdItem);
         if (equiped)

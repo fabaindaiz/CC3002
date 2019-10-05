@@ -1,12 +1,18 @@
 package controller;
 
 import controller.Parameter.IParameter;
-import controller.create.Factory;
-import controller.create.ICreate;
+import controller.Parameter.ItemParameter;
+import controller.Parameter.UnitParameter;
 import model.Tactician;
+import model.items.IEquipableItem;
 import model.map.Field;
+import model.map.Location;
+import model.units.IUnit;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Random;
+import java.util.TreeMap;
 
 public abstract class GameInitialization {
 
@@ -16,11 +22,12 @@ public abstract class GameInitialization {
     protected boolean initiatedGame = false;
     protected int defaultMapSize;
 
-    public ICreate factory = new Factory();
-    protected ArrayList<IParameter> parameters;
-
+    protected ArrayList<IParameter> parameters = new ArrayList<IParameter>();
     protected Map<String, Tactician> tacticians = new TreeMap<>();
     protected Field gameMap = new Field();
+
+    protected ArrayList<UnitParameter> predefinedUnits;
+    protected ArrayList<ItemParameter> predefinedItems;
 
     public GameInitialization(int numberOfPlayers, int mapSize) {
         numPlayers = numberOfPlayers;
@@ -36,8 +43,8 @@ public abstract class GameInitialization {
         tacticians.clear();
         for (int i = 0; i < numPlayers; i++)
             tacticians.put("Player " + i, new Tactician("Player " + i, gameMap));
-        for (IParameter parameter:parameters) {
-            parameter.create(factory, new ArrayList<Tactician>(tacticians.values()));
+        for (IParameter parameter : parameters) {
+            parameter.create(new ArrayList<Tactician>(tacticians.values()));
         }
 
     }
