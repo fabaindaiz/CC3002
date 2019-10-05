@@ -1,5 +1,6 @@
 package controller.Parameter;
 
+import controller.create.ICreate;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Location;
@@ -16,6 +17,6 @@ public abstract class AbstractParameter implements IParameter {
     public AbstractParameter() {}
 
     @Override
-    public void create (Tactician tactician, IUnit unit) {}
+    public void create (ICreate factory, ArrayList<Tactician> tacticians) {}
 
 }

@@ -1,8 +1,10 @@
 package model.units;
 
+import controller.Parameter.IParameter;
 import model.items.IEquipableItem;
 import model.map.Location;
 
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +30,7 @@ public abstract class AbstractUnit implements IUnit {
     protected IEquipableItem equippedItem;
     private int currentHitPoints;
     private Location location;
+    private IParameter parameter;
 
     /**
      * Creates a new Unit.
@@ -243,5 +246,11 @@ public abstract class AbstractUnit implements IUnit {
     @Override
     public void equipStaff(IEquipableItem item) {
     }
+
+    @Override
+    public void setParameter(IParameter parameter) { this.parameter = parameter; }
+
+    @Override
+    public IParameter getParameter() { return parameter; }
 
 }

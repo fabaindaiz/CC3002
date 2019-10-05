@@ -1,5 +1,6 @@
 package model.items;
 
+import controller.Parameter.IParameter;
 import model.units.IUnit;
 
 /**
@@ -15,6 +16,7 @@ public abstract class AbstractItem implements IEquipableItem {
     protected int minRange;
     protected int maxRange;
     protected IUnit owner;
+    private IParameter parameter;
 
     /**
      * Constructor for a default item without any special behaviour.
@@ -72,5 +74,11 @@ public abstract class AbstractItem implements IEquipableItem {
     public void receiveStaffHeal(IEquipableItem item) {
         owner.receiveHeal(item);
     }
+
+    @Override
+    public void setParameter(IParameter parameter) { this.parameter = parameter; }
+
+    @Override
+    public IParameter getParameter() { return parameter; }
 
 }

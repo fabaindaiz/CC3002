@@ -1,5 +1,6 @@
 package model.items;
 
+import controller.Parameter.IParameter;
 import model.units.IUnit;
 
 /**
@@ -145,4 +146,8 @@ public interface IEquipableItem {
      * @param counterAttack *    Avisa este ataque requiere un contraataque
      */
     void receiveBowAttack(IEquipableItem item, boolean counterAttack);
+
+    void setParameter(IParameter parameter);
+
+    IParameter getParameter();
 }

@@ -94,7 +94,6 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public void initGame(final int maxTurns) {
-        tacticians.clear();
         initiatedGame = true;
         initAll();
         assignTurns();
