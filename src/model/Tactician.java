@@ -54,7 +54,7 @@ public class Tactician implements ITactician {
 
     @Override
     public void removeAllUnit() {
-        for (IUnit unit:units) {
+        for (IUnit unit : units) {
             removeUnit(unit);
         }
     }

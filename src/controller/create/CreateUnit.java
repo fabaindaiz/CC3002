@@ -17,11 +17,7 @@ import java.util.TreeMap;
 
 public class CreateUnit extends AbstractFactory {
 
-    Map<String, IUnit> units;
-
-    public CreateUnit () {
-        units = new TreeMap<>();
-    }
+    public CreateUnit() {}
 
     public IUnit createUnit(IUnit unit) {
         /*IUnit newTactician = new (name);
@@ -53,11 +49,4 @@ public class CreateUnit extends AbstractFactory {
         }
     }
 
-    public ArrayList<IUnit> getTacticians() {
-        return new ArrayList<IUnit>(units.values());
-    }
-
-    public void deleteTactician (String name) {
-        units.remove(name);
-    }
 }

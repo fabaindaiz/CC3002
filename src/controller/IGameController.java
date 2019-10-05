@@ -3,7 +3,6 @@ package controller;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
-import model.map.Location;
 import model.units.IUnit;
 
 import java.util.List;
@@ -117,6 +116,9 @@ public interface IGameController {
      */
     List<String> getWinners();
 
+    /**
+     * Termina una partida
+     */
     void endGame();
 
     /**

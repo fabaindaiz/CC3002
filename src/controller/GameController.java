@@ -92,16 +92,6 @@ public class GameController extends GameInitialization implements IGameControlle
         defaultSeed = random.nextLong();
     }
 
-    /**
-     * Verificación estandar antes de realizar una accion con una selectedUnit
-     *
-     * @return true: algo va mal, no ejecuta de la función que se llamo | false: continua normal
-     */
-    private boolean standardVerification() {
-        if (!initiatedGame) return true;
-        return false;
-    }
-
     @Override
     public void initGame(final int maxTurns) {
         tacticians.clear();
@@ -154,7 +144,7 @@ public class GameController extends GameInitialization implements IGameControlle
      */
     private void verificateEndRound() {
         turnInRound++;
-        if (turnInRound == tacticians.size()) {
+        if (turnInRound >= tacticians.size()) {
             turnInRound = 0;
             roundNumber++;
             assignTurns();
@@ -163,9 +153,12 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public void removeTactician(String tactician) {
-        tacticians.get(tactician).removeAllUnit();
-        turns.remove(tacticians.get(tactician));
-        tacticians.remove(tactician);
+        Tactician tacticianTemp = tacticians.get(tactician);
+        if (tacticianTemp != null) {
+            tacticianTemp.removeAllUnit();
+            turns.remove(tacticianTemp);
+            tacticians.remove(tactician);
+        }
     }
 
     @Override
@@ -190,60 +183,52 @@ public class GameController extends GameInitialization implements IGameControlle
     @Override
     public void endGame() {
         initiatedGame = false;
+
     }
 
     @Override
     public void selectUnitIn(int x, int y) {
-        if (standardVerification()) return;
-        turnOwner.selectUnitIn(x,y);
+        if (initiatedGame) turnOwner.selectUnitIn(x, y);
     }
 
     @Override
     public void selectUnitId(int index) {
-        if (standardVerification()) return;
-        turnOwner.selectUnitId(index);
+        if (initiatedGame) turnOwner.selectUnitId(index);
     }
 
     @Override
     public IUnit getSelectedUnit() {
-        if (standardVerification()) return null;
         return turnOwner.getSelectedUnit();
     }
 
     @Override
     public List<IEquipableItem> getItems() {
-        if (standardVerification()) return null;
         return turnOwner.getItems();
     }
 
     @Override
     public void selectItem(int index) {
-        if (standardVerification()) return;
-        turnOwner.selectItem(index);
+        if (initiatedGame) turnOwner.selectItem(index);
     }
 
     @Override
     public IEquipableItem getSelectedItem() {
-        if (standardVerification()) return null;
         return turnOwner.getSelectedItem();
     }
 
     @Override
     public void equipItem(int index) {
-        if (standardVerification()) return;
-        turnOwner.equipItem(index);
+        if (initiatedGame) turnOwner.equipItem(index);
     }
 
     @Override
     public void useItemOn(int x, int y) {
-        if (standardVerification()) return;
-        turnOwner.useItemOn(x,y);
+        if (initiatedGame) turnOwner.useItemOn(x, y);
     }
 
     @Override
     public void giveItemTo(int x, int y) {
-        if (standardVerification()) return;
-        turnOwner.giveItemTo(x, y);
+        if (initiatedGame) turnOwner.giveItemTo(x, y);
     }
 
 }

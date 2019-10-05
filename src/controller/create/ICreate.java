@@ -1,6 +1,5 @@
 package controller.create;
 
-import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Location;
 import model.units.IUnit;

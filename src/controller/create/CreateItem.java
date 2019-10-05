@@ -2,7 +2,7 @@ package controller.create;
 
 public class CreateItem extends AbstractFactory {
 
-    public CreateItem () {
+    public CreateItem() {
         super();
     }
 }

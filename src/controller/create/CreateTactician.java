@@ -10,7 +10,7 @@ public class CreateTactician extends AbstractFactory {
 
     Map<String, Tactician> tacticians;
 
-    public CreateTactician () {
+    public CreateTactician() {
         tacticians = new TreeMap<>();
     }
 
@@ -22,7 +22,7 @@ public class CreateTactician extends AbstractFactory {
         return new ArrayList<Tactician>(tacticians.values());
     }
 
-    public void deleteTactician (String name) {
+    public void deleteTactician(String name) {
         tacticians.remove(name);
     }
 }

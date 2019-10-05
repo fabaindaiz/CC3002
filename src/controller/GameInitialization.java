@@ -1,12 +1,10 @@
 package controller;
 
+import controller.Parameter.IParameter;
 import model.Tactician;
 import model.map.Field;
-import model.units.IUnit;
 
-import java.util.Map;
-import java.util.Random;
-import java.util.TreeMap;
+import java.util.*;
 
 public abstract class GameInitialization {
 
@@ -16,25 +14,25 @@ public abstract class GameInitialization {
     protected boolean initiatedGame = false;
     protected int defaultMapSize;
 
-    protected Map<String, Tactician> tacticiansMaster = new TreeMap<>();
+    protected ArrayList<IParameter> parameters;
+
     protected Map<String, Tactician> tacticians = new TreeMap<>();
-    protected Field gameMapMaster = new Field();
     protected Field gameMap = new Field();
 
     public GameInitialization(int numberOfPlayers, int mapSize) {
         numPlayers = numberOfPlayers;
         defaultMapSize = mapSize;
-        gameMapMaster.setSeed(defaultSeed);
-        gameMapMaster.generateMap(defaultMapSize);
+        gameMap.setSeed(defaultSeed);
+        gameMap.generateMap(defaultMapSize);
 
         for (int i = 0; i < numPlayers; i++)
-            tacticiansMaster.put("Player " + i, new Tactician("Player " + i, gameMap));
+            tacticians.put("Player " + i, new Tactician("Player " + i, gameMap));
     }
 
     public void initAll() {
         tacticians.clear();
-        for (Tactician tactician : tacticiansMaster.values()) {
-        }
+        for (int i = 0; i < numPlayers; i++)
+            tacticians.put("Player " + i, new Tactician("Player " + i, gameMap));
 
     }
 
