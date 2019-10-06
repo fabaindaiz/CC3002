@@ -20,7 +20,7 @@ import static java.lang.Math.min;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public abstract class AbstractUnit implements IUnit {
+public abstract class AbstractUnit extends UnitSubject implements IUnit {
 
     private final int maxHitPoints;
     private final int movement;
@@ -119,6 +119,7 @@ public abstract class AbstractUnit implements IUnit {
     private void death() {
         location.setUnit(null);
         location = null;
+        notifyAllObservers();
     }
 
     @Override

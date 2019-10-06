@@ -1,5 +1,6 @@
 package model;
 
+import controller.Observer.Observer;
 import model.items.IEquipableItem;
 import model.map.Field;
 import model.units.IUnit;
@@ -14,7 +15,7 @@ import java.util.List;
  * @version 2.0
  * @since 2.0
  */
-public class Tactician implements ITactician {
+public class Tactician extends TacticianSubject implements ITactician {
 
     protected final List<IUnit> units = new ArrayList<>();
     private final Field gameMap;
@@ -50,6 +51,8 @@ public class Tactician implements ITactician {
     public void removeUnit(IUnit unit) {
         unit.getLocation().setUnit(null);
         units.remove(unit);
+
+        notifyAllObservers();
     }
 
     @Override

@@ -21,6 +21,7 @@ import java.util.List;
  */
 public class GameController extends GameInitialization implements IGameController {
 
+
     protected Tactician turnOwner;
     private int turnInRound;
     private Tactician lastTurn;
@@ -36,6 +37,7 @@ public class GameController extends GameInitialization implements IGameControlle
      */
     public GameController(int numberOfPlayers, int mapSize) {
         super(numberOfPlayers, mapSize);
+        setGameController(this);
         assignTurns();
         turnOwner = turns.get(0);
     }
@@ -189,6 +191,7 @@ public class GameController extends GameInitialization implements IGameControlle
             turns.remove(tacticianTemp);
             tacticians.remove(tactician);
         }
+        notifyAllObservers();
     }
 
     @Override
