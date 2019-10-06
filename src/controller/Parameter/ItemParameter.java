@@ -1,4 +1,4 @@
-package controller.Parameter;
+package controller.parameter;
 
 import model.Tactician;
 import model.items.IEquipableItem;

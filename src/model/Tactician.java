@@ -1,6 +1,5 @@
 package model;
 
-import controller.Observer.Observer;
 import model.items.IEquipableItem;
 import model.map.Field;
 import model.units.IUnit;
@@ -118,14 +117,15 @@ public class Tactician extends TacticianSubject implements ITactician {
     public void useItemOn(int x, int y) {
         if (selectedUnit == null) return;
         IUnit unit = gameMap.getCell(x, y).getUnit();
-        selectedUnit.useItem(unit, true);
+        if (!units.contains(unit))
+            selectedUnit.useItem(unit, true);
     }
 
     @Override
     public void giveItemTo(int x, int y) {
         if (selectedUnit == null || selectedItem == null) return;
         IUnit unit = gameMap.getCell(x, y).getUnit();
-        if (unit != null)
+        if (unit != null && units.contains(unit))
             selectedUnit.exchange(unit, selectedItem);
         selectedItem = null;
     }

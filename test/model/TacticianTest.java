@@ -37,12 +37,14 @@ class TacticianTest {
         tactician2 = new Tactician ("Player0", gameMap);
         unit1 = new Hero(50, 2, gameMap.getCell(0, 0));
         unit2 = new Cleric(50, 2, gameMap.getCell(1, 1));
+        unit3 = new Hero(50, 2, gameMap.getCell(1, 0));
         item1 = new Spear("Spear", 10, 1, 3);
         item2 = new Staff("Staff", 10, 1, 3);
         unit1.addItem(item1);
         unit1.addItem(item2);
         tactician1.addUnit(unit1);
         tactician1.addUnit(unit2);
+        tactician2.addUnit(unit3);
 
     }
 
@@ -55,7 +57,7 @@ class TacticianTest {
     @Test
     void getUnits() {
         assertEquals(tactician1.getUnits(), List.of(unit1, unit2));
-        assertEquals(tactician2.getUnits(), List.of());
+        assertEquals(tactician2.getUnits(), List.of(unit3));
     }
 
     @Test
@@ -136,11 +138,15 @@ class TacticianTest {
         assertEquals(tactician1.getItems(), null);
         assertEquals(tactician2.getItems(), null);
         tactician2.selectUnitId(0);
+        assertEquals(tactician2.getItems(), List.of());
+        tactician2.selectUnitId(1);
         assertEquals(tactician2.getItems(), null);
     }
 
     @Test
     void selectItem() {
+        assertEquals(tactician1.getSelectedItem(), null);
+        tactician1.selectItem(0);
         assertEquals(tactician1.getSelectedItem(), null);
         tactician1.selectUnitId(0);
         assertEquals(tactician1.getSelectedItem(), null);
@@ -158,6 +164,8 @@ class TacticianTest {
 
     @Test
     void getSelectedItem() {    //Cambiar esto
+        assertEquals(tactician1.getSelectedItem(), null);
+        tactician1.selectItem(0);
         assertEquals(tactician1.getSelectedItem(), null);
         tactician1.selectUnitId(0);
         assertEquals(tactician1.getSelectedItem(), null);
@@ -193,10 +201,10 @@ class TacticianTest {
     void useItemOn() {
         tactician1.selectUnitId(0);
         tactician1.useItemOn(1,1);
-        assertEquals(unit2.getCurrentHitPoints(), 50);
+        assertEquals(unit3.getCurrentHitPoints(), 50);
         tactician1.equipItem(0);
-        tactician1.useItemOn(1,1);
-        assertEquals(unit2.getCurrentHitPoints(), 40);
+        tactician1.useItemOn(1,0);
+        assertEquals(unit3.getCurrentHitPoints(), 40);
     }
 
     @Test

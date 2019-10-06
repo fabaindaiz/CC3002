@@ -1,4 +1,4 @@
-package controller.Observer;
+package controller.observer;
 
 import javax.security.auth.Subject;
 

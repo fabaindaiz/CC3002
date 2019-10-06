@@ -1,6 +1,6 @@
 package model.items;
 
-import controller.Parameter.IParameter;
+import controller.parameter.IParameter;
 import model.units.IUnit;
 
 /**
@@ -75,7 +75,7 @@ public abstract class AbstractItem implements IEquipableItem {
         owner.receiveHeal(item);
     }
 
-    @Override
+    /*@Override
     public IParameter getParameter() {
         return parameter;
     }
@@ -83,6 +83,6 @@ public abstract class AbstractItem implements IEquipableItem {
     @Override
     public void setParameter(IParameter parameter) {
         this.parameter = parameter;
-    }
+    }*/
 
 }

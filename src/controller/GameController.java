@@ -1,8 +1,8 @@
 package controller;
 
-import controller.Parameter.IParameter;
-import controller.Parameter.ItemParameter;
-import controller.Parameter.UnitParameter;
+import controller.parameter.IParameter;
+import controller.parameter.ItemParameter;
+import controller.parameter.UnitParameter;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
@@ -257,13 +257,14 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void useItemOn(int x, int y) {
-        if (initiatedGame) turnOwner.useItemOn(x, y);
-    }
+    public void useItemOn(int x, int y) { if (initiatedGame) turnOwner.useItemOn(x, y); }
 
     @Override
     public void giveItemTo(int x, int y) {
         if (initiatedGame) turnOwner.giveItemTo(x, y);
     }
+
+    @Override
+    public void moveUnitTo(int x, int y) { if (initiatedGame) turnOwner.moveUnitTo(x, y); }
 
 }

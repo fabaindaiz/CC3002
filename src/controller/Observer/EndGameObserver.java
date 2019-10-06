@@ -1,4 +1,4 @@
-package controller.Observer;
+package controller.observer;
 
 import controller.GameController;
 

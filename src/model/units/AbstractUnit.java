@@ -1,6 +1,6 @@
 package model.units;
 
-import controller.Parameter.IParameter;
+import controller.parameter.IParameter;
 import model.items.IEquipableItem;
 import model.map.Location;
 
@@ -247,7 +247,7 @@ public abstract class AbstractUnit extends UnitSubject implements IUnit {
     public void equipStaff(IEquipableItem item) {
     }
 
-    @Override
+    /*@Override
     public IParameter getParameter() {
         return parameter;
     }
@@ -255,6 +255,6 @@ public abstract class AbstractUnit extends UnitSubject implements IUnit {
     @Override
     public void setParameter(IParameter parameter) {
         this.parameter = parameter;
-    }
+    }*/
 
 }

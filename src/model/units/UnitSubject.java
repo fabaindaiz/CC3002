@@ -1,6 +1,6 @@
 package model.units;
 
-import controller.Observer.Observer;
+import controller.observer.Observer;
 
 import java.util.ArrayList;
 import java.util.List;

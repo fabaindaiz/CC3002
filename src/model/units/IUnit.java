@@ -1,6 +1,6 @@
 package model.units;
 
-import controller.Parameter.IParameter;
+import controller.parameter.IParameter;
 import model.items.IEquipableItem;
 import model.map.Location;
 
@@ -167,7 +167,7 @@ public interface IUnit {
      */
     void equipStaff(IEquipableItem item);
 
-    IParameter getParameter();
+    /*IParameter getParameter();
 
-    void setParameter(IParameter parameter);
+    void setParameter(IParameter parameter);*/
 }

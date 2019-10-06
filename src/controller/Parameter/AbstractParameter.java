@@ -1,4 +1,4 @@
-package controller.Parameter;
+package controller.parameter;
 
 import model.items.IEquipableItem;
 import model.items.magicbook.Anima;

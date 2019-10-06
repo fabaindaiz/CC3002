@@ -1,6 +1,6 @@
 package controller;
 
-import controller.Parameter.IParameter;
+import controller.parameter.IParameter;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
@@ -207,4 +207,5 @@ public interface IGameController {
      */
     void giveItemTo(int x, int y);
 
+    void moveUnitTo(int x, int y);
 }

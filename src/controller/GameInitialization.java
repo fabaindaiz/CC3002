@@ -1,12 +1,12 @@
 package controller;
 
-import controller.Observer.DefeatTacticianObserver;
-import controller.Observer.DefeatUnitObserver;
-import controller.Observer.EndGameObserver;
-import controller.Observer.Observer;
-import controller.Parameter.IParameter;
-import controller.Parameter.ItemParameter;
-import controller.Parameter.UnitParameter;
+import controller.observer.DefeatTacticianObserver;
+import controller.observer.DefeatUnitObserver;
+import controller.observer.EndGameObserver;
+import controller.observer.Observer;
+import controller.parameter.IParameter;
+import controller.parameter.ItemParameter;
+import controller.parameter.UnitParameter;
 import model.Tactician;
 import model.map.Field;
 import model.units.IUnit;

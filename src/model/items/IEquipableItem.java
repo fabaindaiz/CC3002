@@ -1,6 +1,6 @@
 package model.items;
 
-import controller.Parameter.IParameter;
+import controller.parameter.IParameter;
 import model.units.IUnit;
 
 /**
@@ -147,7 +147,7 @@ public interface IEquipableItem {
      */
     void receiveBowAttack(IEquipableItem item, boolean counterAttack);
 
-    IParameter getParameter();
+    /*IParameter getParameter();
 
-    void setParameter(IParameter parameter);
+    void setParameter(IParameter parameter);*/
 }
