@@ -2,6 +2,7 @@ package controller.Parameter;
 
 import model.Tactician;
 import model.items.IEquipableItem;
+import model.map.Field;
 import model.map.Location;
 import model.units.IUnit;
 
@@ -14,7 +15,7 @@ public interface IParameter {
      *
      * @param tacticians Lista con los tacticians
      */
-    void create(ArrayList<Tactician> tacticians);
+    void create(Field gameMap, ArrayList<Tactician> tacticians);
 
     /**
      * @param type

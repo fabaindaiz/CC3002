@@ -1,6 +1,7 @@
 package controller.Parameter;
 
 import model.Tactician;
+import model.map.Field;
 import model.map.Location;
 import model.units.IUnit;
 
@@ -23,8 +24,8 @@ public class UnitParameter extends AbstractParameter {
     }
 
     @Override
-    public void create(ArrayList<Tactician> tacticians) {
-        IUnit createdUnit = createUnit(type, maxHitPoints, movement, location, null);
+    public void create(Field gameMap, ArrayList<Tactician> tacticians) {
+        IUnit createdUnit = createUnit(type, maxHitPoints, movement, gameMap.getCell(location.getRow(),location.getColumn()));
         Tactician tactician = tacticians.get(ownerTactician);
         tactician.addUnit(createdUnit);
     }

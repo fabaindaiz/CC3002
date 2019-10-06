@@ -2,6 +2,7 @@ package controller.Parameter;
 
 import model.Tactician;
 import model.items.IEquipableItem;
+import model.map.Field;
 import model.units.IUnit;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class ItemParameter extends AbstractParameter {
     }
 
     @Override
-    public void create(ArrayList<Tactician> tacticians) {
+    public void create(Field gameMap, ArrayList<Tactician> tacticians) {
         IEquipableItem createdItem = createItem(type, name, power, minRange, maxRange);
         IUnit unit = tacticians.get(ownerTactician).getUnits().get(ownerUnit);
         unit.addItem(createdItem);

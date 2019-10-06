@@ -40,6 +40,8 @@ public interface IField {
      */
     void printMap();
 
+    void clearMap();
+
     /**
      * Add cells to the map.
      *

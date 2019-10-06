@@ -57,11 +57,15 @@ public abstract class GameInitialization {
 
     public void initAll() {
         tacticians.clear();
+        gameMap.clearMap();
+        gameMap.setSeed(defaultSeed);
+        gameMap.generateMap(defaultMapSize);
+
         for (int i = 0; i < numPlayers; i++)
             tacticians.put("Player " + i, new Tactician("Player " + i, gameMap));
 
         for (IParameter parameter : parameters) {
-            parameter.create(new ArrayList<Tactician>(tacticians.values()));
+            parameter.create(gameMap, new ArrayList<Tactician>(tacticians.values()));
         }
 
         new EndGameObserver (gameController);

@@ -1,5 +1,6 @@
 package controller;
 
+import controller.Parameter.IParameter;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
@@ -54,7 +55,7 @@ public interface IGameController {
      * @param type Tipo de la unidad
      *             Los otros parametros son entregados directamente al constructor de abstractUnit
      */
-    void createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items);
+    IParameter createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items);
 
     /**
      *
@@ -71,7 +72,7 @@ public interface IGameController {
      * @param maxRange
      * @param equiped
      */
-    void createItem(String type, String name, int power, int minRange, int maxRange, boolean equiped);
+    IParameter createItem(String type, String name, int power, int minRange, int maxRange, boolean equiped);
 
     /**
      * Añade una unidad a un tactician antes de inicializar en juego

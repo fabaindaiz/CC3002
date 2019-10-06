@@ -44,7 +44,8 @@ public class Tactician extends TacticianSubject implements ITactician {
 
     @Override
     public void addUnit(IUnit unit) {
-        units.add(unit);
+        if (unit.getLocation().addUnitToCell(unit))
+            units.add(unit);
     }
 
     @Override

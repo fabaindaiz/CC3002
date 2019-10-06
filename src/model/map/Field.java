@@ -93,6 +93,11 @@ public class Field implements IField {
     }
 
     @Override
+    public void clearMap() {
+        map = new HashMap<>();
+    }
+
+    @Override
     public void addCells(final boolean connectAll, final Location... cells) {
         for (Location cell : cells) {
             addCell(cell);

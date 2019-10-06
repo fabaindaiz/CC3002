@@ -1,5 +1,6 @@
 package controller;
 
+import controller.Parameter.IParameter;
 import controller.Parameter.ItemParameter;
 import controller.Parameter.UnitParameter;
 import model.Tactician;
@@ -7,6 +8,7 @@ import model.items.IEquipableItem;
 import model.map.Field;
 import model.map.Location;
 import model.units.IUnit;
+import model.units.sorcerer.Sorcerer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +76,11 @@ public class GameController extends GameInitialization implements IGameControlle
     public void CreatePredefinedUnit() {}
 
     @Override
-    public void createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items) {
-        parameters.add(new UnitParameter(type, hitPoints, movement, location, turnInRound));
+    public IParameter createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items) {
+        turnOwner.addUnit(new Sorcerer(hitPoints, movement, location));
+        IParameter parameter = new UnitParameter(type, hitPoints, movement, location, turnInRound);
+        parameters.add(parameter);
+        return parameter;
     }
 
     @Override
@@ -87,9 +92,11 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void createItem(String type, final String name, final int power, final int minRange, final int maxRange, boolean equiped) {
-        parameters.add(new ItemParameter(type, name, power, minRange, maxRange, turnInRound,
-                turnOwner.getUnits().indexOf(turnOwner.getSelectedUnit()), equiped));
+    public IParameter createItem(String type, final String name, final int power, final int minRange, final int maxRange, boolean equiped) {
+        IParameter parameter = new ItemParameter(type, name, power, minRange, maxRange, turnInRound,
+                turnOwner.getUnits().indexOf(turnOwner.getSelectedUnit()), equiped);
+        parameters.add(parameter);
+        return parameter;
     }
 
     @Override
@@ -103,8 +110,7 @@ public class GameController extends GameInitialization implements IGameControlle
     @Override
     public void addUnit (IUnit... units) {
         for (IUnit unit : units) {
-            if (unit.getLocation().addUnitToCell(unit))
-                turnOwner.addUnit(unit);
+            turnOwner.addUnit(unit);
         }
     }
 
@@ -221,13 +227,11 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public void selectUnitIn(int x, int y) {
-        if (initiatedGame) turnOwner.selectUnitIn(x, y);
+        turnOwner.selectUnitIn(x, y);
     }
 
     @Override
-    public void selectUnitId(int index) {
-        if (initiatedGame) turnOwner.selectUnitId(index);
-    }
+    public void selectUnitId(int index) { turnOwner.selectUnitId(index); }
 
     @Override
     public IUnit getSelectedUnit() {
@@ -240,9 +244,7 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void selectItem(int index) {
-        if (initiatedGame) turnOwner.selectItem(index);
-    }
+    public void selectItem(int index) { if (initiatedGame) turnOwner.selectItem(index); }
 
     @Override
     public IEquipableItem getSelectedItem() {
