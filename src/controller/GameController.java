@@ -87,7 +87,7 @@ public class GameController extends GameInitialization implements IGameControlle
     public void createRandomItem() {}
 
     //@Override
-    public void createPredefineditem() {
+    public void createPredefinedItem() {
 
     }
 

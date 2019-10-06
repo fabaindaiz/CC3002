@@ -104,4 +104,6 @@ public interface ITactician {
      * @param y vertical position of the target
      */
     void giveItemTo(int x, int y);
+
+    void moveUnitTo(int x, int y);
 }

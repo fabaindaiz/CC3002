@@ -44,21 +44,24 @@ public class Tactician extends TacticianSubject implements ITactician {
 
     @Override
     public void addUnit(IUnit unit) {
-        if (unit.getLocation().addUnitToCell(unit))
+        if (unit != null && unit.getLocation().addUnitToCell(unit))
             units.add(unit);
     }
 
     @Override
     public void removeUnit(IUnit unit) {
-        unit.getLocation().setUnit(null);
-        units.remove(unit);
+        if (unit != null) {
+            unit.getLocation().setUnit(null);
+            units.remove(unit);
+        }
 
         notifyAllObservers();
     }
 
     @Override
     public void removeAllUnit() {
-        for (IUnit unit : units) {
+        List<IUnit> tempUnits = new ArrayList<IUnit>(units);
+        for (IUnit unit : tempUnits) {
             removeUnit(unit);
         }
     }
@@ -92,9 +95,11 @@ public class Tactician extends TacticianSubject implements ITactician {
 
     @Override
     public void selectItem(int index) {
-        if (selectedUnit == null) return;
-        if (selectedUnit.getItems().size() > index)
+        if (selectedUnit == null)
+            selectedItem = null;
+        else if (selectedUnit.getItems().size() > index)
             selectedItem = selectedUnit.getItems().get(index);
+        else selectedItem = null;
     }
 
     @Override
@@ -123,5 +128,12 @@ public class Tactician extends TacticianSubject implements ITactician {
         if (unit != null)
             selectedUnit.exchange(unit, selectedItem);
         selectedItem = null;
+    }
+
+    @Override
+    public void moveUnitTo(int x, int y) {
+        if (selectedUnit == null) return;
+        if (gameMap.getCell(x, y).getUnit() == null)
+            selectedUnit.moveTo(gameMap.getCell(x,y));
     }
 }
