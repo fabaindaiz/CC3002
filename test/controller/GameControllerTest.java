@@ -66,6 +66,10 @@ class GameControllerTest {
     }
 
     @Test
+    void getInitiatedGameStatus() {
+    }
+
+    @Test
     void getMaxRounds() {
         Random randomTurnSequence = new Random();
         IntStream.range(0, 50).map(i -> randomTurnSequence.nextInt() & Integer.MAX_VALUE).forEach(nextInt -> {

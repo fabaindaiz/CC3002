@@ -18,22 +18,22 @@ public interface IParameter {
     void create(Field gameMap, ArrayList<Tactician> tacticians);
 
     /**
-     * @param type
-     * @param hitPoints
-     * @param movement
-     * @param location
-     * @param items
-     * @return
+     * Crea a una unidad especifica
+     *
+     * @param type Tipo de unidad
+     * El resto de los parametros son los mismos que desde AbstractUnit
+     *
+     * @return la unidad creada
      */
     IUnit createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items);
 
     /**
+     * Crea un item específico
+     *
      * @param type
-     * @param name
-     * @param power
-     * @param minRange
-     * @param maxRange
-     * @return
+     * El resto de los parametros son los mismos que desde AbstractItem
+
+     * @return el item Creado
      */
     IEquipableItem createItem(String type, String name, int power, int minRange, int maxRange);
 }

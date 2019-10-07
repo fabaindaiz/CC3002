@@ -45,6 +45,9 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
+    public boolean getInitiatedGameStatus() { return initiatedGame; }
+
+    @Override
     public int getMaxRounds() {
         return maxRounds;
     }
@@ -150,6 +153,7 @@ public class GameController extends GameInitialization implements IGameControlle
         maxRounds = maxTurns;
         roundNumber = 0;
         turnInRound = 0;
+        notifyAllObservers();
     }
 
     @Override
@@ -231,7 +235,6 @@ public class GameController extends GameInitialization implements IGameControlle
     @Override
     public void endGame() {
         initiatedGame = false;
-
     }
 
     @Override

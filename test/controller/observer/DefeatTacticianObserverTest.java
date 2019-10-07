@@ -30,6 +30,7 @@ class DefeatTacticianObserverTest {
         controller.initEndlessGame();
         while (!controller.getTurnOwner().getName().equals("Player 0"))
             controller.endTurn();
+
         controller.selectUnitId(0);
         assertEquals(controller.getSelectedUnit().getLocation(), controller.getGameMap().getCell(6, 6));
         assertEquals(controller.getSelectedUnit().getEquippedItem().getName(), "Weak Bow");

@@ -9,6 +9,7 @@ class AbstractSubjectTest {
 
     @BeforeEach
     void setUp() {
+
     }
 
     @Test

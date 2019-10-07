@@ -20,6 +20,11 @@ import java.util.List;
 public interface IGameController {
 
     /**
+     * @return status of the Game
+     */
+    boolean getInitiatedGameStatus();
+
+    /**
      * @return the maximum number of rounds a match can last
      */
     int getMaxRounds();
