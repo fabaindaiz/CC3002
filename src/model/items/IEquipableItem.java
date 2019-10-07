@@ -1,6 +1,5 @@
 package model.items;
 
-import controller.parameter.IParameter;
 import model.units.IUnit;
 
 /**

@@ -114,9 +114,9 @@ class GameControllerTest {
         assertEquals(testMap.getSize(), gameMap.getSize());
         assertEquals(testMap.getSideSquare(), gameMap.getSideSquare());
         for (int i = 0; i < 1000; i++) {
-            int x = (int) (testRandom.nextFloat()*gameMap.getSideSquare());
-            int y = (int) (testRandom.nextFloat()*gameMap.getSideSquare());
-            assertEquals(testMap.getCell(x,y), gameMap.getCell(x,y));
+            int x = (int) (testRandom.nextFloat() * gameMap.getSideSquare());
+            int y = (int) (testRandom.nextFloat() * gameMap.getSideSquare());
+            assertEquals(testMap.getCell(x, y), gameMap.getCell(x, y));
         }
     }
 
@@ -278,7 +278,7 @@ class GameControllerTest {
 
     @Test
     void endGame() {
-        controller. initEndlessGame();
+        controller.initEndlessGame();
         controller.endGame();
 
 

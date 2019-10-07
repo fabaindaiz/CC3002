@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TacticianTest {
     Field gameMap;
@@ -33,8 +33,8 @@ class TacticianTest {
         gameMap.addCells(true, new Location(1, 0));
         gameMap.addCells(true, new Location(1, 1));
 
-        tactician1 = new Tactician ("ExamplePlayer", 0, gameMap);
-        tactician2 = new Tactician ("Player0", 1, gameMap);
+        tactician1 = new Tactician("ExamplePlayer", 0, gameMap);
+        tactician2 = new Tactician("Player0", 1, gameMap);
         unit1 = new Hero(50, 2, gameMap.getCell(0, 0));
         unit2 = new Cleric(50, 2, gameMap.getCell(1, 1));
         unit3 = new Hero(50, 2, gameMap.getCell(1, 0));
@@ -82,26 +82,26 @@ class TacticianTest {
     @Test
     void removeAllUnit() {
         assertEquals(tactician1.getUnits(), List.of(unit1, unit2));
-        assertEquals(unit1.getLocation().getUnit(),unit1);
-        assertEquals(unit2.getLocation().getUnit(),unit2);
+        assertEquals(unit1.getLocation().getUnit(), unit1);
+        assertEquals(unit2.getLocation().getUnit(), unit2);
         tactician1.removeAllUnit();
         assertEquals(tactician1.getUnits(), List.of());
-        assertEquals(unit1.getLocation().getUnit(),null);
-        assertEquals(unit2.getLocation().getUnit(),null);
+        assertEquals(unit1.getLocation().getUnit(), null);
+        assertEquals(unit2.getLocation().getUnit(), null);
     }
 
     @Test
     void selectUnitIn() {
         assertEquals(tactician1.getSelectedUnit(), null);
-        tactician1.selectUnitIn(0,0);
+        tactician1.selectUnitIn(0, 0);
         assertEquals(tactician1.getSelectedUnit(), unit1);
-        tactician1.selectUnitIn(1,0);
+        tactician1.selectUnitIn(1, 0);
         assertEquals(tactician1.getSelectedUnit(), null);
-        tactician1.selectUnitIn(0,1);
+        tactician1.selectUnitIn(0, 1);
         assertEquals(tactician1.getSelectedUnit(), null);
-        tactician1.selectUnitIn(1,1);
+        tactician1.selectUnitIn(1, 1);
         assertEquals(tactician1.getSelectedUnit(), unit2);
-        tactician1.selectUnitIn(2,2);
+        tactician1.selectUnitIn(2, 2);
         assertEquals(tactician1.getSelectedUnit(), null);
     }
 
@@ -131,7 +131,7 @@ class TacticianTest {
     void getItems() {
         assertEquals(tactician1.getItems(), null);
         tactician1.selectUnitId(0);
-        assertEquals(tactician1.getItems(), List.of(item1,item2));
+        assertEquals(tactician1.getItems(), List.of(item1, item2));
         tactician1.selectUnitId(1);
         assertEquals(tactician1.getItems(), List.of());
         tactician1.selectUnitId(2);
@@ -184,42 +184,42 @@ class TacticianTest {
     @Test
     void equipItem() {
         tactician1.selectUnitId(0);
-        assertEquals(tactician1.getSelectedUnit().getEquippedItem(),null);
+        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), null);
         tactician1.equipItem(2);
-        assertEquals(tactician1.getSelectedUnit().getEquippedItem(),null);
+        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), null);
         tactician1.equipItem(1);
-        assertEquals(tactician1.getSelectedUnit().getEquippedItem(),null);
+        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), null);
         tactician1.equipItem(0);
-        assertEquals(tactician1.getSelectedUnit().getEquippedItem(),item1);
+        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), item1);
         tactician1.selectUnitId(1);
-        assertEquals(tactician1.getSelectedUnit().getEquippedItem(),null);
+        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), null);
         tactician1.equipItem(0);
-        assertEquals(tactician1.getSelectedUnit().getEquippedItem(),null);
+        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), null);
     }
 
     @Test
     void useItemOn() {
         tactician1.selectUnitId(0);
-        tactician1.useItemOn(1,1);
+        tactician1.useItemOn(1, 1);
         assertEquals(unit3.getCurrentHitPoints(), 50);
         tactician1.equipItem(0);
-        tactician1.useItemOn(1,0);
+        tactician1.useItemOn(1, 0);
         assertEquals(unit3.getCurrentHitPoints(), 40);
     }
 
     @Test
     void giveItemTo() {
         tactician1.selectUnitId(0);
-        tactician1.giveItemTo(1,1);
-        assertEquals(unit1.getItems(), List.of(item1,item2));
+        tactician1.giveItemTo(1, 1);
+        assertEquals(unit1.getItems(), List.of(item1, item2));
         assertEquals(unit2.getItems(), List.of());
         tactician1.selectItem(0);
-        tactician1.giveItemTo(1,1);
-        assertEquals(unit1.getItems(), List.of(item1,item2));
+        tactician1.giveItemTo(1, 1);
+        assertEquals(unit1.getItems(), List.of(item1, item2));
         assertEquals(unit2.getItems(), List.of());
-        tactician1.moveUnitTo(0,1);
+        tactician1.moveUnitTo(0, 1);
         tactician1.selectItem(0);
-        tactician1.giveItemTo(1,1);
+        tactician1.giveItemTo(1, 1);
         assertEquals(unit1.getItems(), List.of(item2));
         assertEquals(unit2.getItems(), List.of(item1));
     }
@@ -227,12 +227,12 @@ class TacticianTest {
     @Test
     void moveUnitTo() {
         tactician1.selectUnitId(0);
-        assertEquals(tactician1.getSelectedUnit().getLocation(),gameMap.getCell(0, 0));
-        tactician1.moveUnitTo(0,2);
-        assertEquals(tactician1.getSelectedUnit().getLocation(),gameMap.getCell(0, 0));
-        tactician1.moveUnitTo(0,1);
-        assertEquals(tactician1.getSelectedUnit().getLocation(),gameMap.getCell(0, 1));
-        tactician1.moveUnitTo(1,1);
-        assertEquals(tactician1.getSelectedUnit().getLocation(),gameMap.getCell(0, 1));
+        assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 0));
+        tactician1.moveUnitTo(0, 2);
+        assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 0));
+        tactician1.moveUnitTo(0, 1);
+        assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 1));
+        tactician1.moveUnitTo(1, 1);
+        assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 1));
     }
 }

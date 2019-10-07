@@ -70,10 +70,12 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void createRandomUnit() {}
+    public void createRandomUnit() {
+    }
 
     //@Override
-    public void CreatePredefinedUnit() {}
+    public void CreatePredefinedUnit() {
+    }
 
     @Override
     public IParameter createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items) {
@@ -84,7 +86,8 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void createRandomItem() {}
+    public void createRandomItem() {
+    }
 
     //@Override
     public void createPredefinedItem() {
@@ -108,14 +111,14 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void addUnit (IUnit... units) {
+    public void addUnit(IUnit... units) {
         for (IUnit unit : units) {
             turnOwner.addUnit(unit);
         }
     }
 
     @Override
-    public void addItem (IEquipableItem... items) {
+    public void addItem(IEquipableItem... items) {
         for (IEquipableItem item : items) {
             turnOwner.getSelectedUnit().addItem(item);
         }
@@ -237,7 +240,9 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void selectUnitId(int index) { turnOwner.selectUnitId(index); }
+    public void selectUnitId(int index) {
+        turnOwner.selectUnitId(index);
+    }
 
     @Override
     public IUnit getSelectedUnit() {
@@ -250,7 +255,9 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void selectItem(int index) { if (initiatedGame) turnOwner.selectItem(index); }
+    public void selectItem(int index) {
+        if (initiatedGame) turnOwner.selectItem(index);
+    }
 
     @Override
     public IEquipableItem getSelectedItem() {
@@ -263,7 +270,9 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void useItemOn(int x, int y) { if (initiatedGame) turnOwner.useItemOn(x, y); }
+    public void useItemOn(int x, int y) {
+        if (initiatedGame) turnOwner.useItemOn(x, y);
+    }
 
     @Override
     public void giveItemTo(int x, int y) {
@@ -271,6 +280,8 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void moveUnitTo(int x, int y) { if (initiatedGame) turnOwner.moveUnitTo(x, y); }
+    public void moveUnitTo(int x, int y) {
+        if (initiatedGame) turnOwner.moveUnitTo(x, y);
+    }
 
 }

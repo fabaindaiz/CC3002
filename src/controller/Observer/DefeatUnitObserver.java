@@ -3,12 +3,12 @@ package controller.observer;
 import model.Tactician;
 import model.units.IUnit;
 
-public class DefeatUnitObserver extends Observer {
+public class DefeatUnitObserver extends AbstractObserver {
 
     Tactician tactician;
     IUnit unit;
 
-    public DefeatUnitObserver (Tactician tactician, IUnit unit){
+    public DefeatUnitObserver(Tactician tactician, IUnit unit) {
         this.tactician = tactician;
         this.unit = unit;
     }

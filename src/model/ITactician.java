@@ -1,6 +1,6 @@
 package model;
 
-import controller.observer.Observer;
+import controller.observer.IObserver;
 import model.items.IEquipableItem;
 import model.units.IUnit;
 
@@ -16,13 +16,19 @@ import java.util.List;
  */
 public interface ITactician {
 
-    void addObserver (Observer observer);
+    /**
+     * @param observer
+     */
+    void addObserver(IObserver observer);
 
     /**
      * @return el nombre del Tactician
      */
     String getName();
 
+    /**
+     * @return
+     */
     int getTacticianNumber();
 
     /**

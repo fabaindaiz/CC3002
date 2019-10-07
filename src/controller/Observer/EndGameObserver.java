@@ -2,11 +2,11 @@ package controller.observer;
 
 import controller.GameController;
 
-public class EndGameObserver extends Observer {
+public class EndGameObserver extends AbstractObserver {
 
     GameController gameController;
 
-    public EndGameObserver (GameController gameController){
+    public EndGameObserver(GameController gameController) {
         this.gameController = gameController;
     }
 

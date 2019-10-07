@@ -63,8 +63,6 @@ public interface IGameController {
     void createRandomItem();
 
     /**
-     *
-     *
      * @param type
      * @param name
      * @param power

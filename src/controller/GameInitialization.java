@@ -1,9 +1,9 @@
 package controller;
 
+import controller.observer.AbstractSubject;
 import controller.observer.DefeatTacticianObserver;
 import controller.observer.DefeatUnitObserver;
 import controller.observer.EndGameObserver;
-import controller.observer.Observer;
 import controller.parameter.IParameter;
 import controller.parameter.ItemParameter;
 import controller.parameter.UnitParameter;
@@ -11,11 +11,12 @@ import model.Tactician;
 import model.map.Field;
 import model.units.IUnit;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Random;
+import java.util.TreeMap;
 
-public abstract class GameInitialization {
-
-    private List<Observer> observers = new ArrayList<Observer>();
+public abstract class GameInitialization extends AbstractSubject {
 
     protected final int numPlayers;
     protected Random random = new Random();
@@ -42,17 +43,7 @@ public abstract class GameInitialization {
 
     }
 
-    public void notifyAllObservers(){
-        for (Observer observer : observers) {
-            observer.update();
-        }
-    }
-
-    public void attach(Observer observer){
-        observers.add(observer);
-    }
-
-    public void setGameController (GameController gameController) {
+    public void setGameController(GameController gameController) {
         this.gameController = gameController;
     }
 
@@ -69,7 +60,7 @@ public abstract class GameInitialization {
             parameter.create(gameMap, new ArrayList<Tactician>(tacticians.values()));
         }
 
-        observers.add(new EndGameObserver (gameController));
+        getObservers().add(new EndGameObserver(gameController));
         for (Tactician tactician : tacticians.values()) {
             tactician.addObserver(new DefeatTacticianObserver(gameController, tactician));
             for (IUnit unit : tactician.getUnits()) {

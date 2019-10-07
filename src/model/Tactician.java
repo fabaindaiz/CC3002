@@ -1,6 +1,7 @@
 package model;
 
-import controller.observer.Observer;
+import controller.observer.AbstractSubject;
+import controller.observer.IObserver;
 import model.items.IEquipableItem;
 import model.map.Field;
 import model.units.IUnit;
@@ -15,7 +16,7 @@ import java.util.List;
  * @version 2.0
  * @since 2.0
  */
-public class Tactician extends TacticianSubject implements ITactician {
+public class Tactician extends AbstractSubject implements ITactician {
 
     protected final List<IUnit> units = new ArrayList<>();
     private final Field gameMap;
@@ -28,14 +29,14 @@ public class Tactician extends TacticianSubject implements ITactician {
     /**
      * Crea un jugador para el juego (se ejecuta desde GameController)
      */
-    public Tactician(String name,int number, Field map) {
+    public Tactician(String name, int number, Field map) {
         this.gameMap = map;
         this.tacticianNumber = number;
         this.name = name;
     }
 
     @Override
-    public void addObserver (Observer observer) {
+    public void addObserver(IObserver observer) {
         this.attach(observer);
     }
 
@@ -45,7 +46,9 @@ public class Tactician extends TacticianSubject implements ITactician {
     }
 
     @Override
-    public int getTacticianNumber() { return tacticianNumber; }
+    public int getTacticianNumber() {
+        return tacticianNumber;
+    }
 
     @Override
     public List<IUnit> getUnits() {
@@ -146,6 +149,6 @@ public class Tactician extends TacticianSubject implements ITactician {
     public void moveUnitTo(int x, int y) {
         if (selectedUnit == null) return;
         if (gameMap.getCell(x, y).getUnit() == null)
-            selectedUnit.moveTo(gameMap.getCell(x,y));
+            selectedUnit.moveTo(gameMap.getCell(x, y));
     }
 }

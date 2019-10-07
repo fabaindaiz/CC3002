@@ -1,6 +1,7 @@
 package model.units;
 
-import controller.observer.Observer;
+import controller.observer.AbstractSubject;
+import controller.observer.IObserver;
 import controller.parameter.IParameter;
 import model.items.IEquipableItem;
 import model.map.Location;
@@ -21,7 +22,7 @@ import static java.lang.Math.min;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public abstract class AbstractUnit extends UnitSubject implements IUnit {
+public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     private final int maxHitPoints;
     private final int movement;
@@ -51,7 +52,7 @@ public abstract class AbstractUnit extends UnitSubject implements IUnit {
     }
 
     @Override
-    public void addObserver(Observer observer) {
+    public void addObserver(IObserver observer) {
         this.attach(observer);
     }
 
@@ -253,15 +254,5 @@ public abstract class AbstractUnit extends UnitSubject implements IUnit {
     @Override
     public void equipStaff(IEquipableItem item) {
     }
-
-    /*@Override
-    public IParameter getParameter() {
-        return parameter;
-    }
-
-    @Override
-    public void setParameter(IParameter parameter) {
-        this.parameter = parameter;
-    }*/
 
 }
