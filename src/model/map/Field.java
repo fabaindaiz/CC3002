@@ -80,6 +80,8 @@ public class Field implements IField {
         for (int i = 0; i < sideSquare; i++) {
             for (int j = 0; j < sideSquare; j++) {
                 if (getCell(i, j).getRow() < 0 || getCell(i, j).getRow() < 0) System.out.print("  ");
+                else if (i == sideSquare /2 && j == sideSquare / 2)
+                    System.out.print("X ");
                 else {
                     //System.out.print(" ("+ i +","+ j +")");
                     System.out.print(getCell(i, j).getNeighbours().size() + " ");

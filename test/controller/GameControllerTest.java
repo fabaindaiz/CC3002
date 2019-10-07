@@ -224,7 +224,7 @@ class GameControllerTest {
         List<Tactician> tacticiansTemp = controller.getTacticians();
         tacticiansTemp.remove((int) (random.nextFloat() * tacticiansTemp.size()));
         String name = tacticiansTemp.get((int) (random.nextFloat() * tacticiansTemp.size())).getName();
-        Tactician secondPlayer = new Tactician(name, controller.getGameMap());
+        Tactician secondPlayer = new Tactician(name, 2, controller.getGameMap());
         assertNotEquals(secondPlayer.getName(), firstPlayer.getName());
 
         controller.endTurn();

@@ -1,5 +1,6 @@
 package model.units;
 
+import controller.observer.Observer;
 import controller.parameter.IParameter;
 import model.items.IEquipableItem;
 import model.map.Location;
@@ -23,6 +24,8 @@ public interface IUnit {
      * @param item the item to equip
      */
     void equipItem(IEquipableItem item);
+
+    void addObserver(Observer observer);
 
     int getMaxHitPoints();
 

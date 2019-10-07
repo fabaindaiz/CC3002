@@ -33,8 +33,8 @@ class TacticianTest {
         gameMap.addCells(true, new Location(1, 0));
         gameMap.addCells(true, new Location(1, 1));
 
-        tactician1 = new Tactician ("ExamplePlayer", gameMap);
-        tactician2 = new Tactician ("Player0", gameMap);
+        tactician1 = new Tactician ("ExamplePlayer", 0, gameMap);
+        tactician2 = new Tactician ("Player0", 1, gameMap);
         unit1 = new Hero(50, 2, gameMap.getCell(0, 0));
         unit2 = new Cleric(50, 2, gameMap.getCell(1, 1));
         unit3 = new Hero(50, 2, gameMap.getCell(1, 0));

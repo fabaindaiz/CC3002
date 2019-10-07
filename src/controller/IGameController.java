@@ -106,7 +106,7 @@ public interface IGameController {
     /**
      * Cambia la semilla del mapa para el proximo initGame
      */
-    void changeMap();
+    void changeMap(Long... seed);
 
     /**
      * Starts the game.

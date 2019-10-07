@@ -1,5 +1,6 @@
 package model;
 
+import controller.observer.Observer;
 import model.items.IEquipableItem;
 import model.map.Field;
 import model.units.IUnit;
@@ -19,6 +20,7 @@ public class Tactician extends TacticianSubject implements ITactician {
     protected final List<IUnit> units = new ArrayList<>();
     private final Field gameMap;
     private final String name;
+    private int tacticianNumber;
 
     private IUnit selectedUnit;
     private IEquipableItem selectedItem;
@@ -26,15 +28,24 @@ public class Tactician extends TacticianSubject implements ITactician {
     /**
      * Crea un jugador para el juego (se ejecuta desde GameController)
      */
-    public Tactician(String name, Field map) {
+    public Tactician(String name,int number, Field map) {
         this.gameMap = map;
+        this.tacticianNumber = number;
         this.name = name;
+    }
+
+    @Override
+    public void addObserver (Observer observer) {
+        this.attach(observer);
     }
 
     @Override
     public String getName() {
         return name;
     }
+
+    @Override
+    public int getTacticianNumber() { return tacticianNumber; }
 
     @Override
     public List<IUnit> getUnits() {
@@ -50,7 +61,8 @@ public class Tactician extends TacticianSubject implements ITactician {
     @Override
     public void removeUnit(IUnit unit) {
         if (unit != null) {
-            unit.getLocation().setUnit(null);
+            if (unit.getLocation() != null)
+                unit.getLocation().setUnit(null);
             units.remove(unit);
         }
 

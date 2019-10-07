@@ -1,5 +1,6 @@
 package model.units;
 
+import controller.observer.Observer;
 import controller.parameter.IParameter;
 import model.items.IEquipableItem;
 import model.map.Location;
@@ -47,6 +48,11 @@ public abstract class AbstractUnit extends UnitSubject implements IUnit {
         this.maxItems = maxItems;
         this.location = location;
         this.items.addAll(Arrays.asList(items).subList(0, min(maxItems, items.length)));
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.attach(observer);
     }
 
     @Override
@@ -119,6 +125,7 @@ public abstract class AbstractUnit extends UnitSubject implements IUnit {
     private void death() {
         location.setUnit(null);
         location = null;
+
         notifyAllObservers();
     }
 

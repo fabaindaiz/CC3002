@@ -1,5 +1,6 @@
 package model;
 
+import controller.observer.Observer;
 import model.items.IEquipableItem;
 import model.units.IUnit;
 
@@ -15,10 +16,14 @@ import java.util.List;
  */
 public interface ITactician {
 
+    void addObserver (Observer observer);
+
     /**
      * @return el nombre del Tactician
      */
     String getName();
+
+    int getTacticianNumber();
 
     /**
      * @return Una lista con ls unidades del Tactician

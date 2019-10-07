@@ -78,7 +78,7 @@ public class GameController extends GameInitialization implements IGameControlle
     @Override
     public IParameter createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items) {
         turnOwner.addUnit(new Sorcerer(hitPoints, movement, location));
-        IParameter parameter = new UnitParameter(type, hitPoints, movement, location, turnInRound);
+        IParameter parameter = new UnitParameter(type, hitPoints, movement, location, turnOwner.getTacticianNumber());
         parameters.add(parameter);
         return parameter;
     }
@@ -93,7 +93,7 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public IParameter createItem(String type, final String name, final int power, final int minRange, final int maxRange, boolean equiped) {
-        IParameter parameter = new ItemParameter(type, name, power, minRange, maxRange, turnInRound,
+        IParameter parameter = new ItemParameter(type, name, power, minRange, maxRange, turnOwner.getTacticianNumber(),
                 turnOwner.getUnits().indexOf(turnOwner.getSelectedUnit()), equiped);
         parameters.add(parameter);
         return parameter;
@@ -127,8 +127,14 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void changeMap() {
-        defaultSeed = random.nextLong();
+    public void changeMap(Long... seed) {
+        if (seed.length > 0)
+            defaultSeed = seed[0];
+        else
+            defaultSeed = random.nextLong();
+        gameMap.clearMap();
+        gameMap.setSeed(defaultSeed);
+        gameMap.generateMap(defaultMapSize);
     }
 
     @Override

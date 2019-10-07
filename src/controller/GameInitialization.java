@@ -38,7 +38,8 @@ public abstract class GameInitialization {
         gameMap.generateMap(defaultMapSize);
 
         for (int i = 0; i < numPlayers; i++)
-            tacticians.put("Player " + i, new Tactician("Player " + i, gameMap));
+            tacticians.put("Player " + i, new Tactician("Player " + i, i, gameMap));
+
     }
 
     public void notifyAllObservers(){
@@ -62,17 +63,17 @@ public abstract class GameInitialization {
         gameMap.generateMap(defaultMapSize);
 
         for (int i = 0; i < numPlayers; i++)
-            tacticians.put("Player " + i, new Tactician("Player " + i, gameMap));
+            tacticians.put("Player " + i, new Tactician("Player " + i, i, gameMap));
 
         for (IParameter parameter : parameters) {
             parameter.create(gameMap, new ArrayList<Tactician>(tacticians.values()));
         }
 
-        new EndGameObserver (gameController);
+        observers.add(new EndGameObserver (gameController));
         for (Tactician tactician : tacticians.values()) {
-            new DefeatTacticianObserver(gameController, tactician);
+            tactician.addObserver(new DefeatTacticianObserver(gameController, tactician));
             for (IUnit unit : tactician.getUnits()) {
-                new DefeatUnitObserver(tactician, unit);
+                unit.addObserver(new DefeatUnitObserver(tactician, unit));
             }
         }
 
