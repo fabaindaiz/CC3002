@@ -32,6 +32,12 @@ public class ItemParameter extends AbstractParameter {
     }
 
     @Override
+    public String getType() { return type; }
+
+    @Override
+    public String getName() { return name; }
+
+    @Override
     public void create(Field gameMap, ArrayList<Tactician> tacticians) {
         IEquipableItem createdItem = createItem(type, name, power, minRange, maxRange);
         IUnit unit = tacticians.get(ownerTactician).getUnits().get(ownerUnit);

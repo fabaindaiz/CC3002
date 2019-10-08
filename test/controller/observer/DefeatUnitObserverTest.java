@@ -28,7 +28,7 @@ class DefeatUnitObserverTest {
         controller.endTurn();
         controller.createUnit("cleric", 50, 2, controller.getGameMap().getCell(7, 7));
         controller.createUnit("cleric", 50, 2, controller.getGameMap().getCell(7, 6));
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         while (!controller.getTurnOwner().getName().equals("Player 0"))
             controller.endTurn();
 

@@ -28,7 +28,7 @@ class DefeatTacticianObserverTest {
         controller.createUnit("archer", 50, 2, controller.getGameMap().getCell(7, 7));
         controller.selectUnitId(0);
         controller.createItem("bow", "Weak Bow", 0, 0, 3, true);
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         while (!controller.getTurnOwner().getName().equals("Player 0"))
             controller.endTurn();
 

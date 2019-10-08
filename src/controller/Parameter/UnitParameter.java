@@ -24,6 +24,12 @@ public class UnitParameter extends AbstractParameter {
     }
 
     @Override
+    public String getType() { return type; }
+
+    @Override
+    public Location getLocation() { return location; }
+
+    @Override
     public void create(Field gameMap, ArrayList<Tactician> tacticians) {
         IUnit createdUnit = createUnit(type, maxHitPoints, movement, gameMap.getCell(location.getRow(), location.getColumn()));
         Tactician tactician = tacticians.get(ownerTactician);

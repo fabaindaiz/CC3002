@@ -1,13 +1,16 @@
 package controller;
 
+import controller.parameter.IParameter;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.items.otheritem.Staff;
+import model.items.weapon.Bow;
 import model.items.weapon.Spear;
 import model.map.Field;
 import model.map.Location;
 import model.units.IUnit;
 import model.units.otherunit.Cleric;
+import model.units.warrior.Archer;
 import model.units.warrior.Hero;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -66,25 +69,21 @@ class GameControllerTest {
     }
 
     @Test
-    void getInitiatedGameStatus() {
-    }
-
-    @Test
     void getMaxRounds() {
         Random randomTurnSequence = new Random();
         IntStream.range(0, 50).map(i -> randomTurnSequence.nextInt() & Integer.MAX_VALUE).forEach(nextInt -> {
-            controller.initGame(nextInt);
+            controller.initGameTest(nextInt);
             System.out.println(nextInt);
             assertEquals(nextInt, controller.getMaxRounds());
             System.out.println(nextInt);
         });
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         assertEquals(-1, controller.getMaxRounds());
     }
 
     @Test
     void getRoundNumber() {
-        controller.initGame(10);
+        controller.initGameTest(10);
         for (int i = 1; i < 10; i++) {
             assertEquals(i, controller.getRoundNumber());
             for (int j = 0; j < 4; j++) {
@@ -129,7 +128,7 @@ class GameControllerTest {
         Random random = new Random();
         random.setSeed(randomSeed);
         controller.setSeed(randomSeed);
-        controller.initGame(-1);
+        controller.initGameTest(-1);
 
         List<Tactician> tacticiansTurn = new ArrayList<Tactician>();
         List<Tactician> tacticiansTemp;
@@ -158,63 +157,91 @@ class GameControllerTest {
     }
 
     @Test
-    void createRandomUnit() {
-    }
-
-    @Test
-    void createPredefinedUnit() {
-    }
-
-    @Test
     void createUnit() {
-    }
-
-    @Test
-    void createRandomItem() {
-    }
-
-    @Test
-    void createPredefinedItem() {
+        GameController controller = new GameController(2, 50);
+        controller.changeMap((long) 1068 + 1067 + 1067);
+        controller.createUnit("archer", 50, 2, controller.getGameMap().getCell(6, 6));
+        IParameter parameter = controller.getParameters().get(0);
+        assertEquals(parameter.getType(), "archer");
+        assertEquals(parameter.getLocation(), controller.getGameMap().getCell(6, 6));
     }
 
     @Test
     void createItem() {
+        GameController controller = new GameController(2, 50);
+        controller.changeMap((long) 1068 + 1067 + 1067);
+        controller.createUnit("archer", 50, 2, controller.getGameMap().getCell(6, 6));
+        controller.selectUnitId(0);
+        controller.createItem("bow", "Example Bow", 10, 2, 3, false);
+        IParameter parameter = controller.getParameters().get(1);
+        assertEquals(parameter.getType(), "bow");
+        assertEquals(parameter.getName(), "Example Bow");
     }
 
     @Test
     void addUnit() {
+        GameController controller = new GameController(2, 50);
+        controller.changeMap((long) 1068 + 1067 + 1067);
+        controller.initGameTest(-1);
+        assertEquals(controller.getTurnOwner().getUnits().size(), 0);
+        controller.addUnit(new Archer(50, 2, controller.getGameMap().getCell(6, 6)));
+        assertEquals(controller.getTurnOwner().getUnits().size(), 1);
+        controller.selectUnitId(0);
+        assertEquals(controller.getSelectedUnit().getLocation(), controller.getGameMap().getCell(6, 6));
     }
 
     @Test
     void addItem() {
-    }
-
-    @Test
-    void setSeed() {
+        GameController controller = new GameController(2, 50);
+        controller.changeMap((long) 1068 + 1067 + 1067);
+        controller.initGameTest(-1);
+        controller.addUnit(new Archer(50, 2, controller.getGameMap().getCell(6, 6)));
+        controller.selectUnitId(0);
+        assertEquals(controller.getSelectedUnit().getItems().size(), 0);
+        controller.addItem(new Bow("Example Bow", 10, 2, 4));
+        assertEquals(controller.getSelectedUnit().getItems().size(), 1);
+        controller.selectItem(0);
+        assertEquals(controller.getSelectedItem().getName(), "Example Bow");
+        assertEquals(controller.getSelectedUnit().getLocation(), controller.getGameMap().getCell(6, 6));
     }
 
     @Test
     void changeMap() {
+        long defaultSeed = controller.defaultSeed;
+        controller.changeMap();
+        assertNotEquals(defaultSeed, controller.defaultSeed);
+        controller.changeMap((long) 12345678);
+        assertEquals(12345678, controller.defaultSeed);
     }
 
     @Test
     void initGame() {
-        controller.initiatedGame = false;
+        GameController controller = new GameController(2, 50);
+        controller.changeMap((long) 1068 + 1067 + 1067);
+        assertEquals(controller.getInitiatedGameStatus(), false);
+        controller.createUnit("archer", 50, 2, controller.getGameMap().getCell(6, 6));
+        controller.endTurn();
+        controller.createUnit("archer", 50, 2, controller.getGameMap().getCell(7, 7));
         controller.initGame(10);
-        controller.initiatedGame = true;
+        assertEquals(controller.getInitiatedGameStatus(), true);
         assertEquals(controller.getMaxRounds(), 10);
+        controller.endGame();
+        assertEquals(controller.getInitiatedGameStatus(), false);
     }
 
     @Test
     void initEndlessGame() {
-        controller.initiatedGame = false;
+        GameController controller = new GameController(2, 50);
+        controller.changeMap((long) 1068 + 1067 + 1067);
+        assertEquals(controller.getInitiatedGameStatus(), false);
+        controller.createUnit("archer", 50, 2, controller.getGameMap().getCell(6, 6));
+        controller.endTurn();
+        controller.createUnit("archer", 50, 2, controller.getGameMap().getCell(7, 7));
         controller.initEndlessGame();
-        controller.initiatedGame = true;
+        assertEquals(controller.getInitiatedGameStatus(), true);
         assertEquals(controller.getMaxRounds(), -1);
-    }
-
-    @Test
-    void assignTurns() {
+        controller.endGame();
+        assertEquals(controller.getInitiatedGameStatus(), false);
     }
 
     @Test
@@ -222,7 +249,7 @@ class GameControllerTest {
         Random random = new Random();
         random.setSeed(randomSeed);
         controller.setSeed(randomSeed);
-        controller.initGame(-1);
+        controller.initGameTest(-1);
         Tactician firstPlayer = controller.getTurnOwner();
 
         List<Tactician> tacticiansTemp = controller.getTacticians();
@@ -255,14 +282,14 @@ class GameControllerTest {
     }
 
     @Test
-    void getWinners() {
-        controller.initGame(2);
+    void getWinnersCaseWin() {
+        controller.initGameTest(2);
         IntStream.range(0, 8).forEach(i -> controller.endTurn());
         assertEquals(4, controller.getWinners().size());
         controller.getWinners()
                 .forEach(player -> Assertions.assertTrue(testTacticians.contains(player)));
 
-        controller.initGame(2);
+        controller.initGameTest(2);
         IntStream.range(0, 4).forEach(i -> controller.endTurn());
         assertNull(controller.getWinners());
         controller.removeTactician("Player 0");
@@ -272,7 +299,7 @@ class GameControllerTest {
         assertEquals(2, winners.size());
         assertTrue(List.of("Player 1", "Player 3").containsAll(winners));
 
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         for (int i = 0; i < 3; i++) {
             assertNull(controller.getWinners());
             controller.removeTactician("Player " + i);
@@ -281,17 +308,35 @@ class GameControllerTest {
     }
 
     @Test
+    void getWinnersCaseTurn() {
+        controller = new GameController(2, 50);
+        controller.changeMap((long) 1068 + 1067 + 1067);
+        while (!controller.getTurnOwner().getName().equals("Player 0"))
+            controller.endTurn();
+        controller.createUnit("archer", 50, 2, controller.getGameMap().getCell(6, 6));
+        controller.endTurn();
+        controller.createUnit("archer", 50, 2, controller.getGameMap().getCell(7, 7));
+        controller.initGame(1);
+        controller.endTurn();
+        controller.endTurn();
+        List<String> winners = controller.getWinners();
+        assertEquals(2, winners.size());
+        assertTrue(List.of("Player 0", "Player 1").containsAll(winners));
+    }
+
+    @Test
     void endGame() {
-        controller.initEndlessGame();
+        assertEquals(controller.getInitiatedGameStatus(), false);
+        controller.initGameTest(-1);
+        assertEquals(controller.getInitiatedGameStatus(), true);
         controller.endGame();
-
-
+        assertEquals(controller.getInitiatedGameStatus(), false);
     }
 
     // Desde aquí en adelante, los tests deben definirlos completamente ustedes
     @Test
     void selectUnitIn() {
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         sideSquare = controller.gameMap.getSideSquare();
         unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare / 2, sideSquare / 2));
         unit2 = new Cleric(50, 2, controller.gameMap.getCell(sideSquare, sideSquare));
@@ -312,7 +357,7 @@ class GameControllerTest {
 
     @Test
     void selectUnitId() {
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         sideSquare = controller.gameMap.getSideSquare();
         unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare / 2, sideSquare / 2));
         unit2 = new Cleric(50, 2, controller.gameMap.getCell(sideSquare, sideSquare));
@@ -333,7 +378,7 @@ class GameControllerTest {
 
     @Test
     void getSelectedUnit() {
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         sideSquare = controller.gameMap.getSideSquare();
         unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare / 2, sideSquare / 2));
 
@@ -357,7 +402,7 @@ class GameControllerTest {
 
     @Test
     void getItems() {
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         sideSquare = controller.gameMap.getSideSquare();
         unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare / 2, sideSquare / 2));
         item1 = new Spear("Spear", 10, 1, 3);
@@ -376,7 +421,7 @@ class GameControllerTest {
 
     @Test
     void selectItem() {
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         sideSquare = controller.gameMap.getSideSquare();
         unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare / 2, sideSquare / 2));
         item1 = new Spear("Spear", 10, 1, 3);
@@ -398,7 +443,7 @@ class GameControllerTest {
 
     @Test
     void getSelectedItem() {
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         sideSquare = controller.gameMap.getSideSquare();
         unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare / 2, sideSquare / 2));
         item1 = new Spear("Spear", 10, 1, 3);
@@ -419,7 +464,7 @@ class GameControllerTest {
 
     @Test
     void equipItem() {
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         sideSquare = controller.gameMap.getSideSquare();
         unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare / 2, sideSquare / 2));
         item1 = new Spear("Spear", 10, 1, 3);
@@ -438,7 +483,7 @@ class GameControllerTest {
 
     @Test
     void useItemOn() {
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         sideSquare = controller.gameMap.getSideSquare();
         unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare / 2, sideSquare / 2));
         if (controller.gameMap.getCell(sideSquare / 2 + 1, sideSquare / 2).getRow() == -1)
@@ -461,7 +506,7 @@ class GameControllerTest {
 
     @Test
     void giveItemTo() {
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         sideSquare = controller.gameMap.getSideSquare();
         if (controller.gameMap.getCell(sideSquare / 2 - 1, sideSquare / 2).getRow() == -1)
             controller.gameMap.addCells(true, new Location(sideSquare / 2 - 1, sideSquare / 2));
@@ -499,7 +544,7 @@ class GameControllerTest {
 
     @Test
     void moveUnitTo() {
-        controller.initEndlessGame();
+        controller.initGameTest(-1);
         sideSquare = controller.gameMap.getSideSquare();
         if (controller.gameMap.getCell(sideSquare / 2 - 1, sideSquare / 2).getRow() == -1)
             controller.gameMap.addCells(true, new Location(sideSquare / 2 - 1, sideSquare / 2));

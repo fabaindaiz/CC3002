@@ -11,6 +11,21 @@ import java.util.ArrayList;
 public interface IParameter {
 
     /**
+     * @return el tipo de el item o la unidad
+     */
+    String getType();
+
+    /**
+     * @return la ubicación de la unidad
+     */
+    Location getLocation();
+
+    /**
+     * @return el nombre del item
+     */
+    String getName();
+
+    /**
      * Crea el objeto dependiendo de sus parametros
      *
      * @param tacticians Lista con los tacticians
@@ -36,4 +51,5 @@ public interface IParameter {
      * @return el item Creado
      */
     IEquipableItem createItem(String type, String name, int power, int minRange, int maxRange);
+
 }

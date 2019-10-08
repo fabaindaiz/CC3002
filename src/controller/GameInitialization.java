@@ -11,10 +11,7 @@ import model.Tactician;
 import model.map.Field;
 import model.units.IUnit;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Random;
-import java.util.TreeMap;
+import java.util.*;
 
 public abstract class GameInitialization extends AbstractSubject {
 
@@ -46,6 +43,8 @@ public abstract class GameInitialization extends AbstractSubject {
     public void setGameController(GameController gameController) {
         this.gameController = gameController;
     }
+
+    public List<IParameter> getParameters() { return List.copyOf(parameters); }
 
     public void initAll() {
         tacticians.clear();

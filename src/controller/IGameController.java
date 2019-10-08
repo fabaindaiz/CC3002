@@ -50,22 +50,12 @@ public interface IGameController {
     Tactician getTurnOwner();
 
     /**
-     * Crea una unidad aleatoria
-     */
-    void createRandomUnit();
-
-    /**
      * Crea una unidad
      *
      * @param type Tipo de la unidad
      *             Los otros parametros son entregados directamente al constructor de abstractUnit
      */
     IParameter createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items);
-
-    /**
-     *
-     */
-    void createRandomItem();
 
     /**
      * @param type
@@ -76,14 +66,6 @@ public interface IGameController {
      * @param equiped
      */
     IParameter createItem(String type, String name, int power, int minRange, int maxRange, boolean equiped);
-
-    /**
-     * Añade una unidad a un tactician antes de inicializar en juego
-     *
-     * @param tactician Este tactician recibira la unidad
-     * @param units     Unidad a añadir
-     */
-    void addUnit(Tactician tactician, IUnit... units);
 
     /**
      * Añade una unidad a un tactician ya uniciado el juego
@@ -117,6 +99,14 @@ public interface IGameController {
      * @param maxTurns the maximum number of turns the game can last
      */
     void initGame(int maxTurns);
+
+    /**
+     * Inicia el juego sin comprobaciones iniciales
+     * (Usado en test para iniciar con Tacticians sin unidades)
+     *
+     * @param maxTurns the maximum number of turns the game can last
+     */
+    void initGameTest(int maxTurns);
 
     /**
      * Starts a game without a limit of turns.

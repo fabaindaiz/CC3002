@@ -3,6 +3,7 @@ package controller;
 import controller.parameter.IParameter;
 import controller.parameter.ItemParameter;
 import controller.parameter.UnitParameter;
+import model.ITactician;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
@@ -72,13 +73,13 @@ public class GameController extends GameInitialization implements IGameControlle
         return turnOwner;
     }
 
-    @Override
+    /*@Override
     public void createRandomUnit() {
     }
 
-    //@Override
+    @Override
     public void CreatePredefinedUnit() {
-    }
+    }*/
 
     @Override
     public IParameter createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items) {
@@ -88,14 +89,13 @@ public class GameController extends GameInitialization implements IGameControlle
         return parameter;
     }
 
-    @Override
+    /*@Override
     public void createRandomItem() {
     }
 
-    //@Override
+    @Override
     public void createPredefinedItem() {
-
-    }
+    }*/
 
     @Override
     public IParameter createItem(String type, final String name, final int power, final int minRange, final int maxRange, boolean equiped) {
@@ -103,14 +103,6 @@ public class GameController extends GameInitialization implements IGameControlle
                 turnOwner.getUnits().indexOf(turnOwner.getSelectedUnit()), equiped);
         parameters.add(parameter);
         return parameter;
-    }
-
-    @Override
-    public void addUnit(Tactician tactician, IUnit... units) {
-        for (IUnit unit : units) {
-            if (unit.getLocation().addUnitToCell(unit))
-                tactician.addUnit(unit);
-        }
     }
 
     @Override
@@ -145,6 +137,15 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public void initGame(final int maxTurns) {
+        initGameTest(maxTurns);
+
+        List<Tactician> tacticians = getTacticians();
+        for (Tactician tactician : tacticians)
+            tactician.notifyObservers();
+    }
+
+    @Override
+    public void initGameTest(final int maxTurns) {
         initiatedGame = true;
         initAll();
         assignTurns();

@@ -25,6 +25,12 @@ public abstract class AbstractParameter implements IParameter {
     }
 
     @Override
+    public Location getLocation() { return null; }
+
+    @Override
+    public String getName() { return null; }
+
+    @Override
     public IUnit createUnit(String type, final int hitPoints, final int movement, final Location location, IEquipableItem... items) {
         switch (type.toLowerCase()) {
             case "alpaca":
@@ -71,5 +77,4 @@ public abstract class AbstractParameter implements IParameter {
                 return null;
         }
     }
-
 }
