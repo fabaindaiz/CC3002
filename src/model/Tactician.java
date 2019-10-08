@@ -56,6 +56,11 @@ public class Tactician extends AbstractSubject implements ITactician {
     }
 
     @Override
+    public void notifyObservers() {
+        notifyAllObservers();
+    }
+
+    @Override
     public void addUnit(IUnit unit) {
         if (unit != null && unit.getLocation().addUnitToCell(unit))
             units.add(unit);
@@ -90,7 +95,7 @@ public class Tactician extends AbstractSubject implements ITactician {
 
     @Override
     public void selectUnitId(int index) {
-        if (units.size() > index)
+        if (units.size() > index && 0 <= index)
             selectedUnit = units.get(index);
         else selectedUnit = null;
         selectedItem = null;

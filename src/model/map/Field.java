@@ -41,11 +41,11 @@ public class Field implements IField {
         map.clear();
         maxSize = mapSize;
         double mult;
-        if (mapSize <= 500)
+        if (mapSize < 500)
             mult = 1.5;
-        else if (mapSize <= 2000)
+        else if (mapSize < 2000)
             mult = 2.0;
-        else if (mapSize <= 6000)
+        else if (mapSize < 5000)
             mult = 2.5;
         else
             mult = 3.0;

@@ -23,10 +23,11 @@ class DefeatTacticianObserverTest {
             controller.endTurn();
         controller.createUnit("archer", 50, 2, controller.getGameMap().getCell(6, 6));
         controller.selectUnitId(0);
-        controller.createItem("bow", "Weak Bow", 10, 0, 3, true);
-        controller.createItem("bow", "Strong Bow", 50, 0, 3, false);
+        controller.createItem("bow", "Weak Bow", 30, 0, 3, true);
         controller.endTurn();
-        controller.createUnit("cleric", 50, 2, controller.getGameMap().getCell(7, 7));
+        controller.createUnit("archer", 50, 2, controller.getGameMap().getCell(7, 7));
+        controller.selectUnitId(0);
+        controller.createItem("bow", "Weak Bow", 0, 0, 3, true);
         controller.initEndlessGame();
         while (!controller.getTurnOwner().getName().equals("Player 0"))
             controller.endTurn();
@@ -38,11 +39,8 @@ class DefeatTacticianObserverTest {
         controller.endTurn();
         controller.selectUnitId(0);
         assertEquals(controller.getSelectedUnit().getLocation(), controller.getGameMap().getCell(7, 7));
-        assertEquals(controller.getSelectedUnit().getCurrentHitPoints(), 40);
-        controller.endTurn();
-        controller.selectUnitId(0);
-        controller.equipItem(1);
-        controller.useItemOn(7, 7);
+        assertEquals(controller.getSelectedUnit().getCurrentHitPoints(), 20);
+        controller.useItemOn(6, 6);
         assertEquals(controller.getTacticians().size(), 1);
     }
 

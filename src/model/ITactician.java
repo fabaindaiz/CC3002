@@ -36,6 +36,8 @@ public interface ITactician {
      */
     List<IUnit> getUnits();
 
+    void notifyObservers();
+
     /**
      * Añade unidades a un Tactician
      * Si ya hay una unidad en ese Location, la unidad no se añade

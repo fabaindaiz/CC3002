@@ -3,6 +3,8 @@ package model.map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -35,6 +37,9 @@ class FieldTest {
                 checkConnections(row, col);
             }
         }
+        assertEquals(map.getCell(2, 3).getNeighbours().size(), 0);
+        map.getCell(2,3).addNeighbour(map.getCell(2, 2));
+        assertEquals(map.getCell(2, 3).getNeighbours().size(), 0);
     }
 
     /**
@@ -53,6 +58,8 @@ class FieldTest {
                 assertTrue(map.getCell(row, col).isNeighbour(map.getMap().get(key)));
             }
         }
+        map.addCells(true, new Location(3, 3));
+        assertEquals(map.isConnected(), false);
     }
 
     /**

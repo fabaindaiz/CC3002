@@ -142,7 +142,7 @@ public class Location {
      */
     public double distanceTo(final Location otherNode) {
 
-        return shortestPath(otherNode, new HashSet<>(), random.nextLong());
+        return shortestPathTo(otherNode, new HashSet<>(), random.nextLong());
     }
 
     /**
@@ -150,22 +150,7 @@ public class Location {
      *
      * @return the distance between the nodes
      */
-    private double shortestPathTo(final Location otherNode, final Set<Location> visited) {
-        if (otherNode.equals(this)) {
-            return 0;
-        }
-        visited.add(this);
-        double distance = Double.POSITIVE_INFINITY;
-        for (Location node :
-                neighbours) {
-            if (!visited.contains(node)) {
-                distance = Math.min(distance, 1 + node.shortestPathTo(otherNode, new HashSet<>(visited)));
-            }
-        }
-        return distance;
-    }
-
-    private double shortestPath(final Location otherNode, final Set<Location> visited, long code) {
+    private double shortestPathTo(final Location otherNode, final Set<Location> visited, long code) {
         if (otherNode.equals(this)) {
             return 0;
         }
@@ -182,7 +167,7 @@ public class Location {
         for (Location node :
                 neighbours) {
             if (!visited.contains(node)) {
-                distance = Math.min(distance, 1 + node.shortestPath(otherNode, new HashSet<>(visited), code));
+                distance = Math.min(distance, 1 + node.shortestPathTo(otherNode, new HashSet<>(visited), code));
             }
             if (visited.size() > shortestPath) {
                 return Double.POSITIVE_INFINITY;

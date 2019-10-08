@@ -1,6 +1,7 @@
 package controller.observer;
 
 import controller.GameController;
+import model.ITactician;
 
 public class EndGameObserver extends AbstractObserver {
 

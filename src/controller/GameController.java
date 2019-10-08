@@ -186,6 +186,7 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public void endTurn() {
+        turnOwner.selectUnitId(-1);
         verificateEndRound();
         turnOwner = turns.get(turnInRound);
     }

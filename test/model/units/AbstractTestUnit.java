@@ -142,6 +142,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     @Test
     public void constructorTest() {
         assertEquals(50, getTestUnit().getCurrentHitPoints());
+        assertEquals(50, getTestUnit().getMaxHitPoints());
         assertEquals(2, getTestUnit().getMovement());
         assertEquals(new Location(0, 0), getTestUnit().getLocation());
         assertTrue(getTestUnit().getItems().isEmpty());
