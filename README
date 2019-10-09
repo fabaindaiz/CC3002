@@ -88,7 +88,29 @@ Decisiones relevantes
     - No se modifico nada del Template en model.map
 
     Comentarios para la Entrega 2:
+    - Todas las clases nuevas son parte del controlador, a excepcion de la clase Tactician que es parte de modelo
+
+    - Se decidio crear una interfaz para cada clase del controlador, esto para agrupar toda la documentación en la interfaz
+        Esto no era necesario en GameController y Tactician, pero ayuda a evitar muchas cosas en la clase principal
+
+    - Ademas, para los Observer y Parameter, era necesario agruparlos en una interfaz por su funcionamiento
+        Esto para cuando se guardan en ArrayList que pueden tener varios Observer o Parameter
+
+    - De decidio crear una clase separada para guardar las variables del juego necesarias para inicializarlo
+        Esto para simplificarme la inicialización de una nueva partida y el almacenamiento de Parameter
+
+    - Para inicializar la partida se decidio crear una clase llamada Parameter, que almacena todos los parametros de la partida
+        Su uso es almacenar todas las unidades e items creadas antes de initGame, para poder volver a este estado
+        Estos Parameter se guardan en un List, y poseen un metodo para crearse a si mismos en la nueva partida
+        Se separaron los parametros en dos tipos: UnitParameter e ItemParameter, ambos con su propio metodo create()
+
+    - Se decidio crear el metodo que genera el mapa en la clase Field, con un metodo que puede ser llamado desde GameController
+        Esto porque el mapa tiene todos los datos necesarios para crearse a si mismo una vez es llamado
+
     -
+
+    - Se creo una clase Observer muy simple para realizar las tareas de verificar derrota de Tactician o Unit
+        Se crearon 3 subclases para cada caso que necesita ser observado.
 
 Testeo
     Los test están implementados con JUnit 5
@@ -119,10 +141,32 @@ Testeo
     En el testeo, cada unidad con cada arma ataca a el resto de forma independiente, verificando así el funcionamiento completo
     Además, en cada test especifico se han añadido casos de borde para verificar que ninguna método falle en estos
 
+    Los test del mapa se mantuvieron igual a como estaban en el Template usado
+
+    EDIT entrega 2: Se añadieron los test de los nuevos metodos definidos en IUnit para el funcionamiento del modelo
+
+    Se testean los metodos de ITactician de forma individual, para verificar su funcionalidad principal
+    La mayoria de los test son iguales a los test definidos para los metodos de IGameController
+    Esto porque algunos metodos de IGameController llaman directamente a los emtodos en ITactician
+
+    No se añadieron nuevos test a los metodos de IField, ya que aunque se añadieron funcionalidades al mapa
+    Estos metodos son en su mayoria setters o getters (a excepcion del generador del mapa)
+
     Test de la Vista:
 
     Test del Controlador:
+    Los metodos de IParameter se testean para cada unidad y su arma equipable para verificar su funcionamiento
+    Se añadio un test independiente para parametros nulos, que verifica que ocurre cuando son introducidos datos erroneos
 
+    Los metodos de IObserver se testean de forma general para un par de casos dependiendo del Observer
+    Todos los observer se complementan, asi que puede que metodos de un Observer tambie se prueben en otro test
+
+    Los metodos de ISubject se testean de forma completamente indirecta, desde los test de Observer
+    Esto porque su funcionalidad es bastante limitada cuando no se usa de forma completa en una partida
+
+    Los metodos de IGame controller
+    Estos test se han basado en los test definidos en el template, fueron añadidos algunos test extra
+    Las funcionalidades se testean de manera independiente con variados escenarios de casos generales y casos bordes
 
 Hecho con
     Java 12 (compatible con Java 11 o superior)
