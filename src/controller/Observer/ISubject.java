@@ -2,6 +2,13 @@ package controller.observer;
 
 import java.util.List;
 
+/**
+ * Interfaz que representa a un sujeto observable
+ *
+ * @author Fabián Díaz
+ * @version 2.0
+ * @since 2.0
+ */
 public interface ISubject {
 
     /**

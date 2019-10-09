@@ -53,17 +53,16 @@ public interface IGameController {
      * Crea una unidad
      *
      * @param type Tipo de la unidad
-     *             Los otros parametros son entregados directamente al constructor de abstractUnit
+     *
+     * Los otros parametros son entregados directamente al constructor de abstractUnit
      */
     IParameter createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items);
 
     /**
-     * @param type
-     * @param name
-     * @param power
-     * @param minRange
-     * @param maxRange
-     * @param equiped
+     * @param type Tipo del item
+     * @param equiped Si la unidad de equipa al crearse
+     *
+     * Los otros parametros son entregados directamente al constructor de abstractItem
      */
     IParameter createItem(String type, String name, int power, int minRange, int maxRange, boolean equiped);
 
@@ -202,5 +201,11 @@ public interface IGameController {
      */
     void giveItemTo(int x, int y);
 
+    /**
+     * Mueve a la unidad selecionada al destino
+     *
+     * @param x horizontal position of the target
+     * @param y vertical position of the target
+     */
     void moveUnitTo(int x, int y);
 }

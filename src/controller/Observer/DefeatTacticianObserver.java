@@ -3,11 +3,24 @@ package controller.observer;
 import controller.GameController;
 import model.Tactician;
 
-public class DefeatTacticianObserver extends AbstractObserver {
+/**
+ * Objeto que representa un observer que verifica cuando un tactician es derrotado
+ *
+ * @author Fabián Díaz
+ * @version 2.0
+ * @since 2.0
+ */
+public class DefeatTacticianObserver implements IObserver {
 
     GameController gameController;
     Tactician tactician;
 
+    /**
+     * Crea un observer que verifica cuando un tactician es derrotado
+     *
+     * @param gameController controlador del juego
+     * @param tactician tactician a observar
+     */
     public DefeatTacticianObserver(GameController gameController, Tactician tactician) {
         this.gameController = gameController;
         this.tactician = tactician;

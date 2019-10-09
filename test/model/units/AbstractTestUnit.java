@@ -574,6 +574,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
         assertEquals(new Location(0, 2), getTestUnit().getLocation());
     }
 
+    @Override
+    @Test
+    public void DefeatCondition() {
+        assertEquals(getTestUnit().defeatCondition(), false);
+    }
+
     /**
      * @return the test field
      */

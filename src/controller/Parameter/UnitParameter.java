@@ -7,6 +7,13 @@ import model.units.IUnit;
 
 import java.util.ArrayList;
 
+/**
+ * Objeto que representa un parametro de la partida de tipo unit
+ *
+ * @author Fabián Díaz
+ * @version 2.0
+ * @since 2.0
+ */
 public class UnitParameter extends AbstractParameter {
 
     private final String type;
@@ -15,6 +22,14 @@ public class UnitParameter extends AbstractParameter {
     private final Location location;
     private final int ownerTactician;
 
+    /**
+     * Constructor de un parametro tipo unit
+     *
+     * @param type Tipo de la unidad
+     * @param ownerTactician Tactician dueño de la unidad
+     *
+     * Los demas parametros son los mismos que en el contructor de AbstractUnit
+     */
     public UnitParameter(final String type, final int hitPoints, final int movement, final Location position, final int ownerTactician) {
         this.type = type;
         this.maxHitPoints = hitPoints;

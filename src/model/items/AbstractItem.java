@@ -75,14 +75,4 @@ public abstract class AbstractItem implements IEquipableItem {
         owner.receiveHeal(item);
     }
 
-    /*@Override
-    public IParameter getParameter() {
-        return parameter;
-    }
-
-    @Override
-    public void setParameter(IParameter parameter) {
-        this.parameter = parameter;
-    }*/
-
 }

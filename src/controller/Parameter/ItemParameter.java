@@ -7,6 +7,13 @@ import model.units.IUnit;
 
 import java.util.ArrayList;
 
+/**
+ * Objeto que representa un parametro de la partida de tipo item
+ *
+ * @author Fabián Díaz
+ * @version 2.0
+ * @since 2.0
+ */
 public class ItemParameter extends AbstractParameter {
 
     private final String type;
@@ -18,7 +25,16 @@ public class ItemParameter extends AbstractParameter {
     private final int ownerUnit;
     private final boolean equiped;
 
-
+    /**
+     * Contructor de un parametro de tipo item
+     *
+     * @param type Tipo del item
+     * @param ownerTactician Tactician dueño del item
+     * @param ownerUnit Unidad dueño del item
+     * @param equiped Determina si se equipa al crearse
+     *
+     * Los demas parametros son los mismos que en el contructor de AbstractItem
+     */
     public ItemParameter(final String type, final String name, final int power, final int minRange, final int maxRange,
                          final int ownerTactician, final int ownerUnit, final boolean equiped) {
         this.type = type;

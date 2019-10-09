@@ -19,10 +19,14 @@ import model.units.warrior.Fighter;
 import model.units.warrior.Hero;
 import model.units.warrior.SwordMaster;
 
+/**
+ * Objeto que representa un parametro de la partida
+ *
+ * @author Fabián Díaz
+ * @version 2.0
+ * @since 2.0
+ */
 public abstract class AbstractParameter implements IParameter {
-
-    public AbstractParameter() {
-    }
 
     @Override
     public Location getLocation() { return null; }

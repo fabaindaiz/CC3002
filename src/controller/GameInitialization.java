@@ -13,6 +13,13 @@ import model.units.IUnit;
 
 import java.util.*;
 
+/**
+ * Objeto que representa un inicializador de la partida
+ *
+ * @author Fabián Díaz
+ * @version 2.0
+ * @since 2.0
+ */
 public abstract class GameInitialization extends AbstractSubject {
 
     protected final int numPlayers;
@@ -29,6 +36,13 @@ public abstract class GameInitialization extends AbstractSubject {
     protected ArrayList<UnitParameter> predefinedUnits;
     protected ArrayList<ItemParameter> predefinedItems;
 
+    /**
+     * Contructor de un inicializador de partidas
+     * Por simplicidad, lo relacionado al inicio del juego pesta aqui
+     *
+     * @param numberOfPlayers numero de Tactician que juegan
+     * @param mapSize Tamaño del mapa para el juego
+     */
     public GameInitialization(int numberOfPlayers, int mapSize) {
         this.numPlayers = numberOfPlayers;
         this.defaultMapSize = mapSize;
@@ -37,7 +51,6 @@ public abstract class GameInitialization extends AbstractSubject {
 
         for (int i = 0; i < numPlayers; i++)
             tacticians.put("Player " + i, new Tactician("Player " + i, i, gameMap));
-
     }
 
     public void setGameController(GameController gameController) {
@@ -46,6 +59,9 @@ public abstract class GameInitialization extends AbstractSubject {
 
     public List<IParameter> getParameters() { return List.copyOf(parameters); }
 
+    /**
+     * Inicializa lo necesario para una nueva partida
+     */
     public void initAll() {
         tacticians.clear();
         gameMap.clearMap();

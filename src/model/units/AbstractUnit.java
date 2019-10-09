@@ -52,6 +52,9 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
     }
 
     @Override
+    public boolean defeatCondition() { return false; }
+
+    @Override
     public void addObserver(IObserver observer) {
         this.attach(observer);
     }

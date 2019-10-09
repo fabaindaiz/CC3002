@@ -25,10 +25,18 @@ public interface IUnit {
     void equipItem(IEquipableItem item);
 
     /**
+     * @return boolean que indica si el Tactician pierde si esta unidad es derrotada
+     */
+    boolean defeatCondition();
+
+    /**
      * @param observer
      */
     void addObserver(IObserver observer);
 
+    /**
+     * @return max hit points of the unit
+     */
     int getMaxHitPoints();
 
     /**
@@ -172,7 +180,4 @@ public interface IUnit {
      */
     void equipStaff(IEquipableItem item);
 
-    /*IParameter getParameter();
-
-    void setParameter(IParameter parameter);*/
 }

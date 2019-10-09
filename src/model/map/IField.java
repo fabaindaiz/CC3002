@@ -40,6 +40,9 @@ public interface IField {
      */
     void printMap();
 
+    /**
+     * Elimina todas las casillas colocadas en el mapa actual
+     */
     void clearMap();
 
     /**

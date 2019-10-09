@@ -54,6 +54,13 @@ public class Field implements IField {
         recursiveMap(sideSquare / 2, sideSquare / 2, 0);
     }
 
+    /**
+     * Genera un mapa de manera recursiva
+     *
+     * @param x Posición horizontal del nodo a generar
+     * @param y Posición vertical del nodo a generar
+     * @param step Paso de la recursión
+     */
     private void recursiveMap(int x, int y, int step) {
         if (getCell(x, y).getRow() == x || getCell(x, y).getColumn() == y) return;
         if (step > sideSquare * Math.log10(maxSize) || map.size() >= maxSize) return;

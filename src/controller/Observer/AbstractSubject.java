@@ -3,6 +3,13 @@ package controller.observer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Objeto que representa a un jugador
+ *
+ * @author Fabián Díaz
+ * @version 2.0
+ * @since 2.0
+ */
 public class AbstractSubject implements ISubject {
 
     private List<IObserver> observers = new ArrayList<IObserver>();

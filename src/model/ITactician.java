@@ -17,7 +17,9 @@ import java.util.List;
 public interface ITactician {
 
     /**
-     * @param observer
+     * Añade un observador al Tactician
+     *
+     * @param observer Observador a añadir
      */
     void addObserver(IObserver observer);
 
@@ -27,7 +29,7 @@ public interface ITactician {
     String getName();
 
     /**
-     * @return
+     * @return el nombre de la unidad
      */
     int getTacticianNumber();
 
@@ -36,6 +38,9 @@ public interface ITactician {
      */
     List<IUnit> getUnits();
 
+    /**
+     * Notifica a todos los observadores
+     */
     void notifyObservers();
 
     /**
@@ -118,5 +123,11 @@ public interface ITactician {
      */
     void giveItemTo(int x, int y);
 
+    /**
+     * Mueve a la unidad selecionada al destino
+     *
+     * @param x horizontal position of the target
+     * @param y vertical position of the target
+     */
     void moveUnitTo(int x, int y);
 }

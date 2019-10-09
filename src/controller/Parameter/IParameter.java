@@ -8,6 +8,13 @@ import model.units.IUnit;
 
 import java.util.ArrayList;
 
+/**
+ * Interfaz que representa un parametro de la partida
+ *
+ * @author Fabián Díaz
+ * @version 2.0
+ * @since 2.0
+ */
 public interface IParameter {
 
     /**

@@ -224,6 +224,12 @@ public interface ITestUnit {
     void testMovement();
 
     /**
+     * Verifica si la unidad tiene vien configurada la condición de derrota del tactician
+     */
+    @Test
+    void DefeatCondition();
+
+    /**
      * @return the test field
      */
     Field getField();

@@ -61,6 +61,12 @@ public class HeroTest extends AbstractTestUnit {
     }
 
     @Override
+    @Test
+    public void DefeatCondition() {
+        assertEquals(getTestUnit().defeatCondition(), true);
+    }
+
+    @Override
     public int getHPanima() {
         return 35;
     }

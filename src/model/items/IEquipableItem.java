@@ -146,7 +146,4 @@ public interface IEquipableItem {
      */
     void receiveBowAttack(IEquipableItem item, boolean counterAttack);
 
-    /*IParameter getParameter();
-
-    void setParameter(IParameter parameter);*/
 }
