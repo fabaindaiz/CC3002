@@ -333,7 +333,24 @@ class GameControllerTest {
         assertEquals(controller.getInitiatedGameStatus(), false);
     }
 
-    // Desde aquí en adelante, los tests deben definirlos completamente ustedes
+    @Test
+    void getUnits() {
+        controller.initGameTest(-1);
+        sideSquare = controller.gameMap.getSideSquare();
+        if (controller.gameMap.getCell(sideSquare / 2 - 1, sideSquare / 2).getRow() == -1)
+            controller.gameMap.addCells(true, new Location(sideSquare / 2 - 1, sideSquare / 2));
+        unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare / 2, sideSquare / 2));
+        unit2 = new Cleric(50, 2, controller.gameMap.getCell(sideSquare / 2 - 1, sideSquare / 2));
+        unit3 = new Hero(50, 2, controller.gameMap.getCell(sideSquare, sideSquare));
+        assertEquals(controller.getUnits().size(), 0);
+        controller.addUnit(unit1);
+        assertEquals(controller.getUnits().size(), 1);
+        controller.addUnit(unit2);
+        assertEquals(controller.getUnits().size(), 2);
+        controller.addUnit(unit3);
+        assertEquals(controller.getUnits().size(), 2);
+    }
+
     @Test
     void selectUnitIn() {
         controller.initGameTest(-1);

@@ -140,6 +140,8 @@ public interface IGameController {
      */
     void endGame();
 
+    List<IUnit> getUnits();
+
     /**
      * Selects a unit in the game map
      *

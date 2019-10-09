@@ -24,7 +24,6 @@ import java.util.List;
  */
 public class GameController extends GameInitialization implements IGameController {
 
-
     protected Tactician turnOwner;
     private int turnInRound;
     private Tactician lastTurn;
@@ -85,7 +84,8 @@ public class GameController extends GameInitialization implements IGameControlle
     public IParameter createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items) {
         turnOwner.addUnit(new Sorcerer(hitPoints, movement, location));
         IParameter parameter = new UnitParameter(type, hitPoints, movement, location, turnOwner.getTacticianNumber());
-        parameters.add(parameter);
+        if (parameter.getType() != null)
+            parameters.add(parameter);
         return parameter;
     }
 
@@ -101,7 +101,8 @@ public class GameController extends GameInitialization implements IGameControlle
     public IParameter createItem(String type, final String name, final int power, final int minRange, final int maxRange, boolean equiped) {
         IParameter parameter = new ItemParameter(type, name, power, minRange, maxRange, turnOwner.getTacticianNumber(),
                 turnOwner.getUnits().indexOf(turnOwner.getSelectedUnit()), equiped);
-        parameters.add(parameter);
+        if (parameter.getType() != null)
+            parameters.add(parameter);
         return parameter;
     }
 
@@ -238,6 +239,9 @@ public class GameController extends GameInitialization implements IGameControlle
     public void endGame() {
         initiatedGame = false;
     }
+
+    @Override
+    public List<IUnit> getUnits() {return turnOwner.getUnits(); }
 
     @Override
     public void selectUnitIn(int x, int y) {
