@@ -13,8 +13,6 @@ public class NullParameterTest {
     @BeforeEach
     void setUp() {
         controller = new GameController(1, 50);
-        controller.changeMap((long) 1068 + 1067 + 1067);
-        controller.getGameMap().printMap();
     }
 
     @Test

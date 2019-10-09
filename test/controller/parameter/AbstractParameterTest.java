@@ -13,7 +13,8 @@ abstract class AbstractParameterTest implements IAbstractParameterTest{
     @BeforeEach
     void setUp() {
         controller = new GameController(2, 50);
-        controller.changeMap((long) 1068 + 1067 + 1067);
+        controller.changeMap((long) 168 + 167 + 167);
+        controller.getGameMap().printMap();
     }
 
     @Test

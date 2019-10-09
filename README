@@ -1,8 +1,9 @@
-Tarea CC3002
+Tarea CC3002 v2.0
 
 Empezando
     Este proyecto tiene por finalidad cumplir con las tareas de CC3002 para este semestre
-    Actualmente está implementado únicamente lo pedido en el primer enunciado
+    Actualmente está implementado hasta lo pedido en el segundo enunciado
+    Cualquier información no disponible en este documento se podra encontrar en la documentación de las clases y metodos
 
 Requisitos
     Para ejecutar el proyecto se necesita tener java 11 o superior instalado (JDK)
@@ -10,7 +11,30 @@ Requisitos
 
 Descripción del proyecto
     Esta tarea fue hecha considerando lo visto en CC3002
-    Se implementaron 2 interfaces principales: IUnit y IEquipableItem
+
+    Se implementaron 8 interfaces principales:
+        IUnit e IEquipableItem: Unidades e Items
+        IField:                 Mapa de la partida
+        ITactician:             Jugador de la partida
+        IGameController:        Controlador de la partida
+        IParameter:             Parametros de configuración de la partida
+        IObserver e ISubject:   Observador y Sujeto observado
+
+    Se implemento usando un patrón de diseño MVC (Modelo-Vista-Controlador)
+    A continuación se menciona a que parte del diseño pertenece cada interfaz
+        M (Modelo):
+            IUnit
+            IEquipableItem
+            IField
+            ITactician
+        V (Vista):
+        C (Controlador):
+            IGameController
+            IParameter
+            IObserver
+            ISubject
+
+    Estructura interna del Modelo:
     Cada interfaz posee una clase abstracta principal
 
     Todas las armas y unidades similares están implementadas con clases abstractas asociadas a su clase abstracta principal
@@ -20,10 +44,22 @@ Descripción del proyecto
     Para ejecutar diferentes acciones dependiendo del caso como en los ataques o en los test, se usó Double Dispatch
     Esto permite tener funciones en cada clase que generan un comportamiento distinto según sea requerido
 
+    El mapa fue creado como un objeto que contiene los nodos en un Map<Location> y metodos para crearse de forma aleatoria
+
+    Estructura interna de la Vista:
+
+    Estructura interna del Controlador:
+    Cada interfaz posee una clase abtracta principal
+    (Excepto IObserver, ya que todos los observer son completamente independientes en funcionalidad)
+
+    Ademas, existe una única clase abstracta que no posee interfaz llamada GameInitializatión
+    Esta se encarga de inicializar lo necesario para una nueva partida al llamarse InitGame
+
+
 Decisiones relevantes
     Se enumeraran a continuación todas las decisiones no mencionadas en la descripción que se tomaron al realizar el proyecto
 
-    Comentarios para la Tarea 1:
+    Comentarios para la Entrega 1:
     - Se crearon clases abstractas para agrupar armas y unidades similares para facilitar futuras implementaciones
         Asi, se redujo el codigo duplicado en situaciones similares, como al equipar un MagicBook en Sorcerer
         o al atacar a unidades que tengan armas con las mismas debilidades, como Magias vs Armas normales.
@@ -47,10 +83,32 @@ Decisiones relevantes
 
     - Una unidad muerta simplemente posee localización nula, así nadie puede interactuar con ella
         Se verifica además que ninguna función pueda ejecutarse o falle por puntero nulo
+        EDIT entrega 2: Cuando una unidad muere, es eliminada del Tactician por IObserver
+
+    - No se modifico nada del Template en model.map
+
+    Comentarios para la Entrega 2:
+    -
 
 Testeo
     Los test están implementados con JUnit 5
 
+    Fueron creados test para todas clases y metodos del programa en variados casos estandares y bordes
+    Existen 351 test en total y todas las clases del programa cumplen con un coverage del 100%
+
+    Los test demoran entre 1.5 y 2 segundos en correr en mi pc (Portatil Windows i7 8gb ssd)
+    El test que más tiempo demora en completarse es BenchmarkGenerateMap (entre 1 y 1.5 segundos)
+
+    Las unicas funcionalidades sin test directo, pero con varios test indirectos son
+        - En IField, el generador de mapa no posee un test directo
+            Su funcionalidad se prueba en muchos test de IGameController, IObserver, entre otros
+            Aca se verifica las invariantes del objeto y distintos casos bordes
+        - En GameInitialization, el metodo InitAll no se testea directamente
+            Su funcionalidad se testea directa e indirectamente por muchos otros test en casi todas las clases
+            Si presentara un error, simplemente muchos test no pasarian, ya que es la parte principal del juego
+        - Muchos setters y getters no tiene test directos pero si test indirectos que los verifican
+
+    Test del Modelo:
     Cada arma se testea con los mismos test básicos que verifican su correcto funcionamiento
     En esta parte no han habido muchos cambios desde el template además de añadir los test para las armas nuevas
 
@@ -61,6 +119,11 @@ Testeo
     En el testeo, cada unidad con cada arma ataca a el resto de forma independiente, verificando así el funcionamiento completo
     Además, en cada test especifico se han añadido casos de borde para verificar que ninguna método falle en estos
 
+    Test de la Vista:
+
+    Test del Controlador:
+
+
 Hecho con
     Java 12 (compatible con Java 11 o superior)
     Intellij - IDE java
@@ -70,14 +133,11 @@ Contribuciones
     Esto es un trabajo personal, sin contribuciones externas
 
 Versionamiento
-    Se uso git para el versionamiento. Para ver las versiones disponibles, revisa los Tags de este repositorio
+    Se uso git para el versionamiento. Para ver las versiones disponibles, revisa los Tags o Commits de este repositorio
 
 Autores
     Ignacio Slater Muñoz - Template inicial
     Fabián Díaz González - Trabajo posterior
 
 Licencia
-    Este proyecto no posee licencia, puede usarse con cualquier fin
-
-A tener en cuenta:
-    - Null patern en units
+    Este proyecto no posee licencia y puede usarse con cualquier fin

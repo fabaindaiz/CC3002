@@ -64,7 +64,7 @@ public class Field implements IField {
     private void recursiveMap(int x, int y, int step) {
         if (getCell(x, y).getRow() == x || getCell(x, y).getColumn() == y) return;
         if (step > sideSquare * Math.log10(maxSize) || map.size() >= maxSize) return;
-        addCells(true, new Location(x, y));
+        addCells(false, new Location(x, y));
 
         int a1[] = {x - 1, y}, a2[] = {x + 1, y}, a3[] = {x, y - 1}, a4[] = {x, y + 1};
         ArrayList<int[]> order = new ArrayList<int[]>(List.of(a1, a2, a3, a4));
@@ -112,7 +112,7 @@ public class Field implements IField {
             addCell(cell);
             Location[] adjacentCells = getAdjacentCells(cell);
             for (Location adjacentCell : adjacentCells) {
-                if (connectAll || random.nextDouble() > 1.0 / 2 || cell.getNeighbours().size() < 2) { //Original: 3 y 1
+                if (connectAll || random.nextDouble() > 1.0 / 3 || cell.getNeighbours().size() < 1) { //Original: 3 y 1
                     addConnection(cell, adjacentCell);
                 }
             }
