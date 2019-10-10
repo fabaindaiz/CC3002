@@ -17,7 +17,7 @@ Descripción del proyecto
         IField:                 Mapa de la partida
         ITactician:             Jugador de la partida
         IGameController:        Controlador de la partida
-        IParameter:             Parametros de configuración de la partida
+        IParameter:             Parámetros de configuración de la partida
         IObserver e ISubject:   Observador y Sujeto observado
 
     Se implemento usando un patrón de diseño MVC (Modelo-Vista-Controlador)
@@ -44,24 +44,31 @@ Descripción del proyecto
     Para ejecutar diferentes acciones dependiendo del caso como en los ataques o en los test, se usó Double Dispatch
     Esto permite tener funciones en cada clase que generan un comportamiento distinto según sea requerido
 
-    El mapa fue creado como un objeto que contiene los nodos en un Map<Location> y metodos para crearse de forma aleatoria
+    El mapa fue creado como un objeto que contiene los nodos en un Map<Location> y métodos para crearse de forma aleatoria
+
+    La clase Tactician representa a un jugador del juego
+    Este jugador posee unidades que están colocadas en el mapa
 
     Estructura interna de la Vista:
 
     Estructura interna del Controlador:
-    Cada interfaz posee una clase abtracta principal
-    (Excepto IObserver, ya que todos los observer son completamente independientes en funcionalidad)
+    Cada interfaz posee una clase abstracta principal
+    (Excepto IObserver, ya que todos los Observer son completamente independientes en funcionalidad)
 
     Ademas, existe una única clase abstracta que no posee interfaz llamada GameInitializatión
     Esta se encarga de inicializar lo necesario para una nueva partida al llamarse InitGame
 
+    La clase Parameter guarda todos los parametros de una partida para poder replicarla
+    Se implemento un Observer simple para las funciones que lo requieran
+        Hay más información de estas clases en la siguiente sección
 
 Decisiones relevantes
     Se enumeraran a continuación todas las decisiones no mencionadas en la descripción que se tomaron al realizar el proyecto
+    Para consultas especificas del funcionamiento de las clases y métodos, consultar la documentación de cada interfaz
 
     Comentarios para la Entrega 1:
     - Se crearon clases abstractas para agrupar armas y unidades similares para facilitar futuras implementaciones
-        Asi, se redujo el codigo duplicado en situaciones similares, como al equipar un MagicBook en Sorcerer
+        Así, se redujo el código duplicado en situaciones similares, como al equipar un MagicBook en Sorcerer
         o al atacar a unidades que tengan armas con las mismas debilidades, como Magias vs Armas normales.
 
     - Para el contraataque, se optó por tener el método ataque con un parámetro boolean que indica si es necesario
@@ -78,57 +85,74 @@ Decisiones relevantes
         (En un inicio se pensó usar una clase ataque, pero se descartó para usar esta implementación)
     - El aumento y disminución de valores y la verificaciones de armas son las únicas partes del combate
         que se implementaron en la unidad, esto con fin de evitar problemas con unidades sin armas
-        (Una posible propuesta fue implementar una clase "nullWeapon", pero se descartó por esta idea)
+        (Una posible propuesta fue implementar una clase "nullWeapon", pero se descartó temporalmente)
     - Toda unidad sin arma equipada recibe daño sin modificar, esto se ejecuta directamente en la unidad
 
     - Una unidad muerta simplemente posee localización nula, así nadie puede interactuar con ella
         Se verifica además que ninguna función pueda ejecutarse o falle por puntero nulo
-        EDIT entrega 2: Cuando una unidad muere, es eliminada del Tactician por IObserver
 
-    - No se modifico nada del Template en model.map
+        EDIT entrega 2:
+            Cuando una unidad muere, es eliminada del Tactician por IObserver
+            Cada vez que se ejecuta un Observer, también lo hacen los Observer de niveles superiores
+
+    - No se modificó nada del Template en model.map en esta entrega
 
     Comentarios para la Entrega 2:
-    - Todas las clases nuevas son parte del controlador, a excepcion de la clase Tactician que es parte de modelo
+    - Al inicio de esta entrega, se decidió revisar la visibilidad de todos los métodos y variables para dejarlas
+        lo menos visible que se pueda, sin alterar el correcto funcionamiento del programa y los test
 
-    - Se decidio crear una interfaz para cada clase del controlador, esto para agrupar toda la documentación en la interfaz
-        Esto no era necesario en GameController y Tactician, pero ayuda a evitar muchas cosas en la clase principal
+    - Todas las clases nuevas son parte del controlador, a excepción de la clase Tactician que es parte de modelo
+        El controlador se encarga de preparar los elementos necesarios para la partida y controlar
+         todos los elementos del modelo que dependan de las decisiones de los jugadores
 
-    - Ademas, para los Observer y Parameter, era necesario agruparlos en una interfaz por su funcionamiento
+    - Se decidió crear una interfaz para cada clase del controlador, esto para agrupar toda la documentación en la interfaz
+        Esto no era necesario en GameController y Tactician, pero ayuda a evitar saturar de documentación la clase principal
+        Además, ayuda a ordenar los métodos disponibles para el uso de los jugadores durante la partida
+
+    - Además, para los Observer y Parameter, era necesario agruparlos en una interfaz por su funcionamiento
         Esto para cuando se guardan en ArrayList que pueden tener varios Observer o Parameter
 
-    - De decidio crear una clase separada para guardar las variables del juego necesarias para inicializarlo
-        Esto para simplificarme la inicialización de una nueva partida y el almacenamiento de Parameter
+    - De decidió crear una clase separada para guardar las variables del juego necesarias para inicializarlo
+        Esto para simplificarme la inicialización de una nueva partida y el almacenamiento de los parametros
 
-    - Para inicializar la partida se decidio crear una clase llamada Parameter, que almacena todos los parametros de la partida
+    - Para inicializar la partida se decidió crear una clase llamada Parameter, que almacena todos los parámetros de la partida
         Su uso es almacenar todas las unidades e items creadas antes de initGame, para poder volver a este estado
-        Estos Parameter se guardan en un List, y poseen un metodo para crearse a si mismos en la nueva partida
-        Se separaron los parametros en dos tipos: UnitParameter e ItemParameter, ambos con su propio metodo create()
+        Estos Parameter se guardan en un List, y poseen un método para crearse a sí mismos en la nueva partida
+        Se separaron los parámetros en dos tipos: UnitParameter e ItemParameter, ambos con su propio método create()
 
-    - Se decidio crear el metodo que genera el mapa en la clase Field, con un metodo que puede ser llamado desde GameController
-        Esto porque el mapa tiene todos los datos necesarios para crearse a si mismo una vez es llamado
-
-    -
+    - Se decidió crear el método que genera el mapa en la clase Field, con un método que puede ser llamado desde GameController
+        Esto porque el mapa tiene todos los datos necesarios para crearse a sí mismo una vez es llamado
+        Además, esto permite delegar todas las acciones que corresponden al mapa a las clases Field y Location
 
     - Se creo una clase Observer muy simple para realizar las tareas de verificar derrota de Tactician o Unit
-        Se crearon 3 subclases para cada caso que necesita ser observado.
+        Se crearon 3 subclases para cada caso que necesita ser observado: DefeatUnit, DefeatTactician y EndGame
+
+    - Se creo una clase Subject muy simple, que simboliza el sujeto observable donde se guardan los Observers
+        Esta clase puede ser extendida por cualquier otra clase abstracta para usar un Observer
 
 Testeo
     Los test están implementados con JUnit 5
 
-    Fueron creados test para todas clases y metodos del programa en variados casos estandares y bordes
-    Existen 351 test en total y todas las clases del programa cumplen con un coverage del 100%
+    Fueron creados test para todas clases y métodos del programa en variados casos estándares y bordes
+    Existen 348 test en total y todas las clases del programa cumplen con un coverage del 100%
 
-    Los test demoran entre 1.5 y 2 segundos en correr en mi pc (Portatil Windows i7 8gb ssd)
-    El test que más tiempo demora en completarse es BenchmarkGenerateMap (entre 1 y 1.5 segundos)
+    Los test demoran entre 1 y 2 segundos en correr en mi pc (Portátil Windows 10 - i7 8gb ssd)
+    El test que más tiempo demora en completarse es BenchmarkGenerateMap (entre 0.5 y 1.5 segundos)
 
-    Las unicas funcionalidades sin test directo, pero con varios test indirectos son
+    Las únicas funcionalidades sin test directo, pero con varios test indirectos son
         - En IField, el generador de mapa no posee un test directo
             Su funcionalidad se prueba en muchos test de IGameController, IObserver, entre otros
-            Aca se verifica las invariantes del objeto y distintos casos bordes
-        - En GameInitialization, el metodo InitAll no se testea directamente
+            Acá se verifica las invariantes del objeto y distintos casos bordes
+
+        - En GameInitialization, el método InitAll no se testea directamente
             Su funcionalidad se testea directa e indirectamente por muchos otros test en casi todas las clases
-            Si presentara un error, simplemente muchos test no pasarian, ya que es la parte principal del juego
-        - Muchos setters y getters no tiene test directos pero si test indirectos que los verifican
+            Si presentara un error, simplemente muchos test no pasarían, ya que es la parte principal del juego
+
+        - La clase AbstractSubject no posee test directos ya que su funcionalidad es muy limitada por si solo
+            Esta clase solo tiene funcionalidades completas cuando se arma toda la estructura del juego
+            Esto porque no tiene una funcionalidad directa, sino que solo almacena y ejecuta observers
+
+        - Muchos setters y getters no tiene test directos pero si varios test indirectos que los verifican
 
     Test del Modelo:
     Cada arma se testea con los mismos test básicos que verifican su correcto funcionamiento
@@ -143,28 +167,29 @@ Testeo
 
     Los test del mapa se mantuvieron igual a como estaban en el Template usado
 
-    EDIT entrega 2: Se añadieron los test de los nuevos metodos definidos en IUnit para el funcionamiento del modelo
+    EDIT entrega 2:
+        Se añadieron los test de los nuevos métodos definidos en IUnit para el funcionamiento del modelo
 
-    Se testean los metodos de ITactician de forma individual, para verificar su funcionalidad principal
-    La mayoria de los test son iguales a los test definidos para los metodos de IGameController
-    Esto porque algunos metodos de IGameController llaman directamente a los emtodos en ITactician
+        Se testean los métodos de ITactician de forma individual, para verificar su funcionalidad principal
+        La mayoría de los test son iguales a los test definidos para los métodos de IGameController
+        Esto porque algunos métodos de IGameController llaman directamente a los métodos en ITactician
 
-    No se añadieron nuevos test a los metodos de IField, ya que aunque se añadieron funcionalidades al mapa
-    Estos metodos son en su mayoria setters o getters (a excepcion del generador del mapa)
+        No se añadieron nuevos test a los métodos de IField, ya que aunque se añadieron funcionalidades al mapa
+        Estos métodos son en su mayoría setters o getters (a excepción del generador del mapa)
 
     Test de la Vista:
 
     Test del Controlador:
-    Los metodos de IParameter se testean para cada unidad y su arma equipable para verificar su funcionamiento
-    Se añadio un test independiente para parametros nulos, que verifica que ocurre cuando son introducidos datos erroneos
+    Los métodos de IParameter se testean para cada unidad y su arma equipable para verificar su funcionamiento
+    Se añadió un test independiente para parámetros nulos, que verifica que ocurre cuando son introducidos datos erróneos
 
-    Los metodos de IObserver se testean de forma general para un par de casos dependiendo del Observer
-    Todos los observer se complementan, asi que puede que metodos de un Observer tambie se prueben en otro test
+    Los métodos de IObserver se testean de forma general para un par de casos dependiendo del Observer
+    Todos los observer se complementan, así que puede que métodos de un Observer también se prueben en otro test
 
-    Los metodos de ISubject se testean de forma completamente indirecta, desde los test de Observer
+    Los métodos de ISubject se testean de forma completamente indirecta, desde los test de Observer
     Esto porque su funcionalidad es bastante limitada cuando no se usa de forma completa en una partida
 
-    Los metodos de IGame controller
+    Los métodos de IGame controller
     Estos test se han basado en los test definidos en el template, fueron añadidos algunos test extra
     Las funcionalidades se testean de manera independiente con variados escenarios de casos generales y casos bordes
 
