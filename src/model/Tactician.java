@@ -41,6 +41,12 @@ public class Tactician extends AbstractSubject implements ITactician {
     }
 
     @Override
+    public void setNewTurn() {
+        for (IUnit unit : units)
+            unit.setNewTurn();
+    }
+
+    @Override
     public String getName() {
         return name;
     }

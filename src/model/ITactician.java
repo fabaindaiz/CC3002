@@ -24,6 +24,11 @@ public interface ITactician {
     void addObserver(IObserver observer);
 
     /**
+     * Restaura las variables que indican si un turno fue usado para todas las unidades del Tactician
+     */
+    void setNewTurn();
+
+    /**
      * @return el nombre del Tactician
      */
     String getName();

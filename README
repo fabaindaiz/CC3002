@@ -134,7 +134,7 @@ Testeo
     Los test están implementados con JUnit 5
 
     Fueron creados test para todas clases y métodos del programa en variados casos estándares y bordes
-    Existen 348 test en total y todas las clases del programa cumplen con un coverage del 100%
+    Existen 358 test en total y todas las clases del programa cumplen con un coverage del 100%
 
     Los test demoran entre 1 y 2 segundos en correr en mi pc (Portátil Windows 10 - i7 8gb ssd)
     El test que más tiempo demora en completarse es BenchmarkGenerateMap (entre 0.5 y 1.5 segundos)

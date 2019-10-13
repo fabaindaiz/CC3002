@@ -49,6 +49,28 @@ class TacticianTest {
     }
 
     @Test
+    void setNewTurn() {
+        tactician1.selectUnitId(0);
+        assertEquals(tactician1.getSelectedUnit().getMovementUsed(), false);
+        assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 0));
+        tactician1.moveUnitTo(1,1);
+        assertEquals(tactician1.getSelectedUnit().getMovementUsed(), false);
+        assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 0));
+        tactician1.moveUnitTo(0,1);
+        assertEquals(tactician1.getSelectedUnit().getMovementUsed(), true);
+        assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 1));
+        tactician1.setNewTurn();
+        assertEquals(tactician1.getSelectedUnit().getMovementUsed(), false);
+        assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 1));
+        tactician1.moveUnitTo(1,1);
+        assertEquals(tactician1.getSelectedUnit().getMovementUsed(), false);
+        assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 1));
+        tactician1.moveUnitTo(0,0);
+        assertEquals(tactician1.getSelectedUnit().getMovementUsed(), true);
+        assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 0));
+    }
+
+    @Test
     void getName() {
         assertEquals(tactician1.getName(), "ExamplePlayer");
         assertEquals(tactician2.getName(), "Player0");

@@ -191,6 +191,7 @@ public class GameController extends GameInitialization implements IGameControlle
         turnOwner.selectUnitId(-1);
         verificateEndRound();
         turnOwner = turns.get(turnInRound);
+        turnOwner.setNewTurn();
     }
 
     /**

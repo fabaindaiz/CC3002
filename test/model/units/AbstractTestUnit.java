@@ -576,6 +576,27 @@ public abstract class AbstractTestUnit implements ITestUnit {
 
     @Override
     @Test
+    public void testMovementUsed() {
+        assertEquals(getTestUnit().getMovementUsed(), false);
+        getTestUnit().moveTo(getField().getCell(0, 2));
+        assertEquals(getTestUnit().getMovementUsed(), true);
+        assertEquals(new Location(0, 2), getTestUnit().getLocation());
+        getTestUnit().moveTo(getField().getCell(0, 0));
+        assertEquals(getTestUnit().getMovementUsed(), true);
+        assertEquals(new Location(0, 2), getTestUnit().getLocation());
+
+        getTestUnit().setNewTurn();
+        assertEquals(getTestUnit().getMovementUsed(), false);
+        getTestUnit().moveTo(getField().getCell(0, 0));
+        assertEquals(getTestUnit().getMovementUsed(), true);
+        assertEquals(new Location(0, 0), getTestUnit().getLocation());
+        getTestUnit().moveTo(getField().getCell(0, 2));
+        assertEquals(getTestUnit().getMovementUsed(), true);
+        assertEquals(new Location(0, 0), getTestUnit().getLocation());
+    }
+
+    @Override
+    @Test
     public void DefeatCondition() {
         assertEquals(getTestUnit().defeatCondition(), false);
     }

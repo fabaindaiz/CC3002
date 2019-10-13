@@ -224,6 +224,12 @@ public interface ITestUnit {
     void testMovement();
 
     /**
+     * Verifica que la unidad solo se pueda mover una vez por turno
+     */
+    @Test
+    void testMovementUsed();
+
+    /**
      * Verifica si la unidad tiene vien configurada la condición de derrota del tactician
      */
     @Test

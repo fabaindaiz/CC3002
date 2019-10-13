@@ -35,6 +35,16 @@ public interface IUnit {
     void addObserver(IObserver observer);
 
     /**
+     * Restaura las variables que indican si un turno fue usado
+     */
+    void setNewTurn();
+
+    /**
+     * @return si el turno fue usado con un movimiento
+     */
+    boolean getMovementUsed();
+
+    /**
      * @return max hit points of the unit
      */
     int getMaxHitPoints();

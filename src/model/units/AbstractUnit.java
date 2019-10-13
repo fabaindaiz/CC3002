@@ -24,6 +24,7 @@ import static java.lang.Math.min;
  */
 public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
+    private boolean movementUsed = false;
     private final int maxHitPoints;
     private final int movement;
     private final int maxItems;
@@ -60,6 +61,14 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
     }
 
     @Override
+    public void setNewTurn() {
+        movementUsed = false;
+    }
+
+    @Override
+    public boolean getMovementUsed() { return movementUsed; }
+
+    @Override
     public int getMaxHitPoints() {
         return maxHitPoints;
     }
@@ -93,6 +102,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
      * Sets a new location for this unit,
      */
     private void setLocation(final Location location) {
+        movementUsed = true;
         this.location.setUnit(null);
         this.location = location;
         location.setUnit(this);
@@ -135,9 +145,9 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     @Override
     public void moveTo(final Location targetLocation) {
-        if (getLocation().distanceTo(targetLocation) <= getMovement()
-                && targetLocation.getUnit() == null) {
-            setLocation(targetLocation);
+        if (getLocation().distanceTo(targetLocation) <= getMovement() && targetLocation.getUnit() == null) {
+            if (!movementUsed && targetLocation.getRow() != -1)
+                setLocation(targetLocation);
         }
     }
 
