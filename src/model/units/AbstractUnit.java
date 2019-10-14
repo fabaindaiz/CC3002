@@ -75,6 +75,11 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
     }
 
     @Override
+    public void successfulAttack() {
+        actionRemains --;
+    }
+
+    @Override
     public int getActionRemains() { return actionRemains; }
 
     @Override
@@ -173,10 +178,8 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     @Override
     public void useItem(IUnit other, boolean counterattack) {
-        if (actionRemains > 0 && equippedItem != null && other != null) {
+        if (actionRemains > 0 && equippedItem != null && other != null)
             equippedItem.useItem(other, counterattack);
-            actionRemains--;
-        }
     }
 
     @Override
@@ -195,6 +198,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
      * @param counterAttack
      */
     private void receiveDamage(IEquipableItem item, int damage, boolean counterAttack) {
+        item.getOwner().successfulAttack();
         if (damage < currentHitPoints) {
             if (damage > 0)
                 this.currentHitPoints -= damage;
@@ -207,6 +211,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
     @Override
     public void receiveHeal(IEquipableItem item) {
         if (outOfRange(item.getOwner())) return;
+        item.getOwner().successfulAttack();
         int healed = item.getPower();
         if ((maxHitPoints - currentHitPoints) < healed)
             currentHitPoints = maxHitPoints;

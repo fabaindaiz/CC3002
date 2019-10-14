@@ -46,6 +46,8 @@ public interface IUnit {
      */
     void setMaxAction(int maxAction);
 
+    void successfulAttack();
+
     /**
      * @return el numero de acciones restates de la unidad
      */

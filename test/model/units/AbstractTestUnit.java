@@ -502,10 +502,8 @@ public abstract class AbstractTestUnit implements ITestUnit {
     public void testMovement() {
         getTestUnit().moveTo(getField().getCell(2, 2));
         assertEquals(new Location(0, 0), getTestUnit().getLocation());
-
         getTestUnit().moveTo(getField().getCell(0, 2));
         assertEquals(new Location(0, 2), getTestUnit().getLocation());
-
         getField().getCell(0, 1).setUnit(getTargetAlpaca());
         getTestUnit().moveTo(getField().getCell(0, 1));
         assertEquals(new Location(0, 2), getTestUnit().getLocation());
@@ -521,7 +519,6 @@ public abstract class AbstractTestUnit implements ITestUnit {
         getTestUnit().moveTo(getField().getCell(0, 0));
         assertEquals(getTestUnit().getMovementUsed(), true);
         assertEquals(new Location(0, 2), getTestUnit().getLocation());
-
         getTestUnit().setNewTurn();
         assertEquals(getTestUnit().getMovementUsed(), false);
         getTestUnit().moveTo(getField().getCell(0, 0));
@@ -535,8 +532,35 @@ public abstract class AbstractTestUnit implements ITestUnit {
     @Override
     @Test
     public void testActionUsed() {
+        field.addCells(true, new Location(3, 2), new Location(3, 3));
+        IUnit targetAttack = new Alpaca(50, 2, field.getCell(3, 3));
+        getTestUnit().setMaxAction(1);
+        getTestUnit().addItem(getWeapon());
+        getTestUnit().addItem(item1);
+        getTestUnit().addItem(item2);
         getTestUnit().equipItem(getWeapon());
-
+        assertEquals(getTestUnit().getActionRemains(), 1);
+        getTestUnit().useItem(targetAttack, false);
+        assertEquals(getTestUnit().getActionRemains(), 1);
+        getTestUnit().useItem(targetCounterattack1, false);
+        assertEquals(getTestUnit().getActionRemains(), 0);
+        getTestUnit().setNewTurn();
+        assertEquals(getTestUnit().getItems(), List.of(getWeapon(), item1, item2));
+        assertEquals(getTestUnit().getActionRemains(), 1);
+        getTestUnit().exchange(targetIntercambio, item3);
+        assertEquals(getTestUnit().getItems(), List.of(getWeapon(), item1, item2));
+        assertEquals(getTestUnit().getActionRemains(), 1);
+        getTestUnit().exchange(targetIntercambio, item2);
+        assertEquals(getTestUnit().getItems(), List.of(getWeapon(), item1));
+        assertEquals(getTestUnit().getActionRemains(), 0);
+        getTestUnit().exchange(targetIntercambio, item1);
+        assertEquals(getTestUnit().getItems(), List.of(getWeapon(), item1));
+        assertEquals(getTestUnit().getActionRemains(), 0);
+        getTestUnit().setNewTurn();
+        assertEquals(getTestUnit().getActionRemains(), 1);
+        getTestUnit().exchange(targetIntercambio, item1);
+        assertEquals(getTestUnit().getItems(), List.of(getWeapon()));
+        assertEquals(getTestUnit().getActionRemains(), 0);
     }
 
     @Override

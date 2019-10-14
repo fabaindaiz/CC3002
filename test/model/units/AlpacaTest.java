@@ -168,8 +168,25 @@ public class AlpacaTest extends AbstractTestUnit {
     @Override
     @Test
     public void testActionUsed() {
-        
-
+        getTestUnit().setMaxAction(1);
+        getTestUnit().addItem(item1);
+        getTestUnit().addItem(item2);
+        assertEquals(getTestUnit().getItems(), List.of(item1, item2));
+        assertEquals(getTestUnit().getActionRemains(), 1);
+        getTestUnit().exchange(targetIntercambio, item3);
+        assertEquals(getTestUnit().getItems(), List.of(item1, item2));
+        assertEquals(getTestUnit().getActionRemains(), 1);
+        getTestUnit().exchange(targetIntercambio, item2);
+        assertEquals(getTestUnit().getItems(), List.of(item1));
+        assertEquals(getTestUnit().getActionRemains(), 0);
+        getTestUnit().exchange(targetIntercambio, item1);
+        assertEquals(getTestUnit().getItems(), List.of(item1));
+        assertEquals(getTestUnit().getActionRemains(), 0);
+        getTestUnit().setNewTurn();
+        assertEquals(getTestUnit().getActionRemains(), 1);
+        getTestUnit().exchange(targetIntercambio, item1);
+        assertEquals(getTestUnit().getItems(), List.of());
+        assertEquals(getTestUnit().getActionRemains(), 0);
     }
 
     @Override
