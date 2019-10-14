@@ -21,6 +21,7 @@ public class HeroTest extends AbstractTestUnit {
     @Override
     public void setTestUnit() {
         hero = new Hero(50, 2, field.getCell(0, 0));
+        hero.setMaxAction(4);
     }
 
     @Override

@@ -230,6 +230,12 @@ public interface ITestUnit {
     void testMovementUsed();
 
     /**
+     * Verifica que la unidad solo se pueda realizar la cantidad de acciones permitidas
+     */
+    @Test
+    void testActionUsed();
+
+    /**
      * Verifica si la unidad tiene vien configurada la condición de derrota del tactician
      */
     @Test

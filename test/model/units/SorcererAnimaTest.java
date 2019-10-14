@@ -21,6 +21,7 @@ public class SorcererAnimaTest extends AbstractTestUnit {
     @Override
     public void setTestUnit() {
         sorcerer = new Sorcerer(50, 2, field.getCell(0, 0));
+        sorcerer.setMaxAction(5);
     }
 
     @Override

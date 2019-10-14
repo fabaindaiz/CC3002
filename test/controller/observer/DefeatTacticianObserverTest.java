@@ -33,6 +33,7 @@ class DefeatTacticianObserverTest {
             controller.endTurn();
 
         controller.selectUnitId(0);
+        controller.getSelectedUnit().setMaxAction(2);
         assertEquals(controller.getSelectedUnit().getLocation(), controller.getGameMap().getCell(6, 6));
         assertEquals(controller.getSelectedUnit().getEquippedItem().getName(), "Weak Bow");
         controller.useItemOn(7, 7);

@@ -40,6 +40,18 @@ public interface IUnit {
     void setNewTurn();
 
     /**
+     * Configura el numero maximo de acciones de una unidad
+     *
+     * @param maxAction numero de acciones maximo
+     */
+    void setMaxAction(int maxAction);
+
+    /**
+     * @return el numero de acciones restates de la unidad
+     */
+    int getActionRemains();
+
+    /**
      * @return si el turno fue usado con un movimiento
      */
     boolean getMovementUsed();

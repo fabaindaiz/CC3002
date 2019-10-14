@@ -51,6 +51,8 @@ class TacticianTest {
     @Test
     void setNewTurn() {
         tactician1.selectUnitId(0);
+        tactician1.equipItem(0);
+
         assertEquals(tactician1.getSelectedUnit().getMovementUsed(), false);
         assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 0));
         tactician1.moveUnitTo(1,1);
@@ -59,6 +61,17 @@ class TacticianTest {
         tactician1.moveUnitTo(0,1);
         assertEquals(tactician1.getSelectedUnit().getMovementUsed(), true);
         assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 1));
+
+        assertEquals(tactician1.getSelectedUnit().getActionRemains(), 1);
+        tactician1.useItemOn(2, 2);
+        assertEquals(tactician1.getSelectedUnit().getActionRemains(), 1);
+        assertEquals(unit3.getCurrentHitPoints(), 50);
+        tactician1.useItemOn(1, 0);
+        assertEquals(unit3.getCurrentHitPoints(), 40);
+        assertEquals(tactician1.getSelectedUnit().getActionRemains(), 0);
+        tactician1.useItemOn(1, 0);
+        assertEquals(unit3.getCurrentHitPoints(), 40);
+
         tactician1.setNewTurn();
         assertEquals(tactician1.getSelectedUnit().getMovementUsed(), false);
         assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 1));
@@ -68,6 +81,16 @@ class TacticianTest {
         tactician1.moveUnitTo(0,0);
         assertEquals(tactician1.getSelectedUnit().getMovementUsed(), true);
         assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 0));
+
+        assertEquals(tactician1.getSelectedUnit().getActionRemains(), 1);
+        tactician1.useItemOn(2, 2);
+        assertEquals(tactician1.getSelectedUnit().getActionRemains(), 1);
+        assertEquals(unit3.getCurrentHitPoints(), 40);
+        tactician1.useItemOn(1, 0);
+        assertEquals(unit3.getCurrentHitPoints(), 30);
+        assertEquals(tactician1.getSelectedUnit().getActionRemains(), 0);
+        tactician1.useItemOn(1, 0);
+        assertEquals(unit3.getCurrentHitPoints(), 30);
     }
 
     @Test

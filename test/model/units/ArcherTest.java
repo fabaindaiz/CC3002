@@ -24,6 +24,7 @@ public class ArcherTest extends AbstractTestUnit {
     @Override
     public void setTestUnit() {
         archer = new Archer(50, 2, field.getCell(0, 0));
+        archer.setMaxAction(4);
     }
 
     @Override

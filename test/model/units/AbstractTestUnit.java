@@ -159,32 +159,28 @@ public abstract class AbstractTestUnit implements ITestUnit {
         targetCounterattack1.equipItem(item1);
         targetCounterattack2.equipItem(item2);
         targetCounterattack3.equipItem(item3);
-        if (item != null) {
-            unit.addItem(item);
-            unit.equipItem(item);
-            unit.useItem(targetCounterattack1, true);
-            assertEquals(unit.getCurrentHitPoints(), getHP1());
-            unit.useItem(targetCounterattack1, true);
-            assertEquals(unit.getCurrentHitPoints(), getHP1());
-            unit.useItem(targetCounterattack2, true);
-            assertEquals(unit.getCurrentHitPoints(), getHP1());
-            unit.useItem(targetCounterattack3, true);
-            assertEquals(unit.getCurrentHitPoints(), getHP2());
-            unit.useItem(targetCounterattack4, true);
-            assertEquals(unit.getCurrentHitPoints(), getHP2());
-            targetCounterattack2.useItem(unit, true);
-            assertEquals(unit.getCurrentHitPoints(), 50);
-            if (item != staff)
-                assertEquals(targetCounterattack2.getCurrentHitPoints(), 40);
-            else
-                assertEquals(targetCounterattack2.getCurrentHitPoints(), 50);
-        }
+        unit.addItem(item);
+        unit.equipItem(item);
+        unit.useItem(targetCounterattack1, true);
+        assertEquals(unit.getCurrentHitPoints(), getHP1());
+        unit.useItem(targetCounterattack1, true);
+        assertEquals(unit.getCurrentHitPoints(), getHP1());
+        unit.useItem(targetCounterattack2, true);
+        assertEquals(unit.getCurrentHitPoints(), getHP1());
+        unit.useItem(targetCounterattack3, true);
+        assertEquals(unit.getCurrentHitPoints(), getHP2());
+        unit.useItem(targetCounterattack4, true);
+        assertEquals(unit.getCurrentHitPoints(), getHP2());
+        targetCounterattack2.useItem(unit, true);
+        assertEquals(unit.getCurrentHitPoints(), 50);
+        assertEquals(targetCounterattack2.getCurrentHitPoints(), 40);
     }
 
     @Override
     @Test
     public void healTest() {
         IUnit unit = getTestUnit();
+        targetCounterattack2.setMaxAction(3);
         targetCounterattack2.addItem(staff);
         targetCounterattack2.addItem(item4);
         unit.setCurrentHitPoints(20);
@@ -206,23 +202,20 @@ public abstract class AbstractTestUnit implements ITestUnit {
         IEquipableItem item = getWeapon();
         assertEquals(targetAlpaca.getItems(), List.of());
         unit.addItem(staff);
-        if (item != null) {
-            unit.addItem(item);
-            unit.equipItem(item);
-        }
+        unit.addItem(item);
+        unit.equipItem(item);
         unit.exchange(targetAlpaca, staff);
         assertEquals(targetAlpaca.getItems(), List.of(staff));
-        if (item != null) {
-            unit.exchange(targetAlpaca, item);
-            assertEquals(targetAlpaca.getItems(), List.of(staff, item));
-            assertNull(item.getOwner());
-        }
+        unit.exchange(targetAlpaca, item);
+        assertEquals(targetAlpaca.getItems(), List.of(staff, item));
+        assertNull(item.getOwner());
         assertNull(unit.getEquippedItem());
     }
 
     @Override
     @Test
     public void llenarInventarioTest() {
+        assertEquals(getTestUnit().getMaxItems(), 3);
         assertEquals(targetIntercambio.getItems(), List.of());
         getTestUnit().addItem(anima);
         assertEquals(getTestUnit().getItems(), List.of(anima));
@@ -231,41 +224,25 @@ public abstract class AbstractTestUnit implements ITestUnit {
         getTestUnit().addItem(light);
         assertEquals(getTestUnit().getItems(), List.of(anima, dark, light));
         getTestUnit().addItem(staff);
-        if (getTestUnit().getMaxItems() == 3)
-            assertEquals(getTestUnit().getItems(), List.of(anima, dark, light));
-        else assertEquals(getTestUnit().getItems(), List.of(anima, dark, light, staff));
+        assertEquals(getTestUnit().getItems(), List.of(anima, dark, light));
         getTestUnit().exchange(targetIntercambio, anima);
-        if (getTestUnit().getMaxItems() == 3)
-            assertEquals(getTestUnit().getItems(), List.of(dark, light));
-        else assertEquals(getTestUnit().getItems(), List.of(dark, light, staff));
+        assertEquals(getTestUnit().getItems(), List.of(dark, light));
         getTestUnit().exchange(targetIntercambio, dark);
-        if (getTestUnit().getMaxItems() == 3)
-            assertEquals(getTestUnit().getItems(), List.of(light));
-        else assertEquals(getTestUnit().getItems(), List.of(light, staff));
+        assertEquals(getTestUnit().getItems(), List.of(light));
         getTestUnit().exchange(targetIntercambio, light);
-        if (getTestUnit().getMaxItems() == 3)
-            assertEquals(getTestUnit().getItems(), List.of());
-        else assertEquals(getTestUnit().getItems(), List.of(staff));
+        assertEquals(getTestUnit().getItems(), List.of());
         getTestUnit().exchange(targetIntercambio, staff);
         assertEquals(targetIntercambio.getItems(), List.of(anima, dark, light));
         getTestUnit().addItem(staff);
         getTestUnit().exchange(targetIntercambio, staff);
         assertEquals(targetIntercambio.getItems(), List.of(anima, dark, light));
-        if (getTestUnit().getMaxItems() == 3)
-            assertEquals(getTestUnit().getItems(), List.of(staff));
-        else assertEquals(getTestUnit().getItems(), List.of(staff, staff));
+        assertEquals(getTestUnit().getItems(), List.of(staff));
         targetIntercambio.exchange(getTestUnit(), staff);
-        if (getTestUnit().getMaxItems() == 3)
-            assertEquals(getTestUnit().getItems(), List.of(staff));
-        else assertEquals(getTestUnit().getItems(), List.of(staff, staff));
+        assertEquals(getTestUnit().getItems(), List.of(staff));
         targetIntercambio.exchange(getTestUnit(), anima);
-        if (getTestUnit().getMaxItems() == 3)
-            assertEquals(getTestUnit().getItems(), List.of(staff, anima));
-        else assertEquals(getTestUnit().getItems(), List.of(staff, staff, anima));
+        assertEquals(getTestUnit().getItems(), List.of(staff, anima));
         getTestUnit().exchange(targetIntercambio, staff);
-        if (getTestUnit().getMaxItems() == 3)
-            assertEquals(getTestUnit().getItems(), List.of(anima));
-        else assertEquals(getTestUnit().getItems(), List.of(staff, anima));
+        assertEquals(getTestUnit().getItems(), List.of(anima));
     }
 
     public abstract IEquipableItem getWeapon();
@@ -305,17 +282,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
     public void attackToAnima() {
         IUnit unit = getTestUnit();
         IEquipableItem item = getWeapon();
-        if (item != null) {
-            unit.addItem(item);
-            unit.equipItem(item);
-            sorcerer.addItem(anima);
-            sorcerer.equipItem(anima);
-            unit.useItem(sorcerer, false);
-            assertEquals(sorcerer.getCurrentHitPoints(), getHPanima());
-        } else {
-            unit.useItem(sorcerer, false);
-            assertEquals(sorcerer.getCurrentHitPoints(), 50);
-        }
+        unit.addItem(item);
+        unit.equipItem(item);
+        sorcerer.addItem(anima);
+        sorcerer.equipItem(anima);
+        unit.useItem(sorcerer, false);
+        assertEquals(sorcerer.getCurrentHitPoints(), getHPanima());
     }
 
     /**
@@ -338,17 +310,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
     public void attackToDark() {
         IUnit unit = getTestUnit();
         IEquipableItem item = getWeapon();
-        if (item != null) {
-            unit.addItem(item);
-            unit.equipItem(item);
-            sorcerer.addItem(dark);
-            sorcerer.equipItem(dark);
-            unit.useItem(sorcerer, false);
-            assertEquals(sorcerer.getCurrentHitPoints(), getHPdark());
-        } else {
-            unit.useItem(sorcerer, false);
-            assertEquals(sorcerer.getCurrentHitPoints(), 50);
-        }
+        unit.addItem(item);
+        unit.equipItem(item);
+        sorcerer.addItem(dark);
+        sorcerer.equipItem(dark);
+        unit.useItem(sorcerer, false);
+        assertEquals(sorcerer.getCurrentHitPoints(), getHPdark());
     }
 
     /**
@@ -371,17 +338,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
     public void attackToLight() {
         IUnit unit = getTestUnit();
         IEquipableItem item = getWeapon();
-        if (item != null) {
-            unit.addItem(item);
-            unit.equipItem(item);
-            sorcerer.addItem(light);
-            sorcerer.equipItem(light);
-            unit.useItem(sorcerer, false);
-            assertEquals(sorcerer.getCurrentHitPoints(), getHPlight());
-        } else {
-            unit.useItem(sorcerer, false);
-            assertEquals(sorcerer.getCurrentHitPoints(), 50);
-        }
+        unit.addItem(item);
+        unit.equipItem(item);
+        sorcerer.addItem(light);
+        sorcerer.equipItem(light);
+        unit.useItem(sorcerer, false);
+        assertEquals(sorcerer.getCurrentHitPoints(), getHPlight());
     }
 
     /**
@@ -404,17 +366,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
     public void attackToAxe() {
         IUnit unit = getTestUnit();
         IEquipableItem item = getWeapon();
-        if (item != null) {
-            unit.addItem(item);
-            unit.equipItem(item);
-            fighter.addItem(axe);
-            fighter.equipItem(axe);
-            unit.useItem(fighter, false);
-            assertEquals(fighter.getCurrentHitPoints(), getHPaxe());
-        } else {
-            unit.useItem(fighter, false);
-            assertEquals(fighter.getCurrentHitPoints(), 50);
-        }
+        unit.addItem(item);
+        unit.equipItem(item);
+        fighter.addItem(axe);
+        fighter.equipItem(axe);
+        unit.useItem(fighter, false);
+        assertEquals(fighter.getCurrentHitPoints(), getHPaxe());
     }
 
     /**
@@ -437,17 +394,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
     public void attackToSword() {
         IUnit unit = getTestUnit();
         IEquipableItem item = getWeapon();
-        if (item != null) {
-            unit.addItem(item);
-            unit.equipItem(item);
-            swordMaster.addItem(sword);
-            swordMaster.equipItem(sword);
-            unit.useItem(swordMaster, false);
-            assertEquals(swordMaster.getCurrentHitPoints(), getHPsword());
-        } else {
-            unit.useItem(swordMaster, false);
-            assertEquals(swordMaster.getCurrentHitPoints(), 50);
-        }
+        unit.addItem(item);
+        unit.equipItem(item);
+        swordMaster.addItem(sword);
+        swordMaster.equipItem(sword);
+        unit.useItem(swordMaster, false);
+        assertEquals(swordMaster.getCurrentHitPoints(), getHPsword());
     }
 
     /**
@@ -470,17 +422,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
     public void attackToSpear() {
         IUnit unit = getTestUnit();
         IEquipableItem item = getWeapon();
-        if (item != null) {
-            unit.addItem(item);
-            unit.equipItem(item);
-            hero.addItem(spear);
-            hero.equipItem(spear);
-            unit.useItem(hero, false);
-            assertEquals(hero.getCurrentHitPoints(), getHPspear());
-        } else {
-            unit.useItem(hero, false);
-            assertEquals(hero.getCurrentHitPoints(), 50);
-        }
+        unit.addItem(item);
+        unit.equipItem(item);
+        hero.addItem(spear);
+        hero.equipItem(spear);
+        unit.useItem(hero, false);
+        assertEquals(hero.getCurrentHitPoints(), getHPspear());
     }
 
     /**
@@ -503,17 +450,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
     public void attackToStaff() {
         IUnit unit = getTestUnit();
         IEquipableItem item = getWeapon();
-        if (item != null) {
-            unit.addItem(item);
-            unit.equipItem(item);
-            cleric.addItem(staff);
-            cleric.equipItem(staff);
-            unit.useItem(cleric, false);
-            assertEquals(cleric.getCurrentHitPoints(), getHPstaff());
-        } else {
-            unit.useItem(cleric, false);
-            assertEquals(cleric.getCurrentHitPoints(), 50);
-        }
+        unit.addItem(item);
+        unit.equipItem(item);
+        cleric.addItem(staff);
+        cleric.equipItem(staff);
+        unit.useItem(cleric, false);
+        assertEquals(cleric.getCurrentHitPoints(), getHPstaff());
     }
 
     /**
@@ -536,17 +478,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
     public void attackToBow() {
         IUnit unit = getTestUnit();
         IEquipableItem item = getWeapon();
-        if (item != null) {
-            unit.addItem(item);
-            unit.equipItem(item);
-            archer.addItem(bow);
-            archer.equipItem(bow);
-            unit.useItem(archer, false);
-            assertEquals(archer.getCurrentHitPoints(), getHPbow());
-        } else {
-            unit.useItem(archer, false);
-            assertEquals(archer.getCurrentHitPoints(), 50);
-        }
+        unit.addItem(item);
+        unit.equipItem(item);
+        archer.addItem(bow);
+        archer.equipItem(bow);
+        unit.useItem(archer, false);
+        assertEquals(archer.getCurrentHitPoints(), getHPbow());
     }
 
     /**
@@ -593,6 +530,13 @@ public abstract class AbstractTestUnit implements ITestUnit {
         getTestUnit().moveTo(getField().getCell(0, 2));
         assertEquals(getTestUnit().getMovementUsed(), true);
         assertEquals(new Location(0, 0), getTestUnit().getLocation());
+    }
+
+    @Override
+    @Test
+    public void testActionUsed() {
+        getTestUnit().equipItem(getWeapon());
+
     }
 
     @Override

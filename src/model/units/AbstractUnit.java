@@ -25,6 +25,8 @@ import static java.lang.Math.min;
 public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     private boolean movementUsed = false;
+    private int actionRemains = 1;
+    public int maxAction = 1;
     private final int maxHitPoints;
     private final int movement;
     private final int maxItems;
@@ -63,7 +65,17 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
     @Override
     public void setNewTurn() {
         movementUsed = false;
+        actionRemains = maxAction;
     }
+
+    @Override
+    public void setMaxAction(int maxAction) {
+        this.maxAction = maxAction;
+        this.actionRemains = maxAction;
+    }
+
+    @Override
+    public int getActionRemains() { return actionRemains; }
 
     @Override
     public boolean getMovementUsed() { return movementUsed; }
@@ -161,8 +173,10 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     @Override
     public void useItem(IUnit other, boolean counterattack) {
-        if (equippedItem != null && other != null)
+        if (actionRemains > 0 && equippedItem != null && other != null) {
             equippedItem.useItem(other, counterattack);
+            actionRemains--;
+        }
     }
 
     @Override
@@ -228,12 +242,13 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
      * @param item Item para intercambiar
      */
     private void exchangeCondition(IUnit unit, IEquipableItem item) {
-        if (unit.addItem(item)) {
+        if (actionRemains > 0 && unit.addItem(item)) {
             if (equippedItem == item) {
                 equippedItem = null;
                 item.setOwner(null);
             }
             items.remove(item);
+            actionRemains--;
         }
     }
 
