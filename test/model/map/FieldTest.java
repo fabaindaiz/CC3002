@@ -3,8 +3,6 @@ package model.map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -38,7 +36,7 @@ class FieldTest {
             }
         }
         assertEquals(map.getCell(2, 3).getNeighbours().size(), 0);
-        map.getCell(2,3).addNeighbour(map.getCell(2, 2));
+        map.getCell(2, 3).addNeighbour(map.getCell(2, 2));
         assertEquals(map.getCell(2, 3).getNeighbours().size(), 0);
     }
 

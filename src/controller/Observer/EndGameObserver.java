@@ -1,7 +1,6 @@
 package controller.observer;
 
 import controller.GameController;
-import model.ITactician;
 
 /**
  * Objeto que representa un observer que verifica cuando un juego termina

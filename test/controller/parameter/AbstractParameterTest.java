@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-abstract class AbstractParameterTest implements IAbstractParameterTest{
+abstract class AbstractParameterTest implements IAbstractParameterTest {
 
     GameController controller;
 
@@ -94,8 +94,7 @@ abstract class AbstractParameterTest implements IAbstractParameterTest{
         if (getTypeItem() != null) {
             assertEquals(controller.getSelectedItem().getName(), getNameItem());
             assertEquals(controller.getSelectedUnit().getEquippedItem().getName(), getNameItem());
-        }
-        else
+        } else
             assertEquals(controller.getSelectedItem(), null);
         controller.endTurn();
         controller.selectUnitId(0);
@@ -127,8 +126,7 @@ abstract class AbstractParameterTest implements IAbstractParameterTest{
             assertEquals(controller.getSelectedItem().getName(), getNameItem());
             assertEquals(controller.getSelectedItem().getPower(), 10);
             assertEquals(controller.getSelectedUnit().getEquippedItem().getName(), getNameItem());
-        }
-        else
+        } else
             assertEquals(controller.getSelectedItem(), null);
         controller.endTurn();
         controller.selectUnitId(0);

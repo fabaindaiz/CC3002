@@ -3,7 +3,6 @@ package controller;
 import controller.parameter.IParameter;
 import controller.parameter.ItemParameter;
 import controller.parameter.UnitParameter;
-import model.ITactician;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
@@ -45,7 +44,9 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public boolean getInitiatedGameStatus() { return initiatedGame; }
+    public boolean getInitiatedGameStatus() {
+        return initiatedGame;
+    }
 
     @Override
     public int getMaxRounds() {
@@ -122,17 +123,18 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public void setSeed(long seed) {
+        defaultSeed = seed;
         random.setSeed(seed);
     }
 
     @Override
     public void changeMap(Long... seed) {
         if (seed.length > 0)
-            defaultSeed = seed[0];
+            defaultMapSeed = seed[0];
         else
-            defaultSeed = random.nextLong();
+            defaultMapSeed = random.nextLong();
         gameMap.clearMap();
-        gameMap.setSeed(defaultSeed);
+        gameMap.setSeed(defaultMapSeed);
         gameMap.generateMap(defaultMapSize);
     }
 
@@ -149,6 +151,7 @@ public class GameController extends GameInitialization implements IGameControlle
     public void initGameTest(final int maxTurns) {
         initiatedGame = true;
         initAll();
+        random.setSeed(defaultSeed);
         assignTurns();
 
         turnOwner = turns.get(0);
@@ -242,7 +245,9 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public List<IUnit> getUnits() {return turnOwner.getUnits(); }
+    public List<IUnit> getUnits() {
+        return turnOwner.getUnits();
+    }
 
     @Override
     public void selectUnitIn(int x, int y) {

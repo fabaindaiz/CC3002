@@ -29,10 +29,14 @@ import model.units.warrior.SwordMaster;
 public abstract class AbstractParameter implements IParameter {
 
     @Override
-    public Location getLocation() { return null; }
+    public Location getLocation() {
+        return null;
+    }
 
     @Override
-    public String getName() { return null; }
+    public String getName() {
+        return null;
+    }
 
     @Override
     public IUnit createUnit(String type, final int hitPoints, final int movement, final Location location, IEquipableItem... items) {

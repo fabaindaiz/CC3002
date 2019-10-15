@@ -19,7 +19,7 @@ public class DefeatUnitObserver implements IObserver {
      * Crea un observer que verifica cuando una unidad es derrotado
      *
      * @param tactician dueño de la unidad a observar
-     * @param unit unidad a observar
+     * @param unit      unidad a observar
      */
     public DefeatUnitObserver(Tactician tactician, IUnit unit) {
         this.tactician = tactician;
@@ -32,8 +32,7 @@ public class DefeatUnitObserver implements IObserver {
             if (unit.defeatCondition()) {
                 tactician.removeAllUnit();
                 tactician.notifyObservers();
-            }
-            else
+            } else
                 tactician.removeUnit(unit);
     }
 }

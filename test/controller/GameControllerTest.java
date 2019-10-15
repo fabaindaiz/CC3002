@@ -1,6 +1,7 @@
 package controller;
 
 import controller.parameter.IParameter;
+import model.ITactician;
 import model.Tactician;
 import model.items.IEquipableItem;
 import model.items.otheritem.Staff;
@@ -157,6 +158,21 @@ class GameControllerTest {
     }
 
     @Test
+    void turnOrderTest() {
+        int size = controller.getTacticians().size();
+        List<ITactician> turns = new ArrayList<ITactician>();
+        for (int i = 0; i < size; i++) {
+            turns.add(controller.getTurnOwner());
+            controller.endTurn();
+        }
+        controller.initGameTest(-1);
+        for (ITactician turn : turns) {
+            assertEquals(turn.getName(), controller.getTurnOwner().getName());
+            controller.endTurn();
+        }
+    }
+
+    @Test
     void createUnit() {
         GameController controller = new GameController(2, 50);
         controller.changeMap((long) 1068 + 1067 + 1067);
@@ -207,11 +223,11 @@ class GameControllerTest {
 
     @Test
     void changeMap() {
-        long defaultSeed = controller.defaultSeed;
+        long defaultSeed = controller.defaultMapSeed;
         controller.changeMap();
-        assertNotEquals(defaultSeed, controller.defaultSeed);
+        assertNotEquals(defaultSeed, controller.defaultMapSeed);
         controller.changeMap((long) 12345678);
-        assertEquals(12345678, controller.defaultSeed);
+        assertEquals(12345678, controller.defaultMapSeed);
     }
 
     @Test

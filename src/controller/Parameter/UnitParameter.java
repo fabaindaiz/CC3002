@@ -25,10 +25,10 @@ public class UnitParameter extends AbstractParameter {
     /**
      * Constructor de un parametro tipo unit
      *
-     * @param type Tipo de la unidad
+     * @param type           Tipo de la unidad
      * @param ownerTactician Tactician dueño de la unidad
-     *
-     * Los demas parametros son los mismos que en el contructor de AbstractUnit
+     *                       <p>
+     *                       Los demas parametros son los mismos que en el contructor de AbstractUnit
      */
     public UnitParameter(final String type, final int hitPoints, final int movement, final Location position, final int ownerTactician) {
         this.type = type;
@@ -39,10 +39,14 @@ public class UnitParameter extends AbstractParameter {
     }
 
     @Override
-    public String getType() { return type; }
+    public String getType() {
+        return type;
+    }
 
     @Override
-    public Location getLocation() { return location; }
+    public Location getLocation() {
+        return location;
+    }
 
     @Override
     public void create(Field gameMap, ArrayList<Tactician> tacticians) {

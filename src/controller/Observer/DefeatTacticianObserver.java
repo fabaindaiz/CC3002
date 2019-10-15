@@ -19,7 +19,7 @@ public class DefeatTacticianObserver implements IObserver {
      * Crea un observer que verifica cuando un tactician es derrotado
      *
      * @param gameController controlador del juego
-     * @param tactician tactician a observar
+     * @param tactician      tactician a observar
      */
     public DefeatTacticianObserver(GameController gameController, Tactician tactician) {
         this.gameController = gameController;

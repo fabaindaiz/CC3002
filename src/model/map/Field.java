@@ -57,8 +57,8 @@ public class Field implements IField {
     /**
      * Genera un mapa de manera recursiva
      *
-     * @param x Posición horizontal del nodo a generar
-     * @param y Posición vertical del nodo a generar
+     * @param x    Posición horizontal del nodo a generar
+     * @param y    Posición vertical del nodo a generar
      * @param step Paso de la recursión
      */
     private void recursiveMap(int x, int y, int step) {

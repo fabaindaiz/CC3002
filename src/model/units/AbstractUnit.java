@@ -24,14 +24,14 @@ import static java.lang.Math.min;
  */
 public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
-    private boolean movementUsed = false;
-    private int actionRemains = 1;
-    public int maxAction = 1;
     private final int maxHitPoints;
     private final int movement;
     private final int maxItems;
+    public int maxAction = 1;
     protected List<IEquipableItem> items = new ArrayList<>();
     protected IEquipableItem equippedItem;
+    private boolean movementUsed = false;
+    private int actionRemains = 1;
     private int currentHitPoints;
     private Location location;
     private IParameter parameter;
@@ -55,7 +55,9 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
     }
 
     @Override
-    public boolean defeatCondition() { return false; }
+    public boolean defeatCondition() {
+        return false;
+    }
 
     @Override
     public void addObserver(IObserver observer) {
@@ -76,14 +78,18 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     @Override
     public void successfulAttack() {
-        actionRemains --;
+        actionRemains--;
     }
 
     @Override
-    public int getActionRemains() { return actionRemains; }
+    public int getActionRemains() {
+        return actionRemains;
+    }
 
     @Override
-    public boolean getMovementUsed() { return movementUsed; }
+    public boolean getMovementUsed() {
+        return movementUsed;
+    }
 
     @Override
     public int getMaxHitPoints() {

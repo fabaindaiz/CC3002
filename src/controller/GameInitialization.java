@@ -24,6 +24,7 @@ public abstract class GameInitialization extends AbstractSubject {
 
     protected final int numPlayers;
     protected Random random = new Random();
+    protected long defaultMapSeed = random.nextLong();
     protected long defaultSeed = random.nextLong();
     protected boolean initiatedGame = false;
     protected int defaultMapSize;
@@ -38,34 +39,44 @@ public abstract class GameInitialization extends AbstractSubject {
 
     /**
      * Contructor de un inicializador de partidas
-     * Por simplicidad, lo relacionado al inicio del juego pesta aqui
+     * Por simplicidad, lo relacionado al inicio del juego esta aqui
      *
      * @param numberOfPlayers numero de Tactician que juegan
-     * @param mapSize Tamaño del mapa para el juego
+     * @param mapSize         Tamaño del mapa para el juego
      */
     public GameInitialization(int numberOfPlayers, int mapSize) {
+        random.setSeed(defaultSeed);
+
         this.numPlayers = numberOfPlayers;
         this.defaultMapSize = mapSize;
-        gameMap.setSeed(defaultSeed);
+        gameMap.setSeed(defaultMapSeed);
         gameMap.generateMap(defaultMapSize);
 
         for (int i = 0; i < numPlayers; i++)
             tacticians.put("Player " + i, new Tactician("Player " + i, i, gameMap));
     }
 
-    public void setGameController(GameController gameController) {
+    /**
+     * Configura el controller para que sea visible desde el inicializador
+     */
+    protected void setGameController(GameController gameController) {
         this.gameController = gameController;
     }
 
-    public List<IParameter> getParameters() { return List.copyOf(parameters); }
+    /**
+     * @return los parametros de la partida almacenados en el controlador
+     */
+    public List<IParameter> getParameters() {
+        return List.copyOf(parameters);
+    }
 
     /**
      * Inicializa lo necesario para una nueva partida
      */
-    public void initAll() {
+    protected void initAll() {
         tacticians.clear();
         gameMap.clearMap();
-        gameMap.setSeed(defaultSeed);
+        gameMap.setSeed(defaultMapSeed);
         gameMap.generateMap(defaultMapSize);
 
         for (int i = 0; i < numPlayers; i++)
@@ -82,8 +93,6 @@ public abstract class GameInitialization extends AbstractSubject {
                 unit.addObserver(new DefeatUnitObserver(tactician, unit));
             }
         }
-
-
     }
 
 }

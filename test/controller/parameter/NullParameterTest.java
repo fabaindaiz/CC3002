@@ -1,4 +1,4 @@
-package controller;
+package controller.parameter;
 
 import controller.GameController;
 import org.junit.jupiter.api.BeforeEach;

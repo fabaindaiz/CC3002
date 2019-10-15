@@ -28,12 +28,12 @@ public class ItemParameter extends AbstractParameter {
     /**
      * Contructor de un parametro de tipo item
      *
-     * @param type Tipo del item
+     * @param type           Tipo del item
      * @param ownerTactician Tactician dueño del item
-     * @param ownerUnit Unidad dueño del item
-     * @param equiped Determina si se equipa al crearse
-     *
-     * Los demas parametros son los mismos que en el contructor de AbstractItem
+     * @param ownerUnit      Unidad dueño del item
+     * @param equiped        Determina si se equipa al crearse
+     *                       <p>
+     *                       Los demas parametros son los mismos que en el contructor de AbstractItem
      */
     public ItemParameter(final String type, final String name, final int power, final int minRange, final int maxRange,
                          final int ownerTactician, final int ownerUnit, final boolean equiped) {
@@ -48,10 +48,14 @@ public class ItemParameter extends AbstractParameter {
     }
 
     @Override
-    public String getType() { return type; }
+    public String getType() {
+        return type;
+    }
 
     @Override
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     @Override
     public void create(Field gameMap, ArrayList<Tactician> tacticians) {

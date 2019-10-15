@@ -55,10 +55,10 @@ class TacticianTest {
 
         assertEquals(tactician1.getSelectedUnit().getMovementUsed(), false);
         assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 0));
-        tactician1.moveUnitTo(1,1);
+        tactician1.moveUnitTo(1, 1);
         assertEquals(tactician1.getSelectedUnit().getMovementUsed(), false);
         assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 0));
-        tactician1.moveUnitTo(0,1);
+        tactician1.moveUnitTo(0, 1);
         assertEquals(tactician1.getSelectedUnit().getMovementUsed(), true);
         assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 1));
 
@@ -75,10 +75,10 @@ class TacticianTest {
         tactician1.setNewTurn();
         assertEquals(tactician1.getSelectedUnit().getMovementUsed(), false);
         assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 1));
-        tactician1.moveUnitTo(1,1);
+        tactician1.moveUnitTo(1, 1);
         assertEquals(tactician1.getSelectedUnit().getMovementUsed(), false);
         assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 1));
-        tactician1.moveUnitTo(0,0);
+        tactician1.moveUnitTo(0, 0);
         assertEquals(tactician1.getSelectedUnit().getMovementUsed(), true);
         assertEquals(tactician1.getSelectedUnit().getLocation(), gameMap.getCell(0, 0));
 

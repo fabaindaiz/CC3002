@@ -25,7 +25,9 @@ public class Hero extends Warrior {
     }
 
     @Override
-    public boolean defeatCondition() { return true; }
+    public boolean defeatCondition() {
+        return true;
+    }
 
     @Override
     public void equipSpear(IEquipableItem item) {
