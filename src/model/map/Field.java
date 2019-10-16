@@ -14,10 +14,9 @@ import java.util.*;
  */
 public class Field implements IField {
 
+    private final Random random = new Random();
+    private final StringBuilder builder = new StringBuilder();
     private Map<String, Location> map = new HashMap<>();
-    private Random random = new Random();
-    private StringBuilder builder = new StringBuilder();
-
     private int sideSquare;
     private int maxSize;
 

@@ -12,8 +12,8 @@ import model.Tactician;
  */
 public class DefeatTacticianObserver implements IObserver {
 
-    GameController gameController;
-    Tactician tactician;
+    private final GameController gameController;
+    private final Tactician tactician;
 
     /**
      * Crea un observer que verifica cuando un tactician es derrotado

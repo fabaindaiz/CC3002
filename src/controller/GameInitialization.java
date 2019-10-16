@@ -23,19 +23,18 @@ import java.util.*;
 public abstract class GameInitialization extends AbstractSubject {
 
     protected final int numPlayers;
-    protected Random random = new Random();
+    protected final Random random = new Random();
+    protected final int defaultMapSize;
+    protected final Field gameMap = new Field();
     protected long defaultMapSeed = random.nextLong();
     protected long defaultSeed = random.nextLong();
     protected boolean initiatedGame = false;
-    protected int defaultMapSize;
-    protected GameController gameController;
-
     protected ArrayList<IParameter> parameters = new ArrayList<IParameter>();
     protected Map<String, Tactician> tacticians = new TreeMap<>();
-    protected Field gameMap = new Field();
-
+    // Para implementar moldes de unidades
     protected ArrayList<UnitParameter> predefinedUnits;
     protected ArrayList<ItemParameter> predefinedItems;
+    private GameController gameController;
 
     /**
      * Contructor de un inicializador de partidas

@@ -27,8 +27,8 @@ public class Location {
     private final int row;
     private final int column;
     private final String id;
+    private final NullUnit nullUnit = new NullUnit(this);
     Random random = new Random();
-    private NullUnit nullUnit = new NullUnit(this);
     private Set<Location> neighbours = new HashSet<>();
     private IUnit unit = nullUnit;
     private long searchCode = random.nextLong();

@@ -168,7 +168,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
      * (Despues del SMAAAASH!! unit ha recibido daño mortal)
      */
     private void death() {
-        location.setUnit(null);
+        location.setNullUnit();
         location = null;
 
         notifyAllObservers();

@@ -11,7 +11,7 @@ import controller.GameController;
  */
 public class EndGameObserver implements IObserver {
 
-    GameController gameController;
+    private final GameController gameController;
 
     /**
      * Crea un observer que verifica cuando un juego termina

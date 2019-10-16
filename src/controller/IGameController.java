@@ -139,6 +139,9 @@ public interface IGameController {
      */
     void endGame();
 
+    /**
+     * @return la lista de unidades de TurnOwner
+     */
     List<IUnit> getUnits();
 
     /**

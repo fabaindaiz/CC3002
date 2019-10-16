@@ -46,6 +46,9 @@ public interface IUnit {
      */
     void setMaxAction(int maxAction);
 
+    /**
+     * Se ejecuta cuando el ataque fue exitoso
+     */
     void successfulAttack();
 
     /**
@@ -58,6 +61,9 @@ public interface IUnit {
      */
     boolean getMovementUsed();
 
+    /**
+     * @return el item nulo de la unidad
+     */
     IEquipableItem getNullItem();
 
     /**

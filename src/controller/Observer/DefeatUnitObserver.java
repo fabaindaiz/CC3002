@@ -12,8 +12,8 @@ import model.units.IUnit;
  */
 public class DefeatUnitObserver implements IObserver {
 
-    Tactician tactician;
-    IUnit unit;
+    private final Tactician tactician;
+    private final IUnit unit;
 
     /**
      * Crea un observer que verifica cuando una unidad es derrotado

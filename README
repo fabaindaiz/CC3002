@@ -207,3 +207,7 @@ Autores
 
 Licencia
     Este proyecto tiene licencia MIT, para mas detalles revisar archivo LICENCE
+
+Cambios pendientes:
+    - predefinedUnits && predefinedInits en GameInitialization
+    -

@@ -23,10 +23,10 @@ public class Tactician extends AbstractSubject implements ITactician {
     protected final List<IUnit> units = new ArrayList<>();
     private final Field gameMap;
     private final String name;
-    private int tacticianNumber;
+    private final int tacticianNumber;
 
-    private IUnit nullUnit = new NullUnit();
-    private IEquipableItem nullItem = new NullItem();
+    private final IUnit nullUnit = new NullUnit();
+    private final IEquipableItem nullItem = new NullItem();
     private IUnit selectedUnit = nullUnit;
     private IEquipableItem selectedItem = nullItem;
 
@@ -105,7 +105,6 @@ public class Tactician extends AbstractSubject implements ITactician {
         }
     }
 
-    //---------------------------------------------------------
     @Override
     public void selectUnitIn(int x, int y) {
         if (units.contains(gameMap.getCell(x, y).getUnit()))

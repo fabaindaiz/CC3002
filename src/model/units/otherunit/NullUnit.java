@@ -1,6 +1,7 @@
 package model.units.otherunit;
 
 import model.items.IEquipableItem;
+import model.map.InvalidLocation;
 import model.map.Location;
 import model.units.IUnit;
 
@@ -18,7 +19,7 @@ public class NullUnit extends OtherUnit {
      * Crea una nueva unidad nula para ser usada por Tactician
      */
     public NullUnit() {
-        super(0, 0, null, 0);
+        super(0, 0, new InvalidLocation(), 0);
         super.setMaxAction(0);
     }
 

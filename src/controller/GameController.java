@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class GameController extends GameInitialization implements IGameController {
 
-    protected Tactician turnOwner;
+    private Tactician turnOwner;
     private int turnInRound;
     private Tactician lastTurn;
     private ArrayList<Tactician> turns = new ArrayList<Tactician>();
