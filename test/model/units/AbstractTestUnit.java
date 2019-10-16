@@ -4,7 +4,6 @@ import model.items.IEquipableItem;
 import model.items.magicbook.Anima;
 import model.items.magicbook.Dark;
 import model.items.magicbook.Light;
-import model.items.otheritem.NullItem;
 import model.items.otheritem.Staff;
 import model.items.weapon.Axe;
 import model.items.weapon.Bow;
@@ -605,9 +604,13 @@ public abstract class AbstractTestUnit implements ITestUnit {
     }
 
     @Override
-    public int getHP3() { return 50; }
+    public int getHP3() {
+        return 50;
+    }
 
     @Override
-    public int getHP4() { return 40; }
+    public int getHP4() {
+        return 40;
+    }
 
 }

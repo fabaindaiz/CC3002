@@ -28,10 +28,8 @@ class TacticianTest {
     @BeforeEach
     void setUp() {
         gameMap = new Field();
-        gameMap.addCells(true, new Location(0, 0));
-        gameMap.addCells(true, new Location(0, 1));
-        gameMap.addCells(true, new Location(1, 0));
-        gameMap.addCells(true, new Location(1, 1));
+        gameMap.addCells(true, new Location(0, 0), new Location(0, 1),
+                new Location(1, 0), new Location(1, 1));
 
         tactician1 = new Tactician("ExamplePlayer", 0, gameMap);
         tactician2 = new Tactician("Player0", 1, gameMap);

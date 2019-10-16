@@ -2,7 +2,6 @@ package model.items.weapon;
 
 import model.items.AbstractItem;
 import model.items.IEquipableItem;
-import model.units.IUnit;
 
 /**
  * This class represents a weapon item.

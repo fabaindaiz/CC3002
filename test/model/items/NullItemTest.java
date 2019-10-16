@@ -7,7 +7,6 @@ import model.units.otherunit.Cleric;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class NullItemTest extends AbstractTestItem {
 
@@ -15,7 +14,7 @@ public class NullItemTest extends AbstractTestItem {
 
     @Override
     public void setTestItem() {
-        expectedName =null;
+        expectedName = null;
         expectedMinRange = 1;
         expectedMaxRange = 1;
     }
@@ -24,13 +23,16 @@ public class NullItemTest extends AbstractTestItem {
      * Sets up an item with wrong ranges setted.
      */
     @Override
-    public void setWrongRangeItem() { }
+    public void setWrongRangeItem() {
+    }
 
     /**
      * Sets the unit that will be equipped with the test item
      */
     @Override
-    public void setTestUnit() { cleric = new Cleric(10, 5, new Location(0, 0)); }
+    public void setTestUnit() {
+        cleric = new Cleric(10, 5, new Location(0, 0));
+    }
 
     @Override
     public IEquipableItem getWrongTestItem() {
@@ -38,7 +40,9 @@ public class NullItemTest extends AbstractTestItem {
     }
 
     @Override
-    public IEquipableItem getTestItem() { return cleric.getNullItem(); }
+    public IEquipableItem getTestItem() {
+        return cleric.getNullItem();
+    }
 
     /**
      * @return a unit that can equip the item being tested

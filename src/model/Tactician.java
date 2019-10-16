@@ -6,7 +6,7 @@ import model.items.IEquipableItem;
 import model.items.otheritem.NullItem;
 import model.map.Field;
 import model.units.IUnit;
-import model.units.NullUnit;
+import model.units.otherunit.NullUnit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,10 +71,14 @@ public class Tactician extends AbstractSubject implements ITactician {
     }
 
     @Override
-    public IUnit getNullUnit() { return nullUnit; }
+    public IUnit getNullUnit() {
+        return nullUnit;
+    }
 
     @Override
-    public IEquipableItem getNullItem() { return nullItem; }
+    public IEquipableItem getNullItem() {
+        return nullItem;
+    }
 
     @Override
     public void addUnit(IUnit unit) {
@@ -100,7 +104,8 @@ public class Tactician extends AbstractSubject implements ITactician {
             removeUnit(unit);
         }
     }
-//---------------------------------------------------------
+
+    //---------------------------------------------------------
     @Override
     public void selectUnitIn(int x, int y) {
         if (units.contains(gameMap.getCell(x, y).getUnit()))
@@ -123,7 +128,9 @@ public class Tactician extends AbstractSubject implements ITactician {
     }
 
     @Override
-    public List<IEquipableItem> getItems() { return selectedUnit.getItems(); }
+    public List<IEquipableItem> getItems() {
+        return selectedUnit.getItems();
+    }
 
     @Override
     public void selectItem(int index) {

@@ -6,7 +6,6 @@ import model.units.otherunit.Cleric;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * @author Ignacio Slater Muñoz
@@ -123,8 +122,12 @@ public class ClericTest extends AbstractTestUnit {
     } //Light
 
     @Override
-    public int getHP3() { return 50; }
+    public int getHP3() {
+        return 50;
+    }
 
     @Override
-    public int getHP4() { return 50; }
+    public int getHP4() {
+        return 50;
+    }
 }

@@ -1,7 +1,7 @@
 package model.map;
 
 import model.units.IUnit;
-import model.units.NullUnit;
+import model.units.otherunit.NullUnit;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -24,11 +24,11 @@ import java.util.Set;
  */
 public class Location {
 
-    private NullUnit nullUnit = new NullUnit(this);
     private final int row;
     private final int column;
     private final String id;
     Random random = new Random();
+    private NullUnit nullUnit = new NullUnit(this);
     private Set<Location> neighbours = new HashSet<>();
     private IUnit unit = nullUnit;
     private long searchCode = random.nextLong();
@@ -46,7 +46,9 @@ public class Location {
         id = "(" + row + ", " + column + ")";
     }
 
-    public NullUnit getNullUnit(){ return nullUnit; }
+    public NullUnit getNullUnit() {
+        return nullUnit;
+    }
 
     public boolean addUnitToCell(IUnit newUnit) {
         if (newUnit.getLocation() == this && this.unit == nullUnit) {
@@ -117,7 +119,7 @@ public class Location {
      *
      * @param unit the unit to be placed in this cell
      */
-    public void setUnit (final IUnit unit) {
+    public void setUnit(final IUnit unit) {
         this.unit = unit;
     }
 

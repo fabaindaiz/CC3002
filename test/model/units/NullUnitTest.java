@@ -3,11 +3,13 @@ package model.units;
 import model.items.IEquipableItem;
 import model.map.Location;
 import model.units.otherunit.Alpaca;
+import model.units.otherunit.NullUnit;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NullUnitTest extends AbstractTestUnit {
 
@@ -151,44 +153,72 @@ public class NullUnitTest extends AbstractTestUnit {
     }
 
     @Override
-    public IEquipableItem getWeapon() { return nullUnit.getNullItem(); }
+    public IEquipableItem getWeapon() {
+        return nullUnit.getNullItem();
+    }
 
     @Override
-    public IUnit getTestUnit() { return nullUnit; }
+    public IUnit getTestUnit() {
+        return nullUnit;
+    }
 
     @Override
-    public int getHPanima() { return 50; }
+    public int getHPanima() {
+        return 50;
+    }
 
     @Override
-    public int getHPdark() { return 50; }
+    public int getHPdark() {
+        return 50;
+    }
 
     @Override
-    public int getHPlight() { return 50; }
+    public int getHPlight() {
+        return 50;
+    }
 
     @Override
-    public int getHPaxe() { return 50; }
+    public int getHPaxe() {
+        return 50;
+    }
 
     @Override
-    public int getHPspear() { return 50; }
+    public int getHPspear() {
+        return 50;
+    }
 
     @Override
-    public int getHPsword() { return 50; }
+    public int getHPsword() {
+        return 50;
+    }
 
     @Override
-    public int getHPstaff() { return 50; }
+    public int getHPstaff() {
+        return 50;
+    }
 
     @Override
-    public int getHPbow() { return 50; }
+    public int getHPbow() {
+        return 50;
+    }
 
     @Override
-    public int getHP1() { return 0; }
+    public int getHP1() {
+        return 0;
+    }
 
     @Override
-    public int getHP2() { return 0; }
+    public int getHP2() {
+        return 0;
+    }
 
     @Override
-    public int getHP3() { return 0; }
+    public int getHP3() {
+        return 0;
+    }
 
     @Override
-    public int getHP4() { return 50; }
+    public int getHP4() {
+        return 50;
+    }
 }

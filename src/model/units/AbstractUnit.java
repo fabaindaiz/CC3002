@@ -29,9 +29,9 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
     private final int maxHitPoints;
     private final int movement;
     private final int maxItems;
-    private int maxAction = 1;
     protected List<IEquipableItem> items = new ArrayList<>();
     protected IEquipableItem equippedItem = nullItem;
+    private int maxAction = 1;
     private boolean movementUsed = false;
     private int actionRemains = 1;
     private int currentHitPoints;
@@ -95,7 +95,9 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
     }
 
     @Override
-    public IEquipableItem getNullItem() { return nullItem; }
+    public IEquipableItem getNullItem() {
+        return nullItem;
+    }
 
     @Override
     public int getMaxHitPoints() {

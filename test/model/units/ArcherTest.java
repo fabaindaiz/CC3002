@@ -6,7 +6,6 @@ import model.units.warrior.Archer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Test set for the Archer unit.

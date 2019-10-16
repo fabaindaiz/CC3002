@@ -2,9 +2,7 @@ package model;
 
 import controller.observer.IObserver;
 import model.items.IEquipableItem;
-import model.items.otheritem.NullItem;
 import model.units.IUnit;
-import model.units.NullUnit;
 
 import java.util.List;
 
