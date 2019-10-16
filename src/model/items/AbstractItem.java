@@ -65,9 +65,7 @@ public abstract class AbstractItem implements IEquipableItem {
 
     @Override
     public void useItem(IUnit other, boolean counterAttack) {
-        if (other.getEquippedItem() != null)
-            specificAttack(other, counterAttack);
-        else noItemAttack(other);
+        specificAttack(other, counterAttack);
     }
 
     @Override

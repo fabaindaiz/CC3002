@@ -38,36 +38,36 @@ public abstract class OtherItem extends AbstractItem {
 
     @Override
     public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
+        owner.receiveAttack(item, false);
     }
 
     @Override
     public void receiveDarkAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
+        owner.receiveAttack(item, false);
     }
 
     @Override
     public void receiveLightAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
+        owner.receiveAttack(item, false);
     }
 
     @Override
     public void receiveAxeAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
+        owner.receiveAttack(item, false);
     }
 
     @Override
     public void receiveSpearAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
+        owner.receiveAttack(item, false);
     }
 
     @Override
     public void receiveSwordAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
+        owner.receiveAttack(item, false);
     }
 
     @Override
     public void receiveBowAttack(IEquipableItem item, boolean counterAttack) {
-        owner.receiveAttack(item, counterAttack);
+        owner.receiveAttack(item, false);
     }
 }

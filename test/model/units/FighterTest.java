@@ -58,7 +58,7 @@ public class FighterTest extends AbstractTestUnit {
     @Test
     @Override
     public void equipAxeTest() {
-        assertNull(fighter.getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         fighter.addItem(axe);
         fighter.equipItem(axe);
         assertEquals(axe, fighter.getEquippedItem());

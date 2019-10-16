@@ -68,12 +68,6 @@ public interface IEquipableItem {
      */
     void equipTo(IUnit unit);
 
-    /**
-     * Ataque que se activa caundo la otra unidad no tiene nada equipado
-     *
-     * @param other Unidad que se ataca
-     */
-    void noItemAttack(IUnit other);
 
     /**
      * Ataque que se activa en un combate normal cuando el atacado tiene un arma equipada

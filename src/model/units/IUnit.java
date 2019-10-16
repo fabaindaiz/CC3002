@@ -58,6 +58,8 @@ public interface IUnit {
      */
     boolean getMovementUsed();
 
+    IEquipableItem getNullItem();
+
     /**
      * @return max hit points of the unit
      */
@@ -204,4 +206,8 @@ public interface IUnit {
      */
     void equipStaff(IEquipableItem item);
 
+    /**
+     * Equipa un item de tipo null
+     */
+    void equipNullItem();
 }

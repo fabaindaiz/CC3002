@@ -38,11 +38,6 @@ public abstract class Weapon extends AbstractItem {
     }
 
     @Override
-    public void noItemAttack(IUnit other) {
-        other.receiveAttack(this, false);
-    }
-
-    @Override
     public void receiveAnimaAttack(IEquipableItem item, boolean counterAttack) {
         owner.receiveWeaknessAttack(item, counterAttack);
     }

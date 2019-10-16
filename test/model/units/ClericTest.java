@@ -52,10 +52,21 @@ public class ClericTest extends AbstractTestUnit {
         }
     }
 
+    @Override
+    @Test
+    public void attackToNullItem() {
+        IUnit unit = getTestUnit();
+        IEquipableItem item = getWeapon();
+        unit.addItem(item);
+        unit.equipItem(item);
+        unit.useItem(sorcerer, false);
+        assertEquals(sorcerer.getCurrentHitPoints(), 50);
+    }
+
     @Test
     @Override
     public void equipStaffTest() {
-        assertNull(cleric.getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         cleric.addItem(staff);
         cleric.equipItem(staff);
         assertEquals(staff, cleric.getEquippedItem());

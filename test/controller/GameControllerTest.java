@@ -507,9 +507,9 @@ class GameControllerTest {
         controller.addUnit(unit1);
         controller.selectUnitIn(sideSquare / 2, sideSquare / 2);
         assertEquals(controller.getItems(), List.of(item1, item2));
-        assertEquals(controller.getSelectedUnit().getEquippedItem(), null);
+        assertEquals(controller.getSelectedUnit().getEquippedItem(), controller.getSelectedUnit().getNullItem());
         controller.equipItem(1);
-        assertEquals(controller.getSelectedUnit().getEquippedItem(), null);
+        assertEquals(controller.getSelectedUnit().getEquippedItem(), controller.getSelectedUnit().getNullItem());
         controller.equipItem(0);
         assertEquals(controller.getSelectedUnit().getEquippedItem(), item1);
     }

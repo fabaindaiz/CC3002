@@ -27,6 +27,17 @@ public class AlpacaTest extends AbstractTestUnit {
 
     @Override
     @Test
+    public void attackToNullItem() {
+        IUnit unit = getTestUnit();
+        IEquipableItem item = getWeapon();
+        unit.addItem(item);
+        unit.equipItem(item);
+        unit.useItem(sorcerer, false);
+        assertEquals(sorcerer.getCurrentHitPoints(), 50);
+    }
+
+    @Override
+    @Test
     public void counterattackTest() {
         IUnit unit = getTestUnit();
         IEquipableItem item = getWeapon();
@@ -57,7 +68,7 @@ public class AlpacaTest extends AbstractTestUnit {
         unit.addItem(staff);
         unit.exchange(targetAlpaca, staff);
         assertEquals(targetAlpaca.getItems(), List.of(staff));
-        assertNull(unit.getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
     }
 
     @Override
@@ -191,7 +202,7 @@ public class AlpacaTest extends AbstractTestUnit {
 
     @Override
     public IEquipableItem getWeapon() {
-        return null;
+        return alpaca.getNullItem();
     }
 
     @Override

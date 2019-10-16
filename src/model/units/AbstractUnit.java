@@ -4,6 +4,7 @@ import controller.observer.AbstractSubject;
 import controller.observer.IObserver;
 import controller.parameter.IParameter;
 import model.items.IEquipableItem;
+import model.items.otheritem.NullItem;
 import model.map.Location;
 
 import java.util.ArrayList;
@@ -24,12 +25,13 @@ import static java.lang.Math.min;
  */
 public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
+    private IEquipableItem nullItem = new NullItem();
     private final int maxHitPoints;
     private final int movement;
     private final int maxItems;
     public int maxAction = 1;
     protected List<IEquipableItem> items = new ArrayList<>();
-    protected IEquipableItem equippedItem;
+    protected IEquipableItem equippedItem = nullItem;
     private boolean movementUsed = false;
     private int actionRemains = 1;
     private int currentHitPoints;
@@ -52,6 +54,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
         this.maxItems = maxItems;
         this.location = location;
         this.items.addAll(Arrays.asList(items).subList(0, min(maxItems, items.length)));
+        nullItem.setOwner(this);
     }
 
     @Override
@@ -90,6 +93,9 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
     public boolean getMovementUsed() {
         return movementUsed;
     }
+
+    @Override
+    public IEquipableItem getNullItem() { return nullItem; }
 
     @Override
     public int getMaxHitPoints() {
@@ -184,13 +190,13 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     @Override
     public void useItem(IUnit other, boolean counterattack) {
-        if (actionRemains > 0 && equippedItem != null && other != null)
+        if (actionRemains > 0 && other != null)
             equippedItem.useItem(other, counterattack);
     }
 
     @Override
     public void equipItem(final IEquipableItem item) {
-        if (item != null && items.contains(item))
+        if (items.contains(item))
             item.equipTo(this);
     }
 
@@ -255,8 +261,9 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
     private void exchangeCondition(IUnit unit, IEquipableItem item) {
         if (actionRemains > 0 && unit.addItem(item)) {
             if (equippedItem == item) {
-                equippedItem = null;
                 item.setOwner(null);
+                equippedItem = nullItem;
+                nullItem.setOwner(this);
             }
             items.remove(item);
             actionRemains--;
@@ -292,6 +299,12 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     @Override
     public void equipStaff(IEquipableItem item) {
+    }
+
+    @Override
+    public void equipNullItem() {
+        equippedItem = nullItem;
+        nullItem.setOwner(this);
     }
 
 }

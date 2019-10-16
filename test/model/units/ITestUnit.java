@@ -102,6 +102,15 @@ public interface ITestUnit {
      * Checks if the anima is equipped correctly to the unit
      */
     @Test
+    void equipNullItemTest();
+
+    @Test
+    void attackToNullItem();
+
+    /**
+     * Checks if the anima is equipped correctly to the unit
+     */
+    @Test
     void equipAnimaTest();
 
     @Test

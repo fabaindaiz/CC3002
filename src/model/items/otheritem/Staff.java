@@ -30,11 +30,6 @@ public class Staff extends OtherItem {
     }
 
     @Override
-    public void noItemAttack(IUnit other) {
-        other.receiveHeal(this);
-    }
-
-    @Override
     public void equipTo(final IUnit unit) {
         unit.equipStaff(this);
     }

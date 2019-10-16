@@ -4,6 +4,7 @@ import model.items.IEquipableItem;
 import model.items.magicbook.Anima;
 import model.items.magicbook.Dark;
 import model.items.magicbook.Light;
+import model.items.otheritem.NullItem;
 import model.items.otheritem.Staff;
 import model.items.weapon.Axe;
 import model.items.weapon.Bow;
@@ -209,7 +210,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
         unit.exchange(targetAlpaca, item);
         assertEquals(targetAlpaca.getItems(), List.of(staff, item));
         assertNull(item.getOwner());
-        assertNull(unit.getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
     }
 
     @Override
@@ -261,18 +262,36 @@ public abstract class AbstractTestUnit implements ITestUnit {
     @Override
     public void checkEquippedItem(IEquipableItem item) {
         getTestUnit().equipItem(null);
-        assertNull(getTestUnit().getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         getTestUnit().equipItem(item);
-        assertNull(getTestUnit().getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         getTestUnit().addItem(item);
         getTestUnit().equipItem(item);
-        assertNull(getTestUnit().getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
+    }
+
+    @Override
+    @Test
+    public void equipNullItemTest() {
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
+        assertEquals(getTestUnit().getNullItem().counterattack(), false);
+    }
+
+    @Override
+    @Test
+    public void attackToNullItem() {
+        IUnit unit = getTestUnit();
+        IEquipableItem item = getWeapon();
+        unit.addItem(item);
+        unit.equipItem(item);
+        unit.useItem(sorcerer, false);
+        assertEquals(sorcerer.getCurrentHitPoints(), 40);
     }
 
     @Override
     @Test
     public void equipAnimaTest() {
-        assertNull(getTestUnit().getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         checkEquippedItem(getAnima());
 
     }
@@ -301,7 +320,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     @Override
     @Test
     public void equipDarkTest() {
-        assertNull(getTestUnit().getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         checkEquippedItem(getDark());
     }
 
@@ -329,7 +348,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     @Override
     @Test
     public void equipLightTest() {
-        assertNull(getTestUnit().getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         checkEquippedItem(getLight());
     }
 
@@ -357,7 +376,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     @Override
     @Test
     public void equipAxeTest() {
-        assertNull(getTestUnit().getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         checkEquippedItem(getAxe());
     }
 
@@ -385,7 +404,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     @Override
     @Test
     public void equipSwordTest() {
-        assertNull(getTestUnit().getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         checkEquippedItem(getSword());
     }
 
@@ -413,7 +432,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     @Override
     @Test
     public void equipSpearTest() {
-        assertNull(getTestUnit().getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         checkEquippedItem(getSpear());
     }
 
@@ -441,7 +460,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     @Override
     @Test
     public void equipStaffTest() {
-        assertNull(getTestUnit().getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         checkEquippedItem(getStaff());
     }
 
@@ -469,7 +488,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     @Override
     @Test
     public void equipBowTest() {
-        assertNull(getTestUnit().getEquippedItem());
+        assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
         checkEquippedItem(getBow());
     }
 

@@ -229,17 +229,17 @@ class TacticianTest {
     @Test
     void equipItem() {
         tactician1.selectUnitId(0);
-        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), null);
+        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), tactician1.getSelectedUnit().getNullItem());
         tactician1.equipItem(2);
-        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), null);
+        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), tactician1.getSelectedUnit().getNullItem());
         tactician1.equipItem(1);
-        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), null);
+        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), tactician1.getSelectedUnit().getNullItem());
         tactician1.equipItem(0);
         assertEquals(tactician1.getSelectedUnit().getEquippedItem(), item1);
         tactician1.selectUnitId(1);
-        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), null);
+        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), tactician1.getSelectedUnit().getNullItem());
         tactician1.equipItem(0);
-        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), null);
+        assertEquals(tactician1.getSelectedUnit().getEquippedItem(), tactician1.getSelectedUnit().getNullItem());
     }
 
     @Test
