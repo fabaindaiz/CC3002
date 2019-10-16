@@ -309,4 +309,14 @@ public interface ITestUnit {
      * @return expected HP after counterattack test en case 2
      */
     int getHP2();
+
+    /**
+     * @return expected HP after counterattack test en case 3
+     */
+    int getHP3();
+
+    /**
+     * @return expected HP after counterattack test en case 4
+     */
+    int getHP4();
 }

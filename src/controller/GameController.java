@@ -295,8 +295,6 @@ public class GameController extends GameInitialization implements IGameControlle
     }
 
     @Override
-    public void moveUnitTo(int x, int y) {
-        if (initiatedGame) turnOwner.moveUnitTo(x, y);
-    }
+    public void moveUnitTo(int x, int y) { if (initiatedGame) turnOwner.moveUnitTo(x, y); }
 
 }

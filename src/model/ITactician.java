@@ -2,7 +2,9 @@ package model;
 
 import controller.observer.IObserver;
 import model.items.IEquipableItem;
+import model.items.otheritem.NullItem;
 import model.units.IUnit;
+import model.units.NullUnit;
 
 import java.util.List;
 
@@ -47,6 +49,16 @@ public interface ITactician {
      * Notifica a todos los observadores
      */
     void notifyObservers();
+
+    /**
+     * @return la unidad nula a usar
+     */
+    IUnit getNullUnit();
+
+    /**
+     * @return el item nulo a usar
+     */
+    IEquipableItem getNullItem();
 
     /**
      * Añade unidades a un Tactician

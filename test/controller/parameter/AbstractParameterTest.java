@@ -95,14 +95,14 @@ abstract class AbstractParameterTest implements IAbstractParameterTest {
             assertEquals(controller.getSelectedItem().getName(), getNameItem());
             assertEquals(controller.getSelectedUnit().getEquippedItem().getName(), getNameItem());
         } else
-            assertEquals(controller.getSelectedItem(), null);
+            assertEquals(controller.getSelectedItem(), controller.getTurnOwner().getNullItem());
         controller.endTurn();
         controller.selectUnitId(0);
         assertEquals(controller.getSelectedUnit().getLocation(), controller.getGameMap().getCell(6, 7));
         assertEquals(controller.getSelectedUnit().getCurrentHitPoints(), 50);
         assertEquals(controller.getSelectedUnit().getMovement(), 2);
         controller.selectItem(0);
-        assertEquals(controller.getSelectedItem(), null);
+        assertEquals(controller.getSelectedItem(), controller.getTurnOwner().getNullItem());
     }
 
     @Test
@@ -127,11 +127,11 @@ abstract class AbstractParameterTest implements IAbstractParameterTest {
             assertEquals(controller.getSelectedItem().getPower(), 10);
             assertEquals(controller.getSelectedUnit().getEquippedItem().getName(), getNameItem());
         } else
-            assertEquals(controller.getSelectedItem(), null);
+            assertEquals(controller.getSelectedItem(), controller.getTurnOwner().getNullItem());
         controller.endTurn();
         controller.selectUnitId(0);
         controller.selectItem(0);
-        assertEquals(controller.getSelectedItem(), null);
+        assertEquals(controller.getSelectedItem(), controller.getTurnOwner().getNullItem());
     }
 
 }

@@ -73,34 +73,6 @@ public class ClericTest extends AbstractTestUnit {
     }
 
     @Override
-    @Test
-    public void counterattackTest() {
-        IUnit unit = getTestUnit();
-        IEquipableItem item = getWeapon();
-        targetCounterattack1.addItem(item1);
-        targetCounterattack2.addItem(item2);
-        targetCounterattack3.addItem(item3);
-        targetCounterattack1.equipItem(item1);
-        targetCounterattack2.equipItem(item2);
-        targetCounterattack3.equipItem(item3);
-        unit.addItem(item);
-        unit.equipItem(item);
-        unit.useItem(targetCounterattack1, true);
-        assertEquals(unit.getCurrentHitPoints(), getHP1());
-        unit.useItem(targetCounterattack1, true);
-        assertEquals(unit.getCurrentHitPoints(), getHP1());
-        unit.useItem(targetCounterattack2, true);
-        assertEquals(unit.getCurrentHitPoints(), getHP1());
-        unit.useItem(targetCounterattack3, true);
-        assertEquals(unit.getCurrentHitPoints(), getHP2());
-        unit.useItem(targetCounterattack4, true);
-        assertEquals(unit.getCurrentHitPoints(), getHP2());
-        targetCounterattack2.useItem(unit, true);
-        assertEquals(unit.getCurrentHitPoints(), 50);
-        assertEquals(targetCounterattack2.getCurrentHitPoints(), 50);
-    }
-
-    @Override
     public int getHPanima() {
         return 50;
     }
@@ -149,4 +121,10 @@ public class ClericTest extends AbstractTestUnit {
     public int getHP2() {
         return 50;
     } //Light
+
+    @Override
+    public int getHP3() { return 50; }
+
+    @Override
+    public int getHP4() { return 50; }
 }

@@ -131,99 +131,80 @@ class TacticianTest {
         assertEquals(unit2.getLocation().getUnit(), unit2);
         tactician1.removeAllUnit();
         assertEquals(tactician1.getUnits(), List.of());
-        assertEquals(unit1.getLocation().getUnit(), null);
-        assertEquals(unit2.getLocation().getUnit(), null);
+        assertEquals(unit1.getLocation().getUnit(), unit1.getLocation().getNullUnit());
+        assertEquals(unit2.getLocation().getUnit(), unit2.getLocation().getNullUnit());
     }
 
     @Test
     void selectUnitIn() {
-        assertEquals(tactician1.getSelectedUnit(), null);
+        assertEquals(tactician1.getSelectedUnit(), tactician1.getNullUnit());
         tactician1.selectUnitIn(0, 0);
         assertEquals(tactician1.getSelectedUnit(), unit1);
         tactician1.selectUnitIn(1, 0);
-        assertEquals(tactician1.getSelectedUnit(), null);
+        assertEquals(tactician1.getSelectedUnit(), tactician1.getNullUnit());
         tactician1.selectUnitIn(0, 1);
-        assertEquals(tactician1.getSelectedUnit(), null);
+        assertEquals(tactician1.getSelectedUnit(), tactician1.getNullUnit());
         tactician1.selectUnitIn(1, 1);
         assertEquals(tactician1.getSelectedUnit(), unit2);
         tactician1.selectUnitIn(2, 2);
-        assertEquals(tactician1.getSelectedUnit(), null);
+        assertEquals(tactician1.getSelectedUnit(), tactician1.getNullUnit());
     }
 
     @Test
     void selectUnitId() {
-        assertEquals(tactician1.getSelectedUnit(), null);
+        assertEquals(tactician1.getSelectedUnit(), tactician1.getNullUnit());
         tactician1.selectUnitId(0);
         assertEquals(tactician1.getSelectedUnit(), unit1);
         tactician1.selectUnitId(1);
         assertEquals(tactician1.getSelectedUnit(), unit2);
         tactician1.selectUnitId(2);
-        assertEquals(tactician1.getSelectedUnit(), null);
+        assertEquals(tactician1.getSelectedUnit(), tactician1.getNullUnit());
     }
 
     @Test
     void getSelectedUnit() {
-        assertEquals(tactician1.getSelectedUnit(), null);
+        assertEquals(tactician1.getSelectedUnit(), tactician1.getNullUnit());
         tactician1.selectUnitId(0);
         assertEquals(tactician1.getSelectedUnit(), unit1);
         tactician1.selectUnitId(1);
         assertEquals(tactician1.getSelectedUnit(), unit2);
         tactician1.selectUnitId(2);
-        assertEquals(tactician1.getSelectedUnit(), null);
+        assertEquals(tactician1.getSelectedUnit(), tactician1.getNullUnit());
     }
 
     @Test
     void getItems() {
-        assertEquals(tactician1.getItems(), null);
+        assertEquals(tactician1.getItems(), List.of());
         tactician1.selectUnitId(0);
         assertEquals(tactician1.getItems(), List.of(item1, item2));
         tactician1.selectUnitId(1);
         assertEquals(tactician1.getItems(), List.of());
         tactician1.selectUnitId(2);
-        assertEquals(tactician1.getItems(), null);
-        assertEquals(tactician2.getItems(), null);
+        assertEquals(tactician1.getItems(), List.of());
+        assertEquals(tactician2.getItems(), List.of());
         tactician2.selectUnitId(0);
         assertEquals(tactician2.getItems(), List.of());
         tactician2.selectUnitId(1);
-        assertEquals(tactician2.getItems(), null);
+        assertEquals(tactician2.getItems(), List.of());
     }
 
     @Test
-    void selectItem() {
-        assertEquals(tactician1.getSelectedItem(), null);
+    void ItemTest() {
+        assertEquals(tactician1.getSelectedItem(), tactician1.getNullItem());
         tactician1.selectItem(0);
-        assertEquals(tactician1.getSelectedItem(), null);
+        assertEquals(tactician1.getSelectedItem(), tactician1.getNullItem());
         tactician1.selectUnitId(0);
-        assertEquals(tactician1.getSelectedItem(), null);
+        assertEquals(tactician1.getSelectedItem(), tactician1.getNullItem());
         tactician1.selectItem(0);
         assertEquals(tactician1.getSelectedItem(), item1);
         tactician1.selectItem(1);
         assertEquals(tactician1.getSelectedItem(), item2);
         tactician1.selectItem(2);
-        assertEquals(tactician1.getSelectedItem(), null);
+        assertEquals(tactician1.getSelectedItem(), tactician1.getNullItem());
         tactician1.selectUnitId(1);
-        assertEquals(tactician1.getSelectedItem(), null);
+        assertEquals(tactician1.getSelectedItem(), tactician1.getNullItem());
         tactician1.selectItem(0);
-        assertEquals(tactician1.getSelectedItem(), null);
-    }
-
-    @Test
-    void getSelectedItem() {    //Cambiar esto
-        assertEquals(tactician1.getSelectedItem(), null);
-        tactician1.selectItem(0);
-        assertEquals(tactician1.getSelectedItem(), null);
-        tactician1.selectUnitId(0);
-        assertEquals(tactician1.getSelectedItem(), null);
-        tactician1.selectItem(0);
-        assertEquals(tactician1.getSelectedItem(), item1);
-        tactician1.selectItem(1);
-        assertEquals(tactician1.getSelectedItem(), item2);
-        tactician1.selectItem(2);
-        assertEquals(tactician1.getSelectedItem(), null);
-        tactician1.selectUnitId(1);
-        assertEquals(tactician1.getSelectedItem(), null);
-        tactician1.selectItem(0);
-        assertEquals(tactician1.getSelectedItem(), null);
+        assertEquals(tactician1.getSelectedItem(), tactician1.getNullItem());
     }
 
     @Test

@@ -1,6 +1,7 @@
 package model.map;
 
 import model.units.IUnit;
+import model.units.NullUnit;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -23,12 +24,13 @@ import java.util.Set;
  */
 public class Location {
 
+    private NullUnit nullUnit = new NullUnit(this);
     private final int row;
     private final int column;
     private final String id;
     Random random = new Random();
     private Set<Location> neighbours = new HashSet<>();
-    private IUnit unit;
+    private IUnit unit = nullUnit;
     private long searchCode = random.nextLong();
     private double shortestPath;
 
@@ -44,8 +46,10 @@ public class Location {
         id = "(" + row + ", " + column + ")";
     }
 
+    public NullUnit getNullUnit(){ return nullUnit; }
+
     public boolean addUnitToCell(IUnit newUnit) {
-        if (newUnit.getLocation() == this && this.getUnit() == null) {
+        if (newUnit.getLocation() == this && this.unit == nullUnit) {
             unit = newUnit;
             return true;
         }
@@ -113,8 +117,12 @@ public class Location {
      *
      * @param unit the unit to be placed in this cell
      */
-    public void setUnit(final IUnit unit) {
+    public void setUnit (final IUnit unit) {
         this.unit = unit;
+    }
+
+    public void setNullUnit() {
+        unit = nullUnit;
     }
 
     /**
@@ -141,7 +149,6 @@ public class Location {
      * @return the length of the shortest path to the other location
      */
     public double distanceTo(final Location otherNode) {
-
         return shortestPathTo(otherNode, new HashSet<>(), random.nextLong());
     }
 

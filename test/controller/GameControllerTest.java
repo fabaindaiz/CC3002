@@ -375,7 +375,7 @@ class GameControllerTest {
         unit2 = new Cleric(50, 2, controller.gameMap.getCell(sideSquare, sideSquare));
 
         controller.selectUnitIn(sideSquare / 2, sideSquare / 2);
-        assertEquals(controller.getSelectedUnit(), null);
+        assertEquals(controller.getSelectedUnit(), controller.getTurnOwner().getNullUnit());
         controller.addUnit(unit1);
         controller.addUnit(unit2);
         controller.selectUnitIn(sideSquare / 2, sideSquare / 2);
@@ -385,7 +385,7 @@ class GameControllerTest {
         controller.selectUnitIn(sideSquare / 2, sideSquare / 2);
         assertEquals(controller.getSelectedUnit(), unit1);
         controller.selectUnitIn(sideSquare, sideSquare);
-        assertEquals(controller.getSelectedUnit(), null);
+        assertEquals(controller.getSelectedUnit(), controller.getTurnOwner().getNullUnit());
     }
 
     @Test
@@ -396,7 +396,7 @@ class GameControllerTest {
         unit2 = new Cleric(50, 2, controller.gameMap.getCell(sideSquare, sideSquare));
 
         controller.selectUnitId(0);
-        assertEquals(controller.getSelectedUnit(), null);
+        assertEquals(controller.getSelectedUnit(), controller.getTurnOwner().getNullUnit());
         controller.addUnit(unit1);
         controller.addUnit(unit2);
         controller.selectUnitId(0);
@@ -406,7 +406,7 @@ class GameControllerTest {
         controller.selectUnitId(0);
         assertEquals(controller.getSelectedUnit(), unit1);
         controller.selectUnitId(1);
-        assertEquals(controller.getSelectedUnit(), null);
+        assertEquals(controller.getSelectedUnit(), controller.getTurnOwner().getNullUnit());
     }
 
     @Test
@@ -416,21 +416,21 @@ class GameControllerTest {
         unit1 = new Hero(50, 2, controller.gameMap.getCell(sideSquare / 2, sideSquare / 2));
 
         assertEquals(controller.getTurnOwner().getUnits(), List.of());
-        assertEquals(controller.getSelectedUnit(), null);
+        assertEquals(controller.getSelectedUnit(), controller.getTurnOwner().getNullUnit());
         controller.addUnit(unit1);
         controller.addUnit(unit1);
         assertEquals(controller.getTurnOwner().getUnits(), List.of(unit1));
-        assertEquals(controller.getSelectedUnit(), null);
+        assertEquals(controller.getSelectedUnit(), controller.getTurnOwner().getNullUnit());
         controller.selectUnitIn(sideSquare / 2, sideSquare / 2);
         assertEquals(controller.getTurnOwner().getUnits(), List.of(unit1));
         assertEquals(controller.getSelectedUnit(), unit1);
         controller.selectUnitIn(0, 0);
         assertEquals(controller.getTurnOwner().getUnits(), List.of(unit1));
-        assertEquals(controller.getSelectedUnit(), null);
+        assertEquals(controller.getSelectedUnit(), controller.getTurnOwner().getNullUnit());
         controller.selectUnitIn(sideSquare / 2, sideSquare / 2);
         controller.endTurn();
         assertEquals(controller.getTurnOwner().getUnits(), List.of());
-        assertEquals(controller.getSelectedUnit(), null);
+        assertEquals(controller.getSelectedUnit(), controller.getTurnOwner().getNullUnit());
     }
 
     @Test
@@ -465,9 +465,9 @@ class GameControllerTest {
         controller.addUnit(unit1);
         controller.selectUnitIn(sideSquare / 2, sideSquare / 2);
         assertEquals(controller.getItems(), List.of(item1, item2));
-        assertEquals(controller.getSelectedItem(), null);
+        assertEquals(controller.getSelectedItem(), controller.getTurnOwner().getNullItem());
         controller.selectItem(2);
-        assertEquals(controller.getSelectedItem(), null);
+        assertEquals(controller.getSelectedItem(), controller.getTurnOwner().getNullItem());
         controller.selectItem(0);
         assertEquals(controller.getSelectedItem(), item1);
         controller.selectItem(1);
@@ -486,13 +486,13 @@ class GameControllerTest {
         unit1.addItem(item2);
         controller.addUnit(unit1);
         controller.selectUnitIn(sideSquare / 2, sideSquare / 2);
-        assertEquals(controller.getSelectedItem(), null);
+        assertEquals(controller.getSelectedItem(), controller.getTurnOwner().getNullItem());
         controller.selectItem(0);
         assertEquals(controller.getSelectedItem(), item1);
         controller.selectItem(1);
         assertEquals(controller.getSelectedItem(), item2);
         controller.selectItem(2);
-        assertEquals(controller.getSelectedItem(), null);
+        assertEquals(controller.getSelectedItem(), controller.getTurnOwner().getNullItem());
     }
 
     @Test

@@ -25,11 +25,11 @@ import static java.lang.Math.min;
  */
 public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
-    private IEquipableItem nullItem = new NullItem();
+    private final IEquipableItem nullItem = new NullItem();
     private final int maxHitPoints;
     private final int movement;
     private final int maxItems;
-    public int maxAction = 1;
+    private int maxAction = 1;
     protected List<IEquipableItem> items = new ArrayList<>();
     protected IEquipableItem equippedItem = nullItem;
     private boolean movementUsed = false;
@@ -132,7 +132,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
      */
     private void setLocation(final Location location) {
         movementUsed = true;
-        this.location.setUnit(null);
+        this.location.setNullUnit();
         this.location = location;
         location.setUnit(this);
     }
@@ -174,7 +174,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     @Override
     public void moveTo(final Location targetLocation) {
-        if (getLocation().distanceTo(targetLocation) <= getMovement() && targetLocation.getUnit() == null) {
+        if (getLocation().distanceTo(targetLocation) <= getMovement() && targetLocation.getUnit() == targetLocation.getNullUnit()) {
             if (!movementUsed && targetLocation.getRow() != -1)
                 setLocation(targetLocation);
         }

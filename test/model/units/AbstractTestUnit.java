@@ -173,8 +173,8 @@ public abstract class AbstractTestUnit implements ITestUnit {
         unit.useItem(targetCounterattack4, true);
         assertEquals(unit.getCurrentHitPoints(), getHP2());
         targetCounterattack2.useItem(unit, true);
-        assertEquals(unit.getCurrentHitPoints(), 50);
-        assertEquals(targetCounterattack2.getCurrentHitPoints(), 40);
+        assertEquals(unit.getCurrentHitPoints(), getHP3());
+        assertEquals(targetCounterattack2.getCurrentHitPoints(), getHP4());
     }
 
     @Override
@@ -603,5 +603,11 @@ public abstract class AbstractTestUnit implements ITestUnit {
     public Alpaca getTargetAlpaca() {
         return targetAlpaca;
     }
+
+    @Override
+    public int getHP3() { return 50; }
+
+    @Override
+    public int getHP4() { return 40; }
 
 }

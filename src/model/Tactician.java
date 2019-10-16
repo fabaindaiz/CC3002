@@ -3,8 +3,10 @@ package model;
 import controller.observer.AbstractSubject;
 import controller.observer.IObserver;
 import model.items.IEquipableItem;
+import model.items.otheritem.NullItem;
 import model.map.Field;
 import model.units.IUnit;
+import model.units.NullUnit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +25,10 @@ public class Tactician extends AbstractSubject implements ITactician {
     private final String name;
     private int tacticianNumber;
 
-    private IUnit selectedUnit;
-    private IEquipableItem selectedItem;
+    private IUnit nullUnit = new NullUnit();
+    private IEquipableItem nullItem = new NullItem();
+    private IUnit selectedUnit = nullUnit;
+    private IEquipableItem selectedItem = nullItem;
 
     /**
      * Crea un jugador para el juego (se ejecuta desde GameController)
@@ -67,6 +71,12 @@ public class Tactician extends AbstractSubject implements ITactician {
     }
 
     @Override
+    public IUnit getNullUnit() { return nullUnit; }
+
+    @Override
+    public IEquipableItem getNullItem() { return nullItem; }
+
+    @Override
     public void addUnit(IUnit unit) {
         if (unit != null && unit.getLocation().addUnitToCell(unit))
             units.add(unit);
@@ -76,7 +86,7 @@ public class Tactician extends AbstractSubject implements ITactician {
     public void removeUnit(IUnit unit) {
         if (unit != null) {
             if (unit.getLocation() != null)
-                unit.getLocation().setUnit(null);
+                unit.getLocation().setNullUnit();
             units.remove(unit);
         }
 
@@ -90,21 +100,21 @@ public class Tactician extends AbstractSubject implements ITactician {
             removeUnit(unit);
         }
     }
-
+//---------------------------------------------------------
     @Override
     public void selectUnitIn(int x, int y) {
         if (units.contains(gameMap.getCell(x, y).getUnit()))
             selectedUnit = gameMap.getCell(x, y).getUnit();
-        else selectedUnit = null;
-        selectedItem = null;
+        else selectedUnit = nullUnit;
+        selectedItem = nullItem;
     }
 
     @Override
     public void selectUnitId(int index) {
         if (units.size() > index && 0 <= index)
             selectedUnit = units.get(index);
-        else selectedUnit = null;
-        selectedItem = null;
+        else selectedUnit = nullUnit;
+        selectedItem = nullItem;
     }
 
     @Override
@@ -113,18 +123,13 @@ public class Tactician extends AbstractSubject implements ITactician {
     }
 
     @Override
-    public List<IEquipableItem> getItems() {
-        if (selectedUnit == null) return null;
-        return selectedUnit.getItems();
-    }
+    public List<IEquipableItem> getItems() { return selectedUnit.getItems(); }
 
     @Override
     public void selectItem(int index) {
-        if (selectedUnit == null)
-            selectedItem = null;
-        else if (selectedUnit.getItems().size() > index)
+        if (selectedUnit.getItems().size() > index)
             selectedItem = selectedUnit.getItems().get(index);
-        else selectedItem = null;
+        else selectedItem = nullItem;
     }
 
     @Override
@@ -134,14 +139,12 @@ public class Tactician extends AbstractSubject implements ITactician {
 
     @Override
     public void equipItem(int index) {
-        if (selectedUnit == null) return;
         if (selectedUnit.getItems().size() > index)
             selectedUnit.equipItem(selectedUnit.getItems().get(index));
     }
 
     @Override
     public void useItemOn(int x, int y) {
-        if (selectedUnit == null) return;
         IUnit unit = gameMap.getCell(x, y).getUnit();
         if (!units.contains(unit))
             selectedUnit.useItem(unit, true);
@@ -149,17 +152,15 @@ public class Tactician extends AbstractSubject implements ITactician {
 
     @Override
     public void giveItemTo(int x, int y) {
-        if (selectedUnit == null || selectedItem == null) return;
         IUnit unit = gameMap.getCell(x, y).getUnit();
-        if (unit != null && units.contains(unit))
+        if (unit != gameMap.getCell(x, y).getNullUnit() && units.contains(unit))
             selectedUnit.exchange(unit, selectedItem);
-        selectedItem = null;
+        selectedItem = nullItem;
     }
 
     @Override
     public void moveUnitTo(int x, int y) {
-        if (selectedUnit == null) return;
-        if (gameMap.getCell(x, y).getUnit() == null)
+        if (gameMap.getCell(x, y).getUnit() == gameMap.getCell(x, y).getNullUnit())
             selectedUnit.moveTo(gameMap.getCell(x, y));
     }
 }
