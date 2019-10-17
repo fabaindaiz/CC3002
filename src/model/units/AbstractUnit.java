@@ -223,7 +223,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
     }
 
     @Override
-    public void receiveHeal(IEquipableItem item) {
+    public void receiveHeal(IEquipableItem item, boolean counterattack) {
         if (outOfRange(item.getOwner())) return;
         item.getOwner().successfulAttack();
         int healed = item.getPower();
@@ -231,6 +231,8 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
             currentHitPoints = maxHitPoints;
         else
             this.currentHitPoints += healed;
+        if (counterattack)
+            equippedItem.specificAttack(item.getOwner(), false);
     }
 
     @Override

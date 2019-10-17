@@ -55,7 +55,7 @@ public class NullUnit extends OtherUnit {
     }
 
     @Override
-    public void receiveHeal(IEquipableItem item) {
+    public void receiveHeal(IEquipableItem item, boolean counterattack) {
     }
 
     @Override

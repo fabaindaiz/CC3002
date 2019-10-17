@@ -134,7 +134,7 @@ public interface IUnit {
      *
      * @param item Received heal.
      */
-    void receiveHeal(IEquipableItem item);
+    void receiveHeal(IEquipableItem item, boolean counterattack);
 
     /**
      * Receives an attack.

@@ -89,9 +89,7 @@ public class Field implements IField {
                 else if (i == sideSquare / 2 && j == sideSquare / 2)
                     System.out.print("X ");
                 else {
-                    //System.out.print(" ("+ i +","+ j +")");
                     System.out.print(getCell(i, j).getNeighbours().size() + " ");
-                    //System.out.print("x ");
                 }
             }
             System.out.println("");

@@ -49,6 +49,10 @@ Descripción del proyecto
     La clase Tactician representa a un jugador del juego
     Este jugador posee unidades que están colocadas en el mapa
 
+    EDIT entrega 2:
+    Se decidio usar Null Pattern y para esto se crearon las clases NullUnit y NullItem
+    Estas clases poseen todos sus metodos vacios, asi se evita comprobaciones de nulos
+
     Estructura interna de la Vista:
 
     Estructura interna del Controlador:
@@ -124,6 +128,16 @@ Decisiones relevantes
         Esto porque el mapa tiene todos los datos necesarios para crearse a sí mismo una vez es llamado
         Además, esto permite delegar todas las acciones que corresponden al mapa a las clases Field y Location
 
+    - Se decidio implementar Null Patern para Items y Units, asi hacer el programa un poco más "correcto"
+        NullItem se usa cuando una unidad no tiene Items equipados (se equipa el NullItem)
+        NullUnit se usa en Location, cuando la celda del mapa no posee ninguna unidad (esta la NullUnit)
+        Tambien se usan en Tactician, para definir un Item y Unit nulos cuando no hay ninguno seleccionado
+
+    - Se decidio
+
+    - Se eliminaron las función de contraataque y se reemplazo con parametros boolean en las clases de los items
+        Este parametro se asigna en el Double Dispatch cuando se recibe un ataque y es altamente configurable
+
     - Se creo una clase Observer muy simple para realizar las tareas de verificar derrota de Tactician o Unit
         Se crearon 3 subclases para cada caso que necesita ser observado: DefeatUnit, DefeatTactician y EndGame
 
@@ -134,7 +148,8 @@ Testeo
     Los test están implementados con JUnit 5
 
     Fueron creados test para todas clases y métodos del programa en variados casos estándares y bordes
-    Existen 414 test en total y todas las clases del programa cumplen con un coverage del 100%
+    EL programa posee un total de 414 test repartidos entre todas las clases
+    Se cumple con un coverage del 99% (Intentando llegar al 100%)
 
     Los test demoran entre 1 y 2 segundos en correr en mi pc (Portátil Windows 10 - i7 8gb ssd)
     El test que más tiempo demora en completarse es BenchmarkGenerateMap (entre 0.5 y 1.5 segundos)
@@ -210,4 +225,4 @@ Licencia
 
 Cambios pendientes:
     - predefinedUnits && predefinedInits en GameInitialization
-    -
+    - Atacar solo a otras unidades y curar a las propias
