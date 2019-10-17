@@ -273,7 +273,6 @@ public abstract class AbstractTestUnit implements ITestUnit {
     @Test
     public void equipNullItemTest() {
         assertEquals(getTestUnit().getEquippedItem(), getTestUnit().getNullItem());
-        assertEquals(getTestUnit().getNullItem().counterattack(), false);
     }
 
     @Override

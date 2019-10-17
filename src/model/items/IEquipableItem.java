@@ -50,16 +50,9 @@ public interface IEquipableItem {
      * Item that receives the attack.
      *
      * @param other Unit that receives the attack.
+     * @param counterattack indica si se debe contraatacar
      */
-    void useItem(IUnit other, boolean counterAttack);
-
-    /**
-     * Verifica si este item contraataca
-     *
-     * @return un valor booleano dependiendo de la condicion
-     * TRUE si este item contraataca
-     */
-    boolean counterattack();
+    void useItem(IUnit other, boolean counterattack);
 
     /**
      * Equips this item to a unit.
@@ -82,7 +75,7 @@ public interface IEquipableItem {
      *
      * @param item Received heal.
      */
-    void receiveStaffHeal(IEquipableItem item);
+    void receiveStaffHeal(IEquipableItem item, boolean counterAttack);
 
     /**
      * Receives damage from a Anima attack.

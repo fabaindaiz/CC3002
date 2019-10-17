@@ -26,7 +26,7 @@ public class Staff extends OtherItem {
 
     @Override
     public void specificAttack(IUnit other, boolean counterAttack) {
-        other.getEquippedItem().receiveStaffHeal(this);
+        other.getEquippedItem().receiveStaffHeal(this, counterAttack);
     }
 
     @Override

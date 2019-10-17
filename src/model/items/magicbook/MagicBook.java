@@ -27,10 +27,6 @@ public abstract class MagicBook extends AbstractItem {
         super(name, power, minRange, maxRange);
     }
 
-    @Override
-    public boolean counterattack() {
-        return true;
-    }
 
     @Override
     public void equipTo(final IUnit unit) {

@@ -2,6 +2,7 @@ package model.items.weapon;
 
 import model.items.AbstractItem;
 import model.items.IEquipableItem;
+import model.units.IUnit;
 
 /**
  * This class represents a weapon item.
@@ -24,16 +25,6 @@ public abstract class Weapon extends AbstractItem {
      */
     public Weapon(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
-    }
-
-    /**
-     * Verifica si este item contraataca
-     *
-     * @return un valor booleano dependiendo de la condicion
-     * TRUE si este item contraataca
-     */
-    public boolean counterattack() {
-        return true;
     }
 
     @Override

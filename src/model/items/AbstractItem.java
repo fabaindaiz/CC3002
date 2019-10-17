@@ -64,13 +64,9 @@ public abstract class AbstractItem implements IEquipableItem {
     }
 
     @Override
-    public void useItem(IUnit other, boolean counterAttack) {
-        specificAttack(other, counterAttack);
-    }
+    public void useItem(IUnit other, boolean counterAttack) { specificAttack(other, counterAttack); }
 
     @Override
-    public void receiveStaffHeal(IEquipableItem item) {
-        owner.receiveHeal(item);
-    }
+    public void receiveStaffHeal(IEquipableItem item, boolean counterAttack) { owner.receiveHeal(item); }
 
 }

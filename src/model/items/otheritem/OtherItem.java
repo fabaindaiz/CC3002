@@ -2,6 +2,7 @@ package model.items.otheritem;
 
 import model.items.AbstractItem;
 import model.items.IEquipableItem;
+import model.units.IUnit;
 
 /**
  * This class represents an Other item.
@@ -24,16 +25,6 @@ public abstract class OtherItem extends AbstractItem {
      */
     public OtherItem(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
-    }
-
-    /**
-     * Verifica si este item contraataca
-     *
-     * @return un valor booleano dependiendo de la condicion
-     * TRUE si este item contraataca
-     */
-    public boolean counterattack() {
-        return false;
     }
 
     @Override

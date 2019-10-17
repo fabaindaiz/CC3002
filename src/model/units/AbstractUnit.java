@@ -209,15 +209,15 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
      *
      * @param item          Arma que esta atacando
      * @param damage        DAño que esta haciendo (Ya esta modificado)
-     * @param counterAttack
+     * @param counterattack
      */
-    private void receiveDamage(IEquipableItem item, int damage, boolean counterAttack) {
+    private void receiveDamage(IEquipableItem item, int damage, boolean counterattack) {
         item.getOwner().successfulAttack();
         if (damage < currentHitPoints) {
             if (damage > 0)
                 this.currentHitPoints -= damage;
-            if (counterAttack && equippedItem.counterattack())
-                useItem(item.getOwner(), false);
+            if (counterattack)
+                equippedItem.specificAttack(item.getOwner(), false);
         } else
             death();
     }

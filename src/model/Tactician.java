@@ -152,8 +152,7 @@ public class Tactician extends AbstractSubject implements ITactician {
     @Override
     public void useItemOn(int x, int y) {
         IUnit unit = gameMap.getCell(x, y).getUnit();
-        if (!units.contains(unit))
-            selectedUnit.useItem(unit, true);
+        selectedUnit.useItem(unit, true);
     }
 
     @Override
