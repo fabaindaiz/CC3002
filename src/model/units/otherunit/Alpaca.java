@@ -21,8 +21,7 @@ public class Alpaca extends OtherUnit {
      * @param movement  number of cells the unit can move
      * @param location  current position of the unit
      */
-    public Alpaca(final int hitPoints, final int movement, final Location location,
-                  final IEquipableItem... items) {
+    public Alpaca(final int hitPoints, final int movement, final Location location, final IEquipableItem... items) {
         super(hitPoints, movement, location, Integer.MAX_VALUE, items);
     }
 

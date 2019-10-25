@@ -34,12 +34,10 @@ public class NullUnit extends OtherUnit {
     }
 
     @Override
-    public void setMaxAction(int maxAction) {
-    }
+    public void setMaxAction(int maxAction) {}
 
     @Override
-    public void moveTo(final Location targetLocation) {
-    }
+    public void moveTo(final Location targetLocation) {}
 
     @Override
     public boolean addItem(IEquipableItem item) {
@@ -47,22 +45,17 @@ public class NullUnit extends OtherUnit {
     }
 
     @Override
-    public void useItem(IUnit other, boolean counterattack) {
-    }
+    public void useItem(IUnit other, boolean counterattack) {}
 
     @Override
-    public void equipItem(final IEquipableItem item) {
-    }
+    public void equipItem(final IEquipableItem item) {}
 
     @Override
-    public void receiveHeal(IEquipableItem item, boolean counterattack) {
-    }
+    public void receiveHeal(IEquipableItem item, boolean counterattack) {}
 
     @Override
-    public void receiveAttack(IEquipableItem item, boolean counterAttack) {
-    }
+    public void receiveAttack(IEquipableItem item, boolean counterAttack) {}
 
     @Override
-    public void exchange(IUnit unit, IEquipableItem item) {
-    }
+    public void exchange(IUnit unit, IEquipableItem item) {}
 }

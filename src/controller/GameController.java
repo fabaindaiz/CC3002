@@ -8,7 +8,7 @@ import model.items.IEquipableItem;
 import model.map.Field;
 import model.map.Location;
 import model.units.IUnit;
-import model.units.sorcerer.Sorcerer;
+import model.units.otherunit.Alpaca;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +83,7 @@ public class GameController extends GameInitialization implements IGameControlle
 
     @Override
     public IParameter createUnit(String type, int hitPoints, int movement, Location location, IEquipableItem... items) {
-        turnOwner.addUnit(new Sorcerer(hitPoints, movement, location));
+        turnOwner.addUnit(new Alpaca(hitPoints, movement, location));
         IParameter parameter = new UnitParameter(type, hitPoints, movement, location, turnOwner.getTacticianNumber());
         if (parameter.getType() != null)
             parameters.add(parameter);

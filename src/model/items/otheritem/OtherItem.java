@@ -2,6 +2,7 @@ package model.items.otheritem;
 
 import model.items.AbstractItem;
 import model.items.IEquipableItem;
+import model.items.INoAttackItem;
 import model.units.IUnit;
 
 /**
@@ -14,7 +15,7 @@ import model.units.IUnit;
  * @author Fabian Diaz
  * @since 1.0
  */
-public abstract class OtherItem extends AbstractItem {
+public abstract class OtherItem extends AbstractItem implements INoAttackItem {
     /**
      * Constructor for a default item without any special behaviour.
      *

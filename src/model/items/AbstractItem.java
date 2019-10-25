@@ -60,11 +60,8 @@ public abstract class AbstractItem implements IEquipableItem {
 
     @Override
     public void setOwner(IUnit unit) {
-        owner = unit;
+        this.owner = unit;
     }
-
-    @Override
-    public void useItem(IUnit other, boolean counterAttack) { specificAttack(other, counterAttack); }
 
     @Override
     public void receiveStaffHeal(IEquipableItem item, boolean counterAttack) { owner.receiveHeal(item, false); }

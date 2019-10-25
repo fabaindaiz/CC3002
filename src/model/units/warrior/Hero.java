@@ -19,8 +19,7 @@ public class Hero extends Warrior {
      * @param hitPoints the maximum amount of damage a unit can sustain
      * @param movement  the number of panels a unit can move
      */
-    public Hero(final int hitPoints, final int movement, final Location location,
-                IEquipableItem... items) {
+    public Hero(final int hitPoints, final int movement, final Location location, IEquipableItem... items) {
         super(hitPoints, movement, location, 3, items);
     }
 
@@ -31,7 +30,7 @@ public class Hero extends Warrior {
 
     @Override
     public void equipSpear(IEquipableItem item) {
-        equippedItem = item;
+        this.equippedItem = item;
         item.setOwner(this);
     }
 }

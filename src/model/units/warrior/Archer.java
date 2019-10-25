@@ -21,14 +21,13 @@ public class Archer extends Warrior {
      * @param position  the initial position of this unit
      * @param items     the items carried by this unit
      */
-    public Archer(final int hitPoints, final int movement, final Location position,
-                  final IEquipableItem... items) {
+    public Archer(final int hitPoints, final int movement, final Location position, final IEquipableItem... items) {
         super(hitPoints, movement, position, 3, items);
     }
 
     @Override
     public void equipBow(IEquipableItem item) {
-        equippedItem = item;
+        this.equippedItem = item;
         item.setOwner(this);
     }
 }

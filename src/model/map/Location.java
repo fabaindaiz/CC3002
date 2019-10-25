@@ -28,7 +28,7 @@ public class Location {
     private final int column;
     private final String id;
     private final NullUnit nullUnit = new NullUnit(this);
-    Random random = new Random();
+    private final Random random = new Random();
     private Set<Location> neighbours = new HashSet<>();
     private IUnit unit = nullUnit;
     private long searchCode = random.nextLong();
@@ -43,7 +43,7 @@ public class Location {
     public Location(final int row, final int column) {
         this.row = row;
         this.column = column;
-        id = "(" + row + ", " + column + ")";
+        this.id = "(" + row + ", " + column + ")";
     }
 
     public NullUnit getNullUnit() {
@@ -52,7 +52,7 @@ public class Location {
 
     public boolean addUnitToCell(IUnit newUnit) {
         if (newUnit.getLocation() == this && this.unit == nullUnit) {
-            unit = newUnit;
+            this.unit = newUnit;
             return true;
         }
         return false;
@@ -69,8 +69,7 @@ public class Location {
      */
     @Override
     public boolean equals(final Object other) {
-        return other instanceof Location && row == ((Location) other).row
-                && column == ((Location) other).column;
+        return other instanceof Location && row == ((Location) other).row && column == ((Location) other).column;
     }
 
     @Override
@@ -123,9 +122,10 @@ public class Location {
         this.unit = unit;
     }
 
-    public void setNullUnit() {
-        unit = nullUnit;
-    }
+    /**
+     * Configura la unidad nula para este Location
+     */
+    public void setNullUnit() { this.unit = nullUnit; }
 
     /**
      * Removes a reighbour from this location.

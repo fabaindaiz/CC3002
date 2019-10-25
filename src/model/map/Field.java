@@ -38,7 +38,7 @@ public class Field implements IField {
     @Override
     public void generateMap(int mapSize) {
         map.clear();
-        maxSize = mapSize;
+        this.maxSize = mapSize;
         double mult;
         if (mapSize < 500)
             mult = 1.5;
@@ -48,7 +48,7 @@ public class Field implements IField {
             mult = 2.5;
         else
             mult = 3.0;
-        sideSquare = (int) ((Math.sqrt(mapSize) + 1) * mult);
+        this.sideSquare = (int) ((Math.sqrt(mapSize) + 1) * mult);
 
         recursiveMap(sideSquare / 2, sideSquare / 2, 0);
     }
@@ -197,9 +197,8 @@ public class Field implements IField {
      * Removes a connection from two locations of the field
      */
     protected void removeConnection(final Location cell1, final Location cell2) {
-        if (cell1.getNeighbours().size() > 1 && cell2.getNeighbours().size() > 1) {
+        if (cell1.getNeighbours().size() > 1 && cell2.getNeighbours().size() > 1)
             cell1.removeNeighbour(cell2);
-        }
     }
 
     /**

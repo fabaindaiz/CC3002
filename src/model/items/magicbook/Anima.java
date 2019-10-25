@@ -25,7 +25,7 @@ public class Anima extends MagicBook {
     }
 
     @Override
-    public void specificAttack(IUnit other, boolean counterAttack) {
+    public void useItem(IUnit other, boolean counterAttack) {
         other.getEquippedItem().receiveAnimaAttack(this, counterAttack);
     }
 

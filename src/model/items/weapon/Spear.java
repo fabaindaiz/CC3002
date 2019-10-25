@@ -26,7 +26,7 @@ public class Spear extends Weapon {
     }
 
     @Override
-    public void specificAttack(IUnit other, boolean counterAttack) {
+    public void useItem(IUnit other, boolean counterAttack) {
         other.getEquippedItem().receiveSpearAttack(this, counterAttack);
     }
 

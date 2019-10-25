@@ -51,10 +51,8 @@ public class UnitParameter extends AbstractParameter {
     @Override
     public void create(Field gameMap, ArrayList<Tactician> tacticians) {
         IUnit createdUnit = createUnit(type, maxHitPoints, movement, gameMap.getCell(location.getRow(), location.getColumn()));
-        if (createdUnit != null) {
-            Tactician tactician = tacticians.get(ownerTactician);
-            tactician.addUnit(createdUnit);
-        }
+        if (createdUnit != null)
+            tacticians.get(ownerTactician).addUnit(createdUnit);
     }
 
 }

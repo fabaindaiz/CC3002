@@ -64,13 +64,13 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     @Override
     public void addObserver(IObserver observer) {
-        this.attach(observer);
+        attach(observer);
     }
 
     @Override
     public void setNewTurn() {
-        movementUsed = false;
-        actionRemains = maxAction;
+        this.movementUsed = false;
+        this.actionRemains = maxAction;
     }
 
     @Override
@@ -111,7 +111,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     @Override
     public void setCurrentHitPoints(int HP) {
-        currentHitPoints = HP;
+        this.currentHitPoints = HP;
     }
 
     @Override
@@ -133,7 +133,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
      * Sets a new location for this unit,
      */
     private void setLocation(final Location location) {
-        movementUsed = true;
+        this.movementUsed = true;
         this.location.setNullUnit();
         this.location = location;
         location.setUnit(this);
@@ -169,7 +169,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
      */
     private void death() {
         location.setNullUnit();
-        location = null;
+        this.location = null;
 
         notifyAllObservers();
     }
@@ -217,7 +217,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
             if (damage > 0)
                 this.currentHitPoints -= damage;
             if (counterattack)
-                equippedItem.specificAttack(item.getOwner(), false);
+                equippedItem.useItem(item.getOwner(), false);
         } else
             death();
     }
@@ -228,11 +228,11 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
         item.getOwner().successfulAttack();
         int healed = item.getPower();
         if ((maxHitPoints - currentHitPoints) < healed)
-            currentHitPoints = maxHitPoints;
+            this.currentHitPoints = maxHitPoints;
         else
             this.currentHitPoints += healed;
         if (counterattack)
-            equippedItem.specificAttack(item.getOwner(), false);
+            equippedItem.useItem(item.getOwner(), false);
     }
 
     @Override
@@ -266,7 +266,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
         if (actionRemains > 0 && unit.addItem(item)) {
             if (equippedItem == item) {
                 item.setOwner(null);
-                equippedItem = nullItem;
+                this.equippedItem = nullItem;
                 nullItem.setOwner(this);
             }
             items.remove(item);
@@ -307,7 +307,7 @@ public abstract class AbstractUnit extends AbstractSubject implements IUnit {
 
     @Override
     public void equipNullItem() {
-        equippedItem = nullItem;
+        this.equippedItem = nullItem;
         nullItem.setOwner(this);
     }
 

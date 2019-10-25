@@ -12,14 +12,13 @@ import model.map.Location;
  */
 public class Fighter extends Warrior {
 
-    public Fighter(final int hitPoints, final int movement, final Location location,
-                   IEquipableItem... items) {
+    public Fighter(final int hitPoints, final int movement, final Location location, IEquipableItem... items) {
         super(hitPoints, movement, location, 3, items);
     }
 
     @Override
     public void equipAxe(IEquipableItem item) {
-        equippedItem = item;
+        this.equippedItem = item;
         item.setOwner(this);
     }
 }

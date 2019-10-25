@@ -1,6 +1,7 @@
 package model.items.magicbook;
 
 import model.items.AbstractItem;
+import model.items.IAttackItem;
 import model.items.IEquipableItem;
 import model.units.IUnit;
 
@@ -14,7 +15,7 @@ import model.units.IUnit;
  * @author Fabian Diaz
  * @since 1.0
  */
-public abstract class MagicBook extends AbstractItem {
+public abstract class MagicBook extends AbstractItem implements IAttackItem {
     /**
      * Constructor for a default item without any special behaviour.
      *

@@ -24,7 +24,7 @@ public class DefeatTacticianObserver implements IObserver {
     public DefeatTacticianObserver(GameController gameController, Tactician tactician) {
         this.gameController = gameController;
         this.tactician = tactician;
-        this.tactician.attach(this);
+        tactician.attach(this);
     }
 
     @Override

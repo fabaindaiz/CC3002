@@ -158,14 +158,13 @@ public class Tactician extends AbstractSubject implements ITactician {
     @Override
     public void giveItemTo(int x, int y) {
         IUnit unit = gameMap.getCell(x, y).getUnit();
-        if (unit != gameMap.getCell(x, y).getNullUnit() && units.contains(unit))
+        if (units.contains(unit))
             selectedUnit.exchange(unit, selectedItem);
         selectedItem = nullItem;
     }
 
     @Override
     public void moveUnitTo(int x, int y) {
-        if (gameMap.getCell(x, y).getUnit() == gameMap.getCell(x, y).getNullUnit())
-            selectedUnit.moveTo(gameMap.getCell(x, y));
+        selectedUnit.moveTo(gameMap.getCell(x, y));
     }
 }

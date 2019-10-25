@@ -1,7 +1,9 @@
 package model.items.weapon;
 
 import model.items.AbstractItem;
+import model.items.IAttackItem;
 import model.items.IEquipableItem;
+import model.items.INoAttackItem;
 import model.units.IUnit;
 
 /**
@@ -14,7 +16,7 @@ import model.units.IUnit;
  * @author Fabian Diaz
  * @since 1.0
  */
-public abstract class Weapon extends AbstractItem {
+public abstract class Weapon extends AbstractItem implements IAttackItem {
     /**
      * Constructor for a default item without any special behaviour.
      *

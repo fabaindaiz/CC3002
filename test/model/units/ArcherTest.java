@@ -44,14 +44,12 @@ public class ArcherTest extends AbstractTestUnit {
     public void attackToBow() {
         IUnit unit = new Archer(50, 2, field.getCell(1, 1));
         IEquipableItem item = new Bow("Example Bow", 10, 2, 3);
-        if (item != null) {
-            unit.addItem(item);
-            unit.equipItem(item);
-            archer.addItem(bow);
-            archer.equipItem(bow);
-            unit.useItem(archer, false);
-            assertEquals(archer.getCurrentHitPoints(), getHPbow());
-        }
+        unit.addItem(item);
+        unit.equipItem(item);
+        archer.addItem(bow);
+        archer.equipItem(bow);
+        unit.useItem(archer, false);
+        assertEquals(archer.getCurrentHitPoints(), getHPbow());
     }
 
     /**
